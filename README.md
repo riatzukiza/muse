@@ -1,10 +1,16 @@
 # muse
 
-The muse is a ClojureScript workspace that authors OpenCode plugins as pure
-data (an EDN/CLJC DSL) and runs a small filesystem daemon that keeps those
-plugins built and published. Her flagship artifact is the **`receipt_river`**
-plugin — an append-only `receipts.edn` execution ledger — which is the stable
-reference implementation the wider eta-mu constellation should consume.
+> **Roadmap:** [`ROADMAP.md`](ROADMAP.md) — this repo's slice. The hub, with the
+> seam, ownership table and sequencing rule, is [eta-mu/ROADMAP.md](https://github.com/open-hax/eta-mu/blob/main/ROADMAP.md).
+
+The muse is a ClojureScript workspace that interprets portable declarations
+for concrete hosts. This is the Keryx role: accept lawful data, assemble it,
+and produce a host artifact or an explicit incompatibility. Muse currently
+authors OpenCode plugins as pure data (an EDN/CLJC DSL) and runs a small
+filesystem daemon that keeps those plugins built and published. Her flagship
+artifact is the **`receipt_river`** plugin — an append-only `receipts.edn`
+execution ledger — which is the stable reference implementation the wider
+eta-mu constellation should consume.
 
 To stand her up on another machine, see **[docs/DEPLOY.md](docs/DEPLOY.md)**
 or run `scripts/bootstrap.sh`.
@@ -17,12 +23,31 @@ or run `scripts/bootstrap.sh`.
 | Plugin DSL | `src/cljs/eta_mu/dsl.cljc` + `dsl/{compile,normalize,profile,schema}.cljc` | `deftool`/`defhook`/`defplugin` emit host-agnostic data |
 | Plugins | `.ημ/plugins/*.cljs` (`receipt_river`, `apifany`, `websearch`, …) | Tool definitions; pure logic delegated to `domain.*` |
 | Config tree | `.ημ/config/opencode/root.edn` + `:imports` fragments | Declares which plugins are exposed, permissions, profiles, publish targets |
+| Contract assembly | `src/cljs/eta_mu/shape/katamorph.cljs` | Validates and assembles Katamorph namespace resources without I/O |
+| Agent catalog | `src/cljs/eta_mu/shape/agent_catalog.cljs` | Resolves portable provider, family, model, default, and agent references |
+| Target shapes | `src/cljs/eta_mu/shape/target/*.cljs` | Pure projections from the resolved catalog into host vocabulary |
 | Boundaries | `src/cljs/eta_mu/boundaries/**` | The only namespaces that touch I/O: node fs/proc/watch, mongo ledger, OpenCode host, fetch |
 | Domain | `src/cljs/eta_mu/domain/*.cljc` | Pure decision logic (daemon plans, receipts, repo, mycology, websearch) |
 | Handoff | `.ημ/Π_LAST.md`, `receipts.edn` | Fork-tax snapshots and the append-only execution ledger |
 
 House rules for the layer architecture are in [AGENTS.md](AGENTS.md); engineering
-style in [STYLE.md](STYLE.md).
+style in [STYLE.md](STYLE.md). The recovered ownership boundary and Eta-Mu
+drift inventory are in
+[docs/design/contract-ownership-and-host-translation.md](docs/design/contract-ownership-and-host-translation.md).
+
+## Contracts → host settings
+
+An OpenCode config may import a Katamorph namespace resource file alongside
+ordinary Muse settings fragments. Muse validates and assembles the contracts,
+resolves them into a target-neutral agent catalog, projects the supported
+provider/model/agent/MCP semantics, then applies raw settings as explicit
+host-only overrides. See
+[`examples/contracts/host-runtime.edn`](examples/contracts/host-runtime.edn)
+and [`examples/config/opencode/root.edn`](examples/config/opencode/root.edn).
+
+Katamorph owns whether shared declarations are lawful. Muse owns their
+translation. Turn Processor owns agent turns. Sol is one service deployment of
+that loop; Knoxx is intentionally not part of this stabilization slice.
 
 ## The build pipeline (EDN → registry → boundary)
 
@@ -112,6 +137,6 @@ why it doesn't call the package).
 shadow-cljs compile test    # :node-test target, autoruns target/test/test.cjs
 ```
 
-Currently 124 tests / 286 assertions. The mongo ledger test self-skips
+Currently 153 tests / 374 assertions. The mongo ledger test self-skips
 (800 ms server-selection timeout) when no local mongod is reachable, so the
 suite is green without Mongo.
