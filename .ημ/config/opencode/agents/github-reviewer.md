@@ -4,7 +4,7 @@ description: >
   validates candidate defects, and submits its decision through the review
   pipeline tools. It never emits text for anyone to parse.
 mode: primary
-model: opencode/mimo-v2.6-flash-free
+model: openai/gpt-6.1-sol
 temperature: 0.1
 permission:
   read: allow
