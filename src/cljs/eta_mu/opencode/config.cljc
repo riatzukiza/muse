@@ -54,6 +54,9 @@
 
 (defn fragment-kind [{:keys [data]}]
   (cond
+    (and (map? data)
+         (some? (:namespace data))
+         (sequential? (:resources data))) :contracts
     (:resource data)    :exposure
     (:permissions data) :permissions
     (:settings data)    :settings
@@ -90,6 +93,12 @@
    exposure — eta-mu.opencode.settings deep-merges and renders them."
   [config]
   (into [] (map :settings) (fragments-of config :settings)))
+
+(defn contract-fragments
+  "Katamorph namespace resource files in import order. These stay
+   host-neutral until a target shape projects them."
+  [config]
+  (vec (fragments-of config :contracts)))
 
 (defn emit-target
   "The root's :emit declaration ({:path \"…\"} or nil): where the daemon

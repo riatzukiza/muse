@@ -1,0 +1,4 @@
+{:eta-mu/opencode-version 1
+ :id :eta-mu/contract-example
+ :imports ["../../contracts/host-runtime.edn"]
+ :emit {:path "target/examples/opencode.jsonc"}}

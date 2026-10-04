@@ -16,6 +16,8 @@
             [plugins.websearch :as websearch]))
 
 (def loaded (config/load-config ".ημ/config/opencode/root.edn"))
+(def contract-example
+  (config/load-config "examples/config/opencode/root.edn"))
 
 (def resource-table
   {'plugins.actors/plugin           actors/plugin
@@ -44,6 +46,11 @@
           'plugins.apifany/plugin
           'plugins.kanban-gate/plugin]
          (config/resources loaded))))
+
+(deftest katamorph-contract-fragments-stay-host-neutral
+  (is (= [:open-hax]
+         (mapv :namespace (config/contract-fragments contract-example))))
+  (is (empty? (config/settings-fragments contract-example))))
 
 (deftest exposure-linking
   (let [registry (config/apply-exposure loaded resource-table)]

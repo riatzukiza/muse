@@ -16,7 +16,10 @@
             [eta-mu.boundaries.node.watch :as watch]
             [eta-mu.domain.daemon :as domain]
             [eta-mu.opencode.config :as config]
-            [eta-mu.opencode.settings :as settings]))
+            [eta-mu.opencode.settings :as settings]
+            [eta-mu.shape.agent-catalog :as agent-catalog]
+            [eta-mu.shape.katamorph :as katamorph]
+            [eta-mu.shape.target.opencode :as opencode]))
 
 (def debounce-ms 400)
 (def rescan-ms (* 5 60 1000))
@@ -68,16 +71,36 @@
 ;; Actions
 ;; ---------------------------------------------------------------------------
 
+(defn- target-settings
+  "Project portable contracts first, then apply explicit host settings as
+   ordered overrides. A tree may use either or both."
+  [tree]
+  (let [contracts (config/contract-fragments tree)
+        projected (when (seq contracts)
+                    (-> contracts
+                        katamorph/assemble
+                        agent-catalog/resolve-catalog
+                        opencode/catalog->settings))]
+    (cond-> []
+      projected (conj projected)
+      true (into (config/settings-fragments tree)))))
+
 (defn- render! [tree {:keys [out source]}]
-  (let [fragments (config/settings-fragments tree)]
-    (if (empty? fragments)
-      (log! {:kind :render-skipped :out out
-             :reason "tree has :emit but no :settings fragments"})
-      (let [doc (settings/render-jsonc (settings/merged fragments)
-                                       {:source source})]
-        (if (nfs/write-text-if-changed! out doc)
-          (log! {:kind :render :out out :source source})
-          (log! {:kind :render-unchanged :out out}))))))
+  (try
+    (let [fragments (target-settings tree)]
+      (if (empty? fragments)
+        (log! {:kind :render-skipped :out out
+               :reason "tree has :emit but no contract or settings fragments"})
+        (let [doc (settings/render-jsonc (settings/merged fragments)
+                                         {:source source})]
+          (if (nfs/write-text-if-changed! out doc)
+            (log! {:kind :render :out out :source source})
+            (log! {:kind :render-unchanged :out out})))))
+    (catch :default error
+      (log! {:kind :render-failed
+             :out out
+             :source source
+             :error (.-message error)}))))
 
 (defn- exec! [{:keys [command cwd] :as action}]
   (if (contains? (:busy @state) cwd)
