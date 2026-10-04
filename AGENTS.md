@@ -84,10 +84,10 @@ Always use `^:async` metadata (ClojureScript ≥ 1.12.145). Never use
   - `eta-mu kanban count` — column counts.
   - `eta-mu kanban comment <uuid> "note"` — append provenance to a card.
   - `eta-mu kanban frontmatter <uuid> status <new-status>` — lawful status change.
-  - `node packages/Rheos/dist/cli.cjs status-update <uuid> --to <status>` — FSM-enforced move (also runs build-gate when required).
-- **No direct frontmatter edits.** The file watcher treats hand-edited frontmatter as drift and stamps a `drift: true` indicator on the card. Use the CLI so the ledger records a `write-id` and the provenance is auditable.
+  - `eta-mu kanban frontmatter <uuid> status <new-status>` delegates to Rheos and runs transition gates when required.
+- **Markdown authoring is first-class input.** Cards may be created and edited manually as Markdown with explicit `uuid:` identity, outcome, scope, acceptance and verification. Use comma-separated scalar labels. Manual creation does not require an invented `write-id` or `kanban.task-created` event. Rheos alone owns operational status, comments, transitions and drift reconciliation; never hand-edit an existing card status or fabricate engine events. A harness without Rheos may inspect artifacts and author card content but must not claim board validation.
 - **Walk lawful hops.** There are no shortcut edges. To move a card multiple columns forward, step through each lawful transition in order. The direct `in_progress → review` edge exists only when the build-gate passes.
-- **Regenerate snapshots when needed.** The web UI and `kanban/.kanban/board.json` are generated snapshots; the source of truth is the task files plus the ledger in `kanban/.events/ledger.edn`. If a snapshot is stale, regenerate it from the CLI or the web UI.
+- **Keep provenance under `.ημ`.** The source of truth is `docs/agile/kanban` plus its `.events` symlink into `.ημ/kanban-events`. Never create a physical board ledger under `docs/`.
 
 ## Muse / Plugin Authoring
 
@@ -101,4 +101,3 @@ Always use `^:async` metadata (ClojureScript ≥ 1.12.145). Never use
 - **Types**: Strict TypeScript enabled for legacy TS; ClojureScript uses Malli schemas for validation
 - **Error handling**: Try/catch only when necessary, proper error logging via bus events
 - **Formatting**: Consistent indentation, no unnecessary destructuring, single-responsibility functions
-

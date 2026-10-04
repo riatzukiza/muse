@@ -9,15 +9,17 @@
   "../shared/plugins/edn-ledger.edn"
   "../shared/plugins/websearch.edn"
   "../shared/plugins/actors.edn"
+  "../shared/plugins/actor-watch.edn"
   "../shared/plugins/apifany.edn"
   "../shared/plugins/kanban-gate.edn"
   ;; target-specific overrides below
+  "settings/agents.edn"
   ;; "plugins/custom.edn"
   ]
 
  :profile :dev
 
- :build ["shadow-cljs" "release" "opencode-plugin"]
+ :build ["npm" "run" "build:opencode"]
 
  :publish {:plugins-dir "~/.config/opencode/plugins"
            :agents-dir  "~/.config/opencode/agents"}}

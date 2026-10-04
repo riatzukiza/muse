@@ -11,11 +11,12 @@
   "../shared/plugins/edn-ledger.edn"
   "../shared/plugins/websearch.edn"
   "../shared/plugins/actors.edn"
+  "../shared/plugins/actor-watch.edn"
   "../shared/plugins/apifany.edn"
   ]
 
  :profile :dev
 
- :build ["shadow-cljs" "release" "mcp-server"]
+ :build ["npm" "run" "build:mcp"]
 
  :publish {:mcp-config ".mcp.json"}}
