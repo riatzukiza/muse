@@ -1,0 +1,198 @@
+[
+  {
+    "capture": "card-commit-prs.json",
+    "bytes": 16391,
+    "sha256": "d4ae65c1be2eed4c68907a520014e4732cc1450f5f1fc7eb69d9a9caa580e9b6",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "current-summary-admission-probe.txt",
+    "bytes": 157,
+    "sha256": "7230b99662e9da0b645f8bf52bf7a6b633241183bf58ffbb2f7de74affd4624f",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "issue13-comments.json",
+    "bytes": 2,
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-checks.json",
+    "bytes": 15456,
+    "sha256": "983401b0f2403cf27314228e5773a9462921deb1a8fc9ab3312588147d88b6d6",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-checks.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-comments.json",
+    "bytes": 12007,
+    "sha256": "602bd3d64ba55205a7547908b24ed7c264877b9410b034171507dd25ca0b21cd",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-comments.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-inlines.json",
+    "bytes": 19857,
+    "sha256": "13a95c48cad4b527f68e8a90c7c0c3d4cbefb144c11cda2375796e985be969da",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-inlines.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-pr.json",
+    "bytes": 17559,
+    "sha256": "1f5b1d6e2311bc20eb9c95a31cc065b8cbc7af21ddb9dacd403f289b400bbac9",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-pr.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-reviews.json",
+    "bytes": 5126,
+    "sha256": "308fe191d8fc793ecf4e35a5c6875c5751e411e9e6c2b84181eaa92a76f01592",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "planning15-reviews.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "read-board.json",
+    "bytes": 3479,
+    "sha256": "64f8f4110fda119a7fd9bf2dacbc61254290e5c09e6e55c0da836e7082f5b942",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "read-board.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "read-task.json",
+    "bytes": 3359,
+    "sha256": "c506a9d55a8a9f3f9c53acdff2bcda28645074d29c3885452ee222a766350a5b",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "read-task.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "refined-read-board.json",
+    "bytes": 3479,
+    "sha256": "64f8f4110fda119a7fd9bf2dacbc61254290e5c09e6e55c0da836e7082f5b942",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "refined-read-board.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "refined-read-task.json",
+    "bytes": 7361,
+    "sha256": "cefbeacc0ffb5a2e3a058938a1785ed8c12f4739b2cdef9d23972430f50b1d23",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "refined-read-task.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "muse-personal-network.json",
+    "bytes": 15792,
+    "sha256": "320dfe34fcb2940d2115ddc753308e8c7e3af67ec06e788801b2f180928dccc6",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "muse-main.json",
+    "bytes": 336,
+    "sha256": "909681f82268004e2550104ebf1b5a9d17168a0bd7dbdf1418acce159a9d9455",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "muse-personal-main.json",
+    "bytes": 328,
+    "sha256": "c0f86c1c9d199e1de3e06d4d539aeb2587e9eaa93b4b92fc1ea4feac7ec20ab2",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "final-read-board.json",
+    "bytes": 3479,
+    "sha256": "64f8f4110fda119a7fd9bf2dacbc61254290e5c09e6e55c0da836e7082f5b942",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "final-read-board.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "final-read-task.json",
+    "bytes": 7341,
+    "sha256": "7f2619c4379f7210358ec039af073470bd52a985bf825a1060e05480de4f2f4a",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  },
+  {
+    "capture": "final-read-task.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoding": "base64",
+    "container": "native-captures.base64.json"
+  }
+]
