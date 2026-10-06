@@ -1,0 +1,18 @@
+{
+  "base": "846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f",
+  "card": "docs/agile/kanban/bind-review-summary-claims-to-current-evidence-f07ae3da.md",
+  "original_card_bytes": 2925,
+  "original_card_sha256": "593007c6de5c8a0b0c577aad3e66e56a16412431ec476077f7bd51529256b8c4",
+  "original_card_is_exact_prefix": true,
+  "event_ledger_sha256": "f521d91816f3131f159ef81369781b998ccf7075fafe7dc2f76834aaf826476b",
+  "operational_frontmatter_native_readback": "unchanged ready3points sameUUID/write-id",
+  "native_read_exits": [
+    0,
+    0
+  ],
+  "native_stderr_bytes": [
+    0,
+    0
+  ],
+  "scope": "planning preparation observation, no transition or fresh qualification"
+}
