@@ -69,3 +69,12 @@
   spore: none
   receipt-refs: receipts.edn
   note: Preserve existing Ready criterion scope while distinguishing current owner source, personal sync candidate and Foresight pin. Native JSON mirror reads supply board visibility only. Identity resolution, native publication and independent approval remain separate; no same-session promotion.
+- ts: 2026-10-07T05:32:58.291631446Z
+  session: /home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/worktree
+  task: muse12-verification-filename-correction
+  p-efficiency: 0.87
+  p-friction: 0.15
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: receipts.edn
+  note: Metadata probe namespace/file naming must satisfy the owning recursive lint gate. Rename identical bytes ordinarily, preserve historical commands at original head, verify exact hosted tool digest/version in private cache, and keep old hosted failures visible. No new issue or same-session promotion.
