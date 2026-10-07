@@ -1,0 +1,208 @@
+[
+  {
+    "label": "kondo-release-metadata",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/clj-kondo/clj-kondo/releases/tags/v2026.08.04",
+      "--jq",
+      "{id,tag_name,assets:[.assets[]|select(.name==\"clj-kondo-2026.08.04-linux-amd64.zip\")|{id,name,size,digest}]}"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:31:32.299459+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/kondo-release-metadata.stdout.b64",
+      "bytes": 215,
+      "sha256": "13d562107dad96aeefd161a2754e8fe9455eca19b4407d8ab9d48c7abe39df5e"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/kondo-release-metadata.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "kondo-download",
+    "argv": [
+      "timeout",
+      "70",
+      "curl",
+      "--fail",
+      "--silent",
+      "--show-error",
+      "--location",
+      "--max-time",
+      "60",
+      "https://github.com/clj-kondo/clj-kondo/releases/download/v2026.08.04/clj-kondo-2026.08.04-linux-amd64.zip",
+      "--output",
+      "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache/clj-kondo-2026.08.04-linux-amd64.zip"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:32:09.125399+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/kondo-download.stdout.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/kondo-download.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "kondo-version",
+    "argv": [
+      "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache/clj-kondo",
+      "--version"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:32:09.936999+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/kondo-version.stdout.b64",
+      "bytes": 22,
+      "sha256": "229894e21ebf178c2afcdee11629400b016e71e92037fe21eec169a2ffd219e0"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/kondo-version.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "hosted-equivalent-lint",
+    "argv": [
+      "timeout",
+      "60",
+      "env",
+      "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache",
+      "TMPDIR=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-tmp",
+      "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache/clj-kondo",
+      "--lint",
+      "src/cljs",
+      "src/clj",
+      "test/cljs",
+      ".\u03b7\u03bc",
+      "--fail-level",
+      "warning",
+      "--cache-dir",
+      "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache/kondo"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:32:11.125133+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/hosted-equivalent-lint.stdout.b64",
+      "bytes": 44,
+      "sha256": "5c4a7861b925179aab7fc20f1e4fbfcdc6ba30ddde8fed108e161f6ddcc8ea76"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/hosted-equivalent-lint.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "corrected-probe-api",
+    "argv": [
+      "timeout",
+      "60",
+      "node",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/worktree/backend/node_modules/nbb/cli.js",
+      "-cp",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/receipt-owner/src/cljs",
+      ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/validate_muse_plan.cljs",
+      "receipts.edn"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:32:58.109770+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/corrected-probe-api.stdout.b64",
+      "bytes": 1385,
+      "sha256": "a60a315a0f14bf194b0223f9ee82d8a8cf0c496ae661e9fc03a17ba0dbdeea11"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/corrected-probe-api.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "final-npm-lint",
+    "argv": [
+      "timeout",
+      "60",
+      "env",
+      "PATH=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.codex/tmp/arg0/codex-arg0PxD6rs:/home/err/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.local/bin:/home/err/.local/bin:/home/err/.volta/bin:/home/err/devel/.volta/tools/image/node/20.19.4/bin:/home/err/.bun/bin:/home/err/.opencode/bin:/home/err/.fly/bin:/home/err/devel/promethean/.volta/tools/image/node/20.19.4/bin:/home/err/.local/share/pnpm:/home/err/.cargo/bin:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/err/bin:/home/err/bin:/home/err/devel/bin:/home/err/go/bin:/home/err/.volta/tools/image/node/24.14.1/bin:/home/err/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/usr/lib/chatgpt/resources",
+      "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache",
+      "TMPDIR=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-tmp",
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:33:34.268041+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/final-npm-lint.stdout.b64",
+      "bytes": 125,
+      "sha256": "3874bf84dcf430ce69770405aa124e93062bb243bc24579f6671a14a5daf4c89"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/final-npm-lint.stderr.b64",
+      "bytes": 152,
+      "sha256": "4e2e721ae51a815709251fa3f32c3c9fd0e7d7f2f7b15e4952cff1b18f675c0b"
+    }
+  },
+  {
+    "label": "nonblank-scope-probe",
+    "argv": [
+      "timeout",
+      "60",
+      "node",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/worktree/backend/node_modules/nbb/cli.js",
+      "-cp",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/receipt-owner/src/cljs",
+      ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/validate_muse_plan.cljs",
+      "receipts.edn"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:39:41.676614+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/nonblank-scope-probe.stdout.b64",
+      "bytes": 1430,
+      "sha256": "05c5201f5261114a3c1e2ef3a46108398da588a75e087cf05dbc0370dceb8e11"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/nonblank-scope-probe.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "final-nonblank-npm-lint",
+    "argv": [
+      "timeout",
+      "60",
+      "env",
+      "PATH=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.codex/tmp/arg0/codex-arg0PxD6rs:/home/err/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.local/bin:/home/err/.local/bin:/home/err/.volta/bin:/home/err/devel/.volta/tools/image/node/20.19.4/bin:/home/err/.bun/bin:/home/err/.opencode/bin:/home/err/.fly/bin:/home/err/devel/promethean/.volta/tools/image/node/20.19.4/bin:/home/err/.local/share/pnpm:/home/err/.cargo/bin:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/err/bin:/home/err/bin:/home/err/devel/bin:/home/err/go/bin:/home/err/.volta/tools/image/node/24.14.1/bin:/home/err/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/usr/lib/chatgpt/resources",
+      "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache",
+      "TMPDIR=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-tmp",
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:39:58.110154+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/final-nonblank-npm-lint.stdout.b64",
+      "bytes": 126,
+      "sha256": "aadeed90c148d7e8e48218f43b64c6df5cf6cfcffe6e62a851bdf0815e2cf387"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/final-nonblank-npm-lint.stderr.b64",
+      "bytes": 152,
+      "sha256": "4e2e721ae51a815709251fa3f32c3c9fd0e7d7f2f7b15e4952cff1b18f675c0b"
+    }
+  }
+]

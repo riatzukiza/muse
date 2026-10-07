@@ -1,0 +1,619 @@
+[
+  {
+    "label": "origin-muse",
+    "argv": [
+      "timeout",
+      "60s",
+      "gh",
+      "api",
+      "repos/octave-commons/muse"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T04:56:23.136758+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/origin-muse.stdout.b64",
+      "bytes": 6917,
+      "sha256": "c8e009acadd5dce1b55e25c692f845fc0a41252f3bd37cc6f242ed4f6cf963f7"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/origin-muse.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "origin-prs-muse",
+    "argv": [
+      "timeout",
+      "60s",
+      "gh",
+      "api",
+      "--paginate",
+      "--slurp",
+      "repos/octave-commons/muse/pulls?state=open&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T04:56:23.141209+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/origin-prs-muse.stdout.b64",
+      "bytes": 30490,
+      "sha256": "bfa3cd58f915352b4d34b5a8748d7e17128a2e77c31c172692382c8bb961781b"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/origin-prs-muse.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "map-muse",
+    "argv": [
+      "timeout",
+      "60s",
+      "gh",
+      "api",
+      "repos/riatzukiza/muse"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T04:56:23.199746+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/map-muse.stdout.b64",
+      "bytes": 15792,
+      "sha256": "51ffccde7d81b587a079e88ed689af088dbfa823ca8612b8d47486bb25ac5b5a"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/map-muse.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "personal-prs-muse",
+    "argv": [
+      "timeout",
+      "60s",
+      "gh",
+      "api",
+      "--paginate",
+      "--slurp",
+      "repos/riatzukiza/muse/pulls?state=open&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T04:56:23.200185+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/personal-prs-muse.stdout.b64",
+      "bytes": 51471,
+      "sha256": "b18a6f22066d55fdb021c8a3470f3c3e72b447f5fd06e3d0aa74105a760d5bd3"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/personal-prs-muse.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "issues-muse",
+    "argv": [
+      "timeout",
+      "60s",
+      "gh",
+      "api",
+      "--paginate",
+      "--slurp",
+      "repos/octave-commons/muse/issues?state=open&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T04:56:23.272185+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/issues-muse.stdout.b64",
+      "bytes": 38702,
+      "sha256": "e665d2d6a5fa628540a843c650c822d2a8621004cf8eb701ad377c371fece6fc"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/issues-muse.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "accepted-muse",
+    "argv": [
+      "timeout",
+      "80",
+      "gh",
+      "api",
+      "repos/octave-commons/muse/commits/main"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:00:29.215045+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/accepted-muse.stdout.b64",
+      "bytes": 193068,
+      "sha256": "878985e16d5daad230627e17c44565e7d32a35fa9a0907baeabdc1e53ebf13b2"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/accepted-muse.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse12-comments",
+    "argv": [
+      "timeout",
+      "80",
+      "gh",
+      "api",
+      "repos/octave-commons/muse/issues/12/comments?per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:01:28.595087+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-comments.stdout.b64",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-comments.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse-self-review-prs",
+    "argv": [
+      "timeout",
+      "80",
+      "gh",
+      "api",
+      "search/issues?q=repo:octave-commons/muse+is:pr+self+author&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:01:28.883390+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse-self-review-prs.stdout.b64",
+      "bytes": 41540,
+      "sha256": "90c93f9b7123c7446a275640c3313e104ab4087cbbacd03fce5e272ff33c03bb"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse-self-review-prs.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "rheos-help",
+    "argv": [
+      "timeout",
+      "60",
+      "node",
+      "/home/err/.volta/tools/image/packages/eta-mu/lib/node_modules/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs",
+      "--help"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:02:11.259896+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/rheos-help.stdout.b64",
+      "bytes": 915,
+      "sha256": "a9845ed0d428f74b6e8d5841d8aeefe86ab460e4e53ac718e4e3ba21e84f18d0"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/rheos-help.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse12-task",
+    "argv": [
+      "timeout",
+      "60",
+      "env",
+      "-u",
+      "KANBAN_CONFIG",
+      "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse-services-proxx-intake-ldbqm3_8/.cache",
+      "TMPDIR=/home/err/.codex/parallel-goal/muse-services-proxx-intake-ldbqm3_8/.tmp",
+      "node",
+      "/home/err/.volta/tools/image/packages/eta-mu/lib/node_modules/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs",
+      "read-task",
+      "1bc0a6b5-3286-4e43-afc4-8cf8ae0549a0",
+      "--config",
+      "/home/err/.codex/parallel-goal/muse-services-proxx-intake-ldbqm3_8/muse-board-fixture/openhax.kanban.json"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:02:30.578100+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-task.stdout.b64",
+      "bytes": 3166,
+      "sha256": "71160c01cc393bb80cbc6b6bfc1ac0eb627f01a090e60b59487be5c79fe5084c"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-task.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse-board",
+    "argv": [
+      "timeout",
+      "60",
+      "env",
+      "-u",
+      "KANBAN_CONFIG",
+      "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse-services-proxx-intake-ldbqm3_8/.cache",
+      "TMPDIR=/home/err/.codex/parallel-goal/muse-services-proxx-intake-ldbqm3_8/.tmp",
+      "node",
+      "/home/err/.volta/tools/image/packages/eta-mu/lib/node_modules/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs",
+      "read-board",
+      "--config",
+      "/home/err/.codex/parallel-goal/muse-services-proxx-intake-ldbqm3_8/muse-board-fixture/openhax.kanban.json"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:02:30.623165+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse-board.stdout.b64",
+      "bytes": 3479,
+      "sha256": "64f8f4110fda119a7fd9bf2dacbc61254290e5c09e6e55c0da836e7082f5b942"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse-board.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse-prs-fresh",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/octave-commons/muse/pulls?state=open&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:02:58.163614+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse-prs-fresh.stdout.b64",
+      "bytes": 30488,
+      "sha256": "cd20d2074cbf389608bebe83925598436133d1f9f622fc101744b896233dbc54"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse-prs-fresh.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse12-fresh",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/octave-commons/muse/issues/12"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:02:58.169813+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-fresh.stdout.b64",
+      "bytes": 6528,
+      "sha256": "c10f738f73c4a6a5fbda58a2b8d52ba96df20fe738f5ce83124075ecb5f4253d"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-fresh.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "personal-muse-prs-fresh",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/riatzukiza/muse/pulls?state=open&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:02:58.179597+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/personal-muse-prs-fresh.stdout.b64",
+      "bytes": 51469,
+      "sha256": "a1ae24b5079fa086be3df554c9192dab7a6378344a46bef186ff43b787b00f1b"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/personal-muse-prs-fresh.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "eta-current",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/open-hax/eta-mu/commits/main"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:02:58.208983+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-current.stdout.b64",
+      "bytes": 92493,
+      "sha256": "9a0f0818ea7eb1a772ac09be87abef3fa3a30a85f9d03a014a5782109b0ece20"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-current.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse1-canonical-first",
+    "argv": [
+      "timeout",
+      "90",
+      "node",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/worktree/backend/node_modules/nbb/cli.js",
+      "-cp",
+      "/home/err/.agents/skills/pr-flow/scripts",
+      "/home/err/.agents/skills/pr-flow/scripts/pr.cljs",
+      "status",
+      "riatzukiza/muse",
+      "1"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:03:26.568572+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse1-canonical-first.stdout.b64",
+      "bytes": 647,
+      "sha256": "f9f7a132b474a930812d6ac4a8f806bd4234a27b20867020f7ab98db5245ca13"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse1-canonical-first.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse1-native",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/riatzukiza/muse/pulls/1"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:03:27.539016+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse1-native.stdout.b64",
+      "bytes": 17069,
+      "sha256": "c40855bff53a832116a2a18cca6bbad20b11dc4c98c34ee5459ec6e809a24e57"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse1-native.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse-source-parent-scope",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/octave-commons/muse/compare/846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f...c1369c223cf3c57e3e31934a6d746bfcdfe73f5a"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:03:28.531159+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse-source-parent-scope.stdout.b64",
+      "bytes": 223430,
+      "sha256": "af7adb0538c58ed40b7d8e5c6071604a8fcf26b056290305a764f860d9e0a2d0"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse-source-parent-scope.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "eta-review-caller-exact",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/open-hax/eta-mu/contents/.github/workflows/opencode-code-review.yml?ref=09a4454480baa67f6fdc40f6f73f5e48ef0457d1"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:03:52.688948+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-review-caller-exact.stdout.b64",
+      "bytes": 120063,
+      "sha256": "077a38cc98c4deb4475f146dc22e2eaa11bd72ebd6fb5d3061e563d70aa34035"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-review-caller-exact.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "personal-muse12-pr-history",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "search/issues?q=repo:riatzukiza/muse+is:pr+self-authored&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:04:52.719846+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/personal-muse12-pr-history.stdout.b64",
+      "bytes": 79,
+      "sha256": "c9938edecb99d754b2d039ac9eec320a94c769b6a6417921e2dcbef9e2fe01a0"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/personal-muse12-pr-history.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse12-card-history",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/octave-commons/muse/commits?path=docs/agile/kanban/make-self-authored-review-publication-truthful-ae0549a0.md&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:04:52.736661+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-card-history.stdout.b64",
+      "bytes": 3304,
+      "sha256": "1bde8633992b205edc96cf5140bf27f968825c70937afc44725bf992e7e5cb0f"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-card-history.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "eta-self-identity-owners",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "search/issues?q=repo:open-hax/eta-mu+self-authored&per_page=100"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:04:52.887250+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-self-identity-owners.stdout.b64",
+      "bytes": 40143,
+      "sha256": "b9dad0e5c36deb467d88d5cb5b53bfbba7938488a725c42231b7266cda329864"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-self-identity-owners.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse12-candidate-native-read",
+    "argv": [
+      "timeout",
+      "60",
+      "env",
+      "-u",
+      "KANBAN_CONFIG",
+      "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/cache",
+      "TMPDIR=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/tmp",
+      "node",
+      "/home/err/.volta/tools/image/packages/eta-mu/lib/node_modules/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs",
+      "read-task",
+      "1bc0a6b5-3286-4e43-afc4-8cf8ae0549a0",
+      "--config",
+      "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/worktree/openhax.kanban.json"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:07:29.751041+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-candidate-native-read.stdout.b64",
+      "bytes": 12655,
+      "sha256": "4c3d600692864e7abaf9f27d22421a9ce5252012cff30328db36d664a78b0aa4"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-candidate-native-read.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "eta-foresight-pin-caller",
+    "argv": [
+      "timeout",
+      "60",
+      "gh",
+      "api",
+      "repos/open-hax/eta-mu/contents/.github/workflows/opencode-code-review.yml?ref=0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:08:18.444352+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-foresight-pin-caller.stdout.b64",
+      "bytes": 29149,
+      "sha256": "c1c3dda2ed08a0a9eda335fd12b4a367537fa84acd96c831aa1ee98e059c3295"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-foresight-pin-caller.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse12-owning-api-precommit",
+    "argv": [
+      "timeout",
+      "60",
+      "node",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/worktree/backend/node_modules/nbb/cli.js",
+      "-cp",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/receipt-owner/src/cljs",
+      "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/validate-muse-plan.cljs",
+      "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/worktree/receipts.edn"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:07:42.702598+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-owning-api-precommit.stdout.b64",
+      "bytes": 1385,
+      "sha256": "ab8840d04bce5df41807a93a22e364680dc639936c500aa826a3564a989d9914"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-owning-api-precommit.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "muse12-final-native-read",
+    "argv": [
+      "timeout",
+      "60",
+      "env",
+      "-u",
+      "KANBAN_CONFIG",
+      "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/cache",
+      "TMPDIR=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/tmp",
+      "node",
+      "/home/err/.volta/tools/image/packages/eta-mu/lib/node_modules/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs",
+      "read-task",
+      "1bc0a6b5-3286-4e43-afc4-8cf8ae0549a0",
+      "--config",
+      "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/worktree/openhax.kanban.json"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:09:33.572417+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-final-native-read.stdout.b64",
+      "bytes": 13175,
+      "sha256": "81a8a23534585ab11afe555ed63accbaf9d6bdd870826d985e315f23f900ac6b"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/muse12-final-native-read.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+]

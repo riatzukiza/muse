@@ -1,0 +1,176 @@
+{
+  "source_audit_head": "7644bcdaeeee47d6279255305cc319debd276397",
+  "source_pr_head": "23d0fc40f3f9da29fecde341f7dc96df93560208",
+  "captures": [
+    {
+      "label": "bundle-job",
+      "argv": [
+        "timeout",
+        "60",
+        "gh",
+        "api",
+        "repos/riatzukiza/muse/actions/jobs/112642552293",
+        "--jq",
+        "{id,run_id,head_sha,status,conclusion,started_at,completed_at,runner_name,steps:[.steps[]|{name,status,conclusion,number,started_at,completed_at}]}"
+      ],
+      "exit": 0,
+      "at": "2026-10-07T05:26:39.223357+00:00",
+      "stdout": {
+        "original_bytes": 3108,
+        "original_sha256": "229f674ac3187cfc4e9d8c382647b1a4a8690cabdc75a58d49df2ce5ff00aec0",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/bundle-job.stdout.b64",
+        "bytes": 3108,
+        "sha256": "229f674ac3187cfc4e9d8c382647b1a4a8690cabdc75a58d49df2ce5ff00aec0"
+      },
+      "stderr": {
+        "original_bytes": 0,
+        "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/bundle-job.stderr.b64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "ci-job",
+      "argv": [
+        "timeout",
+        "60",
+        "gh",
+        "api",
+        "repos/riatzukiza/muse/actions/jobs/112642551437",
+        "--jq",
+        "{id,run_id,head_sha,status,conclusion,started_at,completed_at,runner_name,steps:[.steps[]|{name,status,conclusion,number,started_at,completed_at}]}"
+      ],
+      "exit": 0,
+      "at": "2026-10-07T05:26:39.225680+00:00",
+      "stdout": {
+        "original_bytes": 3102,
+        "original_sha256": "47945624d5f202c35afa39536de901e9f51e38d048f82bd92f0541d1d05320d7",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/ci-job.stdout.b64",
+        "bytes": 3102,
+        "sha256": "47945624d5f202c35afa39536de901e9f51e38d048f82bd92f0541d1d05320d7"
+      },
+      "stderr": {
+        "original_bytes": 0,
+        "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/ci-job.stderr.b64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "ci-native-log",
+      "argv": [
+        "timeout",
+        "60",
+        "env",
+        "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse4-hosted-readonly-yriwmvxw/cache",
+        "gh",
+        "run",
+        "view",
+        "--repo",
+        "riatzukiza/muse",
+        "--job",
+        "112642551437",
+        "--log"
+      ],
+      "exit": 0,
+      "at": "2026-10-07T05:27:08.796364+00:00",
+      "stdout": {
+        "original_bytes": 72018,
+        "original_sha256": "c15b90dd4d86e1e7d849b74a9f53d629b614533a16fcfc461ce6bac2045d92e2",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/ci-native-log.stdout.b64",
+        "bytes": 72018,
+        "sha256": "c15b90dd4d86e1e7d849b74a9f53d629b614533a16fcfc461ce6bac2045d92e2"
+      },
+      "stderr": {
+        "original_bytes": 0,
+        "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/ci-native-log.stderr.b64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "bundle-native-log",
+      "argv": [
+        "timeout",
+        "60",
+        "env",
+        "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse4-hosted-readonly-yriwmvxw/cache",
+        "gh",
+        "run",
+        "view",
+        "--repo",
+        "riatzukiza/muse",
+        "--job",
+        "112642552293",
+        "--log"
+      ],
+      "exit": 0,
+      "at": "2026-10-07T05:27:09.220327+00:00",
+      "stdout": {
+        "original_bytes": 94496,
+        "original_sha256": "68f219a689d5fb1e7732404234d3d96e687f58a57d1009bb5eb53f7503bdf477",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/bundle-native-log.stdout.b64",
+        "bytes": 94496,
+        "sha256": "68f219a689d5fb1e7732404234d3d96e687f58a57d1009bb5eb53f7503bdf477"
+      },
+      "stderr": {
+        "original_bytes": 0,
+        "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/bundle-native-log.stderr.b64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "tested-merge-relation",
+      "argv": [
+        "timeout",
+        "60",
+        "gh",
+        "api",
+        "repos/riatzukiza/muse/git/commits/e9387c55a4e97008ed10802ec2d3454a32479703",
+        "--jq",
+        "{sha,tree:.tree.sha,parents:[.parents[].sha]}"
+      ],
+      "exit": 0,
+      "at": "2026-10-07T05:28:46.905883+00:00",
+      "stdout": {
+        "original_bytes": 199,
+        "original_sha256": "53fe7fe7c224cd76ec29f3eb24245e595c7ee0858859370b0598b1b1eea152c2",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/tested-merge-relation.stdout.b64",
+        "bytes": 199,
+        "sha256": "53fe7fe7c224cd76ec29f3eb24245e595c7ee0858859370b0598b1b1eea152c2"
+      },
+      "stderr": {
+        "original_bytes": 0,
+        "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scoped_url_guard_rejections": 0,
+        "retained": true,
+        "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/tested-merge-relation.stderr.b64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

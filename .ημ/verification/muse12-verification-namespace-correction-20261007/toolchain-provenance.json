@@ -1,0 +1,21 @@
+{
+  "release": {
+    "assets": [
+      {
+        "digest": "sha256:dd3bb3ec91bcb838e9bbefc9ba9968b69a8fe2a625fa67e8b0485605604e61d1",
+        "id": 501448125,
+        "name": "clj-kondo-2026.08.04-linux-amd64.zip",
+        "size": 20306638
+      }
+    ],
+    "id": 364926844,
+    "tag_name": "v2026.08.04"
+  },
+  "archive_sha256": "dd3bb3ec91bcb838e9bbefc9ba9968b69a8fe2a625fa67e8b0485605604e61d1",
+  "archive_bytes": 20306638,
+  "binary_sha256": "6c2b00ea3a4bc707e570be995c51c718fb19cd098d4485ab86d9abfcc209623e",
+  "binary_bytes": 67668144,
+  "global_binary_not_used": "/usr/local/bin/clj-kondo2025.07.28 differs from hosted2026.08.04",
+  "private_runtime": "/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache/clj-kondo",
+  "digest_matches_native_release": true
+}
