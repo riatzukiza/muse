@@ -25,3 +25,15 @@ refusals remain disclosed and untouched; new suffix validation is distinct
 from whole-ledger qualification. No backend suite/build is repeated for a
 byte-identical verification rename; new head requires its own hosted gates
 and native planning convergence after publication by root.
+
+## Nonblank-record scope clarification
+
+The live probe filters blank lines before validation and now declares
+`:actual-api-all-nonblank-records`, `:record`, and
+`:declared-owned-nonblank-record` explicitly. API calls, validation decisions
+and behavior remain unchanged. At preserved head 879be5a, nonblank records 37/38
+are literal physical lines 39/40: 38 nonblank records have 16 inherited refusals,
+while 40 physical lines have 18 refusals including historical blanks 19/21.
+This successor appends record 39 at physical 41; it does not normalize either
+historical blank or any receipt. Final physical API proof validates the new
+owned suffix separately from these inherited failures.

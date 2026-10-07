@@ -78,3 +78,12 @@
   spore: none
   receipt-refs: receipts.edn
   note: Metadata probe namespace/file naming must satisfy the owning recursive lint gate. Rename identical bytes ordinarily, preserve historical commands at original head, verify exact hosted tool digest/version in private cache, and keep old hosted failures visible. No new issue or same-session promotion.
+- ts: 2026-10-07T05:39:40.732309102Z
+  session: /home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/worktree
+  task: Muse12 live probe index-scope correction
+  p-efficiency: 0.9
+  p-friction: 0.2
+  p-skill-candidate: false
+  spore: none
+  receipt-refs: receipts.edn
+  note: Preserved879 and historical command/receipt bytes; current probe describes nonblank records explicitly; physical and nonblank failures separately scoped, no validation behavior change.

@@ -153,5 +153,56 @@
       "bytes": 152,
       "sha256": "4e2e721ae51a815709251fa3f32c3c9fd0e7d7f2f7b15e4952cff1b18f675c0b"
     }
+  },
+  {
+    "label": "nonblank-scope-probe",
+    "argv": [
+      "timeout",
+      "60",
+      "node",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/worktree/backend/node_modules/nbb/cli.js",
+      "-cp",
+      "/home/err/.codex/parallel-goal/knoxx161-implementation-20261007-7wwt_9h6/receipt-owner/src/cljs",
+      ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/validate_muse_plan.cljs",
+      "receipts.edn"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:39:41.676614+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/nonblank-scope-probe.stdout.b64",
+      "bytes": 1430,
+      "sha256": "05c5201f5261114a3c1e2ef3a46108398da588a75e087cf05dbc0370dceb8e11"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/nonblank-scope-probe.stderr.b64",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "label": "final-nonblank-npm-lint",
+    "argv": [
+      "timeout",
+      "60",
+      "env",
+      "PATH=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.codex/tmp/arg0/codex-arg0PxD6rs:/home/err/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.local/bin:/home/err/.local/bin:/home/err/.volta/bin:/home/err/devel/.volta/tools/image/node/20.19.4/bin:/home/err/.bun/bin:/home/err/.opencode/bin:/home/err/.fly/bin:/home/err/devel/promethean/.volta/tools/image/node/20.19.4/bin:/home/err/.local/share/pnpm:/home/err/.cargo/bin:/home/err/.local/bin:/home/err/.rbenv/shims:/home/err/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/err/bin:/home/err/bin:/home/err/devel/bin:/home/err/go/bin:/home/err/.volta/tools/image/node/24.14.1/bin:/home/err/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/usr/lib/chatgpt/resources",
+      "XDG_CACHE_HOME=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-cache",
+      "TMPDIR=/home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/repair-tmp",
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exit": 0,
+    "at": "2026-10-07T05:39:58.110154+00:00",
+    "stdout": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/final-nonblank-npm-lint.stdout.b64",
+      "bytes": 126,
+      "sha256": "aadeed90c148d7e8e48218f43b64c6df5cf6cfcffe6e62a851bdf0815e2cf387"
+    },
+    "stderr": {
+      "path": ".\u03b7\u03bc/verification/muse12-verification-namespace-correction-20261007/final-nonblank-npm-lint.stderr.b64",
+      "bytes": 152,
+      "sha256": "4e2e721ae51a815709251fa3f32c3c9fd0e7d7f2f7b15e4952cff1b18f675c0b"
+    }
   }
 ]
