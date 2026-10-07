@@ -1,0 +1,126 @@
+{
+  "sources": [
+    {
+      "repository": "octave-commons/muse",
+      "revision": "846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f",
+      "path": "AGENTS.md",
+      "blob": "8a0224412e5e80b6cdc85818ff3659ded8693590",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-01.b64",
+      "bytes": 7029,
+      "sha256": "a63129888eaa3c3834bca3d172cf7139fd0b2056d0b56fb87f993b07a349f7e7"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f",
+      "path": "docs/agile/AGENTS.md",
+      "blob": "72d95865851a15e037ee7c9f32ac3959509a7ba7",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-02.b64",
+      "bytes": 2953,
+      "sha256": "f621182eb533e8205c2af53abb5e4b36448e083c62f5e3018bc72a9450fe9ea2"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f",
+      "path": "openhax.kanban.json",
+      "blob": "31f5cb0ae06621ecd1eacef75a0b517ca21661f4",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-03.b64",
+      "bytes": 63,
+      "sha256": "1bc6c217180601964638c8ea0647a7c2f3c4e72bdc05cf6412b39ddfb2f5c1e6"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f",
+      "path": "docs/agile/kanban/make-self-authored-review-publication-truthful-ae0549a0.md",
+      "blob": "14f63cb92012b1f6e1d54c030f2610c1d38712bb",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-04.b64",
+      "bytes": 2694,
+      "sha256": "aaa63b61cdeaf365ec27348004af9ec1ae84ef429338bdabf1c0a67d76a950d3"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f",
+      "path": ".\u03b7\u03bc/review/publish-opencode-review.cjs",
+      "blob": "e9d70b4b9d2ee823e921a5af32451ee5317eb252",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-05.b64",
+      "bytes": 6572,
+      "sha256": "bb75bc57d8eeaf7edbd77f34e9a4da2d319617d06809f9aadfb0d94e7ae6c2c9"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "846b47efd1fa5f9e72f6fe8b2cf45cfb347aba0f",
+      "path": ".\u03b7\u03bc/review/publish-opencode-review.test.cjs",
+      "blob": "687c83153427427b78a1eeb080e2cd7d7e6ffbe5",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-06.b64",
+      "bytes": 7128,
+      "sha256": "3084174dcc5a4c4eb77eefdee01ea74276916845927809ce07789159b74eff22"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "c1369c223cf3c57e3e31934a6d746bfcdfe73f5a",
+      "path": "AGENTS.md",
+      "blob": "8a0224412e5e80b6cdc85818ff3659ded8693590",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-07.b64",
+      "bytes": 7029,
+      "sha256": "a63129888eaa3c3834bca3d172cf7139fd0b2056d0b56fb87f993b07a349f7e7"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "c1369c223cf3c57e3e31934a6d746bfcdfe73f5a",
+      "path": ".\u03b7\u03bc/review/publish-opencode-review.cjs",
+      "blob": "e9d70b4b9d2ee823e921a5af32451ee5317eb252",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-08.b64",
+      "bytes": 6572,
+      "sha256": "bb75bc57d8eeaf7edbd77f34e9a4da2d319617d06809f9aadfb0d94e7ae6c2c9"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "c1369c223cf3c57e3e31934a6d746bfcdfe73f5a",
+      "path": ".\u03b7\u03bc/review/publish-opencode-review.test.cjs",
+      "blob": "687c83153427427b78a1eeb080e2cd7d7e6ffbe5",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-09.b64",
+      "bytes": 7128,
+      "sha256": "3084174dcc5a4c4eb77eefdee01ea74276916845927809ce07789159b74eff22"
+    },
+    {
+      "repository": "octave-commons/muse",
+      "revision": "0b9a91492c8355e6933dc2164d35668cb76d9e60",
+      "path": ".\u03b7\u03bc/review/publish-opencode-review.cjs",
+      "blob": "e9d70b4b9d2ee823e921a5af32451ee5317eb252",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/source-10.b64",
+      "bytes": 6572,
+      "sha256": "bb75bc57d8eeaf7edbd77f34e9a4da2d319617d06809f9aadfb0d94e7ae6c2c9"
+    },
+    {
+      "repository": "open-hax/eta-mu",
+      "revision": "09a4454480baa67f6fdc40f6f73f5e48ef0457d1",
+      "path": ".github/workflows/opencode-code-review.yml",
+      "blob": "1b5fc5fa50f2a8b35f7b239005647241609bb805",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-caller-source.b64",
+      "bytes": 86312,
+      "sha256": "9408499fed18a2a0ebda79d7d7147c47eff51bdc7dd0bd4a1a1aa975a6dbc5d9"
+    },
+    {
+      "repository": "open-hax/eta-mu",
+      "revision": "0ed56aa74a53a1d1e9c2e55ce95451817a7f3a90",
+      "path": ".github/workflows/opencode-code-review.yml",
+      "blob": "984af3470eddd2d5e3817dbbe473e130bc893e9c",
+      "capture": ".\u03b7\u03bc/verification/muse12-self-authored-planning-20261007/eta-foresight-pin-caller-source.b64",
+      "bytes": 20328,
+      "sha256": "b4a2f1db643e9be2382ac0ff1d0c57f26386b51f0aae7b9e41c61e29a926b7ba"
+    }
+  ],
+  "runtime": {
+    "cli": "/home/err/.volta/tools/image/packages/eta-mu/lib/node_modules/eta-mu/node_modules/@eta-mu/rheos/dist/cli.cjs",
+    "bytes": 2028106,
+    "sha256": "fba8bef53a9dbc159136de56f5a3c174af33b0d309ae0a26fce440467b50590c",
+    "package": "@eta-mu/rheos",
+    "installed_version": "0.1.0",
+    "capability_limit": "JSON-only installed runtime, not equivalence to lost ef3 EDN bundle"
+  },
+  "native_read_fixture_preservation": {
+    "original_files": 16,
+    "all_exact": true,
+    "extra_paths": []
+  },
+  "scope": "Source views and engine reads; not implementation, review quorum, live App identity proof, or caller activation."
+}

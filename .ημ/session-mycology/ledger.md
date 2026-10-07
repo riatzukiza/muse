@@ -60,3 +60,12 @@
   spore: none
   receipt-refs: Muse19/verification-note-spacing
   note: Preserve original numeric evidence and immutable receipt bytes while improving the editable narrative. Keep native current-head approval separate from a following documentation-only push.
+- ts: 2026-10-07T05:07:29.845117651Z
+  session: /home/err/.codex/parallel-goal/muse12-publisher-plan-cbwpiuvl/worktree
+  task: muse12-self-authored-publication-plan
+  p-efficiency: 0.78
+  p-friction: 0.22
+  p-skill-candidate: 0.2
+  spore: none
+  receipt-refs: receipts.edn
+  note: Preserve existing Ready criterion scope while distinguishing current owner source, personal sync candidate and Foresight pin. Native JSON mirror reads supply board visibility only. Identity resolution, native publication and independent approval remain separate; no same-session promotion.
