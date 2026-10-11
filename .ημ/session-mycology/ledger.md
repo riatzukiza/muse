@@ -195,3 +195,12 @@
   spore: none
   receipt-refs: cephalon-muse-context-custody-law-plan-correction-20261011
   note: Concrete plan correction assigns observed context metadata to filesystem boundary, reference validation/equality/refusal to pure CLJC law, adapter orchestration to that law, and independent declared-custody trace checks to invocation law. Matching metadata does not attest disk authenticity or model consumption. No source/test implementation or GREEN claimed; card stays incoming until planning qualification and native Rheos ready. Unchanged receipt53 passed authoritative Receipt River containing-root validation with derived attribution; context-free legacy repo failure stays visible and original bytes are not rewritten. Native Codex reassessment returned quota, not withdrawal or agreement; P2 concern handled through existing merged contextual API. PR5 passed canonical exact-head gate with Codex/MiMo, five passing checks and one available-agent round, then merged; exact parents846b47e/e733 and tree-equality readback PASS. Parent PR1 manifest-source mismatch fixed by accepted source and actual PR5 producer/reviewer execution; parent still independently unqualified. Current PR6 MiMo run38160888898 remains active; no current review was manually cancelled. Earlier journals and receipt scopes retain their historical truth. Heartbeat remains human-paused; goal active, finite B1/B2/liveB3 incomplete.
+
+- ts: 2026-10-11T18:18:20.740Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-current-custody-protocol-required-20261011
+  note: Valid planning finding repaired by removing legacy fallback from new compiled verifier. Every admitted begin requires known custody protocol and an explicitly present context-source key, including nil for absence. Current manifest plus legacy-shaped begin refuses; raw trace cannot select compatibility. Historical evidence remains with original immutable verifier/source. Planned positive trace fixtures adopt new protocol; original negative scenarios remain. No new caller-controlled version waiver, implemented source law, GREEN or approval claimed. Prior journal prefixes remain exact.
