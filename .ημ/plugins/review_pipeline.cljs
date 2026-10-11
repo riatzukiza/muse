@@ -17,15 +17,16 @@
 (def submission-file-name "submission.json")
 (def events-file-name "review-events.jsonl")
 
-;; Session state is in-process: the review workflow runs one bounded review per
-;; opencode invocation. Keyed by session id when the host provides one.
+;; Session state is in-process. The host-controlled evidence directory binds
+;; one admitted review to this invocation; changing a host session id cannot
+;; discard the calls already made against that input and output artifact.
 (defonce !sessions (atom {}))
-
-(defn- session-key [ctx]
-  (or (:session/id ctx) :default))
 
 (defn- evidence-dir [ctx]
   (bfs/join (or (:worktree ctx) (:directory ctx)) evidence-dir-name))
+
+(defn- session-key [ctx]
+  (evidence-dir ctx))
 
 (defn- record-event! [ctx kind data]
   (bfs/append-jsonl! (bfs/join (evidence-dir ctx) events-file-name)
@@ -41,8 +42,10 @@
     (let [result (apply f session args)]
       (if (:ok? result)
         (do (swap! !sessions assoc (session-key ctx) (:session result))
+            (when (:restart-required? result)
+              (bfs/remove-file! (bfs/join (evidence-dir ctx) submission-file-name)))
             (record-event! ctx kind (merge {:ok true :chunk-id (or (:chunk-id result) (get-in result [:chunk :id]))}
-                                           (select-keys result [:coverage])
+                                           (select-keys result [:coverage :restart-required?])
                                            (when (= "assess-diff-chunk" kind) {:note (second args)})))
             (dissoc result :session))
         (do (record-event! ctx kind {:ok false :error (:error result)})
@@ -55,42 +58,47 @@
 
 (deftool begin
   {:id          :review/begin
-   :description "Begin an evidence-first pull-request review. Verifies input-manifest.json and the complete basehead.diff in .opencode/review-evidence, indexes changed lines and returns the bounded-reader contract. Call this first; restore the required input and retry if admission fails. After successful admission, complete one bounded review pass."
+   :description "Begin an evidence-first pull-request review. Verifies input-manifest.json and the complete basehead.diff in .opencode/review-evidence, indexes changed lines and returns the bounded-reader contract. Call this first. Input repair belongs to the host; a failed begin ends this invocation without submission, retry or restart. After successful admission, complete one bounded review pass. A second begin requires a fresh model process."
    :args        [:map]
    :tags        #{:review}}
   [_params ctx]
-  (swap! !sessions dissoc (session-key ctx))
-  (try
-    (bfs/remove-file! (bfs/join (evidence-dir ctx) submission-file-name))
-    (let [{:keys [text manifest]} (bfs/read-review-input (evidence-dir ctx))
-          session (assoc (review/begin text) :input-source manifest)
-          context-file (bfs/join (evidence-dir ctx) context-file-name)
-          context (when (bfs/exists? context-file) (bfs/read-text context-file))]
-      (swap! !sessions assoc (session-key ctx) session)
-      (record-event! ctx "begin" {:files (get-in session [:diff-stats :files]) :input-source manifest})
-      {:ok? true :stage (name (:stage session)) :stages (mapv name review/stages)
-       :diff-stats (:diff-stats session) :input-source manifest
-       :input-coverage (review/input-coverage session) :pr-context context
-       :contract "Read every full-input page with review_read_diff_chunk, then assess each with review_assess_diff_chunk. Delivery alone is not assessment. Record stage notes in order, propose/classify candidates and submit only after all changed hunks are assessed. pr.diff is a preview, never complete review input."})
-    (catch :default e {:ok? false :error (str "Full input unavailable: " (.-message e))})))
+  (if-let [session (require-session ctx)]
+    (let [result (review/reject-restart session)]
+      (swap! !sessions assoc (session-key ctx) (:session result))
+      (bfs/remove-file! (bfs/join (evidence-dir ctx) submission-file-name))
+      (record-event! ctx "begin" (merge {:ok false} (select-keys result [:restart-required? :error])))
+      (dissoc result :session))
+    (try
+        (bfs/remove-file! (bfs/join (evidence-dir ctx) submission-file-name))
+        (let [{:keys [text manifest]} (bfs/read-review-input (evidence-dir ctx))
+              session (assoc (review/begin text) :input-source manifest)
+              context-file (bfs/join (evidence-dir ctx) context-file-name)
+              context (when (bfs/exists? context-file) (bfs/read-text context-file))]
+          (swap! !sessions assoc (session-key ctx) session)
+          (record-event! ctx "begin" {:files (get-in session [:diff-stats :files]) :input-source manifest})
+          {:ok? true :stage (name (:stage session)) :stages (mapv name review/stages)
+           :diff-stats (:diff-stats session) :input-source manifest
+           :input-coverage (review/input-coverage session) :pr-context context
+           :contract "Read every full-input page with review_read_diff_chunk, then assess each with review_assess_diff_chunk BEFORE the first deterministic stage note. Delivery alone is not assessment. Finish every page read and assessment before recording any stage evidence; retain the returned content for later stages. A later reread permanently invalidates this invocation. Record all five stage notes in order, propose/classify candidates and submit only after complete input assessment. Any failed review call ends this invocation; the host alone owns verified bounded recovery. pr.diff is a preview, never complete review input."})
+      (catch :default e {:ok? false :error (str "Full input unavailable: " (.-message e))}))))
 
 (deftool read-diff-chunk
   {:id :review/read_diff_chunk
-   :description "Read one lossless bounded page of the verified immutable full diff. Read every page; this records delivery, not assessment."
+   :description "Read one lossless bounded page of the verified immutable full diff. Read every page; this records delivery, not assessment. Pair each page read with review_assess_diff_chunk for that same page id; use the assessment result's coverage.missing to track unassessed pages. Retain the returned page content for later stages. Finish all reads of a page before assessing it. Rereading an assessed page invalidates this invocation; same-session restart or reassessment cannot repair its history."
    :args [:map [:id :int]] :tags #{:review}}
   [{:keys [id]} ctx]
   (apply-step! ctx "read-diff-chunk" review/read-diff-chunk id))
 
 (deftool assess-diff-chunk
   {:id :review/assess_diff_chunk
-   :description "Record your changed-hunk assessment of an already delivered page: changed invariants, candidate risks or why no defect is supported. Every page needs assessment before submission."
+   :description "Record your changed-hunk assessment of an already delivered page: changed invariants, candidate risks or why no defect is supported. Use the same page id as review_read_diff_chunk. The returned coverage distinguishes delivered from assessed pages and lists every missing assessment; continue until coverage.missing is empty. Complete all page reads and assessments before the FIRST deterministic stage note; do not reassess after stage evidence."
    :args [:map [:id :int] [:note [:string {:min 1}]]] :tags #{:review}}
   [{:keys [id note]} ctx]
   (apply-step! ctx "assess-diff-chunk" review/assess-diff-chunk id note))
 
 (deftool record-evidence
   {:id          :review/record_evidence
-   :description "Record the evidence note for the current review stage and advance to the next stage. Stages: deterministic, map-change, generate-candidates, adversarial-validate, publish."
+   :description "Record the evidence note for the current review stage and advance to the next stage. Complete every full-input page read and assessment BEFORE the first deterministic note; incomplete input refuses advancement. Retain page content without rereading or reassessing after stage evidence. Stages: deterministic, map-change, generate-candidates, adversarial-validate, publish. Any refusal ends this invocation; only the host owns verified bounded recovery."
    :args        [:map
                  [:stage [:enum "deterministic" "map-change" "generate-candidates" "adversarial-validate" "publish"]]
                  [:note [:string {:min 1}]]]
@@ -117,7 +125,7 @@
 
 (deftool classify-finding
   {:id          :review/classify_finding
-   :description "Classify a pending candidate after adversarial validation: confirmed (independently plausible failure trace), rejected (disproved), or needs-human (cannot be settled from available evidence)."
+   :description "Classify a pending candidate after adversarial validation: confirmed (independently plausible failure trace), rejected (disproved), or needs-human (cannot be settled from available evidence). Legal only at adversarial-validate or publish. From generate-candidates, first record that stage's evidence note with review_record_evidence to advance into adversarial-validate; in that stage, prefer classifying candidates before recording the adversarial-validate evidence note. Candidates may still be classified at publish after that evidence note. Any failed review_* call ends this invocation; do not submit, retry, restart, or make further review calls."
    :args        [:map
                  [:id [:string {:min 1}]]
                  [:status [:enum "confirmed" "rejected" "needs-human"]]
