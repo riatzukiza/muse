@@ -7,7 +7,8 @@
    (schema open-hax.github-review/v1) produced by `submission`.
 
    No I/O lives in this namespace."
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [eta-mu.shape.git-diff-path :as diff-path]))
 
 ;; ---------------------------------------------------------------------------
 ;; Stages
@@ -44,10 +45,11 @@
            acc      {}]
       (if-let [row (first rows)]
         (cond
-          (str/starts-with? row "+++ ")
-          (let [p (str/trim (subs row 4))
-                p (if (str/starts-with? p "b/") (subs p 2) p)]
-            (recur (rest rows) (when-not (= p "/dev/null") p) nil acc))
+          (str/starts-with? row "diff --git ")
+          (recur (rest rows) nil nil acc)
+
+          (and (nil? new-line) (str/starts-with? row "+++ "))
+          (recur (rest rows) (diff-path/normalize (subs row 4)) nil acc)
 
           (str/starts-with? row "@@ ")
           (recur (rest rows) path (parse-hunk-header row) acc)
@@ -73,6 +75,26 @@
 ;; Session
 ;; ---------------------------------------------------------------------------
 
+(defn diff-chunks
+  "Lossless bounded reader pages: at most 8192 UTF-16 units/128 lines.
+   Never split a surrogate pair; pages concatenate to the exact input text."
+  [text]
+  (let [text (or text "") size (count text)]
+    (loop [start 0 chunks []]
+      (if (= start size) chunks
+        (let [bound (min size (+ start 8192))
+              bound (if (and (< bound size)
+                             (<= 0xD800 #?(:clj (int (.charAt ^String text (dec bound)))
+                                           :cljs (.charCodeAt text (dec bound))) 0xDBFF))
+                      (dec bound) bound)
+              page (subs text start bound)
+              end (loop [at 0 lines 0]
+                    (if-let [newline (str/index-of page "\n" at)]
+                      (if (= 127 lines) (+ start (inc newline)) (recur (inc newline) (inc lines)))
+                      bound))]
+          (recur end (conj chunks {:id (inc (count chunks)) :start start :end end
+                                  :text (subs text start end)})))))))
+
 (defn begin
   "Start a review session over staged diff text."
   [diff-text]
@@ -81,19 +103,91 @@
      :evidence      []
      :candidates    {}
      :candidate-order []
+     :diff-chunks (diff-chunks diff-text)
+     :delivered-chunks #{}
+     :assessed-chunks {}
+     :invalidated-chunks #{}
      :changed-lines changed
-     :diff-stats    {:files          (count changed)
+     :diff-stats    {:files          (count (re-seq #"(?m)^diff --git " (or diff-text "")))
                      :bytes          (count (or diff-text ""))
-                     :truncated?     (boolean (and diff-text (str/includes? diff-text "[eta-mu review] diff truncated")))}}))
+                     :truncated?     (boolean (and diff-text (re-find #"(?m)^\[eta-mu review\] diff truncated at [0-9]+ bytes \(was [0-9]+\)\.$" diff-text)))}}))
 
 (defn- err [msg] {:ok? false :error msg})
 
 (defn- non-blank [s] (and (string? s) (not (str/blank? s))))
 
+(defn input-coverage
+  "Delivery and assessment are separate observations, never proof by metadata."
+  [session]
+  (let [ids (set (map :id (:diff-chunks session)))]
+    {:chunks (count ids) :delivered (count (:delivered-chunks session))
+     :assessed (count (:assessed-chunks session))
+     :missing (vec (sort (remove #(contains? (:assessed-chunks session) %) ids)))}))
+
+(defn restart-required?
+  "Whether an admitted session has a latched restart or reread violation."
+  [session]
+  (boolean (or (:restart-error session) (seq (:invalidated-chunks session)))))
+
+(defn reject-restart
+  "Latch refusal of a second admission without discarding session history."
+  [session]
+  (let [message "A review session has already been admitted in this invocation. Start a fresh invocation; this session cannot be restarted."]
+    {:ok? false :session (assoc session :restart-error message)
+     :restart-required? true :error message}))
+
+(defn read-diff-chunk
+  "Deliver one immutable input page. A read after assessment permanently
+   invalidates that page and requires a fresh invocation."
+  [session id]
+  (if-let [chunk (when (and (integer? id) (pos? id)) (get (:diff-chunks session) (dec id)))]
+    (let [invalidate? (or (contains? (:assessed-chunks session) id)
+                          (contains? (:invalidated-chunks session) id))
+          session (cond-> (update session :delivered-chunks conj id)
+                    invalidate? (update :invalidated-chunks conj id)
+                    invalidate? (update :assessed-chunks dissoc id))]
+      {:ok? true :session session :chunk chunk
+       :restart-required? (restart-required? session)})
+    (err "Unknown diff chunk; use the chunk count returned by review_begin.")))
+
+(defn- chronology-error [session]
+  (or (:restart-error session)
+      (when (seq (:invalidated-chunks session))
+        "A diff chunk was read after assessment. Start a fresh invocation; this session's chronology cannot be restored.")))
+
+(defn assess-diff-chunk
+  "Record a substantive model assessment only after delivery, while the
+   session has no latched restart or read-after-assessment violation and
+   before the first deterministic evidence advances the stage."
+  [session id note]
+  (cond
+    (restart-required? session) (err (chronology-error session))
+    (not (contains? (:delivered-chunks session) id)) (err "Read the diff chunk before assessing it.")
+    (not (non-blank note)) (err "Explain the changed-hunk assessment in a non-empty note.")
+    (not= :deterministic (:stage session))
+    (err "Assess every diff chunk before recording deterministic evidence; post-stage reassessment is refused.")
+    :else {:ok? true :session (assoc-in session [:assessed-chunks id] note)
+           :chunk-id id :coverage (input-coverage (assoc-in session [:assessed-chunks id] note))}))
+
+(defn- full-input-error [session]
+  (cond
+    (restart-required? session)
+    (chronology-error session)
+
+    (get-in session [:diff-stats :truncated?])
+    "The staged input is a truncated preview. Recover the full immutable diff before publishing."
+
+    (seq (:missing (input-coverage session)))
+    (str "Unassessed full-input chunks remain: " (str/join ", " (:missing (input-coverage session)))
+         ". Read and assess every changed hunk before publishing.")))
+
 (defn record-evidence
-  "Record a note for the current stage and advance to the next stage."
+  "Record a note and advance only after complete input before deterministic.
+   Preserve the later adversarial coverage check and all submission guards."
   [session stage note]
-  (let [current (:stage session)]
+  (let [current (:stage session)
+        input-error (when (contains? #{:deterministic :adversarial-validate} stage)
+                      (full-input-error session))]
     (cond
       (not (contains? (set stages) stage))
       (err (str "Unknown stage " stage "; stages are " (str/join ", " (map name stages)) "."))
@@ -104,6 +198,9 @@
 
       (not (non-blank note))
       (err "Evidence note must be a non-empty string.")
+
+      input-error
+      (err input-error)
 
       :else
       (let [next-idx (inc (.indexOf stages current))]
@@ -219,7 +316,8 @@
         confirmed  (filter #(= :confirmed (:status %)) candidates)
         underconfident (filter #(< (:confidence %) confirmation-confidence-threshold) confirmed)
         locations  (frequencies (map (juxt :path :line) confirmed))
-        duplicated (keep (fn [[loc n]] (when (> n 1) loc)) locations)]
+        duplicated (keep (fn [[loc n]] (when (> n 1) loc)) locations)
+        input-error (full-input-error session)]
     (cond
       (not= (:stage session) :publish)
       (err (str "Review cannot be submitted at stage " (name (:stage session))
@@ -227,6 +325,9 @@
 
       (not (non-blank summary))
       (err "Summary must be a non-empty string; it becomes the GitHub review body.")
+
+      input-error
+      (err input-error)
 
       (seq pending)
       (err (str "Unclassified candidates remain: "
@@ -267,6 +368,11 @@
          :envelope {:schema  "open-hax.github-review/v1"
                     :event   event
                     :summary summary
+                    :input-source (:input-source session)
+                    :input-coverage (input-coverage session)
+                    :input-assessments (mapv #(assoc (select-keys % [:id :start :end])
+                                                    :note (get (:assessed-chunks session) (:id %)))
+                                             (:diff-chunks session))
                     :comments comments}}))))
 
 (defn status
@@ -276,5 +382,8 @@
    :stages           stages
    :evidence-count   (count (:evidence session))
    :diff-stats       (:diff-stats session)
+   :input-coverage   (input-coverage session)
+   :restart-required? (restart-required? session)
+   :invalidated-chunks (vec (sort (:invalidated-chunks session)))
    :candidates       (mapv #(select-keys % [:id :severity :category :path :line :status :confidence])
                            (ordered-candidates session))})
