@@ -22,6 +22,27 @@ The user explicitly included this minimum prerequisite in the finite character
 milestone on2026-10-11. It enables source qualification for persistent graph
 recall; it does not implement the physical field, mood, or live prompt proof.
 
+### Relationship ownership
+
+The Foresight board owns the character epic
+`63a0e4ff-353f-4c90-ab8a-7241d958d54c`
+([character epic](https://github.com/riatzukiza/foresight/blob/89946bdf09c1d0141e04e2a02d8a09bb05c26ba4/docs/agile/kanban/cephalon-character-epic.md))
+and recall story `a1e9d6af-0233-4dcb-9677-5c76fa9a2701`
+([recall story](https://github.com/riatzukiza/foresight/blob/89946bdf09c1d0141e04e2a02d8a09bb05c26ba4/docs/agile/kanban/cephalon-character-recall.md)).
+The recall story records that epic as both `epic` and `parent`; the finite
+completion and newly accepted prerequisite are recorded in
+`foresight/docs/notes/2026-10-08-cephalon-loop-slice-milestone.md`.
+Native Rheos reads on2026-10-11 confirmed those UUIDs and relationships.
+
+This Muse card is a standalone prerequisite in Muse's separate board; it does
+not create a second epic or copy foreign operational relationships into this
+single-board configuration. Personal Muse PR5 (accepted e733 baseline) and its
+parent PR1 have independent synchronization gates. This card's implementation
+must qualify before the OpenPlanner PR3 reviewer can adopt its merged source;
+OpenPlanner must then qualify before Knoxx consumer adoption and liveB3 proof.
+These PR dependencies identify the source-order gates, not board transitions,
+merged source claims or deployment authorization.
+
 ## Outcome
 
 Return a small, explicit reference to the complete staged PR context from
