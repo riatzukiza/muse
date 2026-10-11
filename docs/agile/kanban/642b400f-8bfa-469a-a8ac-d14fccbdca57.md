@@ -16,9 +16,12 @@ The [intended repair coordinator](bb5b1ee2-111c-4762-8321-889a7256b2f9.md) and
 [transport/law predecessor](32f65d9a-50ec-412a-a0b1-78cb88c27bfb.md) supply
 the bounded begin response and declared observations. This second slice follows
 the predecessor through native Rheos's retained dependency, not a local gate.
-Readback is not graph admission: the stored epic target currently lacks an
-actual epic type. The coordinator documents the canonical prerequisites that
-must be resolved before native readiness or implementation.
+The coordinator's actual epic type was admitted by the qualified native Rheos
+whole-board correction on2026-10-11T21:41:20.879Z. Committed receipt61 records
+the admission and independent readbacks; this child's parent/epic links and
+dependency on the predecessor were retained. Readback alone is not admission
+proof. This child remains Incoming and requires current planning qualification,
+native readiness and its predecessor before implementation.
 
 ## Outcome
 

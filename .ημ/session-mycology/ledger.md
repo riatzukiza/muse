@@ -258,3 +258,12 @@
   spore: none
   receipt-refs: muse-qualified-real-incoming-epic-correction-20261011
   note: NativeexplanationwholebodyreadbackPASS including finalnewline after initialoperatorrstrip comparisonfailure. Firstinline repeat-cardassertion wasvacuous; itgetsno bytecustodycredit. Separatefrozenbyte-custodycorrection records actualrepeat andallbytes equality without rewriting prior proof. Canonicalwait60exit4 wasoperatorpendingtimeout, notfailedproviderattempt; sameMiMoattemptcompleted andno reviews werecancelled/restarted. No paidcredits/headcounterchurn/historyrewrite/localRheosparser/spore/live-maker/model/clock/gateway/PM2/cloud/grant/publication/deployment mutation. GoalACTIVE/heartbeatHUMAN-PAUSED.
+
+- ts: 2026-10-11T22:01:42.085Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: muse6-stale-epic-description-correction-20261011
+  note: Native Codex review on e746 completed with a genuine P1: coordinator and both child descriptions still represented the historical protected-key refusal as the current epic state. Updated only current planning prose to acknowledge the qualified whole-board native correction and retained links/dependency; all three remain Incoming and implementation still requires current plan qualification and lawful native readiness. The two original historical duplicate-ID findings remain open; their old rows, legacy replay/import defect and independent rejection obligations are retained. Native in-thread proposals4243379915/4243380014 have no admitted independent agreement yet. Existing MiMo run38177737421 on e746 remains live; it was not cancelled or restarted. No source implementation, runtime, mood, field, principal, deployment or third CLI namespace repair is claimed.
