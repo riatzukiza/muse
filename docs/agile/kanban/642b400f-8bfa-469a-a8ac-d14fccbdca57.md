@@ -12,10 +12,13 @@ dependency: "32f65d9a-50ec-412a-a0b1-78cb88c27bfb"
 
 ## Context
 
-The [owning repair epic](bb5b1ee2-111c-4762-8321-889a7256b2f9.md) and
+The [intended repair coordinator](bb5b1ee2-111c-4762-8321-889a7256b2f9.md) and
 [transport/law predecessor](32f65d9a-50ec-412a-a0b1-78cb88c27bfb.md) supply
 the bounded begin response and declared observations. This second slice follows
 the predecessor through native Rheos's retained dependency, not a local gate.
+Readback is not graph admission: the stored epic target currently lacks an
+actual epic type. The coordinator documents the canonical prerequisites that
+must be resolved before native readiness or implementation.
 
 ## Outcome
 
