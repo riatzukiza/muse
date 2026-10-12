@@ -177,3 +177,120 @@
   spore: none
   receipt-refs: 46c24f9e-844f-4d0d-a9a4-a1f09e531b05; muse-review-tool-guidance-qualification-v1/publish-stage-guidance-correction-v2/qualification-results-v2.json
   note: Native review found an overstrong sequencing sentence while existing publish-stage classification stayed legal. Prefer the normal sequence in prose and state every supported later stage explicitly. Reuse the actual unchanged regression tests and compiled tool metadata; do not invent runtime RED from a description-only correction. Preserve the initial independent seal, hosted CI and all local preparation failures as historical facts, with fresh qualification for the successor. Canonical receipt and both complete ledger prefixes remain exact. No spore, promotion, native successor review acceptance, Services activation, installed-pack change or deployment is claimed.
+
+- ts: 2026-10-11T17:44:09.955Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-begin-context-plan-transport-corrections-20261011
+  note: Human Yes includes the minimum Muse review-host repair. Isolated personal plan07ebaba was reviewed; native CodeRabbit found one relationship reference gap and Codex seven planning defects. e3be68c names Foresight-owned epic63a0e4ff and recall a1e9d6af, native Rheos readback confirms identity/relationships, and CodeRabbit thread was Fixed/resolved with native assent. cccbb56 renames the card to its canonical UUID, distinguishes the actually clipped single-line serialized begin from the native689line/max966character staged context, narrows the claimed outcome to transport/custody rather than model consumption, requires digest/byte-bound context and changed-context refusal before later stage/submission calls, identifies downstream PR gates, points to canonical exact-head qualification and names exact immutable journal/native failure hashes. These are planning corrections; source repair is not implemented. Existing App3152464 eta-mu-ai and all-personal installation118318185 were freshly authenticated; two encrypted publisher secrets were configured without printing/recording contents or creating an App/install. Original hosted reviews38159907252/38159888959 failed credential precondition and their truthful wrappers failed; only failed completed runs were retried after repair, no failure credited as quota or review. Latest current-head jobs remain pending/in progress; no duplicate current review, synthetic approval, local policy waiver, paid credits, active maker/runtime/clock/cloud/PM2/publication/deployment or spore mutation. Preserve e733 journal prefixes; this owned append will travel with the concrete card corrections.
+
+- ts: 2026-10-11T18:07:30.186Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-context-custody-law-plan-correction-20261011
+  note: Concrete plan correction assigns observed context metadata to filesystem boundary, reference validation/equality/refusal to pure CLJC law, adapter orchestration to that law, and independent declared-custody trace checks to invocation law. Matching metadata does not attest disk authenticity or model consumption. No source/test implementation or GREEN claimed; card stays incoming until planning qualification and native Rheos ready. Unchanged receipt53 passed authoritative Receipt River containing-root validation with derived attribution; context-free legacy repo failure stays visible and original bytes are not rewritten. Native Codex reassessment returned quota, not withdrawal or agreement; P2 concern handled through existing merged contextual API. PR5 passed canonical exact-head gate with Codex/MiMo, five passing checks and one available-agent round, then merged; exact parents846b47e/e733 and tree-equality readback PASS. Parent PR1 manifest-source mismatch fixed by accepted source and actual PR5 producer/reviewer execution; parent still independently unqualified. Current PR6 MiMo run38160888898 remains active; no current review was manually cancelled. Earlier journals and receipt scopes retain their historical truth. Heartbeat remains human-paused; goal active, finite B1/B2/liveB3 incomplete.
+
+- ts: 2026-10-11T18:18:20.740Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-current-custody-protocol-required-20261011
+  note: Valid planning finding repaired by removing legacy fallback from new compiled verifier. Every admitted begin requires known custody protocol and an explicitly present context-source key, including nil for absence. Current manifest plus legacy-shaped begin refuses; raw trace cannot select compatibility. Historical evidence remains with original immutable verifier/source. Planned positive trace fixtures adopt new protocol; original negative scenarios remain. No new caller-controlled version waiver, implemented source law, GREEN or approval claimed. Prior journal prefixes remain exact.
+
+- ts: 2026-10-11T18:49:44.514Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-plan-split-read-errors-entire-prefix-20261011
+  note: Current6cf CodeRabbit full review completed18:37:59 with no actionable findings, exact reviewed coverage/all3 inputs and no declared omission; native summary raw private12467bytes/SHA256ab95b3977d29cda3e4ab81d0170a239707d192812d8b55e451973d3ad35a7302, reply4522bytes/SHA256c07afb30027092be88c0f6f9ce0c8cc95258aff955fd1093e1c79898fd357183. Canonical6cf recognizes only CodeRabbit approval; manual Codex completed18:41:04 with three actual P2 planning findings. MiMo38163252123/job114542320759 still running at capture. The revised cards now address all three findings, with native descriptive metadata and manual first-class child inputs; no implementation/Ready/approval claimed. Exact complete6cf journals, including receipts53-55 and reflection181-206, remain immutable, and future additions inherit that rule. No local Rheos semantics or historical repo insertion. No runtime/maker/clock/PM2/cloud/model/grant/publication/deploy/paid or spore changes; source repair and finite B1/B2/liveB3 remain incomplete.
+
+- ts: 2026-10-11T19:05:02.577Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-extern-plan-and-native-board-refusal-20261011
+  note: Prepared plan fixes Codex P1 extern namespace finding4242786182. Other two actual findings remain open, require separately scoped canonical upstream work. No source test/future refusal proof, approval, valid hierarchy, native readiness or deployment inferred. Complete prior receipts/reflections/events preserved. Old6cf MiMo APPROVED5484510930/all6pages/all3inputs and all actual jobs SUCCESS precede aggregate CANCELLED; verdict remains stale on3c. No runtime/maker/clock/gateway/PM2/cloud/model/grant/publication/deploy/paid/spore changes; B1/B2/liveB3 remain incomplete; heartbeat human-paused.
+
+- ts: 2026-10-11T19:18:31.378Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-native-scalar-dependency-proof-20261011
+  note: Actual full3c MiMo38165465754 review finished19:12:36, all8pages62854bytes/all6inputs, one actual event-collision finding with unknown native severity; no current approval. Newa44 CI/bundleSUCCESS, current38166576503 started19:12:48 with actual live jobs. Native explanation answers scalar question, preserves captured-body chronology/deterministic execution limits and human immediate immutable-history rule. This is bounded native fixture evidence, not production graph admission, implementation RED/GREEN, provider approval or real Muse readiness. No optional rebuild, new paid/fullreview request, runtime/maker/clock/gateway/PM2/cloud/model/grant/publication/deploy/spore change; no observation-only push. B1/B2/liveB3 incomplete/goalACTIVE/heartbeat humanPAUSED.
+
+- ts: 2026-10-11T19:41:28.465Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-current-approval-scope-accepted-20261011
+  note: New Rheosf4f planning CodeRabbit actualfullcompletion/noactionable/all6/exactcoverage; canonical eligibleapproval. AutomaticCodex activitysummary completed but supplies no explicit passingverdict; one deduplicated manualplanning request6112926420 returned actual accountquota6112927469 at19:38:28/resetUNKNOWN, correctly supplies no reviewcredit. Rheos MiMo38168402512 actuallyRUNNING; no duplicate/payed requests. No Muse headadvanced/observation-onlypush/sourceimplementation/Ready/native typecorrection or runtime/maker/clock/gateway/PM2/cloud/model/grant/publication/deploy/spore changes. Prior source58/root399 prefixes remain. B1/B2/liveB3 unfinished; goalACTIVE/heartbeat humanPAUSED.
+
+- ts: 2026-10-11T20:48:58.277Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: muse-qualified-future-event-id-native-correction-20261011
+  note: Operator whole-card-prefix assertionfailedbecauseexistingnativewriterstampsnewwrite-id; exactfrontmatterexceptwrite-idandbodyprefixchecksPASS. Append-onlynativefirstcardevidencecorrectionrecordsbroaderpriorphrase, neverrewriteshistory. MiMocompleted20:37:35/actualAPPROVED20:37:32; no syntheticapproval or counteroverride. GoalACTIVE/heartbeatHUMAN-PAUSED; no livecephalonruntime/maker/clock/model/grant/publication/deployment/spore mutation.
+
+- ts: 2026-10-11T21:43:49.396Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: muse-qualified-real-incoming-epic-correction-20261011
+  note: NativeexplanationwholebodyreadbackPASS including finalnewline after initialoperatorrstrip comparisonfailure. Firstinline repeat-cardassertion wasvacuous; itgetsno bytecustodycredit. Separatefrozenbyte-custodycorrection records actualrepeat andallbytes equality without rewriting prior proof. Canonicalwait60exit4 wasoperatorpendingtimeout, notfailedproviderattempt; sameMiMoattemptcompleted andno reviews werecancelled/restarted. No paidcredits/headcounterchurn/historyrewrite/localRheosparser/spore/live-maker/model/clock/gateway/PM2/cloud/grant/publication/deployment mutation. GoalACTIVE/heartbeatHUMAN-PAUSED.
+
+- ts: 2026-10-11T22:01:42.085Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: muse6-stale-epic-description-correction-20261011
+  note: Native Codex review on e746 completed with a genuine P1: coordinator and both child descriptions still represented the historical protected-key refusal as the current epic state. Updated only current planning prose to acknowledge the qualified whole-board native correction and retained links/dependency; all three remain Incoming and implementation still requires current plan qualification and lawful native readiness. The two original historical duplicate-ID findings remain open; their old rows, legacy replay/import defect and independent rejection obligations are retained. Native in-thread proposals4243379915/4243380014 have no admitted independent agreement yet. Existing MiMo run38177737421 on e746 remains live; it was not cancelled or restarted. No source implementation, runtime, mood, field, principal, deployment or third CLI namespace repair is claimed.
+
+- ts: 2026-10-11T22:11:00.878Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: muse6-native-current-epic-clarification-20261011
+  note: The previous e746 MiMo run actually completed SUCCESS22:05:19UTC; job completed22:05:14 and native COMMENTED5485194253 submitted22:05:10 with one medium stale-epic-description finding. It is not an approval. Actual verified artifact11716358075 binds all11 delivered/assessed full-diff pages, one completed attempt0, actual COMMENT submission and fresh pre/post input verification to e746/e733. The submission contains no stage-array field; native review prose reports five stages, which is not separately counted from that field. The reviewer sandbox's deterministic gate was diff_stat only; separate full CI remains distinct. Current planning prose is already corrected in local0e. Added a qualified native Rheos comment that explicitly supersedes the earlier comment saying the epic repair was next; preserves that entire historical comment text, all original events and child relationships. Actual source CLI SHA85369213440634989365f75929045d36eb69b6c6b1e7679f68d483374a0d526b appended one1852byte comment event, SHAfd8739bc56423c679239c767cb11602c3941470c407c750f481559c10004161f, native IDkanban-bb5b1ee2-111c-4762-8321-889a7256b2f9-93c788d7-dc4a-40c9-8c91-e1f1ff91287c. Independent native coordinator read exited0. All three cards remain Incoming; no implementation readiness, legacy replay/import repair, independent rejection or source review transfer is claimed.
+
+- ts: 2026-10-12T15:12:48.585Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-authorized-event-id-correction-20261012
+  note: Human explicitly authorized fixing ledger rows on2026-10-12 and requested shared script-facing ID creation/checking. Actual source cd5c4d5372aede740feeed74554f635a08559b09 original80row59403byte ledger SHA163dde2f29b3add4aa42dd05e13bd8113b971411e0c4ee608f812ab44143f5e1. Only event/id token bytes in rows76/77 changed to distinct board/task/UUID IDs; all other fields and78otherrows remain exact, count/order retained. Exact original587/530byte rows archived under .ημ with combinedSHA77e709d9fcdf9ce5eadf0ee0f6304bcfa79ed51cc2c4f38eb2b998f0e497a47e and immutable sourceGitblob recorded. AfterSHA c7fcce180fa23d03b87475a547cc8f89f207d9174a4d960ae3ffc34e45f3b872. Actual one-off EDN semantic equality excluding event/id passes; local ID-keyed index counterexample before80rows/79identities now80rows/80identities. Shared write-ID preserved as batch correlation. Qualified native Rheos events read all80rows but existing JSON namespace collision maps event/id and session/id to id=kanban; the initial ID-count assertion failed for that operator representation and supplies no uniqueness proof. Raw EDN/byte proofs retained separately. No namespace-loss repair added. New canonical Rheos owner plan published as PR18/add852f with5pointIncoming card; shared checker/source feature not Ready/implemented/adopted yet and consumerCI invocation remains pending reviewed pin. This is explicitly authorized two-row data correction, not an append-only prefix claim for that ledger and not a standing exception for receipts. Original receipt/reflection prefixes remain intact. No runtime/deployment/publication mutation or spore.
+
+- ts: 2026-10-12T15:29:33.635Z
+  task: Bounded Codex review repair
+  p-efficiency: 0.8
+  p-friction: 0.25
+  p-skill-candidate: 0.12
+  spore: none
+  receipt-refs: cephalon-muse-review-begin-ledger-plan-refinement-20261012T1530
+  note: Codex actual current8aced planning findings4249631979/1993/2000 are addressed in current non-comment card prose: explicitly describe the human-authorized two historical ID-string corrections and original archives, preserve78otherrows/non-ID fields/80count/sharedwriteID/roots, identify actual prior three native collision-thread settlements, and retain prior comments unchanged. Pin new infra custody orchestrator and thin review_pipeline entrypoint. Require unavailable first review_begin observations EACCES/IO to return structured failed begin without session admission/mutation; later re-observation stage/submission controls remain distinct. No implementation or tests for these new contracts yet. Owner Rheos plan separate3point constructor/checker and2point dependent consumer rollout retain original5point total provisionally; no local validator. Both free hosted reviewers failed again after one diagnostic rerun: actual Muse artifact HTTP401 Upstream request failed Invalid credential at opencode.ai inference; model catalog listing is not availability. Mandatory wrapper remains failed, no approval/cohort/waiver/model/key change. Initial wrong-cwd source discovery failed; initial naive comment-boundary assertion failed due actual added EOF newline, fixed and exact native suffix verified. Receipt64 and earlier receipts/reflections remain immutable. No runtime, publication, board transition, spore or goal-completion claim.
