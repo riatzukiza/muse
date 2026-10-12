@@ -7,7 +7,7 @@ points: "8"
 labels: "muse, review-invocation, custody, cephalon, 8sp"
 parent: "bb5b1ee2-111c-4762-8321-889a7256b2f9"
 epic: "bb5b1ee2-111c-4762-8321-889a7256b2f9"
-write-id: "1791838233152-0.0w7ufh5l8xwijlppu2dl"
+write-id: "1791840854662-0.qny88g2ggja7ajpdcv"
 ---
 
 ## Context
@@ -168,5 +168,7 @@ Joint transport/enforcement source follows RED7ce93c8. Pure shape/domain compose
 Correction to the immediately preceding progress comment: current full suite has302tests1876assertions3failures0errors/exit1, all3 in the unchanged file-watch test. It did NOT pass. The earlier299/1834 run passed, and current context controls/optimized export probes pass, but current full gate remains failed. The previous comment prematurely stated a passing result; this append supersedes that statement without changing history. Native Review admission must actually execute its gates and independently read back, with any refusal retained.
 
 Actual native joint Review gate exited3: build/lint passed, pnpm test302/1876 refused on3 unchanged file-watch assertions. Independent native readback retains In Progress. Owned read-only fs.watch canary returns ENOSPC; no host watcher/service/sysctl change or gate bypass. Current context-delivery assertions and optimized invocation93controls pass; full gate remains failed. Preserve failed logs and premature prior passing statement/corrective append. Publish source candidate with truthful gates for independent CI/review; no source qualification, downstream adoption or completion claimed.
+
+Current CodeRabbit review findings4252414361/4252414388/4252414395 verified. Qualified Review-to-InProgress reopened this same joint source boundary. Compiled-input RED exits1 in all4 absent/present context x cleanup/input-read denial cases: admitted begin loses protocol/source/observation metadata. Fault injection is scoped to owned fixture paths and restored finally. Production unchanged. Next minimal catch preserves observed-fields and qualifies two stale Incoming prose statements as historical; native board/frontmatter/comments stay engine-owned. Receipt83 retains actual RED and receipt82 actual prior Review success; neither review credit nor deployment.
 
 ---

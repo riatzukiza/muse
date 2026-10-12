@@ -28,6 +28,42 @@ export async function verifyReviewContext({fixture, call, stageInput}) {
     if (context !== null) fs.writeFileSync(file, context);
     return {evidence, file, ctx: {sessionID: name, directory: path.dirname(path.dirname(evidence))}};
   };
+  const admittedBeginFailures = [];
+  for (const context of [null, Buffer.from('Owned admitted context: ημ\n')]) {
+    for (const failure of ['submission-cleanup', 'full-input-read']) {
+      const f = make(`admitted-begin-${context === null ? 'absent' : 'present'}-${failure}`, context);
+      const sentinel = path.join(f.evidence, 'submission.json');
+      fs.writeFileSync(sentinel, 'owned sentinel');
+      const source = context === null ? null : {path: f.file, bytes: context.length, sha256: sha(context)};
+      const read = fs.readFileSync, unlink = fs.unlinkSync;
+      fs.readFileSync = (file, ...args) => {
+        if (failure === 'full-input-read' && file === path.join(f.evidence, 'input-manifest.json'))
+          throw new Error('owned full-input denial');
+        return read(file, ...args);
+      };
+      fs.unlinkSync = (file, ...args) => {
+        if (failure === 'submission-cleanup' && file === sentinel)
+          throw new Error('owned submission-cleanup denial');
+        return unlink(file, ...args);
+      };
+      syncBuiltinESMExports();
+      let result;
+      try {result = await call('review_begin', {}, f.ctx);}
+      finally {fs.readFileSync = read; fs.unlinkSync = unlink; syncBuiltinESMExports();}
+      try {
+        assert.equal(result['ok?'], false);
+        assert.match(result.error, /^Full input unavailable:/);
+        assert.equal(result['context-protocol'], protocol);
+        assert.equal(Object.hasOwn(result, 'context-source'), true);
+        assert.deepEqual(result['context-source'], source);
+        assert.deepEqual(result['context-observation'], {status: context === null ? 'absent' : 'present', source});
+        assert.equal((await call('review_status', {}, f.ctx))['ok?'], false, 'no session admitted on failed begin');
+        assert.equal(fs.existsSync(path.join(f.evidence, 'review-events.jsonl')), false, 'no invented begin event');
+        assert.equal(fs.existsSync(sentinel), failure === 'submission-cleanup', 'retain existing cleanup behavior');
+      } catch (error) {admittedBeginFailures.push({context: context === null ? 'absent' : 'present', failure, error: error.message});}
+    }
+  }
+  assert.deepEqual(admittedBeginFailures, [], 'Every admitted begin refusal retains shaped custody fields');
   const bytes = Buffer.from(('Untrusted PR data: ημ 😀\n').repeat(2200) + 'EXACT-TAIL: 終わり\n');
   const large = make('1482-pages', bytes);
   // Four header lines plus 189692 changed lines gives the observed 1482 pages.
@@ -148,5 +184,5 @@ export async function verifyReviewContext({fixture, call, stageInput}) {
   assert.ok(fs.existsSync(fixture));
   return {context_protocol: protocol, observed_pages: 1482, bounded_begin_bytes: Buffer.byteLength(JSON.stringify(begin)),
     context_bytes: bytes.length, context_sha256: sha(bytes), custody_negatives: 14,
-    first_unavailable_negatives: 2, native_review: false};
+    first_unavailable_negatives: 2, admitted_begin_refusals: 4, native_review: false};
 }
