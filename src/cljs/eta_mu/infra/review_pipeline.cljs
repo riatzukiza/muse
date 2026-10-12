@@ -62,7 +62,9 @@
             (merge {:ok? true :stage (name (:stage session)) :stages (mapv name review/stages)
                     :diff-stats (:diff-stats session) :input-source manifest
                     :input-coverage (review/input-coverage session) :contract contract} fields))
-          (catch :default error {:ok? false :error (str "Full input unavailable: " (.-message error))}))))))
+          (catch :default error
+            (merge {:ok? false :error (str "Full input unavailable: " (.-message error))}
+                   (observed-fields observation))))))))
 
 (defn- apply-step! [ctx kind f & args]
   (if-let [session (require-session ctx)]

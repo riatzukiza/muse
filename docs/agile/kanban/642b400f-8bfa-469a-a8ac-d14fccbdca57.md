@@ -1,13 +1,13 @@
 ---
 uuid: "642b400f-8bfa-469a-a8ac-d14fccbdca57"
 title: "Verify joint review transport and complete HOST context delivery"
-status: "in_progress"
+status: "review"
 priority: P1
 points: "8"
 labels: "muse, review-invocation, custody, cephalon, 8sp"
 parent: "bb5b1ee2-111c-4762-8321-889a7256b2f9"
 epic: "bb5b1ee2-111c-4762-8321-889a7256b2f9"
-write-id: "1791840854662-0.qny88g2ggja7ajpdcv"
+write-id: "1791841077694-0.pm20nkyb7ypelehbgjc"
 ---
 
 ## Context
@@ -31,8 +31,9 @@ The coordinator's actual epic type was admitted by the qualified native Rheos
 whole-board correction on2026-10-11T21:41:20.879Z. Committed receipt61 records
 the admission and independent readbacks; this child's parent/epic links and
 dependency on the predecessor were retained at that historical admission.
-Readback alone is not admission proof. This child remains Incoming and requires
-current planning qualification and native readiness before implementation.
+Readback alone is not admission proof. At that historical admission, this child
+was Incoming and required current planning qualification and native readiness
+before implementation.
 
 ## Outcome
 
@@ -170,5 +171,7 @@ Correction to the immediately preceding progress comment: current full suite has
 Actual native joint Review gate exited3: build/lint passed, pnpm test302/1876 refused on3 unchanged file-watch assertions. Independent native readback retains In Progress. Owned read-only fs.watch canary returns ENOSPC; no host watcher/service/sysctl change or gate bypass. Current context-delivery assertions and optimized invocation93controls pass; full gate remains failed. Preserve failed logs and premature prior passing statement/corrective append. Publish source candidate with truthful gates for independent CI/review; no source qualification, downstream adoption or completion claimed.
 
 Current CodeRabbit review findings4252414361/4252414388/4252414395 verified. Qualified Review-to-InProgress reopened this same joint source boundary. Compiled-input RED exits1 in all4 absent/present context x cleanup/input-read denial cases: admitted begin loses protocol/source/observation metadata. Fault injection is scoped to owned fixture paths and restored finally. Production unchanged. Next minimal catch preserves observed-fields and qualifies two stale Incoming prose statements as historical; native board/frontmatter/comments stay engine-owned. Receipt83 retains actual RED and receipt82 actual prior Review success; neither review credit nor deployment.
+
+Minimal review correction GREEN: admitted begin catch now retains the same observed-fields for its protocol/source/observation; no new begin event. Compiled full-input204pages/context1482pages/custody14/unavailable2 plus4 admitted-refusal controls pass. Optimized invocation3representations/93assertions pass. Actual qualified native Review gate all5builds0warnings/lint0errors0warnings/full302tests1876assertions0failures0errors exited0; independent readback Review/8points. Existing authenticated Mongo integration remains skipped; no Mongo availability proof. Two body prose passages now qualify Incoming as historical and refer current native status to frontmatter/event history; native old comments retained. Current source awaits fresh exact-head independent review, not adopted or deployed.
 
 ---

@@ -1,0 +1,54 @@
+{
+  "tier": "observed-command-output-index",
+  "provider_approval": false,
+  "red_commit": "a0e7985b0f32ebffba93db3f5f6c02abcb21d951",
+  "findings": [
+    4252414361,
+    4252414388,
+    4252414395
+  ],
+  "results": {
+    "compiled_admitted_refusals": 4,
+    "full_tests": 302,
+    "full_assertions": 1876,
+    "failures": 0,
+    "errors": 0,
+    "optimized_invocation_assertions": 93,
+    "cold_hosts": 3,
+    "native_status": "review",
+    "points": "8",
+    "mongo_integration": "skipped: authentication unavailable"
+  },
+  "logs": [
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/admitted-begin-green-compiled-input.log",
+      "bytes": 1243,
+      "sha256": "77ba4ba39d533bd37cd30741acd4a91105e89bbc98d41cdf6cd195cc2e619b4c"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/admitted-begin-green-native-review.log",
+      "bytes": 3523,
+      "sha256": "80b6734e53f7e8f0047caf55b626ca3e5c6b77a39bdadf8eeb84b1d374a61294"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/admitted-begin-green-native-readback.json",
+      "bytes": 15243,
+      "sha256": "0aad231d069e8a1e28e6cba9e5afb8b77ccd6ac88f36f0cfdd3675c64ec8eb83"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/admitted-begin-green-invocation.log",
+      "bytes": 449,
+      "sha256": "dab6a708cb8d199d51e686f5201b8b6237d06208f6df37a5bac4a2e8e47e6af2"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/admitted-begin-green-cold.log",
+      "bytes": 2746,
+      "sha256": "ed6d407d4c6df18eb5512042a54820992db6372462e5e7c5367cf03e2ce6b461"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/admitted-begin-green-native-comment.log",
+      "bytes": 881,
+      "sha256": "2ba0221ce5efe05efa06b52314710f2a91d1b500249a1336706473e19e459a70"
+    }
+  ]
+}
