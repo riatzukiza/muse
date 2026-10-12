@@ -330,3 +330,12 @@
   spore: none
   receipt-refs: cephalon-muse-restart-status-red-20261012
   note: Verified native CodexP2: infra latched an unused restart-required? session key, while domain status predicate recognizes restart-error/invalidated-chunks, so custody-refused session incorrectly reported false. New actual compiled negative assertion fails before implementation; successful present/absent controls and genuine file restoration are also encoded. Existing pure/fixture f593 success and independent CI remain dated source evidence, not proof of this new status behavior. Cold RED is one observed failure, not an invented full negative count. Initial direct job-log read failed without mutation, normal gh run log read succeeded; wrong domain .cljs read corrected to actual .cljc. Node22.23.3 was fetched into Volta cache only; no default/runtime/maker process changed. Native failed attempts and all prefixes retained; no new watcher scope, model/credential/heartbeat/deployment change, native approval, dependent verifier or spore.
+
+- ts: 2026-10-12T18:14:19.131Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-restart-status-green-20261012
+  note: Minimal verified CodexP2 repair reuses existing domain restart-error rather than keeping an ignored session restart-required? flag, and returns the established indication on refused effects. Causal committed RED and actual compiled GREEN preserved. New JSON binds original finding/head, RED identity, exact current source/log hashes and explicit tier; original5290byte source evidence remains unchanged. Native watcher gate is still a separate local blocker despite matching exact actual CI Node22.23.3. No more runtime retries, watcher implementation, board bypass, weakened tests, source adoption, dependent verifier, provider/credential/heartbeat/deployment change, synthetic approval or spore. All committed receipt/reflection/event prefixes remain immutable; repository attribution remains implicit.

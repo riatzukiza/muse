@@ -1,0 +1,74 @@
+{
+  "tier": "Observed command-output transcription and compiled fixtures; not raw native approval",
+  "finding": "https://github.com/riatzukiza/muse/pull/7#discussion_r4250986013",
+  "finding_head": "f5936ffddc8b820e71313321aea437f908d52361",
+  "red_commit": "5c40f57b86fa7865f8f465f22e5af2fa718f9aa8",
+  "source_sha256": {
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "f9c3fc144606e8ace3a3e8eebb7f4fbd1663944ef9931376976532266cf00897",
+    "scripts/verify-review-context.mjs": "4cea717c1697e53954293f4c9d30e331c0058191a021be43d700a8566461429a"
+  },
+  "causal_red": "Actual cold compiled gate fails restart status false versus expected true; exit1/zero compiler warnings",
+  "verified_fix": "Use existing domain restart-error latch and expose restart-required on refused effects. All14 custody stage/submission negatives assert established status and returned restart indication; original bytes/presence are genuinely restored before the second refusal. Healthy absent/present controls assert false.",
+  "green": {
+    "cold_compiled_full_input": "PASS existing controls and new restart checks; zero compiler warnings",
+    "five_target_build": "PASS zero compiler warnings",
+    "lint": "0errors0warnings",
+    "legacy_invocation": "PASS42assertions; dependent context trace verifier still unimplemented"
+  },
+  "independent_ci": {
+    "run": 38288157141,
+    "job": 114941392259,
+    "exact_head": "f5936ffddc8b820e71313321aea437f908d52361",
+    "node": "22.23.3",
+    "tests": 287,
+    "assertions": 1638,
+    "failures": 0,
+    "errors": 0,
+    "all_builds_zero_warnings": true,
+    "limitation": "Prior source head qualification only; final pushed head needs its own actual checks/reviews"
+  },
+  "native_gate": {
+    "status": "Still refused; first story remains in_progress",
+    "matching_ci_runtime_attempts": 1,
+    "wrapper_exit": 126,
+    "underlying_pnpm_test_exit": 1,
+    "failures": 3,
+    "unchanged_test": "watch-once-resolves-on-append-test",
+    "limits": "Matching exact CI runtime did not resolve local failure; no sole runtime cause, skipped test, FSM command change or added watcher repair"
+  },
+  "logs": {
+    "restart-status-red.log": {
+      "bytes": 1063,
+      "sha256": "87b804776321cf0b383761b887d7c9fda1ca7d7485ef9237a7e296b374686d81"
+    },
+    "restart-status-green.log": {
+      "bytes": 1214,
+      "sha256": "8aecac1f60b7d22eb08b79071f9ed722978ccb0ba807027a9d50bbc0298a2fcc"
+    },
+    "restart-status-build.log": {
+      "bytes": 1086,
+      "sha256": "59bce26c76f89e8b2ba2ed9bfd8a573fc007e746da8a68628ae0420582e67c87"
+    },
+    "restart-status-lint.log": {
+      "bytes": 125,
+      "sha256": "c829991ceb9b3677364788262bfd18e23993ba864c555ca25acc3f6c072cd07c"
+    },
+    "restart-status-invocation.log": {
+      "bytes": 449,
+      "sha256": "3c698d52ff9d86225f86284b0573f7d5fc5161da020924158684040ca5465e42"
+    },
+    "ci-f5936ff-114941392259.log": {
+      "bytes": 75747,
+      "sha256": "56ee0ab25c8c708e78037c4039fe0041f59cfabbd5ac5becd00b5c6d921577c6"
+    },
+    "native-review-transition-ci-node22-23-3.log": {
+      "bytes": 4091,
+      "sha256": "b0f2183dabd090a4202fb27058ef45b4fc8ab8d8417b16c4d7d59803544df9a1"
+    }
+  },
+  "limits": [
+    "No provider/model/credential/permission change",
+    "No native review approval, dependent verifier, downstream source activation, deployment or goal completion",
+    "All historical prefixes and first evidence JSON remain unchanged; no spore"
+  ]
+}
