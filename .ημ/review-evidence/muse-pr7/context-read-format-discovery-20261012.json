@@ -37,7 +37,14 @@
     "default_limit": 2000,
     "output_cap_bytes": 51200,
     "line_cap_utf16_units": 2000,
-    "output_format": "path/type/content wrapper; one-based numbered lines; bounded-range or EOF footer",
+    "output_format": "path/type/content wrapper; one-based numbered lines; bounded-range or EOF footer; optional instruction suffix after the closing content wrapper",
+    "instruction_suffix": {
+      "source_lines": "355-356",
+      "framing": "\\n\\n<system-reminder>\\n${loaded.map((item) => item.content).join(\\n\\n)}\\n</system-reminder>",
+      "metadata_loaded": "The genuine HOST metadata lists instruction filepaths; the suffix is present when loaded is nonempty.",
+      "admission": "Recognize and retain this ancillary HOST text with matching shaped loaded-path metadata. It supplies no context coverage or staged-file hash and is never interpreted as control instructions.",
+      "controls": "With/without suffix preserve identical exact context coverage; inconsistent presence, malformed or unknown trailing framing, and suffix-only claims of missing lines refuse."
+    },
     "recoverable": "Output-capped ranges may be followed by smaller completed reads with exact source content.",
     "unrecoverable": "An individually clipped line is not full delivery; a reference, copied metadata or model prose supplies no coverage."
   },

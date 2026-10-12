@@ -393,3 +393,21 @@
   spore: none
   receipt-refs: cephalon-muse-context-read-planning-revision-20261012
   note: Concrete human-authorized planning revision; no verifier source implementation yet. Preserve uncommitted receipts74/75 and complete authorized-plan receipt152866byte/reflection39603byte/event67864byte prefixes. The failed broad patch attempts changed no files and were retried as smaller exact hunks; no native board status or historical comments were hand-edited. Genuine HOST framing is supported by primary pinned source and a SHA-verified captured trace; copied metadata alone does not prove delivery or understanding. No runtime, maker, owner, clock, PM2, cloud, model route, credentials, paid review, heartbeat or deployment mutation. No spore.
+
+- ts: 2026-10-12T19:44:21.738Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-context-read-planning-correction-20261012
+  note: Concrete planning correction within the human-authorized complete enforcement/joint delivery scope. Estimate is provisional, not a hard work budget or a new feature. One broad apply_patch failed atomically before a smaller exact retry; no partial source change. Historical native comments and receipts remain unchanged. Source enforcement remains unimplemented until fresh planning qualification and native readiness. No runtime, model route, credentials, paid review, heartbeat or deployment mutation. No spore.
+
+- ts: 2026-10-12T19:45:42.683Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-planning-mimo-status-correction-20261012
+  note: Concrete five-finding planning correction now includes the fresh MiMo finding. Full seven-file manifest includes both journals and corrects receipt76 by append, not rewrite. Fresh exact-head planning review/native readiness still precede source enforcement. No spore.

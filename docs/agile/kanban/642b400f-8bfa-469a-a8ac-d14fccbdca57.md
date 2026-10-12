@@ -1,13 +1,13 @@
 ---
 uuid: "642b400f-8bfa-469a-a8ac-d14fccbdca57"
-title: "Require current review context custody in the invocation verifier"
+title: "Verify joint review transport and complete HOST context delivery"
 status: incoming
 priority: P1
-points: 3
-labels: muse, review-invocation, custody, cephalon, 3sp
+points: "8"
+labels: "muse, review-invocation, custody, cephalon, 8sp"
 parent: "bb5b1ee2-111c-4762-8321-889a7256b2f9"
 epic: "bb5b1ee2-111c-4762-8321-889a7256b2f9"
-write-id: "1791832860186-0.si0czwfha6rclyluz3w"
+write-id: "1791834227453-0.040rz9a9b1gfitl935ij"
 ---
 
 ## Context
@@ -19,9 +19,14 @@ included complete context-read enforcement and joint source delivery in the
 existing six-point pair, answering the concrete scope proposal with
 "Include enforcement and joint delivery". Receipt75 preserves that decision.
 Qualified native Rheos removed the predecessor-Done dependency while this card
-was Incoming. Both parent/epic UUIDs remain unchanged. The transport story's
-native checks must pass before this story starts; both stories then qualify and
-merge together in PR7. This technical sequence is not a substituted board gate.
+was Incoming. Both parent/epic UUIDs remain unchanged. This revised story owns
+the complete joint transport-and-verification implementation exit. The earlier
+transport story records a partial implementation already at Review; it is
+retained work to verify and finish inside this story, not an external admission
+prerequisite. No prose-only prerequisite replaces a board relationship. Native
+readiness admits this entire joint story after planning qualification, and its
+Review gate must pass the complete transport and verifier controls. Both source
+slices qualify and merge together in PR7 before any downstream adoption.
 The coordinator's actual epic type was admitted by the qualified native Rheos
 whole-board correction on2026-10-11T21:41:20.879Z. Committed receipt61 records
 the admission and independent readbacks; this child's parent/epic links and
@@ -39,7 +44,10 @@ any existing full-input or review-stage guard.
 
 ## Scope
 
-Compose the predecessor's pure custody law from the existing invocation law.
+Verify and complete the retained transport implementation as part of this story,
+then compose its pure custody law from the existing invocation law. Its tests
+and all new verifier tests form this story's single native Review-gate exit;
+there is no separate predecessor completion required to start implementation.
 Require its known compiled protocol and an explicitly present context-source key
 on every current begin, including explicit nil for absence. Validate later
 stage/submission observations and serialized submission binding. Update existing
@@ -60,6 +68,14 @@ smaller ranges; its2000-character individual-line clipping cannot. Inspect the
 actual captured HOST framing and the pinned
 [read source](https://github.com/anomalyco/opencode/blob/v1.18.18/packages/opencode/src/tool/read.ts).
 Support only established framing; unknown or unrecoverable framing refuses.
+The pinned read implementation may append exactly the established
+`\n\n<system-reminder>\n…\n</system-reminder>` suffix after `</content>` when
+`state.metadata.loaded` names instruction paths. Admit this recognized HOST
+suffix as ancillary untrusted text retained in the original event. It supplies
+no context lines, range/EOF coverage, staged-context hash or approval. Require
+the suffix's framing and presence to agree with the shaped HOST loaded-path
+metadata; reject unknown trailing framing or inconsistent suffix/metadata.
+Do not execute, parse as instructions, or fold the suffix into context custody.
 
 ## Non-goals
 
@@ -91,6 +107,11 @@ immutable verifier/source evidence and no current qualification credit.
    is consistent and complete. A later read does not repair a stage already
    recorded without complete delivery. Return inspectable coverage in the
    verifier result without adding an approval or model-understanding claim.
+   Completed-read end times must precede the first stage's start, so a parallel
+   read completing during that stage cannot qualify merely by event position.
+   With and without loaded instructions, the recognized ancillary suffix must
+   leave exact context coverage unchanged; malformed or inconsistent suffixes
+   and suffix-only claims of missing source lines refuse.
 4. Actual new-protocol positive fixtures pass through the compiled exported
    verifier. Existing partial-input, stale-reread, ordering, restart, failed-call,
    source and submission negative cases retain their original failure meaning.
@@ -99,7 +120,8 @@ immutable verifier/source evidence and no current qualification credit.
    migration. Run existing test, all-host build, cold-build, full-input/invocation
    and lint gates with zero warnings. Preserve the complete qualified planning
    receipt/reflection prefixes before every later append.
-6. Both substories and the entire repair pass the owning epic's current canonical
+6. This joint story's native Review gate verifies both source slices. Both
+   substories and the entire repair pass the owning epic's current canonical
    PR gate before authorized head-guarded MERGE and independent merge readback.
    A downstream caller adopts the actual qualified matching plugin/verifier
    source together and then earns its own current-source qualification.
@@ -120,9 +142,14 @@ understanding remain distinct external observations.
 Older plugin output is intentionally refused by the new verifier. Caller source
 pins must move together after qualification. A correct transport can still leave
 the downstream1482-page review unfinished; no duration or availability promise
-is made. Three points is the proposed verifier estimate within the authorized
-six-point pair and receives fresh planning review. Transport, filesystem and
-guidance remain owned by the predecessor. If the actual HOST surface cannot
+is made. Eight points is the revised joint verifier estimate: trusted-source
+preparation, pinned HOST framing/range reconstruction, causal delivery admission,
+compiled wiring and regression migration are independently tested failure
+domains. The retained transport story remains three points, making eleven for
+the same authorized functionality. This estimate remains provisional until
+fresh planning qualification. The earlier transport's filesystem and guidance
+implementation is retained and verified within this story's complete exit. If
+the actual HOST surface cannot
 establish trustworthy complete delivery, stop and re-describe that specific
 boundary; do not fabricate read proof or relax the gate.
 
@@ -131,5 +158,7 @@ Software/process documentation: GPL-3.0-or-later.
 
 ---
 The human approved Include enforcement and joint delivery on2026-10-12, preserved by receipt75. The revised six-point pair requires complete genuine HOST context reads matched to independently staged bytes before stage one. Native Rheos removed only the Incoming verifier child dependency on predecessor Done, retaining parent/epic links; the transport story has passed native checks and remains Review. Fresh planning qualification and native verifier readiness still precede code, and both source stories qualify and deliver together in PR7 before downstream adoption. Finding4251134311 remains open until actual enforcement and verification. Current3ca MiMo5495006171/run38292920913 is completed APPROVED but does not settle this gap or transfer to the revised head. No runtime, model-route, credentials or paid changes are included.
+
+Native Codex review5495259091 findings4251707587/4251707600/4251707613 require this planning correction. The Incoming verifier is now the eight-point joint implementation boundary: it owns verification/completion of retained transport source plus trusted preparation, genuine HOST framing, causal full-delivery admission, compiled wiring and regression controls. There is no external transport prerequisite expressed only in prose and no substituted non-Done dependency law. Its own native readiness and complete Review gate control both slices; the earlier three-point transport stays Review as retained partial work. The same authorized functionality totals eleven provisional points. Both slices qualify and deliver together through PR7; no standalone transport adoption. Recognized pinned OpenCode instruction suffix is retained ancillary untrusted event text, contributes no context coverage/hash/control instructions, and has explicit matching-metadata and malformed/suffix-only negatives. Fresh planning qualification precedes source implementation. Parent/epic links and historical comments/receipts stay intact.
 
 ---
