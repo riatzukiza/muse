@@ -15,6 +15,7 @@
                      (= "tool_use" (:type event))
                      (assoc :callID (:call-id p) :tool (:tool p)
                             :state {:status (:status state) :input (:input state)
+                                    :metadata (:metadata state) :time (:time state)
                                     :output (if (str/starts-with? (:tool p) "review_")
                                               (js/JSON.stringify (clj->js (:output state)))
                                               (:output state))})
@@ -22,10 +23,12 @@
       (= "text" (:type event)) (assoc-in [:part :text] (:text p)))))
 
 (defn json [x] (js/JSON.stringify (clj->js x)))
+(defn prepare-with-absent-context [diff manifest tools file]
+  (extern/prepare-review-invocation-context diff manifest tools file nil "/fixture/pr-context.txt"))
 (defn response [events] (str (str/join "\n" (map #(json (host-event %)) events)) "\n"))
 (defn context-json []
   (js/JSON.stringify
-   (extern/prepare-review-invocation-context "diff" (json fixture/manifest)
+   (prepare-with-absent-context "diff" (json fixture/manifest)
                                              (clj->js (:review-tools fixture/context))
                                              (:submission-file fixture/context))))
 (defn verify [raw]
@@ -78,7 +81,7 @@
     (is (= "unestablished-review-trace" (:reason (verify (str/join "\n" (map json events))))))))
 
 (deftest context-preparation-binds-bytes-and-canonical-pages
-  (let [context (js->clj (extern/prepare-review-invocation-context
+  (let [context (js->clj (prepare-with-absent-context
                          (.encode (js/TextEncoder.) "diff") (json fixture/manifest)
                          (clj->js (:review-tools fixture/context)) "/fixture/submission.json")
                         :keywordize-keys true)]
@@ -89,7 +92,7 @@
                            ["diff" (json (assoc-in fixture/manifest [:full_diff :bytes] 5))]
                            ["diff" "{\"schema\":1,\"schema\":2}"]
                            [(js/Uint8Array. #js [255]) (json fixture/manifest)]]]
-    (is (thrown? js/Error (extern/prepare-review-invocation-context
+    (is (thrown? js/Error (prepare-with-absent-context
                           diff manifest (clj->js (:review-tools fixture/context)) "/fixture/submission.json")))))
 
 (deftest actual-byte-count-and-canonical-utf16-geometry-are-distinct
@@ -98,7 +101,7 @@
                    (js-invoke "update" bytes)
                    (js-invoke "digest" "hex"))
         manifest (assoc fixture/manifest :full_diff {:path "basehead.diff" :bytes 5 :sha256 digest})
-        ctx (js->clj (extern/prepare-review-invocation-context bytes (json manifest)
+        ctx (js->clj (prepare-with-absent-context bytes (json manifest)
                                                               (clj->js (:review-tools fixture/context)) "/fixture/submission.json")
                      :keywordize-keys true)]
     (is (= [{:id 1 :start 0 :end 3}] (:pages ctx)))
@@ -117,7 +120,7 @@
 
 (deftest empty-prepared-context-is-generic-validity-not-native-credit
   (let [{:keys [context submission events]} (fixture/empty-fixture)
-        prepared (extern/prepare-review-invocation-context "" (json (:input-source context))
+        prepared (prepare-with-absent-context "" (json (:input-source context))
                                                            (clj->js (:review-tools context)) (:submission-file context))
         shape (js->clj prepared :keywordize-keys true)
         result (js->clj (extern/verify-review-invocation (response events) (json submission) prepared) :keywordize-keys true)]
@@ -170,17 +173,17 @@
           diff (.readFileSync fs (str packet "/qualified342-full.diff"))
           manifest (.readFileSync fs (str packet "/qualified342-input-manifest.json"))
           registry (vec (remove str/blank? (str/split-lines (.readFileSync fs (str packet "/qualified342-registry.txt") "utf8"))))
-          ctx (extern/prepare-review-invocation-context diff manifest (clj->js registry)
+          ctx (prepare-with-absent-context diff manifest (clj->js registry)
                                                         "/home/runner/work/eta-mu/eta-mu/.opencode/review-evidence/submission.json")
           result (js->clj (extern/verify-review-invocation raw sub ctx) :keywordize-keys true)]
       ;; Retained historical shape probe only: no new native qualification or
       ;; trusted-context authority inferred from this test's submission data.
-      (is (:ok result))
-      (is (= 11 (get-in result [:acceptedInvocation :pageCount]))))))
+      (is (false? (:ok result)))
+      (is (nil? (:acceptedInvocation result))))))
 
 ;; Candidate controls append without changing any original fixture/assertion.
 (defn length-context-js []
-  (let [ctx (extern/prepare-review-invocation-context "diff" (json fixture/manifest)
+  (let [ctx (prepare-with-absent-context "diff" (json fixture/manifest)
                                                     (clj->js (:review-tools fixture/context))
                                                     (:submission-file fixture/context))]
     (js/Object.assign ctx #js {:fullDiff "diff" :sessionID "session-fixture"})))

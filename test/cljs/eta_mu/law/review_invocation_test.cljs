@@ -2,7 +2,8 @@
   "Source-only synthetic controls in actual OpenCode host-event shape."
   (:require [cljs.test :refer [deftest is testing]]
             [eta-mu.domain.review :as review]
-            [eta-mu.law.review-invocation :as invocation]))
+            [eta-mu.domain.review-invocation :as invocation]
+            [eta-mu.law.review-context :as context-law]))
 
 (def manifest
   {:schema "open-hax.review-input/v1"
@@ -12,21 +13,30 @@
    :provenance {:repository "fixture/repo" :pull_request "1" :run_id "2" :run_attempt "1"
                 :workflow_sha (apply str (repeat 40 "d")) :workflow_ref "fixture/repo/workflow@refs/pull/1/merge"}})
 
+(def absent-context-fields
+  {:context-protocol context-law/protocol :context-source nil
+   :context-observation {:status :absent :source nil}})
+
 (def context
   {:input-source manifest :pages [{:id 1 :start 0 :end 4}] :page-count 1
    :full-input-sha256 (get-in manifest [:full_diff :sha256])
-   :review-tools (vec (sort invocation/review-tools)) :submission-file "/fixture/submission.json"})
+   :review-tools (vec (sort invocation/review-tools)) :submission-file "/fixture/submission.json"
+   :context-source nil :context-path "/fixture/pr-context.txt"
+   :context-lines [] :context-line-bytes []})
 
 (def coverage {:chunks 1 :delivered 1 :assessed 1 :missing []})
 (def submission
   {:schema "open-hax.github-review/v1" :event "APPROVE" :summary "fixture summary" :comments []
+   :context-protocol context-law/protocol :context-source nil
    :input-source manifest :input-coverage coverage
    :input-assessments [{:id 1 :start 0 :end 4 :note "whole-page assessment"}]})
 
 (defn tool-event [n tool args result]
   {:type "tool_use" :timestamp n :session-id "session-fixture"
    :part {:type "tool" :id (str "part-" n) :call-id (str "call-" n) :session-id "session-fixture"
-          :tool tool :state {:status "completed" :input args :output result}}})
+          :tool tool :state {:status "completed" :input args
+                             :output (if (and (map? result) (contains? invocation/review-tools tool))
+                                       (merge absent-context-fields result) result)}}})
 
 (def begin-output
   {:ok? true :stage "deterministic" :stages invocation/stages :input-source manifest
@@ -673,11 +683,23 @@
       :note "Untouched tail first-read and assessed."}],
     :comments []}}]})
 
+(defn current-completion-boundary-fixture
+  "Explicit absent-context migration of synthetic controls. Frozen producer
+   observations above remain byte-preserved; no historical protocol is inferred."
+  []
+  (let [f (completion-boundary-fixture)]
+    (-> f
+        (update :context merge (select-keys context [:context-source :context-path :context-lines :context-line-bytes]))
+        (update :submission merge (select-keys absent-context-fields [:context-protocol :context-source]))
+        (update :events #(mapv (fn [event]
+                                (if (contains? invocation/review-tools (get-in event [:part :tool]))
+                                  (update-in event [:part :state :output] (partial merge absent-context-fields)) event)) %)))))
+
 (defn ordered-fixture-events [events]
   (mapv (fn [index event] (assoc event :timestamp (inc index))) (range) events))
 
 (deftest untouched-tail-after-first-stage-is-refused
-  (let [{:keys [events submission context producer-results]} (completion-boundary-fixture)
+  (let [{:keys [events submission context producer-results]} (current-completion-boundary-fixture)
         result (verdict events submission context)]
     (is (every? :ok? producer-results) "Frozen pre-guard producer accepted this synthetic shape.")
     (is (= 2 (:page-count context)))
@@ -690,7 +712,7 @@
     (is (nil? (:accepted-invocation result)))))
 
 (deftest assessment-after-adversarial-completion-is-too-late
-  (let [{:keys [events submission context]} (completion-boundary-fixture)]
+  (let [{:keys [events submission context]} (current-completion-boundary-fixture)]
     (doseq [late-events [(concat (take 7 events) [(nth events 8) (nth events 7)] (drop 9 events))
                         (concat (take 7 events) [(nth events 8) (nth events 9) (nth events 7)] (drop 10 events))]]
       (let [result (verdict (ordered-fixture-events late-events) submission context)]
@@ -701,7 +723,7 @@
         (is (nil? (:accepted-invocation result)))))))
 
 (deftest late-tail-recovery-never-waives-stale-last-read
-  (let [{:keys [events submission context]} (completion-boundary-fixture)
+  (let [{:keys [events submission context]} (current-completion-boundary-fixture)
         reread (-> (nth events 6)
                    (assoc-in [:part :id] "part-tail-reread")
                    (assoc-in [:part :call-id] "call-tail-reread")
@@ -715,7 +737,7 @@
     (is (nil? (:accepted-invocation result)))))
 
 (deftest late-tail-recovery-still-requires-five-successful-ordered-host-stages
-  (let [{:keys [events submission context]} (completion-boundary-fixture)]
+  (let [{:keys [events submission context]} (current-completion-boundary-fixture)]
     (doseq [stage-index [3 4 5 8 9]]
       (let [omitted (ordered-fixture-events (concat (take stage-index events) (drop (inc stage-index) events)))
             result (verdict omitted submission context)]
@@ -848,7 +870,7 @@
                     (ordered-fixture-events (concat [(base 0) (base 0)] (rest base)))
                     (ordered-fixture-events [(base 0) (base 1) (base 2) (base 4)])]]
       (is (false? (:eligible? (length-classification events)))))
-    (let [{:keys [events context]} (completion-boundary-fixture)
+    (let [{:keys [events context]} (current-completion-boundary-fixture)
           partial (conj (vec (take 10 events)) (assoc-in (terminal 11) [:part :reason] "length"))
           ctx (assoc context :full-input-text (apply str (map #(get-in % [:part :state :output :chunk :text])
                                                             (filter #(= "review_read_diff_chunk" (get-in % [:part :tool])) events))))]

@@ -3,6 +3,33 @@
             [clojure.string :as str]
             [eta-mu.domain.review :as review]))
 
+(deftest context-custody-refusal-is-a-pure-permanent-session-transition
+  (is (fn? review/guard-context) "The domain owns the session transition.")
+  (when (fn? review/guard-context)
+    (let [source {:path "/owned/pr-context.md" :bytes 4 :sha256 (apply str (repeat 64 "a"))}
+          initial (assoc (review/begin "") :context-source source
+                         :evidence [{:stage :deterministic :note "Retain this history."}])
+          present {:status :present :source source}]
+      (doseq [observation [present {:status :absent :source nil}]]
+        (let [session (assoc initial :context-source (:source observation))
+              result (review/guard-context session observation)]
+          (is (true? (:ok? result)))
+          (is (= session (:session result)))
+          (is (false? (review/restart-required? (:session result))))))
+      (doseq [observation [{:status :present :source (assoc source :bytes 5)}
+                           {:status :unavailable :error-code "EACCES"}
+                           {:status :unknown}]]
+        (let [refused (review/guard-context initial observation)
+              session (:session refused)
+              restored (review/guard-context session present)]
+          (is (false? (:ok? refused)))
+          (is (true? (:restart-required? refused)))
+          (is (true? (review/restart-required? session)))
+          (is (= initial (dissoc session :context-custody-refused? :restart-error)))
+          (is (false? (:ok? restored)) "Restoring bytes cannot resume the invocation.")
+          (is (= :previous-refusal (:code restored)))
+          (is (= session (:session restored)) "Keep the first diagnostic and history."))))))
+
 (deftest deterministic-requires-complete-input-without-advancing
   (let [diff (str "diff --git a/tail b/tail\n--- a/tail\n+++ b/tail\n@@ -0,0 +1,130 @@\n"
                   (apply str (repeat 130 "+line\n")))

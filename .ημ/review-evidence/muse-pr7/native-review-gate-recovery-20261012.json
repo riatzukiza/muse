@@ -1,0 +1,49 @@
+{
+  "epistemic": "derived command-output index, not raw REST or provider approval",
+  "source_head": "fba62e7c457ffa0854b261dee2fde0991d26c110",
+  "native_status_readback": {
+    "labels": "muse, review-invocation, custody, cephalon, 8sp",
+    "parent": "bb5b1ee2-111c-4762-8321-889a7256b2f9",
+    "write-id": "1791839740883-0.szxlcg8igpr443yj5s",
+    "points": "8",
+    "title": "Verify joint review transport and complete HOST context delivery",
+    "priority": "P1",
+    "status": "review",
+    "epic": "bb5b1ee2-111c-4762-8321-889a7256b2f9",
+    "uuid": "642b400f-8bfa-469a-a8ac-d14fccbdca57"
+  },
+  "tests": {
+    "tests": 302,
+    "assertions": 1876,
+    "failures": 0,
+    "errors": 0
+  },
+  "proof": [
+    {
+      "file": "joint-native-review-current-canary-retry.log",
+      "bytes": 3523,
+      "sha256": "62a62bfd3e23a89106bee706e259b3347f1d5f01c712854c27f6a8eec7ae169b"
+    },
+    {
+      "file": "joint-native-review-current-canary-readback.json",
+      "bytes": 14545,
+      "sha256": "10af8ad7c9c2b3225a826a79c53fca5b99fcb0b75acaa41e84fce3b39d6bb67b"
+    },
+    {
+      "file": "joint-host-current-watch-canary.json",
+      "bytes": 62,
+      "sha256": "002c84fe0a2474c9fb969d47cce1dce243e313ae9fe796ca75349b1c8fbe33fd"
+    },
+    {
+      "file": "joint-host-inotify-readonly.json",
+      "bytes": 8432,
+      "sha256": "127de2dd8ccea3399aa7b41ada25029231e1ab5bf43b5edd433fa4c105ce87ef"
+    },
+    {
+      "file": "joint-source-fba-coderabbit-request.log",
+      "bytes": 66,
+      "sha256": "093c1098e0530c7e9a5fb187b6c40358501a554ba3e44f4afe9cb08e95356fd9"
+    }
+  ],
+  "limits": "No host/service/sysctl effect. Non-atomic watch availability changed; cause/future availability unknown. Earlier failure/correction retained. Source review/merge/adoption pending."
+}

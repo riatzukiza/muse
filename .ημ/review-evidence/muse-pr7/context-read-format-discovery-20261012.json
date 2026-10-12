@@ -1,0 +1,52 @@
+{
+  "schema": "open-hax.context-read-format-discovery/v1",
+  "tier": "observed-command-output-summary",
+  "approval_evidence": false,
+  "source": {
+    "workflow": "open-hax/eta-mu@09a4454480baa67f6fdc40f6f73f5e48ef0457d1",
+    "opencode_npm_version": "1.18.18",
+    "read_source": "https://github.com/anomalyco/opencode/blob/v1.18.18/packages/opencode/src/tool/read.ts",
+    "read_git_blob": "678ed44510488965bacc87238bf8c80f70ad3c07",
+    "read_bytes": 13126,
+    "read_sha256": "afec8294965cbd9b9e29d3453b682164f0ecdba26574ebc048e9ba21af209c68"
+  },
+  "native_trace": {
+    "repository": "riatzukiza/muse",
+    "run_id": "38289879165",
+    "artifact_id": "11765955746",
+    "head_sha": "2e982c21a4651bab300707e8375d7c488ae3024d",
+    "zip_bytes": 69350,
+    "zip_sha256": "dafdfc91c0186ac7b1f262326f575a7f6cd52f1c667d5bec6ee23ab6fa080218",
+    "response_member": "model-response-attempt-1.txt",
+    "response_bytes": 266495,
+    "context_read_calls": 0,
+    "first_stage_zero_based_event_position": 42,
+    "framing_sample_zero_based_event_position": 10,
+    "framing_sample_tool": "read",
+    "framing_sample_status": "completed",
+    "framing_sample_file": "/home/runner/work/muse/muse/.opencode/review-evidence/summary.json",
+    "framing_sample_lines": 22,
+    "framing_sample_eof": "(End of file - total 22 lines)",
+    "state_metadata_keys": ["preview", "truncated", "loaded", "display"],
+    "display_keys": ["type", "path", "text", "lineStart", "lineEnd", "totalLines", "truncated"]
+  },
+  "contract_observations": {
+    "tool": "read",
+    "inputs": ["filePath", "offset", "limit"],
+    "default_offset": 1,
+    "default_limit": 2000,
+    "output_cap_bytes": 51200,
+    "line_cap_utf16_units": 2000,
+    "output_format": "path/type/content wrapper; one-based numbered lines; bounded-range or EOF footer; optional instruction suffix after the closing content wrapper",
+    "instruction_suffix": {
+      "source_lines": "355-356",
+      "framing": "\\n\\n<system-reminder>\\n${loaded.map((item) => item.content).join(\\n\\n)}\\n</system-reminder>",
+      "metadata_loaded": "The genuine HOST metadata lists instruction filepaths; the suffix is present when loaded is nonempty.",
+      "admission": "Recognize and retain this ancillary HOST text with matching shaped loaded-path metadata. It supplies no context coverage or staged-file hash and is never interpreted as control instructions.",
+      "controls": "With/without suffix preserve identical exact context coverage; inconsistent presence, malformed or unknown trailing framing, and suffix-only claims of missing lines refuse."
+    },
+    "recoverable": "Output-capped ranges may be followed by smaller completed reads with exact source content.",
+    "unrecoverable": "An individually clipped line is not full delivery; a reference, copied metadata or model prose supplies no coverage."
+  },
+  "limits": "This retained discovery describes genuine HOST framing and the observed missing context reads. It is not context delivery, model assessment, current-head review approval, source adoption or deployment proof. The original private ZIP and native source response remain unchanged."
+}

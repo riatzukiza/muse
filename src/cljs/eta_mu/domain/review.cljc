@@ -8,6 +8,7 @@
 
    No I/O lives in this namespace."
   (:require [clojure.string :as str]
+            [eta-mu.law.review-context :as context-law]
             [eta-mu.shape.git-diff-path :as diff-path]))
 
 ;; ---------------------------------------------------------------------------
@@ -128,6 +129,21 @@
   "Whether an admitted session has a latched restart or reread violation."
   [session]
   (boolean (or (:restart-error session) (seq (:invalidated-chunks session)))))
+
+(defn guard-context
+  "Decide custody and return the pure session transition. A first refusal
+   permanently preserves its diagnostic, stage, assessments and evidence;
+   restoring the source cannot repair that invocation. No effects occur here."
+  [session observation]
+  (if (:context-custody-refused? session)
+    {:ok? false :code :previous-refusal :session session :restart-required? true
+     :error (or (:restart-error session) "Review context custody was already refused.")}
+    (let [result (context-law/custody-decision (:context-source session) observation)]
+      (if (:ok? result)
+        (assoc result :session session)
+        (assoc result :restart-required? true
+               :session (assoc session :context-custody-refused? true
+                                       :restart-error (:error result)))))))
 
 (defn reject-restart
   "Latch refusal of a second admission without discarding session history."

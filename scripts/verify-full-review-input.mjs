@@ -8,6 +8,7 @@ import {createRequire, syncBuiltinESMExports} from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
+import {verifyReviewContext} from './verify-review-context.mjs';
 
 Error.stackTraceLimit = 50;
 
@@ -192,6 +193,7 @@ try {
     fs.writeFileSync(path.join(destination, 'input-manifest.json'), JSON.stringify(manifest));
     return destination;
   };
+  const contextProof = await verifyReviewContext({fixture, call, stageInput});
   const freshProcess = (destination, scenario) => {
     const result = spawnSync(process.execPath, [fileURLToPath(import.meta.url), '--fresh-invocation',
       bundle, destination, scenario], {encoding: 'utf8', timeout: 60000, maxBuffer: 8 * 1024 * 1024});
@@ -242,5 +244,5 @@ try {
     recovered_full_input_accepted: true, stale_chronology_refused: true,
     same_session_reset_refused: true, host_id_reset_refused: true, healthy_readmission_refused: true,
     stale_submission_removed: true, fresh_invocation_accepted: true, cleanup_fault_artifact_observed: true,
-    native_review: false}));
+    context: contextProof, native_review: false}));
 } finally {fs.rmSync(fixture, {recursive: true, force: true});}

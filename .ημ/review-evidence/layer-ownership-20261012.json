@@ -1,0 +1,146 @@
+{
+  "evidence_kind": "Observed command-output transcription; neither raw provider review nor approval",
+  "red_commit": "f495c9b95046314218de2702d8cd609767d37a8d",
+  "native_findings": {
+    "domain_transition": 4251134304,
+    "pure_serialization": 4251134318,
+    "context_read_coverage_still_open": 4251134311
+  },
+  "source_sha256": {
+    "src/cljs/eta_mu/domain/review.cljc": "0088d63b415edaa10b3556cb210b7c8f8c847ea37386816aa372127ceb7bdbea",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "3891044698f63ea74a2653d89cda69a0f22ea93c4c82516081e51d82fd599add",
+    "src/cljs/eta_mu/extern/review_submission.cljs": "bf57f2715a677d028a3fb6d438325e30330fc31addd7a904c7bf428ca205e3ff",
+    "src/cljs/eta_mu/shape/review_submission.cljs": "0a8d4f67aa71c2400ad909c2fed01d3f1a181614dd56588186b78cf6126e1a1a",
+    "test/cljs/eta_mu/domain/review_test.cljs": "292aba6b44d74710aeb2325a65fc1227c412695fff50ca3d8e3cf9aacb86233b",
+    "test/cljs/eta_mu/shape/review_submission_test.cljs": "d03aeb212b72b47b5939d65e46761b2aac0dd91eb2cd15aed062b5fb6c664ca3",
+    "scripts/verify-review-context.mjs": "749bd0a84dac990ab59f5be4f669c321ece227fe099dc0cb9f92dfdefac68d06"
+  },
+  "red": {
+    "tests": 289,
+    "assertions": 1640,
+    "failures": 5,
+    "errors": 0,
+    "compiler_warnings": 0,
+    "volta_wrapper_exit": 126,
+    "causal_failures": 2,
+    "retained_watcher_failures": 3,
+    "raw": {
+      "file": "layer-ownership-red.log",
+      "bytes": 2624,
+      "sha256": "ffb649c8a6303003342f5b2c367a93475781cd0807da320387d9d0ddfa1cc25f"
+    }
+  },
+  "green": {
+    "tests": 289,
+    "assertions": 1672,
+    "failures": 0,
+    "errors": 0,
+    "compiler_warnings": 0,
+    "exit": 0,
+    "raw": {
+      "file": "layer-ownership-green.log",
+      "bytes": 1541,
+      "sha256": "eb220abc828eb9c06bc00f340836d959df89cb4a2baa03f83f479bed93e2f9ca"
+    }
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 0,
+    "exit": 0,
+    "raw": {
+      "file": "layer-ownership-lint.log",
+      "bytes": 125,
+      "sha256": "e3106ef7db185ede8fcb9ccdfe0f27eabb145887dc55ceff55dfc30985136250"
+    }
+  },
+  "release_build": {
+    "targets": 5,
+    "compiler_warnings": 0,
+    "exit": 0,
+    "raw": {
+      "file": "layer-ownership-build.log",
+      "bytes": 1087,
+      "sha256": "4d4fe2f703302df9323f977ce645762a903d1c6e6ceaa86e5242254acaaff84a"
+    }
+  },
+  "cold_compiled_and_invocation": {
+    "exit": 0,
+    "context_custody_negatives": 14,
+    "first_unavailable_controls": 2,
+    "invocation_assertions": 42,
+    "old_input_controls_retained": true,
+    "raw": {
+      "file": "layer-ownership-review-input.log",
+      "bytes": 1774,
+      "sha256": "13a02c9a33f9f874f725c7b37b4218feb75343568f535900a6208b71f9c6aa31"
+    }
+  },
+  "watcher_diagnosis": {
+    "same_node": "22.23.3",
+    "first_canary": {
+      "file": "watch-host-node22-23-3.json",
+      "bytes": 298,
+      "sha256": "8b31fb73f6d9993f3f1ab38fbc0279228c149e76718cc8db14c70f75b7dbf2e4"
+    },
+    "first_result": "No recursive events; exact-file error ENOSPC.",
+    "uid": 1000,
+    "visible_watches_observed": 1048442,
+    "max_user_watches_observed": 1048576,
+    "visible_instances_observed": 106,
+    "max_user_instances_observed": 4096,
+    "limits": "Non-atomic partial proc observation; twelve reads inaccessible. A large watcher process disappeared independently; no ownership or cause inferred.",
+    "later_canary": {
+      "file": "watch-host-post-disappearance-20261012.json",
+      "bytes": 436,
+      "sha256": "576a3fba40729c6dd6be762cebd02a7b93c974c0628fa541a2c00b4421b46419"
+    },
+    "later_result": "Actual change events in recursive immediate/delayed and exact-file variants. No process termination, service restart or sysctl mutation."
+  },
+  "native_review_gate": {
+    "runtime": "22.23.3",
+    "commands": [
+      "pnpm build",
+      "pnpm lint",
+      "pnpm test"
+    ],
+    "exit": 0,
+    "from": "in_progress",
+    "to": "review",
+    "task_uuid": "32f65d9a-50ec-412a-a0b1-78cb88c27bfb",
+    "qualified_cli_sha256": "85369213440634989365f75929045d36eb69b6c6b1e7679f68d483374a0d526b",
+    "raw": {
+      "file": "native-review-transition-after-watch-recovery.log",
+      "bytes": 12656,
+      "sha256": "20a24e26bbf5c3f6900fa5c273ee75dcd140b9ab71f72d148e215ad485f27169"
+    },
+    "independent_native_readback": {
+      "file": "native-review-admission-readback-20261012.json",
+      "bytes": 9812,
+      "sha256": "02182e13a3b42d8aa840b82b74914bc2fa4e092d9ec39cd3ea1dcbcd0d298eff"
+    },
+    "retained_notices": [
+      "Existing pnpm configuration warning about unset NPM_TOKEN.",
+      "Optional Mongo integration reports authentication unavailable/skipped."
+    ],
+    "historical_refusals_preserved": 4
+  },
+  "current_delivery_boundary": "Review is native status, not Done or merge qualification. Context-read enforcement remains an open P1 and finite-milestone scope choice; verifier/dependency correction/adoption are not implemented.",
+  "native_review_archives": {
+    "reviews": {
+      "file": "muse-pr7-2e982c2-reviews-20261012.json",
+      "bytes": 12926,
+      "sha256": "d14004fc11ba2b8a142532f0fc06ce4404c7f8c7ee2d529cf725931282ffb52b"
+    },
+    "inline": {
+      "file": "muse-pr7-2e982c2-inline-20261012.json",
+      "bytes": 29502,
+      "sha256": "ee9340f1a848cb4dea78f1b531487615fbda944e1ce9ca5628e64742c33dbe8a"
+    }
+  },
+  "scope_exclusions": [
+    "No watcher source or assertion/FSM change",
+    "No inference/provider/auth route, credential or paid use change",
+    "No maker, clock, owner, PM2, cloud, heartbeat or deployment change",
+    "No model consumption, availability, B1/B2/B3 completion or spore claim"
+  ]
+}

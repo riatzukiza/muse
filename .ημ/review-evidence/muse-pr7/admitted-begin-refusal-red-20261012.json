@@ -1,0 +1,14 @@
+{
+  "tier": "observed-command-output-index",
+  "provider_approval": false,
+  "head": "fba62e7c457ffa0854b261dee2fde0991d26c110",
+  "finding": 4252414395,
+  "expected_refusals": 4,
+  "exit": 1,
+  "reason": "All four admitted absent/present x cleanup/read-error cases lose context protocol/source/observation.",
+  "log": {
+    "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/fba-review-findings-red-confirmed.log",
+    "bytes": 3077,
+    "sha256": "b5afc0a36261e4b26e5a2f5de8253b87847969e5f3d50fbfb05caf8c3621d7a1"
+  }
+}

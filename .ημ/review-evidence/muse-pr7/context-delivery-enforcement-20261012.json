@@ -1,0 +1,132 @@
+{
+  "schema": "cephalon.observed-command-output-index/v1",
+  "epistemic_tier": "derived",
+  "raw_rest": false,
+  "native_review": false,
+  "planning_merge": "0d59966b582a47de22edaf30e5c48278a41a7177",
+  "red_commit": "7ce93c834a0714ab2ababcf7f2392c95dc37c6be",
+  "source_qualified": false,
+  "joint_card_status": "in_progress",
+  "native_review_gate": {
+    "exit": 3,
+    "reason": "pnpm test failed on unchanged watcher test",
+    "tests": 302,
+    "assertions": 1876,
+    "failures": 3,
+    "errors": 0
+  },
+  "context_delivery": {
+    "new_controls_pass": true,
+    "optimized_exports": {
+      "representations": 3,
+      "assertions_each": 31,
+      "native_review": false
+    }
+  },
+  "prior_full_green": {
+    "tests": 299,
+    "assertions": 1834,
+    "failures": 0,
+    "errors": 0,
+    "later_controls_added": true
+  },
+  "host_watch_canary": {
+    "runtime": "v24.14.1",
+    "code": "ENOSPC",
+    "source": "actual tool stdout; observed transcription, not raw REST"
+  },
+  "corrections": [
+    "Initial RED136 includes four failing assertions from an overlapping-range positive fixture with a duplicate synthetic call ID; its corrected unique ID now passes. The other132 new failure assertions reproduced missing enforcement. Original logs/receipt79 remain unchanged.",
+    "Receipt79 native-comment premature success corrected by receipt80. A later native GREEN progress comment prematurely said the current full suite passed; subsequent native correction and this record retain actual3fail/exit1 plus actual native transition refusal.",
+    "Pinned read.ts356 uses loaded.map((item)=>item.content).join(\"\\n\\n\"); historical discovery shorthand omitted the quotes. Native planning6131968696 and docs/review-context-delivery.md correct it without rewriting historical bytes."
+  ],
+  "boundaries": [
+    "No native provider approval/round or source qualification",
+    "No downstream adoption, retry invocation, model route, credentials, paid review, heartbeat, runtime or deployment mutation",
+    "Current legacy fixture positives explicitly declare absent context; frozen old producer trace remains unchanged with a separate current-protocol synthetic wrapper",
+    "Retained pre-protocol authentic342 probe is deliberately refused; no historical approval upgrade",
+    "No spore"
+  ],
+  "logs": [
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-context-delivery-red-full-test.log",
+      "bytes": 42061,
+      "sha256": "8a00cba7057e567ce36f226336f4fd5d5664f24e7cca3e9e92b53236ecd2c707"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-context-delivery-red-no-warning-test.log",
+      "bytes": 41680,
+      "sha256": "ec2cb6fd75d99695ccd6603e8f8a2a5b2a99cf06513bb3d84e7b76b8639b2460"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-full-test-v2.log",
+      "bytes": 1797,
+      "sha256": "6c05713743a5d6c8fb7f41e55631f27e11ede5290f85a2be1f1f8eaee4aad333"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-final-full-test.log",
+      "bytes": 2494,
+      "sha256": "91204cfc5700dfc582a302c9729823bc81a1fe7e75e57426da57380a6399407b"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-current-full-test.log",
+      "bytes": 2494,
+      "sha256": "5d3cf8655bb854c84021c835286037e3ff1bbf61da62e5efbe7c4402ade2c4db"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-all-target-build.log",
+      "bytes": 1299,
+      "sha256": "80f886edb06fa891c1c97939cf03f16de4c80cc86eefc49e1afe5061f505d534"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-final-invocation-build.log",
+      "bytes": 465,
+      "sha256": "918c33a6f902c8e7f4e4a9e46993cf72e34f51145e93832574f689557a1fb24a"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-current-lint.log",
+      "bytes": 280,
+      "sha256": "a0d1bf11accec070934575146aa71ca87e425d13ce1263e4f2b36cfd2bd99d1f"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-final-compiled-input.log",
+      "bytes": 1929,
+      "sha256": "8c2319eeea4e0fb2f9f4dd2e487f8b5764d4c1ce477fc059882612db21d25978"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-current-compiled-invocation.log",
+      "bytes": 449,
+      "sha256": "dab6a708cb8d199d51e686f5201b8b6237d06208f6df37a5bac4a2e8e47e6af2"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-cold-host-builds.log",
+      "bytes": 2746,
+      "sha256": "04455cce97d1bc424fcf0343200d4ba1f6be8ebf4b4b0eb6ced878c9ad6ec8ab"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-portable-jvm.log",
+      "bytes": 84,
+      "sha256": "3ae3c77f0d2eade0bd44a21480e3e63c05d79dd8339e61be4da04a50f3674e19"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-native-review-transition.log",
+      "bytes": 4229,
+      "sha256": "0725a09d9aa14d7012dd8248bf49dad188198e459cb609ea94e8de8610154275"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-native-review-readback.json",
+      "bytes": 13953,
+      "sha256": "f5603774bf69eae3fe05624438ad79c034d46db4cfcb3562917b8b510a22dd6e"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-native-comment.log",
+      "bytes": 802,
+      "sha256": "eb3e055f0a7f82aa8514fc47daafa81f658b05590282916f20ddf6a404af3805"
+    },
+    {
+      "path": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/rheos-event-epic-20261011/muse-context-custody-implementation-20261012/joint-green-native-comment-correction.log",
+      "bytes": 628,
+      "sha256": "0b67936457534f24b015562bba6b996eb83cb7bd7a9753982e0187b22089baa3"
+    }
+  ]
+}
