@@ -25,6 +25,8 @@
 (def confirmation-confidence-threshold 0.85)
 (def max-inline-comments 50)
 
+(declare guard-context)
+
 ;; ---------------------------------------------------------------------------
 ;; Diff indexing (added lines on the PR head side)
 ;; ---------------------------------------------------------------------------

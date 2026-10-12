@@ -339,3 +339,21 @@
   spore: none
   receipt-refs: cephalon-muse-restart-status-green-20261012
   note: Minimal verified CodexP2 repair reuses existing domain restart-error rather than keeping an ignored session restart-required? flag, and returns the established indication on refused effects. Causal committed RED and actual compiled GREEN preserved. New JSON binds original finding/head, RED identity, exact current source/log hashes and explicit tier; original5290byte source evidence remains unchanged. Native watcher gate is still a separate local blocker despite matching exact actual CI Node22.23.3. No more runtime retries, watcher implementation, board bypass, weakened tests, source adoption, dependent verifier, provider/credential/heartbeat/deployment change, synthetic approval or spore. All committed receipt/reflection/event prefixes remain immutable; repository attribution remains implicit.
+
+- ts: 2026-10-12T18:20:13.510Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-restart-status-handoff-20261012
+  note: Actual CODE source correction is pushed and reviewable with causal RED/GREEN, whole scope and immutable receipt/reflection/event prefixes. Native local gate remains explicitly blocked by the unchanged watcher; no fifth speculative runtime retry, watcher source/FSM workaround or new prerequisite scope was performed. Existing included CodeRabbit request6129807641/reply6129809650 was observed triggered and processing15prior-head inputs, not completion; no duplicate request or source approval transfer. Both current exposed review workflows and actual native identities retain gates. This appended handoff is kept local for next concrete owned change, with no observation-only push. Human free OpenCode contract and forwarded401 correction remain durable and unchanged; upstream provider identity unknown, no inference keys, paid fallback, heartbeat/runtime mutation, source adoption or spore.
+
+- ts: 2026-10-12T18:35:43.116Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-layer-ownership-red-20261012
+  note: Two confirmed architectural findings are within the authorized first story: pure session policy belongs to domain; pure wire morphism belongs to shape. RED declarations expose missing implementations without compiler warnings or fake production semantics. Context-read coverage finding4251134311 remains OPEN; concrete finite-milestone scope proposal and one async choice ask to extend the existing pair and joint delivery. No unapproved verifier, reader, board parser, source adoption, global inotify change, paid/provider fallback, credential, maker, heartbeat or deployment change. Current scope comment was appended through qualified native Rheos; all exact committed/base receipt, reflection and event prefixes remain intact. No spore.
