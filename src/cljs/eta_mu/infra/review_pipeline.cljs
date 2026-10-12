@@ -5,7 +5,8 @@
             [eta-mu.domain.review :as review]
             [eta-mu.extern.review-context :as context]
             [eta-mu.extern.review-submission :as submission]
-            [eta-mu.law.review-context :as law]))
+            [eta-mu.law.review-context :as law]
+            [eta-mu.shape.review-submission :as submission-shape]))
 
 (def evidence-dir-name ".opencode/review-evidence")
 (def context-file-name "pr-context.md")
@@ -30,15 +31,9 @@
 
 (defn- guard! [ctx session]
   (let [observation (context-observation ctx)
-        result (if (:context-custody-refused? session)
-                 {:ok? false :code :previous-refusal :error "Review context custody was already refused."}
-                 (law/custody-decision (:context-source session) observation))]
-    (when-not (:ok? result)
-      ;; Preserve stage, assessments and evidence. Restoration of a file cannot
-      ;; repair the failed invocation; the host owns any new process admission.
-      (swap! !sessions assoc (evidence-dir ctx)
-             (assoc session :context-custody-refused? true :restart-error (:error result))))
-    (merge (cond-> result (not (:ok? result)) (assoc :restart-required? true))
+        result (review/guard-context session observation)]
+    (swap! !sessions assoc (evidence-dir ctx) (:session result))
+    (merge (dissoc result :session)
            (observed-fields observation))))
 
 (def contract
@@ -117,7 +112,7 @@
           (if (:ok? result)
             (let [file (bfs/join (evidence-dir ctx) submission-file-name)
                   envelope (merge (:envelope result) (select-keys fields [:context-protocol :context-source]))]
-              (submission/write! file envelope)
+              (submission/write! file (submission-shape/serialize envelope))
               (record-event! ctx "submit" (merge {:ok true :event (:event envelope)} fields))
               (merge {:ok? true :event (:event envelope) :file file
                       :inline-comments (count (:comments envelope))} fields))

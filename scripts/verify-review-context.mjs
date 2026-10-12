@@ -11,6 +11,16 @@ const sha = value => createHash('sha256').update(value).digest('hex');
 const protocol = 'open-hax.review-context/v1';
 const stages = ['deterministic', 'map-change', 'generate-candidates', 'adversarial-validate', 'publish'];
 
+/**
+ * Exercise the cold compiled custody adapter using owned disposable fixtures.
+ * Check bounded Unicode recovery, permanent refusals and wire metadata; this
+ * supplies no model-read, native approval, disk authentication or reservation proof.
+ * @param {object} options Existing cold-gate fixture and compiled tool adapters.
+ * @param {string} options.fixture Owned compiled fixture module path.
+ * @param {Function} options.call Invoke a compiled review tool for a fixture session.
+ * @param {Function} options.stageInput Materialize an owned staged-input directory.
+ * @returns {Promise<object>} Observed fixture geometry and custody-control counts.
+ */
 export async function verifyReviewContext({fixture, call, stageInput}) {
   const make = (name, context) => {
     const evidence = stageInput(`context-${name}`);

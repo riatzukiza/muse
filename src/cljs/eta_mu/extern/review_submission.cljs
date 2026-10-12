@@ -1,9 +1,8 @@
 (ns eta-mu.extern.review-submission
-  "Node serialization/write boundary for a domain-produced submission.
-   Admission policy stays in the laws/infra caller. GPL-3.0-or-later."
+  "Node writer for an already-serialized submission wire string.
+   Admission and serialization stay outside this edge. GPL-3.0-or-later."
   (:require ["node:fs" :as fs]))
 
-(defn write! [path envelope]
-  (js-invoke fs "writeFileSync" path
-             (str (js/JSON.stringify (clj->js envelope) nil 2) "\n") "utf8")
+(defn write! [path wire]
+  (js-invoke fs "writeFileSync" path wire "utf8")
   path)
