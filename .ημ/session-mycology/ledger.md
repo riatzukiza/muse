@@ -303,3 +303,12 @@
   spore: none
   receipt-refs: cephalon-muse-context-custody-red-20261012
   note: Reviewed Muse6 actually merged d63; isolated code child shares Git objects from that merge and personal base d63. Qualified Rheos CLI SHA85369213440634989365f75929045d36eb69b6c6b1e7679f68d483374a0d526b admitted lawful first-story readiness and implementation. Named Malli custody schemas plus explicit unimplemented semantic decisions encode failing positives. Actual compiled adapter at observed1482-page geometry fails required protocol assertion; no model/publication involved. Private raw RED command outputs retained; original complete receipt/reflection/event prefixes frozen. Existing optional Mongo integration reports unavailable/skipped and npm user-config always-auth warning are retained limitations, not new production defects or full database proof. No runtime, model routing, secret, owner, deployment, dependent verifier implementation or goal completion; no spore.
+
+- ts: 2026-10-12T17:59:29.564Z
+  task: B3 reviewed staged-context transport
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-context-custody-candidate-20261012
+  note: Scoped context implementation passes its pure and compiled controls but is not complete GREEN or native Review admission. Begin returns a bounded source/protocol, no inline context. Portable named law validates binding/observation; shaped extern distinguishes absence from unavailable/race and suppresses arbitrary error text; infra checks custody before transitions/submission and permanently refuses a changed invocation. First unavailable begin preserves prior artifacts and no session admission. All tool IDs/exposure/permissions and diff/stage checks unchanged. Public observed-output/fixture transcription5290bytes SHA84cdaa1b6aaae4d50a1e6232714b19f6e01a78fe27cc3e0e8c72154fdfd2bbbf binds exact source/log hashes, raw logs remain private. Native gate build/lint pass but unchanged watch-once assertions fail; baseline361 pnpm passed285/1607; version alone not causal proof. Existing watcher repair is not silently revived. Fixture readback is not model assessment; no full database integration, atomic fencing, review approval, dependent verifier, adoption, deployment or B3 completion. Genuine keyless OpenCode/current free MiMo operating correction remains separate and unchanged. One wrong source-directory rg failed before correction; not production verification. No credentials/runtime/owner/heartbeat change, spore or promotion.

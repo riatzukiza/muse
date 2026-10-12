@@ -1,0 +1,114 @@
+{
+  "tier": "Observed command-output transcription and fixture results; not raw provider approval or complete repository-gate qualification",
+  "planning_merge": "d63afce33b332a55441eab53a42ff4b20a398b94",
+  "red_commit": "42181668ca60fd096a5fa8f3a0507bcb659586c0",
+  "story": "32f65d9a-50ec-412a-a0b1-78cb88c27bfb",
+  "source_hashes": {
+    "src/cljs/eta_mu/law/review_context.cljc": "7c4b18138e6f815b8aa714964504cbdfa70bf5083699ccebe5e23d50f6460a1f",
+    "src/cljs/eta_mu/extern/review_context.cljs": "093a5fe5ce802cafb7515ec40d6b7e5fb5058ddbdb39f02e602bd35ff57a17f7",
+    "src/cljs/eta_mu/extern/review_submission.cljs": "ac301083d091004e14fd78b640d3e2410edd90f73c31e6119f76b189e3d6e5c2",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "c27c61f689d4d83c27d090a3a28a4e81170f840cb5dd16f77dca15df93a8eed9",
+    ".ημ/plugins/review_pipeline.cljs": "5c42f14ec4388cb900e41a01a053ad98cc23b77571d1b45fbf5e98fe57175f69",
+    ".ημ/config/opencode/agents/github-reviewer.md": "9549140ee8678851bd019baa4c8743927575dd812a12cd9064e5c5a18294dc14",
+    ".ημ/review/evidence-review.md": "ccd3e7356984ddaf865f405f2fbcdc6e96ff048c35eda73470df68cdfc5d4e94",
+    "scripts/verify-review-context.mjs": "2fc6e7d713d64f2f04954ba1e0568e1609c6848f81a05be6ac6a57ca53e7a1d2"
+  },
+  "actual_red": {
+    "pure": {
+      "tests": 287,
+      "assertions": 1638,
+      "failures": 4,
+      "errors": 0,
+      "compile_warnings": 0
+    },
+    "compiled": "1482-page actual begin lacks required protocol; expected exit1"
+  },
+  "actual_candidate_results": {
+    "npm_test": {
+      "tests": 287,
+      "assertions": 1638,
+      "failures": 0,
+      "errors": 0,
+      "compile_warnings": 0
+    },
+    "full_review_input": "PASS existing diff/stage/reset/cleanup controls and new context controls",
+    "context_fixture": {
+      "pages": 1482,
+      "begin_response_bytes": 8498,
+      "context_bytes": 63822,
+      "context_sha256": "094bbbf6f427d2159f863f7e5887952bd148c23182e07dcfe611ce0e47fa37e4",
+      "custody_negative_cases": 14,
+      "unavailable_initial_cases": 2,
+      "bounded_unicode_multiline_tail_recovered": true
+    },
+    "build": "Five Muse targets PASS with zero compiler warnings",
+    "cold_host_builds": "OpenCode/MCP/Claude independent cold-source fixtures PASS; zero compiler warnings",
+    "existing_invocation_verifier": "PASS three representations, 42 assertions; dependent context verifier not implemented",
+    "lint": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "native_gate": {
+    "status": "REFUSED; story remains in_progress",
+    "attempts": 3,
+    "reason": "Existing watch-once-resolves-on-append-test returned nil and failed three assertions during pnpm test",
+    "latest_raw_log": "native-review-transition-explicit-node24.log",
+    "test_results": {
+      "tests": 287,
+      "assertions": 1638,
+      "failures": 3,
+      "errors": 0,
+      "compile_warnings": 0
+    },
+    "scope": "Watcher production code, assertions and native FSM commands unchanged",
+    "runtime_check": "Bare Node24 and pnpm Node22 differed; explicit Volta Node24 selection did not repair the native gate. Version alone not established as cause.",
+    "baseline": "Unchanged planning checkout361 had a successful pnpm full suite:285 tests/1607 assertions/0failures/0errors; does not prove current watcher availability.",
+    "historical_card": "f856fdbd-e5a9-4229-80f7-183f098b2324 retains rejected earlier watcher scope and host/error/registration concerns"
+  },
+  "logs": {
+    "red-pure.log": {
+      "bytes": 2967,
+      "sha256": "2dd3199618df2ac9b45d8cc6a04dda6dd8ab1bc92364ce9675ffbbf8ebfd2440"
+    },
+    "red-compiled.log": {
+      "bytes": 1121,
+      "sha256": "857bb6cfeded74f07788e855dd7fbf109aaa5ba15b5b7e33b66da0c85b221637"
+    },
+    "green-pure.log": {
+      "bytes": 1496,
+      "sha256": "573fbba0a39f067fe154f6add1092d4dec03c4d757358f93210f935f8c4a89d4"
+    },
+    "green-compiled.log": {
+      "bytes": 1215,
+      "sha256": "5bf859f5a599bd865b7599f470b8308d425a58a07bad9bd5a3d47d5d47ca49b2"
+    },
+    "green-build.log": {
+      "bytes": 1090,
+      "sha256": "05fbebd4d6a0470f82f278ab357de7dfeb0109bf9c82c611083ec10330a071de"
+    },
+    "green-cold-hosts.log": {
+      "bytes": 2591,
+      "sha256": "34b13076b84894a82485417ef80959af0e9f9c759f2d11b06f6df82b8f86ad17"
+    },
+    "native-review-transition-retry.log": {
+      "bytes": 4091,
+      "sha256": "38ed72a95fbb2de5548922b700dea42cfb68e74a53d1c387cc887eebab91eb37"
+    },
+    "native-review-transition-explicit-node24.log": {
+      "bytes": 4091,
+      "sha256": "14ee182ab5f839d63231d2bf2a798001ca77af3689b0bf8e88ea6f6369b5abc4"
+    },
+    "baseline-361-pnpm-node22.log": {
+      "bytes": 1512,
+      "sha256": "4c9d529906651808eefeb4977ebf14ca11f2540a27facd15b57a757b42c00e7b"
+    }
+  },
+  "limits": [
+    "Optional Mongo integration reports unavailable/skipped due authentication; no full DB integration proof",
+    "Fixture bounded reads do not prove actual model consumption or assessment",
+    "No atomic filesystem reservation, authentication, native review approval, dependent verifier, source adoption or deployment",
+    "No model routing, credential, permissions, runtime, heartbeat or owner changes",
+    "All prior planning receipt/reflection/event prefixes remain immutable; no spore"
+  ]
+}

@@ -86,15 +86,23 @@ export async function verifyReviewContext({fixture, call, stageInput}) {
       finally {fs.readFileSync = read; syncBuiltinESMExports();}
       assert.equal(result['ok?'], false, `${operation} refuses ${change}`);
       assert.equal(result['context-protocol'], protocol);
+      assert.equal(result.code, ['EACCES', 'EIO', 'ENOENT-race'].includes(change) ? 'unavailable' : 'changed');
+      if (['EACCES', 'EIO', 'ENOENT-race'].includes(change)) {
+        assert.deepEqual(result['context-observation'], {status: 'unavailable',
+          'error-code': change === 'ENOENT-race' ? 'ENOENT' : change});
+      }
       assert.equal(JSON.stringify(result).includes('DO-NOT-LEAK'), false);
       const status = await call('review_status', {}, f.ctx);
       assert.equal(status.stage, operation === 'review_submit' ? 'publish' : 'deterministic');
       assert.equal(status['evidence-count'], operation === 'review_submit' ? 5 : 0);
       assert.equal(fs.existsSync(path.join(f.evidence, 'submission.json')), false);
+      assert.equal((await call('review_submit', {summary: 'Restored observation cannot repair a failed invocation'}, f.ctx))['ok?'], false);
     }
   }
   for (const code of ['EACCES', 'EIO']) {
     const f = make(`first-${code}`, bytes), read = fs.readFileSync;
+    const sentinel = path.join(f.evidence, 'submission.json');
+    fs.writeFileSync(sentinel, 'owned pre-existing sentinel');
     fs.readFileSync = (filename, ...args) => {
       if (filename === f.file) throw Object.assign(new Error('DO-NOT-LEAK'), {code});
       return read(filename, ...args);
@@ -104,11 +112,14 @@ export async function verifyReviewContext({fixture, call, stageInput}) {
     try {result = await call('review_begin', {}, f.ctx);}
     finally {fs.readFileSync = read; syncBuiltinESMExports();}
     assert.equal(result['ok?'], false);
+    assert.equal(result.code, 'unavailable');
+    assert.deepEqual(result['context-observation'], {status: 'unavailable', 'error-code': code});
     assert.equal(JSON.stringify(result).includes('DO-NOT-LEAK'), false);
     assert.equal((await call('review_status', {}, f.ctx))['ok?'], false, 'no admitted session on unavailable begin');
-    assert.equal(fs.existsSync(path.join(f.evidence, 'submission.json')), false);
+    assert.equal(fs.readFileSync(sentinel, 'utf8'), 'owned pre-existing sentinel', 'unavailable begin performs no artifact cleanup');
     // The unavailable begin never admitted or mutated a session.
     assert.equal((await call('review_begin', {}, f.ctx))['ok?'], true);
+    assert.equal(fs.existsSync(sentinel), false, 'a later successful admission retains normal cleanup');
   }
   for (const context of [null, bytes]) {
     const f = make(context === null ? 'absent-positive' : 'present-positive', context);

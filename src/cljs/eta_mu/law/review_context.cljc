@@ -24,10 +24,22 @@
 
 (defn admit-observation
   "Bind a successful present/absent observation; unavailable never means nil."
-  [_observation]
-  {:ok? false :error "Context admission not implemented."})
+  [observation]
+  (cond
+    (not (observation-valid? observation))
+    {:ok? false :code :malformed :error "Malformed review context observation."}
+    (= :unavailable (:status observation))
+    {:ok? false :code :unavailable :error "Review context observation unavailable."}
+    :else {:ok? true :source (:source observation)}))
 
 (defn custody-decision
   "Admit effects only for a valid binding and a matching available observation."
-  [_binding _observation]
-  {:ok? false :error "Context custody not implemented."})
+  [binding observation]
+  (let [admission (admit-observation observation)]
+    (cond
+      (not (binding-valid? binding))
+      {:ok? false :code :malformed :error "Malformed review context binding."}
+      (not (:ok? admission)) admission
+      (not= binding (:source admission))
+      {:ok? false :code :changed :error "Review context custody changed."}
+      :else admission)))
