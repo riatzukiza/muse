@@ -312,3 +312,21 @@
   spore: none
   receipt-refs: cephalon-muse-context-custody-candidate-20261012
   note: Scoped context implementation passes its pure and compiled controls but is not complete GREEN or native Review admission. Begin returns a bounded source/protocol, no inline context. Portable named law validates binding/observation; shaped extern distinguishes absence from unavailable/race and suppresses arbitrary error text; infra checks custody before transitions/submission and permanently refuses a changed invocation. First unavailable begin preserves prior artifacts and no session admission. All tool IDs/exposure/permissions and diff/stage checks unchanged. Public observed-output/fixture transcription5290bytes SHA84cdaa1b6aaae4d50a1e6232714b19f6e01a78fe27cc3e0e8c72154fdfd2bbbf binds exact source/log hashes, raw logs remain private. Native gate build/lint pass but unchanged watch-once assertions fail; baseline361 pnpm passed285/1607; version alone not causal proof. Existing watcher repair is not silently revived. Fixture readback is not model assessment; no full database integration, atomic fencing, review approval, dependent verifier, adoption, deployment or B3 completion. Genuine keyless OpenCode/current free MiMo operating correction remains separate and unchanged. One wrong source-directory rg failed before correction; not production verification. No credentials/runtime/owner/heartbeat change, spore or promotion.
+
+- ts: 2026-10-12T18:05:05.719Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-context-custody-pr7-handoff-20261012
+  note: Actual15file578insertion99deletion code candidate preserves causal RED and native watcher refusal; codePR7 attached to chat. Qualified first-story scope remains in_progress, no Done/dependent implementation/adoption/merge. One included CodeRabbit full code review requested on newhead after actual prior Muse6 summary16:59:17/dynamic1perhour and fresh18:03 clock; preserve pending state, no credits. Hosted MiMo/Codex natural attempts are not approval until completed and native-bound. Exact planning and committed prefixes preserved; no observation-only push, runtime/heartbeat/model/credential change or spore. Initial unappended receipt candidate omitted required host/manifest fields and was refused by the authoritative API before any append; candidate was corrected and revalidated, with no historic rewrite.
+
+- ts: 2026-10-12T18:12:08.117Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-restart-status-red-20261012
+  note: Verified native CodexP2: infra latched an unused restart-required? session key, while domain status predicate recognizes restart-error/invalidated-chunks, so custody-refused session incorrectly reported false. New actual compiled negative assertion fails before implementation; successful present/absent controls and genuine file restoration are also encoded. Existing pure/fixture f593 success and independent CI remain dated source evidence, not proof of this new status behavior. Cold RED is one observed failure, not an invented full negative count. Initial direct job-log read failed without mutation, normal gh run log read succeeded; wrong domain .cljs read corrected to actual .cljc. Node22.23.3 was fetched into Volta cache only; no default/runtime/maker process changed. Native failed attempts and all prefixes retained; no new watcher scope, model/credential/heartbeat/deployment change, native approval, dependent verifier or spore.

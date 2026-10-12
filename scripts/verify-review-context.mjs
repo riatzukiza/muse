@@ -93,9 +93,13 @@ export async function verifyReviewContext({fixture, call, stageInput}) {
       }
       assert.equal(JSON.stringify(result).includes('DO-NOT-LEAK'), false);
       const status = await call('review_status', {}, f.ctx);
+      assert.equal(status['restart-required?'], true, 'custody refusal uses the established restart indicator');
+      assert.equal(result['restart-required?'], true, 'refused effect reports required restart');
       assert.equal(status.stage, operation === 'review_submit' ? 'publish' : 'deterministic');
       assert.equal(status['evidence-count'], operation === 'review_submit' ? 5 : 0);
       assert.equal(fs.existsSync(path.join(f.evidence, 'submission.json')), false);
+      if (change === 'appeared') fs.unlinkSync(f.file);
+      else fs.writeFileSync(f.file, bytes);
       assert.equal((await call('review_submit', {summary: 'Restored observation cannot repair a failed invocation'}, f.ctx))['ok?'], false);
     }
   }
@@ -124,6 +128,8 @@ export async function verifyReviewContext({fixture, call, stageInput}) {
   for (const context of [null, bytes]) {
     const f = make(context === null ? 'absent-positive' : 'present-positive', context);
     await assess(f); await advance(f);
+    assert.equal((await call('review_status', {}, f.ctx))['restart-required?'], false,
+      'healthy present and absent context do not require restart');
     const result = await call('review_submit', {summary: 'Fixture custody verified; no model assessment'}, f.ctx);
     assert.equal(result['ok?'], true);
     assert.deepEqual(result['context-source'], context === null ? null :
