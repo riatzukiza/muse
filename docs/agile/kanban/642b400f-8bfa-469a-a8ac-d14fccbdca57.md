@@ -1,13 +1,13 @@
 ---
 uuid: "642b400f-8bfa-469a-a8ac-d14fccbdca57"
 title: "Verify joint review transport and complete HOST context delivery"
-status: incoming
+status: "in_progress"
 priority: P1
 points: "8"
 labels: "muse, review-invocation, custody, cephalon, 8sp"
 parent: "bb5b1ee2-111c-4762-8321-889a7256b2f9"
 epic: "bb5b1ee2-111c-4762-8321-889a7256b2f9"
-write-id: "1791834227453-0.040rz9a9b1gfitl935ij"
+write-id: "1791837286537-0.kjj14v161n9gjbfdpa"
 ---
 
 ## Context
@@ -160,5 +160,7 @@ Software/process documentation: GPL-3.0-or-later.
 The human approved Include enforcement and joint delivery on2026-10-12, preserved by receipt75. The revised six-point pair requires complete genuine HOST context reads matched to independently staged bytes before stage one. Native Rheos removed only the Incoming verifier child dependency on predecessor Done, retaining parent/epic links; the transport story has passed native checks and remains Review. Fresh planning qualification and native verifier readiness still precede code, and both source stories qualify and deliver together in PR7 before downstream adoption. Finding4251134311 remains open until actual enforcement and verification. Current3ca MiMo5495006171/run38292920913 is completed APPROVED but does not settle this gap or transfer to the revised head. No runtime, model-route, credentials or paid changes are included.
 
 Native Codex review5495259091 findings4251707587/4251707600/4251707613 require this planning correction. The Incoming verifier is now the eight-point joint implementation boundary: it owns verification/completion of retained transport source plus trusted preparation, genuine HOST framing, causal full-delivery admission, compiled wiring and regression controls. There is no external transport prerequisite expressed only in prose and no substituted non-Done dependency law. Its own native readiness and complete Review gate control both slices; the earlier three-point transport stays Review as retained partial work. The same authorized functionality totals eleven provisional points. Both slices qualify and deliver together through PR7; no standalone transport adoption. Recognized pinned OpenCode instruction suffix is retained ancillary untrusted event text, contributes no context coverage/hash/control instructions, and has explicit matching-metadata and malformed/suffix-only negatives. Fresh planning qualification precedes source implementation. Parent/epic links and historical comments/receipts stay intact.
+
+Joint source RED after verified planning merge0d59966b and native readiness: first full test297/1822/136failures0errors; clean compiler rerun139failures includes same136 new enforcement failures plus3 existing file-watch timing assertions. New controls demonstrate ignored staged context bytes, missing complete genuine HOST delivery, legacy protocol/source acceptance, clipping and causal completion gaps. No approval or deployment claimed.
 
 ---

@@ -11,6 +11,12 @@
              [:bytes [:int {:min 0 :max 9007199254740991}]]
              [:sha256 [:re "^[0-9a-f]{64}$"]]]
    ::binding [:maybe [:ref ::source]]
+   ::delivery-input
+   [:map {:closed true}
+    [:source [:ref ::binding]]
+    [:path [:string {:min 1}]]
+    [:lines [:vector :string]]
+    [:line-bytes [:vector [:int {:min 0 :max 9007199254740991}]]]]
    ::observation
    [:multi {:dispatch :status}
     [:present [:map {:closed true} [:status [:= :present]] [:source [:ref ::source]]]]
@@ -20,6 +26,8 @@
                                  "ENOTDIR" "ELOOP" "ERR_INVALID_UTF8" "UNKNOWN"]]]]]})
 
 (def binding-valid? (m/validator [:ref ::binding] {:registry (merge (m/default-schemas) registry)}))
+(def delivery-input-valid?
+  (m/validator [:ref ::delivery-input] {:registry (merge (m/default-schemas) registry)}))
 (def observation-valid? (m/validator [:ref ::observation] {:registry (merge (m/default-schemas) registry)}))
 
 (defn admit-observation

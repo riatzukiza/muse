@@ -411,3 +411,21 @@
   spore: none
   receipt-refs: cephalon-muse-planning-mimo-status-correction-20261012
   note: Concrete five-finding planning correction now includes the fresh MiMo finding. Full seven-file manifest includes both journals and corrects receipt76 by append, not rewrite. Fresh exact-head planning review/native readiness still precede source enforcement. No spore.
+
+- ts: 2026-10-12T20:34:16.336Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-joint-context-delivery-red-20261012
+  note: Planning qualification/readiness and meaningful joint RED are recorded separately from source qualification. Earlier wrong Rheos verb kanban was refused before mutation; corrected native comment succeeded. No spore.
+
+- ts: 2026-10-12T20:34:46.908Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-joint-red-native-comment-correction-20261012
+  note: Operator command syntax errors are separate from production verification. All clean RED counts and plan/readiness evidence are unchanged. No spore.
