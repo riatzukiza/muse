@@ -1,0 +1,40 @@
+{
+  "epistemic_tier": "observed-source/authorized-correction/byte-preservation-verified",
+  "authorization": "2026-10-12 human: You can fix the ledger rows. We should probably have a check for that on the scripts, and a standard way of creating and checking the ids",
+  "source_commit": "cd5c4d5372aede740feeed74554f635a08559b09",
+  "source_git_blob": "e9fd8a1593672aba28a7d3a67aa73c22ff47afbc",
+  "source_path": ".ημ/kanban-events/ledger.edn",
+  "before_bytes": 59403,
+  "before_sha256": "163dde2f29b3add4aa42dd05e13bd8113b971411e0c4ee608f812ab44143f5e1",
+  "before_row_count": 80,
+  "original_rows_path": ".ημ/review-evidence/muse-pr6/event-id-correction-20261012/original-rows.edn",
+  "original_rows_sha256": "77e709d9fcdf9ce5eadf0ee0f6304bcfa79ed51cc2c4f38eb2b998f0e497a47e",
+  "changes": [
+    {
+      "row": 76,
+      "before_row_sha256": "9c3349a3e231f2db7313fd60f8fd247a506c9859c00108a8c83ded2d1167167e",
+      "old_id": "kanban-bb5b1ee2-111c-4762-8321-889a7256b2f9-1791744352193",
+      "new_id": "kanban-bb5b1ee2-111c-4762-8321-889a7256b2f9-c1a3adc6-411a-4361-bcb4-84db63f73be2",
+      "after_row_sha256": "31944d3ca3a8c047d21b0ea338b6e1e061e60ac88db365d820076dd5556d651c",
+      "after_row_bytes": 610
+    },
+    {
+      "row": 77,
+      "before_row_sha256": "675f15cd79f9f5ce38da0f3f4cb5704085d3caa0705cd78141424b65671c38d5",
+      "old_id": "kanban-bb5b1ee2-111c-4762-8321-889a7256b2f9-1791744352193",
+      "new_id": "kanban-bb5b1ee2-111c-4762-8321-889a7256b2f9-9f61a1c8-bf43-46f8-933a-29578a0cbc65",
+      "after_row_sha256": "ecb6b2e955b5b494bf830a5687e79d4dca3fc970c8c9aac57ea12c83ea210ff9",
+      "after_row_bytes": 553
+    }
+  ],
+  "preservation": "Only event/id string bytes change. Event order/count, causal roots, shared write correlation, payloads, timestamps and every other original row remain unchanged. Original receipts remain append-only.",
+  "after_bytes": 59449,
+  "after_sha256": "c7fcce180fa23d03b87475a547cc8f89f207d9174a4d960ae3ffc34e45f3b872",
+  "after_row_count": 80,
+  "exact_changed_rows": [
+    76,
+    77
+  ],
+  "unchanged_original_rows": 78,
+  "canonical_owner_check": "pending reviewed Rheos event-ID integrity source; not claimed by byte comparison"
+}
