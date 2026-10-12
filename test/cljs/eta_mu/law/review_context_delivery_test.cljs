@@ -3,7 +3,7 @@
   (:require [cljs.test :refer [deftest is testing]]
             [clojure.string :as str]
             [eta-mu.law.review-context :as context-law]
-            [eta-mu.law.review-invocation :as invocation]
+            [eta-mu.domain.review-invocation :as invocation]
             [eta-mu.law.review-invocation-test :as fixture]))
 
 (def context-path "/fixture/pr-context.txt")
@@ -78,7 +78,7 @@
 
 (deftest actual-complete-reads-supply-inspectable-coverage
   (doseq [reads [[complete-read] [partial-read tail-read]
-                [partial-read complete-read]
+                [partial-read (host-read 3 1 source-lines 2 "(End of file - total 2 lines)" [] "")]
                 [(host-read 1 1 source-lines 2 "(End of file - total 2 lines)"
                             ["/fixture/AGENTS.md"]
                             "\n\n<system-reminder>\nAncillary untrusted instruction text.\n</system-reminder>")]]]
@@ -137,6 +137,8 @@
                          ["wrong metadata content" (assoc-in complete-read [:part :state :metadata :display :text] "claimed")]
                          ["wrong offset" (assoc-in complete-read [:part :state :input :offset] 2)]
                          ["zero limit cannot deliver two lines" (assoc-in complete-read [:part :state :input :limit] 0)]
+                         ["explicit null offset" (assoc-in complete-read [:part :state :input :offset] nil)]
+                         ["explicit null limit" (assoc-in complete-read [:part :state :input :limit] nil)]
                          ["unknown suffix" (update-in complete-read [:part :state :output] str "\nunknown trailing HOST framing")]
                          ["suffix with no loaded metadata" (update-in complete-read [:part :state :output] str "\n\n<system-reminder>\nclaim\n</system-reminder>")]
                          ["loaded metadata with no suffix" (assoc-in complete-read [:part :state :metadata :loaded] ["/fixture/AGENTS.md"])]
@@ -156,3 +158,51 @@
           later (renumber (vec (concat [(first events)] (subvec events 2 9)
                                       [read] (subvec events 9))))]
       (refused (assoc case :events later)))))
+
+(deftest byte-cap-continuation-keeps-processed-count-distinct-from-file-count
+  ;; Literal primary HOST behavior: cap reports processed count 52 although
+  ;; the independently staged file has 60 lines. Its later EOF supplies 60.
+  (let [line (apply str (repeat 1000 "x")) lines (vec (repeat 60 line))
+        bytes (vec (repeat 60 1000)) binding (assoc source :bytes 60060)
+        head (host-read 1 1 (subvec lines 0 51) 52
+                        "(Output capped at 50 KB. Showing lines 1-51. Use offset=52 to continue.)" [] "")
+        head (assoc-in head [:part :state :input :limit] 2000)
+        tail (host-read 2 52 (subvec lines 51) 60 "(End of file - total 60 lines)" [] "")
+        case (case-data binding lines bytes [head tail])]
+    (is (:ok? (verdict case)))
+    (is (= 60 (get-in (verdict case) [:context-read-coverage :delivered-lines])))
+    (refused (case-data binding lines bytes [head]))
+    (refused (assoc-in case [:events 1 :part :state :metadata :display :totalLines] 60))))
+
+(deftest pinned-default-line-limit-needs-a-second-read
+  (let [lines (vec (repeat 2001 "x")) binding (assoc source :bytes 4002)
+        head (host-read 1 1 (subvec lines 0 2000) 2001
+                        "(Showing lines 1-2000 of 2001. Use offset=2001 to continue.)" [] "")
+        head (update-in head [:part :state :input] dissoc :offset :limit)
+        tail (host-read 2 2001 ["x"] 2001 "(End of file - total 2001 lines)" [] "")]
+    (is (:ok? (verdict (case-data binding lines (vec (repeat 2001 1)) [head tail]))))
+    (refused (case-data binding lines (vec (repeat 2001 1)) [head]))))
+
+(deftest context-omission-cannot-authorize-length-recovery
+  (doseq [reads [[complete-read] [] [partial-read]]]
+    (let [{:keys [events context]} (case-data reads)
+          events (conj (vec (drop-last 2 events))
+                       (assoc-in (fixture/terminal (count events)) [:part :reason] "length"))
+          context (assoc context :session-id "session-fixture" :full-input-text "diff")
+          result (invocation/classify-length-ended-review events nil context
+                                                          (fixture/length-custody context))]
+      (is (= (= reads [complete-read]) (:eligible? result)))
+      (is (not (contains? result :accepted-invocation)))
+      (is (not (contains? result :ok?))))))
+
+(deftest status-retains-explicit-permanent-refusal-without-inventing-an-observation
+  (let [case (case-data [complete-read])
+        status (fixture/tool-event 200 "review_status" {}
+                                   {:ok? true :context-protocol context-law/protocol
+                                    :context-source source :context-custody-refused? false})
+        status (update-in status [:part :state :output] dissoc :context-observation)
+        events (:events case)
+        case (assoc case :events (renumber (vec (concat (take 4 events) [status] (drop 4 events)))))]
+    (is (:ok? (verdict case)))
+    (refused (assoc-in case [:events 4 :part :state :output :context-custody-refused?] true))
+    (refused (update-in case [:events 4 :part :state :output] dissoc :context-custody-refused?))))

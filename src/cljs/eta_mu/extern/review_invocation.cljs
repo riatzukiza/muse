@@ -5,7 +5,9 @@
    GPL-3.0-or-later."
   (:require [clojure.string :as str]
             [eta-mu.law.review-invocation :as law]
+            [eta-mu.domain.review-invocation :as invocation]
             [eta-mu.domain.review :as review]
+            [eta-mu.shape.review-context-delivery :as context-shape]
             ["node:crypto" :as crypto]))
 
 (defn- invalid! [] (throw (ex-info "Unestablished structured input" {})))
@@ -101,10 +103,16 @@
      :part {:type (:type part) :id (:id part) :session-id (:sessionID part)
             :call-id (:callID part) :tool name :reason (:reason part)
             :state {:status (:status state) :input (:input state) :error (:error state)
+                    :metadata (:metadata state) :time (:time state)
                     :output (if review?
                               (let [s (:output state)]
                                 (when-not (and (string? s) (not (str/blank? s))) (invalid!))
-                                (strict-json s))
+                                (let [result (strict-json s)]
+                                  (if (contains? result :context-observation)
+                                    (update-in result [:context-observation :status]
+                                               #(get {"present" :present "absent" :absent
+                                                      "unavailable" :unavailable} % %))
+                                    result)))
                               (:output state))}}}))
 
 (defn- context-from-input [raw-diff source tools file]
@@ -123,20 +131,36 @@
       (invalid!))
     ctx))
 
+(defn- context-delivery-input [raw-context context-path]
+  (when-not (and (string? context-path) (str/starts-with? context-path "/")
+                 (or (identical? nil raw-context) (instance? js/Uint8Array raw-context)))
+    (invalid!))
+  (let [text (when (some? raw-context) (raw-text raw-context))
+        lines (if text (context-shape/host-lines text) [])]
+    {:context-source (when (some? raw-context)
+                       {:path context-path :bytes (.-length raw-context)
+                        :sha256 (raw-sha256 raw-context)})
+     :context-path context-path :context-lines lines
+     :context-line-bytes (mapv #(.-length (.encode (js/TextEncoder.) %)) lines)}))
+
 (defn prepare-review-invocation-context
   "CJS prepareReviewInvocationContext(rawFullDiff, rawManifest, JS tools[],
-   submissionFile): fatal UTF8/strict JSON/exact SHA256 byte count; canonical
+   submissionFile, actualRawContextBytesOrNull, fixedAbsoluteContextPath):
+   fatal UTF8/strict JSON/exact SHA256 byte count; canonical
    review/diff-chunks geometry. Throws only a safe typed message on refusal.
    Caller independently binds actual Git/native source before and after child;
    hold this returned context in trusted supervisor memory, not artifact JSON."
-  [raw-full-diff raw-manifest raw-review-tools submission-file]
+  [raw-full-diff raw-manifest raw-review-tools submission-file raw-context context-path]
   (try
     (when-not (js/Array.isArray raw-review-tools) (invalid!))
-    (let [ctx (context-from-input raw-full-diff (strict-json (raw-text raw-manifest))
-                                  (js->clj raw-review-tools) submission-file)]
+    (let [ctx (merge (context-from-input raw-full-diff (strict-json (raw-text raw-manifest))
+                                         (js->clj raw-review-tools) submission-file)
+                     (context-delivery-input raw-context context-path))]
       (clj->js {:inputSource (:input-source ctx) :pages (:pages ctx) :pageCount (:page-count ctx)
                 :fullInputSha256 (:full-input-sha256 ctx) :reviewTools (:review-tools ctx)
-                :submissionFile (:submission-file ctx)}))
+                :submissionFile (:submission-file ctx)
+                :contextSource (:context-source ctx) :contextPath (:context-path ctx)
+                :contextLines (:context-lines ctx) :contextLineBytes (:context-line-bytes ctx)}))
     (catch :default _
       (throw (js/Error. "unestablished-review-trace: invalid full-input context")))))
 
@@ -156,7 +180,11 @@
     {:input-source (:inputSource ctx) :pages (:pages ctx)
      :page-count (:pageCount ctx) :full-input-sha256 (:fullInputSha256 ctx)
      :review-tools (:reviewTools ctx) :submission-file (:submissionFile ctx)
-     :session-id (:sessionID ctx)}))
+     :session-id (:sessionID ctx)
+     :context-path (:contextPath ctx) :context-lines (:contextLines ctx)
+     :context-line-bytes (:contextLineBytes ctx)
+     ;; Missing is distinct from explicit null; legacy prepared data refuses.
+     :context-source (if (contains? ctx :contextSource) (:contextSource ctx) ::omitted)}))
 
 (defn verify-review-invocation
   "CJS API: rawResponseText/rawSubmission accept strings or UTF8 byte arrays;
@@ -174,13 +202,17 @@
           lines (remove str/blank? (str/split-lines text))
           events (mapv #(decode-event (strict-json %)) lines)
           submission (when (some? raw-submission) (strict-json (raw-text raw-submission)))
-          result (law/verify events submission (decode-context expected-context))]
+          result (invocation/verify events submission (decode-context expected-context))]
       (clj->js {:ok (:ok? result)
                 :reason (some-> (:reason-kind result) name)
                 :reasonKind (some-> (:reason-kind result) name)
                 :code (name (:code result)) :violations (:violations result)
                 :sessionID (:session-id result) :pageCount (:page-count result)
                 :reviewCallCount (:review-call-count result)
+                :contextReadCoverage (when-let [coverage (:context-read-coverage result)]
+                                       {:status (name (:status coverage))
+                                        :totalLines (:total-lines coverage)
+                                        :deliveredLines (:delivered-lines coverage) :eof (:eof? coverage)})
                 :acceptedInvocation (when-let [accepted (:accepted-invocation result)]
                                       {:sessionID (:session-id accepted)
                                        :submissionCallID (:submission-call-id accepted)
@@ -229,7 +261,7 @@
                    :response-sha256-after (:responseSha256After c)
                    :context-before (decode-length-context (clj->js (:contextBefore c)))
                    :context-after (decode-length-context (clj->js (:contextAfter c)))}
-          result (law/classify-length-ended-review events submission ctx custody)]
+          result (invocation/classify-length-ended-review events submission ctx custody)]
       (clj->js {:eligible (:eligible? result) :classification (name (:classification result))
                 :code (name (:code result)) :violations (:violations result)
                 :requiredAction (some-> (:required-action result) name)

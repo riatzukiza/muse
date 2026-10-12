@@ -24,29 +24,46 @@ const source = {schema: 'open-hax.review-input/v1', base_sha: 'a'.repeat(40), he
   provenance: {repository: 'synthetic/optimized-export-smoke', pull_request: '1', run_id: '2', run_attempt: '1',
     workflow_sha: 'd'.repeat(40), workflow_ref: 'synthetic/optimized-export-smoke/workflow@refs/pull/1/merge'}};
 const manifest = Buffer.from(JSON.stringify(source));
+const contextPath = path.join(repo, '.opencode/review-evidence/pr-context.md');
+const contextBytes = Buffer.from('alpha\nbeta\n');
+const protocol = 'open-hax.review-context/v1';
 const submissionFile = path.join(repo, '.opencode/review-evidence/smoke-submission.json');
 
 /** Construct synthetic successful host events using pages from the actual preparation export. */
-function smokeInvocation(context) {
+function smokeInvocation(context, readMode = 'complete') {
   const text = full.toString('utf8');
   const pages = context.pages;
   const notes = pages.map(page => ({...page, note: `Synthetic smoke assessment of page ${page.id}.`}));
   const body = {schema: 'open-hax.github-review/v1', event: 'COMMENT',
     summary: 'Synthetic optimized-export smoke; no native review credit.', comments: [],
+    'context-protocol': protocol, 'context-source': context.contextSource,
     'input-source': context.inputSource,
     'input-coverage': {chunks: pages.length, delivered: pages.length, assessed: pages.length, missing: []},
     'input-assessments': notes};
   const sessionID = 'session-optimized-export-smoke';
   const events = [];
-  const call = (tool, input, output) => {
+  const call = (tool, input, output, metadata = undefined) => {
     const n = events.length + 1;
     events.push({type: 'tool_use', timestamp: n, sessionID,
       part: {type: 'tool', id: `part-${n}`, callID: `call-${n}`, sessionID, tool,
-        state: {status: 'completed', input, output: JSON.stringify(output)}}});
+        state: {status: 'completed', input, metadata, time: {start: n, end: n},
+          output: tool.startsWith('review_') ? JSON.stringify({...output,
+            'context-protocol': protocol, 'context-source': context.contextSource,
+            'context-observation': {status: context.contextSource === null ? 'absent' : 'present',
+              source: context.contextSource}}) : output}}});
   };
   call('review_begin', {}, {'ok?': true, stage: stages[0], stages, 'input-source': context.inputSource,
     'diff-stats': {files: 1, bytes: text.length, 'truncated?': false},
     'input-coverage': {chunks: pages.length, delivered: 0, assessed: 0, missing: pages.map(page => page.id)}});
+  if (context.contextSource && readMode !== 'omitted') {
+    const content = readMode === 'wrong' ? 'wrong' : 'beta';
+    call('read', {filePath: context.contextPath, offset: 1, limit: 2},
+      `<path>${context.contextPath}</path>\n<type>file</type>\n<content>\n1: alpha\n2: ${content}\n\n(End of file - total 2 lines)\n</content>`,
+      {preview: 'alpha\nbeta', truncated: false, loaded: [],
+        display: {type: 'file', path: context.contextPath, text: 'alpha\nbeta',
+          lineStart: 1, lineEnd: 2, totalLines: 2, truncated: false}});
+    if (readMode === 'overlap') events.at(-1).part.state.time.end = 10000;
+  }
   for (const [index, page] of pages.entries()) {
     call('review_read_diff_chunk', {id: page.id}, {'ok?': true,
       chunk: {...page, text: text.slice(page.start, page.end)}});
@@ -71,7 +88,7 @@ for (const [representation, encode] of [['string', bytes => bytes.toString('utf8
   const result = {representation, assertions: 0};
   const equal = (actual, expected) => { result.assertions++; assert.deepEqual(actual, expected); };
   try {
-    const context = verifier.prepareReviewInvocationContext(encode(full), encode(manifest), tools, submissionFile);
+    const context = verifier.prepareReviewInvocationContext(encode(full), encode(manifest), tools, submissionFile, null, contextPath);
     equal(context.fullInputSha256, sha256(full));
     equal(context.inputSource.full_diff.bytes, full.length);
     equal(context.pages.at(-1).end, full.toString('utf8').length);
@@ -93,6 +110,36 @@ for (const [representation, encode] of [['string', bytes => bytes.toString('utf8
     equal(Object.hasOwn(lengthVerdict, 'ok'), false);
     equal(Object.hasOwn(lengthVerdict, 'acceptedInvocation'), false);
     equal(Object.hasOwn(lengthVerdict, 'approval'), false);
+    // Actual optimized export derives context custody from bytes, and closes
+    // omission/content/time/protocol/submission negatives without native credit.
+    const present = verifier.prepareReviewInvocationContext(encode(full), encode(manifest), tools,
+      submissionFile, new Uint8Array(contextBytes), contextPath);
+    equal(present.contextSource, {path: contextPath, bytes: contextBytes.length, sha256: sha256(contextBytes)});
+    equal(present.contextLines, ['alpha', 'beta']);
+    equal(present.contextLineBytes, [5, 4]);
+    for (const mode of ['complete', 'omitted', 'wrong', 'overlap']) {
+      const sample = smokeInvocation(present, mode);
+      const checked = verifier.verifyReviewInvocation(encode(sample.response), encode(sample.submission), present);
+      equal(checked.ok, mode === 'complete');
+      if (mode === 'complete') {
+        equal(checked.contextReadCoverage, {status: 'present', totalLines: 2, deliveredLines: 2, eof: true});
+      } else {
+        equal(checked.reasonKind, 'unestablished-review-trace');
+        equal(checked.acceptedInvocation, null);
+      }
+    }
+    const healthyPresent = smokeInvocation(present);
+    const legacy = healthyPresent.response.toString('utf8').trim().split('\n').map(JSON.parse);
+    const begin = JSON.parse(legacy[0].part.state.output);
+    delete begin['context-protocol'];
+    legacy[0].part.state.output = JSON.stringify(begin);
+    equal(verifier.verifyReviewInvocation(legacy.map(JSON.stringify).join('\n'),
+      encode(healthyPresent.submission), present).ok, false);
+    const wrongSub = JSON.parse(healthyPresent.submission.toString('utf8'));
+    wrongSub['context-source'] = null;
+    equal(verifier.verifyReviewInvocation(encode(healthyPresent.response), JSON.stringify(wrongSub), present).ok, false);
+    result.assertions++;
+    assert.throws(() => verifier.prepareReviewInvocationContext(encode(full), encode(manifest), tools, submissionFile));
     result.pass = true;
   } catch (error) {
     result.pass = false;

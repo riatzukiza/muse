@@ -74,3 +74,14 @@
       (is (false? (:ok failed)))
       (is (= "unestablished-review-trace" (:reasonKind failed)))
       (is (nil? (:acceptedInvocation failed))))))
+
+(deftest staged-utf8-byte-identity-is-distinct-from-pinned-host-line-decoding
+  (doseq [[value expected sizes] [["" [] []] ["\n" [""] [0]]
+                                 ["a\r\nb\rc\n" ["a" "b" "c"] [1 1 1]]
+                                 ["😀\nβ" ["😀" "β"] [4 2]]
+                                 ["\uFEFFalpha\nbeta\n" ["alpha" "beta"] [5 4]]]]
+    (let [raw (utf8-bytes value) prepared (js->clj (prepare raw delivery/context-path) :keywordize-keys true)]
+      (is (= (.-length raw) (get-in prepared [:contextSource :bytes])))
+      (is (= (sha raw) (get-in prepared [:contextSource :sha256])))
+      (is (= expected (:contextLines prepared)))
+      (is (= sizes (:contextLineBytes prepared))))))
