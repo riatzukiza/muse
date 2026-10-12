@@ -366,3 +366,48 @@
   spore: none
   receipt-refs: cephalon-muse-layer-ownership-green-20261012
   note: Pure portable domain guard now owns the permanent session transition and preserves the first refusal diagnostic/history under restored observations; infra only observes, stores and reports. Pure CLJS wire morphism is separately testable without filesystem effects and preserves existing JSON representation; Node extern only writes its string. Added verified public helper docstring and corrected stale planning-status prose without manual status mutation. Native Review admission is genuine current local GREEN; four earlier refused attempts remain immutable dated evidence. Existing pnpm unset NPM_TOKEN warning and unavailable optional Mongo auth integration remain explicit notices, not repaired credentials or complete DB proof. New-source external reviews still required; historical2e MiMo approval does not transfer. OpenP1 context-read enforcement awaits the one explicit accepted-milestone scope choice; dependent verifier/joint delivery and downstream adoption are not performed. No watcher/FSM/sysctl/service, maker/clock/owner/heartbeat, model/provider/credential/paid usage, deployment, B1/B2/B3 completion or spore. Initial candidate kind :implementation was refused by authoritative Receipt River before append; the operator batch incorrectly continued to publish source 58175167b1b7395762108c292879c0571c736f7c without this typed GREEN receipt. Preserve that unappended candidate and failure; this valid test-run receipt and a separate normal correction commit repair execution provenance without rewriting history or inventing a historical event. No invalid ledger line was written.
+
+- ts: 2026-10-12T18:52:55.722Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-layer-ownership-handoff-20261012
+  note: This is a truthful handoff append to retain at the next concrete owned change, not an observation-only push. The accepted finite one-loop milestone requires explicit inclusion of newly discovered blocking prerequisites; one pending human scope question proposes context-read enforcement and joint source delivery in the existing six-point pair, preserving native planning/Rheos/review gates. No answer is inferred from elapsed time. First story genuinely reached native Review after host watcher recovery, not Done; second story/adoption/B1/B2/B3 are unfinished. Genuine keyless OpenCode free MiMo route remains the operating contract; forwarded Invalid credential prose alone does not identify OpenRouter or justify user inference keys. Dynamic current free-offering discovery remains a separate unmerged plan. Corrected typed execution receipt preserves an actual rejected unknown-kind candidate and the operator sequencing mistake; every prior committed/base prefix and original evidence byte remains intact. No maker/runtime/clock/owner/PM2/cloud/heartbeat/model/credential/paid-use/deployment change or spore.
+
+- ts: 2026-10-12T19:13:27.149Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-context-read-scope-authorized-20261012
+  note: The accepted finite milestone scope decision has arrived. This includes complete trusted HOST context-read evidence before the first stage and matching strict invocation/submission enforcement in the existing six-point pair. The proposal requires actual pinned HOST format discovery, revised card/dependency scope through qualified Rheos, and planning qualification before dependent implementation. It preserves all full-input, stage, custody, publication and exact-head review obligations. Joint source qualification precedes downstream adoption. No paid/provider/inference-credential, runtime/maker/clock/owner/social/deployment or heartbeat change. The separate authorized Rheos ID checker has only native readiness so far; its source RED has not begun.
+
+- ts: 2026-10-12T19:22:38.390Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-context-read-planning-revision-20261012
+  note: Concrete human-authorized planning revision; no verifier source implementation yet. Preserve uncommitted receipts74/75 and complete authorized-plan receipt152866byte/reflection39603byte/event67864byte prefixes. The failed broad patch attempts changed no files and were retried as smaller exact hunks; no native board status or historical comments were hand-edited. Genuine HOST framing is supported by primary pinned source and a SHA-verified captured trace; copied metadata alone does not prove delivery or understanding. No runtime, maker, owner, clock, PM2, cloud, model route, credentials, paid review, heartbeat or deployment mutation. No spore.
+
+- ts: 2026-10-12T19:44:21.738Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-context-read-planning-correction-20261012
+  note: Concrete planning correction within the human-authorized complete enforcement/joint delivery scope. Estimate is provisional, not a hard work budget or a new feature. One broad apply_patch failed atomically before a smaller exact retry; no partial source change. Historical native comments and receipts remain unchanged. Source enforcement remains unimplemented until fresh planning qualification and native readiness. No runtime, model route, credentials, paid review, heartbeat or deployment mutation. No spore.
+
+- ts: 2026-10-12T19:45:42.683Z
+  task: cephalon-character-memory/B3/review-context-custody
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-planning-mimo-status-correction-20261012
+  note: Concrete five-finding planning correction now includes the fresh MiMo finding. Full seven-file manifest includes both journals and corrects receipt76 by append, not rewrite. Fresh exact-head planning review/native readiness still precede source enforcement. No spore.
