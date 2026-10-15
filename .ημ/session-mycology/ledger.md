@@ -725,3 +725,13 @@
   spore: none
   receipt-refs: muse-pr12-begin-host-await-causal-red-20261015
   note: Actual new begin-await test fails before corresponding production change. Three failed assertions show begin succeeds, no restart latch is retained, and a subsequent read succeeds after context restoration. Delivery and assessment stay empty at the failed admission boundary. Existing batch-await guards remain intact. This is an existing approved context custody obligation. No review/approval/live credit, runtime/model/credential/deployment/heartbeat/spore change; live0/3 and humanPAUSEDheartbeat.
+
+- ts: 2026-10-15T13:50:02.019Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-begin-await-custody-current-native-countercontrols-green-20261015
+  note: Begin reobserves through existing guard after host await before completing admission, preserving original binding/restart. Native closed-map allegation conflicts with pinned registry predicate safeParse(u).success passing original u and three actual domain refusals; original finding remains open until actual opener independently reassesses. No shape/Zod workaround, author self-settlement or synthetic Bot verdict. Old proofs/receipts/reflections stay immutable. Initial lint/public smoke used defaultNode24 with existing npm user-config notice; preserved and repeated in isolated Node22 for qualified gates. No continuation/timeout/model/paid/credential/runtime/deployment/heartbeat/spore change; goalACTIVE heartbeat humanPAUSED live0of3. New current head must independently qualify all checks/reviews.

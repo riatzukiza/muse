@@ -68,18 +68,18 @@
       (is (= 2 (:pageCount result)))
       (is (= 9 (:reviewCallCount result))))))
 
-(deftest current-postawait-producer-native-wire-and-complete-source-binding
+(deftest current-beginawait-producer-native-wire-and-complete-source-binding
   (binding [*fixture-root* (str root "review-fixes/")]
-    (let [{:keys [proof context]} (data "postawait-proof.json" "postawait-native.jsonl")
+    (let [{:keys [proof context]} (data "beginawait-proof.json" "beginawait-native.jsonl")
           prior (read-json "proof.json")
-          result (js->clj (extern/verify-review-invocation (read-bytes "postawait-native.jsonl")
+          result (js->clj (extern/verify-review-invocation (read-bytes "beginawait-native.jsonl")
                                                           (read-bytes "submission.json") context)
                          :keywordize-keys true)]
       (is (:ok result))
       (is (= 4 (count (:pageWitnesses result))))
       (is (= 2 (:pageCount result)))
       (is (= 9 (:reviewCallCount result)))
-      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "postawait-native.jsonl"))))
+      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "beginawait-native.jsonl"))))
       (is (true? (:canonicalVerifierStableAcrossCaptures proof)))
       (is (true? (get-in proof [:capture :canonicalBeforeAfterEqualityActuallyAsserted])))
       (is (true? (:sharedEvidenceActualFreshBytesEqualRetained proof)))
@@ -91,6 +91,51 @@
       (doseq [[file digest] (:sourceFiles proof)]
         (let [file (if (keyword? file) (subs (str file) 1) file)]
           (is (= digest (wire/sha256 (.readFileSync fs file))) file))))))
+
+(deftest retained-postawait-native-transcript-remains-authentic-compatible-data
+  (binding [*fixture-root* (str root "review-fixes/")]
+    (let [{:keys [proof context]} (data "postawait-proof.json" "postawait-native.jsonl")
+          result (js->clj (extern/verify-review-invocation (read-bytes "postawait-native.jsonl")
+                                                          (read-bytes "submission.json") context)
+                         :keywordize-keys true)]
+      (is (:ok result))
+      (is (= 4 (count (:pageWitnesses result))))
+      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "postawait-native.jsonl")))))))
+
+(deftest actual-native-host-preserves-unknown-keys-for-closed-domain-refusal
+  (binding [*fixture-root* (str root "review-fixes/")]
+    (let [proof (read-json "closed-map-native-proof.json")]
+      (is (= 3 (count (:cases proof))))
+      (doseq [[file digest] (:sourceFiles proof)]
+        (let [file (if (keyword? file) (subs (str file) 1) file)]
+          (is (= digest (wire/sha256 (.readFileSync fs file))) file)))
+      (doseq [{:keys [mode nativeFile stdout submissionFile expectedHost actualCalls]} (:cases proof)]
+        (let [raw (read-bytes nativeFile)
+              events (mapv extern/strict-json (str/split-lines (.toString raw "utf8")))
+              calls (filterv #(= "tool_use" (:type %)) events)
+              last-call (last calls)
+              input (get-in last-call [:part :state :input])
+              output (extern/strict-json (get-in last-call [:part :state :output]))
+              context (extern/prepare-review-invocation-context
+                        (read-bytes "input.diff") (read-bytes "input-manifest.json")
+                        (clj->js (get-in proof [:source :tools])) submissionFile nil
+                        (str (subs submissionFile 0 (- (count submissionFile) (count "submission.json")))
+                             "pr-context.md"))
+              _ (aset context "batchHost" (clj->js expectedHost))
+              result (js->clj (extern/verify-review-invocation raw nil context) :keywordize-keys true)]
+          (is (= (:sha256 stdout) (wire/sha256 raw)) mode)
+          (is (= (count actualCalls) (count calls)))
+          (is (= "completed" (get-in last-call [:part :state :status])))
+          (is (false? (:ok? output)))
+          (is (true? (:restart-required? output)))
+          (is (not-any? #(= "review_submit" (get-in % [:part :tool])) calls))
+          (case mode
+            "read-top" (is (= "closed-map-control" (:unexpected input)))
+            "assess-top" (do (is (= (apply str (repeat 20000 "x")) (:unexpected input)))
+                              (is (> (wire/utf8-bytes (wire/encode input)) 16384)))
+            "assess-member" (is (= "closed-map-control" (get-in input [:assessments 0 :unexpected]))))
+          (is (false? (:ok result)))
+          (is (nil? (:acceptedInvocation result))))))))
 
 (deftest retained-wording-native-transcript-remains-authentic-compatible-data
   (binding [*fixture-root* (str root "review-fixes/")]

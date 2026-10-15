@@ -67,8 +67,9 @@
                 _ (swap! !sessions assoc (evidence-dir ctx) initial)
                 host (when-let [observe (:review/observe-host ctx)]
                        (await (observe (or (:worktree ctx) (:directory ctx)))))
+                custody (guard! ctx (require-session ctx))
                 session (-> (require-session ctx) (dissoc :begin-pending?) (assoc :batch-host host))
-                fields (observed-fields observation)]
+                fields (select-keys custody [:context-protocol :context-source :context-observation])]
             (swap! !sessions assoc (evidence-dir ctx) session)
             (record-event! ctx "begin" (merge {:files (get-in session [:diff-stats :files]) :input-source manifest} fields))
             (merge (if (review/restart-required? session)

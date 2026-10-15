@@ -147,3 +147,37 @@ historical compatibility regression; all fifteen current source bindings move
 together to this new proof, without exceptions or overwritten old bytes.
 Fixed localhost scripted SSE supplies no real-model, semantic review, approval,
 round, publication or live B credit.
+
+## Begin admission custody and actual closed-map countercontrols (October 15)
+
+`beginawait-native.jsonl` and `beginawait-proof.json` in `review-fixes/` bind
+all fifteen current source/instruction files after begin reobserves context
+across its host await. The actual selected producer is
+`7f19ce3254f096b1a39b574b36975afc1232788de4a095b9b663db1fd1454e62`;
+the independently built verifier remains
+`b56daf2c15b5cdf43596a72cbcd330eb1af0845cdf21ce2c974026e15e8fb665`.
+The positive scripted native run completed nine actual calls in 4,632 ms,
+retaining two original pages, four actual per-page call witnesses, all five
+stages and actual diagnostic submission. The three shared input/manifest/
+submission files are byte-identical to the earlier saved files. Earlier raw
+captures and proofs remain unchanged and are historical compatibility data.
+
+`closed-map-native-proof.json` binds three separate real native negative
+controls and their complete `closed-*-native.jsonl` captures. The qualified
+OpenCode 1.18.31 host preserves an unknown root key, an unknown root value
+larger than the 16,384-byte assessment argument cap, and an unknown assessment
+member key. Every malformed call reaches the original closed Malli/domain
+boundary and is refused with restart required; none reaches a stage or submit.
+The captured native registry uses `Schema.declare` with
+`zodParams.safeParse(u).success` as a predicate, then passes the original `u`
+to the plugin. It does not replace the input with parsed Zod output. This is
+specific evidence for the pinned qualified host, not a claim about other hosts.
+The first earlier private root-key control had already refused input; its
+wrapper incorrectly compared the public CJS `acceptedInvocation` null to
+JavaScript undefined. Original bytes are retained and a derived operator
+correction is recorded separately. The three current controls are fresh actual
+executions. No production shape change is justified by these observations.
+
+All runs here use a bounded scripted localhost response source and no model.
+They supply no semantic review, approval, review round, publication, or live
+B1/B2/B3 evidence.
