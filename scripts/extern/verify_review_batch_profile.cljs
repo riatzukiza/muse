@@ -17,6 +17,7 @@
 (defn write! [out name value]
   (fs/writeFileSync (path/join out name) (str (json value) "\n") #js {:mode 384}))
 
+(assert (= "v22.20.0" (.-version js/process)) "Qualified reproduction requires Node22.20.0.")
 (assert (even? (count *command-line-args*)) "Arguments are flag/value pairs.")
 (let [opts (apply hash-map *command-line-args*)
       required #{"--corpus" "--manifest" "--bundle" "--zod" "--out"}
@@ -38,6 +39,9 @@
       _ (assert (= 11840401 (.-length corpus) (get-in manifest [:full_diff :bytes])))
       _ (assert (= "3ab5ffbb6e34a2ee3607a74bf421785d47d5391d" (:head_sha manifest)))
       _ (assert (= "f95a53a4da8ed90588b0be320ba8e86c6a03668d" (:base_sha manifest) (:diff_base_sha manifest)))
+      _ (assert (= {:path "basehead.diff" :bytes 11840401
+                    :sha256 "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248"}
+                   (:full_diff manifest)) "Serialized full_diff metadata must match the frozen source exactly.")
       _ (assert (= "4.4.3" (:version (decode (path/join zod "package.json")))) "Use measured zod4.4.3.")
       _ (fs/mkdirSync out #js {:mode 448})
       _ (fs/mkdirSync (path/join out "node_modules") #js {:mode 448})
@@ -92,13 +96,18 @@
                                        (js->clj (.profilePages bridge value) :keywordize-keys true))
                              members (subvec all 0 member-count)
                              digest (sha value)
+                             synthetic-source (assoc source :base_sha (apply str (repeat 40 "a"))
+                                                      :diff_base_sha (apply str (repeat 40 "a"))
+                                                      :head_sha (apply str (repeat 40 "b")))
                              envelope (-> (response members)
                                           (assoc :input-source
-                                                 (assoc source :full_diff
+                                                 (assoc synthetic-source :full_diff
                                                         {:path "synthetic.diff" :bytes (utf8-bytes value) :sha256 digest}))
                                           (assoc :coverage {:chunks (count all) :delivered (count all)
                                                             :assessed 0 :missing (mapv :id all)})
                                           (assoc-in [:custody :source_sha256] digest)
+                                          (assoc-in [:custody :base_sha] (:base_sha synthetic-source))
+                                          (assoc-in [:custody :head_sha] (:head_sha synthetic-source))
                                           (assoc-in [:batch :next-id]
                                                     (when (< member-count (count all)) (inc member-count))))]
                          {:ids (mapv :id members) :wire (encode envelope)
@@ -122,6 +131,8 @@
       over-synthetic (boundary-value "" 48001 1)
       two-page-over (boundary-value (apply str (repeat 8192 "x")) 48001 2)
       first-page (synthetic-wire (:source-text two-page-over) 1)
+      four-pages (synthetic-wire (str/join "\n" (repeat 512 "x")) 4)
+      five-pages (synthetic-wire (str/join "\n" (repeat 513 "x")) 5)
       exact-response (:wire exact-synthetic)
       over-response (:wire over-synthetic)
       padded-request (loop [v (request (subvec pages 0 4) "Fixture only") at 0]
@@ -136,28 +147,56 @@
                 :exact-note (request-case (request (subvec pages 0 1) (apply str (repeat 2048 "n"))))
                 :over-note (request-case (request (subvec pages 0 1) (apply str (repeat 2049 "n"))))
                 :exact-cardinality (request-case (request (subvec pages 0 4) "Fixture note"))
-                :over-cardinality (request-case (request (subvec pages 0 5) "Fixture note"))}
+                :over-cardinality (request-case (request (subvec pages 0 5) "Fixture note"))
+                :max-escaped-notes (request-case (request (subvec pages 0 4) (apply str (repeat 2048 "\u0000"))))}
       responses {:exact {:wire exact-response :measurement (metrics exact-response)
                          :result (fixture/response-outcome (metrics exact-response))}
                  :over {:wire over-response :measurement (metrics over-response)
                         :result (fixture/response-outcome (metrics over-response))}}
-      read-vectors {:first-page first-page :two-page-over two-page-over :single-page-over over-synthetic}
+      read-vectors {:first-page first-page :two-page-over two-page-over :single-page-over over-synthetic
+                    :four-pages four-pages :five-pages five-pages}
       read-measurement (fn [v] (assoc (metrics (:wire v)) :ids (:ids v)))
       read-cases {:whole-prefix (fixture/read-outcome (mapv read-measurement [first-page two-page-over]))
-                  :whole-page-refusal (fixture/read-outcome [(read-measurement over-synthetic)])}
+                  :whole-page-refusal (fixture/read-outcome [(read-measurement over-synthetic)])
+                  :cardinality-exact (fixture/read-outcome [(read-measurement four-pages)])
+                  :cardinality-over (fixture/read-outcome [(read-measurement five-pages)])
+                  :cardinality-prefix (fixture/read-outcome (mapv read-measurement [four-pages five-pages]))}
       unicode (mapv (fn [[name value]]
                       (let [p (js->clj (.profilePages bridge value) :keywordize-keys true)
-                            members (mapv #(assoc % :sha256 (sha (:text %))) p)
-                            wire (encode (response members))]
+                            wire (:wire (synthetic-wire value (count p)))
+                            decoded (js->clj (js/JSON.parse wire) :keywordize-keys true)]
                         (assert (= value (apply str (map :text p))))
+                        (assert (= value (apply str (map :text (:chunks decoded)))))
+                        (assert (= (sha value) (get-in decoded [:input-source :full_diff :sha256])
+                                   (get-in decoded [:custody :source_sha256])))
+                        (assert (= (utf8-bytes value) (get-in decoded [:input-source :full_diff :bytes])))
+                        (assert (= (count p) (get-in decoded [:coverage :chunks])))
+                        (assert (= (mapv :id p) (get-in decoded [:coverage :missing])
+                                   (get-in decoded [:batch :ids])))
+                        (assert (nil? (get-in decoded [:batch :next-id])))
+                        (assert (= (get-in decoded [:input-source :head_sha])
+                                   (get-in decoded [:custody :head_sha])))
+                        (assert (= (get-in decoded [:input-source :base_sha])
+                                   (get-in decoded [:custody :base_sha])))
                         {:name name :value value :wire wire :measurement (metrics wire)}))
                     [["unicode" "ημ 😀é漢字"] ["escaping" "\"\\\n\r\t\u0000"]
                      ["long-line" (apply str (repeat 8192 "z"))]
                      ["surrogate-boundary" (str (apply str (repeat 8191 "x")) "😀tail")]])]
   (doseq [key [:exact-bytes :exact-note :exact-cardinality]]
     (assert (= :accept (get-in requests [key :result :outcome]))))
-  (doseq [key [:over-bytes :over-note :over-cardinality]]
-    (assert (= :refuse (get-in requests [key :result :outcome]))))
+  (doseq [key [:over-bytes :over-note :over-cardinality :max-escaped-notes]]
+    (assert (= :refuse (get-in requests [key :result :outcome])))
+    (assert (zero? (get-in requests [key :result :members]))))
+  (assert (= 49792 (get-in requests [:max-escaped-notes :measurement :bytes])))
+  (assert (= "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
+             (get-in requests [:max-escaped-notes :measurement :sha256])))
+  (doseq [[n v] [[4 four-pages] [5 five-pages]]]
+    (assert (= n (:pages v) (count (:ids v))))
+    (assert (< (utf8-bytes (:wire v)) 48000)))
+  (assert (= [1 2 3 4] (get-in read-cases [:cardinality-exact :ids])
+             (get-in read-cases [:cardinality-prefix :ids])))
+  (assert (= :refuse (get-in read-cases [:cardinality-over :outcome])))
+  (assert (= [] (get-in read-cases [:cardinality-over :ids])))
   (assert (= :accept (get-in responses [:exact :result :outcome])))
   (assert (= :refuse (get-in responses [:over :result :outcome])))
   (assert (= [1] (get-in read-cases [:whole-prefix :ids])))

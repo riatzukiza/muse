@@ -188,3 +188,33 @@ again failed for the missing function; implemented fixture outcomes then passed
 3tests/12assertions. Scoped lint is0errors/0warnings. The ledger appends this
 correction rather than rewriting the earlier receipt. Full owner hosted tests
 still must pass at the final current source before qualification.
+
+
+## Complete synthetic custody and independent limits — review correction
+
+The Unicode, escaping, long-line and surrogate-boundary response regressions
+now bind their own exact synthetic text/bytes/SHA256, synthetic base/head,
+custody, page coverage/IDs and terminal next marker. Each complete wire is
+JSON-round-tripped and those bindings are asserted. The earlier inconsistent
+measurements remain labelled historical in profile.json and immutable62d1a8c;
+they are not valid custody vectors. Original1491 page and375 group records are
+byte-for-byte unchanged.
+
+The concrete four-note escaped request is now generated and executed: each
+note has2048 NUL UTF8 bytes, the complete request has49792 serialized bytes and
+exact original digest f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0.
+The diagnostic fixture refuses it with zero accepted members. Complete four-
+and five-page response envelopes have2940 and3066 bytes respectively, both
+below48000; four accepts, five refuses, and selecting the intact four-page
+prefix remains lawful only for reads. Every vector and actual outcome is
+retained in the private generated output and the nonsecret profile summary.
+
+The generator now refuses any process.version other than v22.20.0 before
+opening inputs or creating output. Use the selected Node22.20.0 executable to
+invoke NBB's cli.js when the shell default differs; plain nbb under another
+Node intentionally fails. It also validates the exact serialized full_diff
+map (basehead.diff,11840401 bytes and frozen SHA256), refusing additional keys
+or changed path. Head/base/diff-base bindings remain exact. Before this repair,
+real Node24 and modified-manifest runs both incorrectly printed PASS; the same
+negative inputs now exit1 before output-directory creation. This is diagnostic
+source qualification, not an actual provider limit or implemented batch guard.
