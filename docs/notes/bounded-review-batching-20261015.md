@@ -23,11 +23,12 @@ Archive1.18.31 binary185030784bytes SHA256 `f9dab32248695e9ebd56b16a1921798fd851
 
 | Owner | Proposed points | Independently reviewable exit |
 |---|---:|---|
-| Muse |8|Joint bounded API/state, exact wire sizing, actual native witness law/decoder, prompts and compiled regressions. Tools and verifier qualify together. Native task 7d9fe66e-0f2b-4b9c-aac7-b746c3041a20.|
+| Muse profile |3|Establish exact effective host and complete wire/request bounds before implementation. Native task 95efe284-754b-4c4c-9a5e-b55b0c3d5d0e.|
+| Muse joint source |5|Consume completed qualified profile; API/state, canonical actual native witness law/decoder, prompts and compiled multi-page regressions ship together. Native task d5bd4e91-8717-4da0-8e13-e307972ecd32.|
 | ETA |2|After the Muse merge, consume exact qualified source at all selection/provenance sites; expose API and exact registry; update caller instructions and regenerate embedded runner; actual compiled verifier integration tests. Create/read its owning native card and qualify its own planning/source before implementation.|
 | OpenPlanner |1|After ETA qualification, update only two selected qualified pins and independently complete real full150-input free OpenCode MiMo review within existing bounded invocation, all current gates and exact readback. Owning card/readiness and fresh head-bound review remain required.|
 
-These are proposed11 points for the new prerequisite, not an adopted goal total or native aggregate. The Muse task is a single coherent8-point package because transport alone without actual-trace verification cannot safely ship. The plan does not create cross-board native edges to absent tasks. Later actual owning cards must record lawful available dependencies and exact-source prerequisites; native Rheos decides admission. No estimate/type/status is mutated by this note.
+These are proposed11 points for the new prerequisite, not an adopted goal total or native aggregate. The native Muse coordinator 7d9fe66e-0f2b-4b9c-aac7-b746c3041a20 retains recorded8 as non-additive history. Its children profile3 then joint5 total8; transport and verifier still ship together after concrete discovery. The plan does not create cross-board native edges to absent tasks. Later actual owning cards must record lawful available dependencies and exact-source prerequisites; native Rheos decides admission. No estimate/type/status is mutated by this note.
 
 ## Required contract
 
@@ -40,3 +41,30 @@ Batch selection measures the entire serialized output including escapes/custody/
 Planning/current-head review and native Rheos Ready precede causal RED. Implement portable law/shape before outer host adapters and orchestration. Qualify source jointly, then consumer(s), then actual large native review; do not transfer prior head approvals. Every owning source has full tests/lint/zero-warning gate and protected receipt provenance. Builds stay in isolated publication-disabled homes. No maker, PM2, daemon, gateway, clock, cloud, watcher/sysctl, credentials, social publication or heartbeat changes are included. Keep existing event/receipt/reflection prefixes and exact history. Failed or partial review remains failure/incomplete, never approval or live B1/B2/B3 completion.
 
 Software/process documentation: GPL-3.0-or-later.
+
+
+## Planning-review correction — 2026-10-15
+
+Codex5527409289 required complete discovery owners and a separate effective-profile
+exit before build. The named native coordinator is now an Incoming epic; its
+explicit UUID filename matches the board convention. The native-created former
+slug path remains immutable receipt85/Git history, corrected by append rather
+than overwritten. Initial child Markdown is first-class Rheos input, with no
+invented native creation records. Native readback/comments preserve actual
+identity and dependency custody; no Ready or implementation is claimed.
+
+Profile 95efe284-754b-4c4c-9a5e-b55b0c3d5d0e establishes exact effective limits/candidate wire and call-count
+projection, then joint d5bd4e91-8717-4da0-8e13-e307972ecd32 must reproduce those bounds in actual compiled
+multi-page calls containing at least two original pages. Source acceptance
+checks per-page ID/geometry/digest/native-witness/nonblank-note custody; semantic
+substance remains the actual model review's obligation. A note counter or unique
+string is not understanding proof. Only read responses may shrink to a complete
+prefix; an oversized/invalid assessment vector refuses atomically in full.
+
+Discovery now includes retained context-delivery shape/domain/law and strict
+HOST decoder, submission serialization shape and tests, legacy Muse publisher
+and tests, and actual compiled full-input/context/invocation scripts. These are
+reused boundaries, not owners to copy into new batch modules. The Muse legacy
+publisher validates envelope/event/inline locations; complete source/context/
+native-invocation admission and privileged final publication remain in the
+qualified ETA consumer. It cannot become a weaker alternative publisher.

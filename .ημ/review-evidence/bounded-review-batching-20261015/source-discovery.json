@@ -17,49 +17,190 @@
       "path": "src/cljs/eta_mu/domain/review.cljc",
       "bytes": 17886,
       "sha256": "0088d63b415edaa10b3556cb210b7c8f8c847ea37386816aa372127ceb7bdbea",
-      "immutable_blob_equal": true
+      "immutable_blob_equal": true,
+      "disposition": "extend existing pure coverage/session transitions atomically for original batch members; preserve all current guards"
     },
     {
       "path": "src/cljs/eta_mu/law/review_invocation.cljc",
       "bytes": 22762,
       "sha256": "51e22d5045899f3844503f46289c2742f18bec68924ecb13ce851cacde466b41",
-      "immutable_blob_equal": true
+      "immutable_blob_equal": true,
+      "disposition": "extend actual-call witness/membership/chronology law; no synthetic native events or context weakening"
     },
     {
       "path": "src/cljs/eta_mu/domain/review_invocation.cljc",
       "bytes": 1219,
       "sha256": "1f5d91c284cdaa6577dfdce58ec32cfd97902c6e316da475ab1d96699d42e9bd",
-      "immutable_blob_equal": true
+      "immutable_blob_equal": true,
+      "disposition": "reuse composition of structural invocation and complete HOST context inspection"
     },
     {
       "path": "src/cljs/eta_mu/extern/review_invocation.cljs",
       "bytes": 16150,
       "sha256": "18eaca244107dcde173434e5c71d5dddbe15be998021995eaf4a2706fb118117",
-      "immutable_blob_equal": true
+      "immutable_blob_equal": true,
+      "disposition": "extend strict raw host decoding/prepared source/page bindings for actual batches; retain fatal UTF8/source hashes"
     },
     {
       "path": "src/cljs/eta_mu/infra/review_pipeline.cljs",
       "bytes": 7855,
       "sha256": "7ec36607adfdb633d8628410c85ca665772231431edbca93716209041640182f",
-      "immutable_blob_equal": true
+      "immutable_blob_equal": true,
+      "disposition": "extend existing guarded orchestration; no new policy in effects"
     },
     {
       "path": ".ημ/plugins/review_pipeline.cljs",
       "bytes": 6787,
       "sha256": "5c42f14ec4388cb900e41a01a053ad98cc23b77571d1b45fbf5e98fe57175f69",
-      "immutable_blob_equal": true
+      "immutable_blob_equal": true,
+      "disposition": "thin new tool schema/delegation only, under existing pipeline plugin"
     },
     {
       "path": ".ημ/review/evidence-review.md",
       "bytes": 4640,
       "sha256": "ccd3e7356984ddaf865f405f2fbcdc6e96ff048c35eda73470df68cdfc5d4e94",
-      "immutable_blob_equal": true
+      "immutable_blob_equal": true,
+      "disposition": "update batch/final-partial/per-page note guidance, same one-invocation/context/stage contract"
     },
     {
       "path": ".ημ/config/opencode/agents/github-reviewer.md",
       "bytes": 11090,
       "sha256": "9549140ee8678851bd019baa4c8743927575dd812a12cd9064e5c5a18294dc14",
-      "immutable_blob_equal": true
+      "immutable_blob_equal": true,
+      "disposition": "update actual exposed batch tools and guidance; preserve existing restrictions"
+    },
+    {
+      "path": "src/cljs/eta_mu/shape/review_context_delivery.cljc",
+      "bytes": 2603,
+      "sha256": "4b27142092c20eba2d6f4f81fb60dfeda26b570bb76bcc304714bf866f2daf4e",
+      "immutable_blob_equal": true,
+      "disposition": "reuse pinned HOST line/rendering shape unchanged; profile verifies applicable framing, no diff-batch source authority"
+    },
+    {
+      "path": "src/cljs/eta_mu/law/review_context.cljc",
+      "bytes": 2387,
+      "sha256": "12ab4736f1c3892aed0ebce52581edf6302e62e4fb14d3f94077fc0cedd8e843",
+      "immutable_blob_equal": true,
+      "disposition": "reuse current context binding/observation shape and refusal; no relaxed or copied custody law"
+    },
+    {
+      "path": "src/cljs/eta_mu/domain/review_context_delivery.cljc",
+      "bytes": 5835,
+      "sha256": "da5792b311db078db771642a13a2f678c452a81895b567c839a8385858eb4ea8",
+      "immutable_blob_equal": true,
+      "disposition": "reuse complete actual pre-stage HOST delivery and custody inspection; new review tools must retain protocol observations"
+    },
+    {
+      "path": "src/cljs/eta_mu/shape/review_submission.cljs",
+      "bytes": 382,
+      "sha256": "0a8d4f67aa71c2400ad909c2fed01d3f1a181614dd56588186b78cf6126e1a1a",
+      "immutable_blob_equal": true,
+      "disposition": "reuse exact pretty JSON/final newline envelope wire; batch witness cannot replace flat per-page submission"
+    },
+    {
+      "path": "src/cljs/eta_mu/boundaries/opencode.cljs",
+      "bytes": 4116,
+      "sha256": "2e2d9d5fd8b16ae204e2ed1cec9c29a861f078e1c1553f846f9f8db7e0ffc777",
+      "immutable_blob_equal": true,
+      "disposition": "reuse actual tool result JSON-stringification path for complete wire measurement; legacy outer boundary, no new policy or broad runtime migration"
+    },
+    {
+      "path": ".ημ/review/publish-opencode-review.cjs",
+      "bytes": 6572,
+      "sha256": "bb75bc57d8eeaf7edbd77f34e9a4da2d319617d06809f9aadfb0d94e7ae6c2c9",
+      "immutable_blob_equal": true,
+      "disposition": "retain legacy envelope/event/inline-location defense; not complete source/context/native-invocation authority and not weaker replacement for ETA privileged gate"
+    },
+    {
+      "path": ".ημ/review/publish-opencode-review.test.cjs",
+      "bytes": 7128,
+      "sha256": "3084174dcc5a4c4eb77eefdee01ea74276916845927809ce07789159b74eff22",
+      "immutable_blob_equal": true,
+      "disposition": "reuse publisher envelope/event/added-line/actual publication fixture defenses; no live publishing"
+    },
+    {
+      "path": ".ημ/review/full-input-verification.md",
+      "bytes": 10711,
+      "sha256": "2a234a4067388f85259bb3af6425422c96f0ce364fc2c6ba5ddaf7364a38bf91",
+      "immutable_blob_equal": true,
+      "disposition": "retain full changed input/receipt selection and no preview substitution constraints"
+    },
+    {
+      "path": ".ημ/review/git-quoted-path-verification.md",
+      "bytes": 7045,
+      "sha256": "0163e4f05f1761b59e10aba010cc4d957ac37eb85f714f6cec67502819250227",
+      "immutable_blob_equal": true,
+      "disposition": "retain exact Unicode Git path identity; no new exclusions"
+    },
+    {
+      "path": "test/cljs/eta_mu/domain/review_test.cljs",
+      "bytes": 46269,
+      "sha256": "292aba6b44d74710aeb2325a65fc1227c412695fff50ca3d8e3cf9aacb86233b",
+      "immutable_blob_equal": true,
+      "disposition": "extend existing domain coverage/first-stage/LAST/truncation/restart positives and negatives with atomic batches"
+    },
+    {
+      "path": "test/cljs/eta_mu/law/review_invocation_test.cljs",
+      "bytes": 48916,
+      "sha256": "d7eb457b5b26faef1f9efe818253bf0b8e026f9fcf168f68248f6c7dc1626231",
+      "immutable_blob_equal": true,
+      "disposition": "extend actual-call witness/chronology/submission controls without synthesizing native calls"
+    },
+    {
+      "path": "test/cljs/eta_mu/law/review_context_test.cljs",
+      "bytes": 2059,
+      "sha256": "76f00ebe37057f2b75c19d84100f0ed44033d17f9428d9c7b7e2c4f20a91a2e7",
+      "immutable_blob_equal": true,
+      "disposition": "reuse context shape/current binding/mismatch/unavailable refusal cases"
+    },
+    {
+      "path": "test/cljs/eta_mu/law/review_context_delivery_test.cljs",
+      "bytes": 13648,
+      "sha256": "2499b9d7709ff5b20a40daeb31e07df9507f512750a3dab2a0d86c43980c6b27",
+      "immutable_blob_equal": true,
+      "disposition": "reuse independent literal HOST frames/time/complete-context/unknown-clipping controls"
+    },
+    {
+      "path": "test/cljs/eta_mu/extern/review_context_delivery_test.cljs",
+      "bytes": 4850,
+      "sha256": "f660f712d9e02b70172756750d738d97e161fa3b3137395acf4f8f626bdd916e",
+      "immutable_blob_equal": true,
+      "disposition": "reuse actual optimized export decoding/UTF8/line/time metadata/context binding controls"
+    },
+    {
+      "path": "test/cljs/eta_mu/extern/review_invocation_test.cljs",
+      "bytes": 17086,
+      "sha256": "008a4300d621f36177fda1803a46150f86d7ec61ff389784b7cd6adb3351aaa5",
+      "immutable_blob_equal": true,
+      "disposition": "extend strict actual JSON/native decoder/fatal bytes/source geometry guards for batch shape"
+    },
+    {
+      "path": "test/cljs/eta_mu/shape/review_submission_test.cljs",
+      "bytes": 994,
+      "sha256": "d03aeb212b72b47b5939d65e46761b2aac0dd91eb2cd15aed062b5fb6c664ca3",
+      "immutable_blob_equal": true,
+      "disposition": "reuse exact unchanged pretty JSON/newline/Unicode submission morphism contract"
+    },
+    {
+      "path": "scripts/verify-full-review-input.mjs",
+      "bytes": 16412,
+      "sha256": "04c0eba6768710f712588643ea903f221769abb66b8a4ade79d642449ee8ef3f",
+      "immutable_blob_equal": true,
+      "disposition": "extend actual compiled plugin/full source/truncation/first-stage smoke with multi-page calls and atomic refusals"
+    },
+    {
+      "path": "scripts/verify-review-context.mjs",
+      "bytes": 11473,
+      "sha256": "814189d37557242013c12e0e0c2b26738272d67e033f92eb3b5b8f371680b593",
+      "immutable_blob_equal": true,
+      "disposition": "reuse actual compiled begin/source/custody/admitted-refusal controls"
+    },
+    {
+      "path": "scripts/verify-review-invocation.mjs",
+      "bytes": 9964,
+      "sha256": "62b39d3450a18c5503245e73932268bcf080a316b2a8eef1730326f95340a1cd",
+      "immutable_blob_equal": true,
+      "disposition": "extend actual optimized CJS string/Buffer/Uint8Array invocation controls with batch calls; preserve context and final source digests"
     }
   ],
   "host_inspection": {
@@ -90,5 +231,76 @@
     "no credentials/paid model/runtime changes",
     "heartbeat stays human-paused",
     "live B1/B2/B3 remain0of3"
+  ],
+  "planning_refinements": [
+    {
+      "at": "2026-10-15T02:56:36.060724+00:00",
+      "reason": "native5527409289 findings4278463405/3415/3423/3433/3440/3450",
+      "native_projection": {
+        "parent": {
+          "uuid": "7d9fe66e-0f2b-4b9c-aac7-b746c3041a20",
+          "source_path": "docs/agile/kanban/7d9fe66e-0f2b-4b9c-aac7-b746c3041a20.md",
+          "frontmatter": {
+            "category": "kanban",
+            "labels": "muse, review-batching, cephalon, 8sp",
+            "dependency": [
+              "d5bd4e91-8717-4da0-8e13-e307972ecd32"
+            ],
+            "type": "epic",
+            "write-id": "1792032993203-0.ln5j8futgjqhs2wpal",
+            "points": "8",
+            "title": "Coordinate bounded review profiling and joint batch proof",
+            "priority": "P1",
+            "status": "incoming",
+            "uuid": "7d9fe66e-0f2b-4b9c-aac7-b746c3041a20",
+            "created_at": "2026-10-15T02:30:33.226Z"
+          }
+        },
+        "profile": {
+          "uuid": "95efe284-754b-4c4c-9a5e-b55b0c3d5d0e",
+          "source_path": "docs/agile/kanban/95efe284-754b-4c4c-9a5e-b55b0c3d5d0e.md",
+          "frontmatter": {
+            "labels": "muse, review-batching, cephalon, 3sp",
+            "parent": "7d9fe66e-0f2b-4b9c-aac7-b746c3041a20",
+            "type": "task",
+            "write-id": "1792032994335-0.u7pahwca5xjwsq0a629",
+            "points": "3",
+            "title": "Establish the bounded review host and wire profile",
+            "priority": "P1",
+            "status": "incoming",
+            "epic": "7d9fe66e-0f2b-4b9c-aac7-b746c3041a20",
+            "uuid": "95efe284-754b-4c4c-9a5e-b55b0c3d5d0e"
+          }
+        },
+        "joint": {
+          "uuid": "d5bd4e91-8717-4da0-8e13-e307972ecd32",
+          "source_path": "docs/agile/kanban/d5bd4e91-8717-4da0-8e13-e307972ecd32.md",
+          "frontmatter": {
+            "labels": "muse, review-batching, cephalon, 5sp",
+            "dependency": "95efe284-754b-4c4c-9a5e-b55b0c3d5d0e",
+            "parent": "7d9fe66e-0f2b-4b9c-aac7-b746c3041a20",
+            "type": "task",
+            "write-id": "1792032995609-0.dvd5cqlr1gkvb1p12ip",
+            "points": "5",
+            "title": "Implement and verify joint lossless review batches",
+            "priority": "P1",
+            "status": "incoming",
+            "epic": "7d9fe66e-0f2b-4b9c-aac7-b746c3041a20",
+            "uuid": "d5bd4e91-8717-4da0-8e13-e307972ecd32"
+          }
+        }
+      },
+      "allocation": "source8 = profile3 + joint5; coordinator8 non-additive historical allocation",
+      "mechanical_assessment_claim": "separate bounded nonblank per-original-page fields and genuine native witness custody; semantics/understanding remain actual reviewer judgment",
+      "oversized_assessment": "whole-vector refusal, never prefix mutation",
+      "actual_multi_page_positive": "compiled read and assessment each contain >=2 original pages under completed measured profile; exact150-input call projection not completion proof",
+      "filename_correction": {
+        "prior_path": "docs/agile/kanban/deliver-bounded-lossless-review-batches-with-native-invocation-proof-c3041a20.md",
+        "prior_immutable_head": "374a3d36ccd45d287971d8b59e92427bb497c325",
+        "current_path": "docs/agile/kanban/7d9fe66e-0f2b-4b9c-aac7-b746c3041a20.md",
+        "history": "receipt85 and native task-created event remain immutable; supported filename authoring move followed by native UUID readback/type correction/comments; no forged move event"
+      },
+      "publisher_boundary": "legacy Muse publisher is not native full-input/context admission authority; ETA canonical compiled verifier and private final gate remain required"
+    }
   ]
 }
