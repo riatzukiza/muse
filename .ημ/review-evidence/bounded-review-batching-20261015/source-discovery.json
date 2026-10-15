@@ -1,0 +1,94 @@
+{
+  "schema": "cephalon.review-batching-planning-discovery/v1",
+  "epistemic_tier": "observed source inspection and derived plan; no batching execution",
+  "source_head": "a9a62f0d509056406f3dd7d8c86a13551be168cd",
+  "personal_carrier": "riatzukiza/muse:chore/sync-upstream-main-e733f5b",
+  "human_authorization": "call_1d609fd775e34385958566086e527a3e: Include bounded batching (Recommended)",
+  "native_task": {
+    "uuid": "7d9fe66e-0f2b-4b9c-aac7-b746c3041a20",
+    "status": "incoming",
+    "points": "8",
+    "priority": "P1",
+    "write_id": "1792031433226-0.p1esqwpzkb50pasuu3",
+    "note": "write-id is native correlation, event/id remains separate"
+  },
+  "source_inputs": [
+    {
+      "path": "src/cljs/eta_mu/domain/review.cljc",
+      "bytes": 17886,
+      "sha256": "0088d63b415edaa10b3556cb210b7c8f8c847ea37386816aa372127ceb7bdbea",
+      "immutable_blob_equal": true
+    },
+    {
+      "path": "src/cljs/eta_mu/law/review_invocation.cljc",
+      "bytes": 22762,
+      "sha256": "51e22d5045899f3844503f46289c2742f18bec68924ecb13ce851cacde466b41",
+      "immutable_blob_equal": true
+    },
+    {
+      "path": "src/cljs/eta_mu/domain/review_invocation.cljc",
+      "bytes": 1219,
+      "sha256": "1f5d91c284cdaa6577dfdce58ec32cfd97902c6e316da475ab1d96699d42e9bd",
+      "immutable_blob_equal": true
+    },
+    {
+      "path": "src/cljs/eta_mu/extern/review_invocation.cljs",
+      "bytes": 16150,
+      "sha256": "18eaca244107dcde173434e5c71d5dddbe15be998021995eaf4a2706fb118117",
+      "immutable_blob_equal": true
+    },
+    {
+      "path": "src/cljs/eta_mu/infra/review_pipeline.cljs",
+      "bytes": 7855,
+      "sha256": "7ec36607adfdb633d8628410c85ca665772231431edbca93716209041640182f",
+      "immutable_blob_equal": true
+    },
+    {
+      "path": ".ημ/plugins/review_pipeline.cljs",
+      "bytes": 6787,
+      "sha256": "5c42f14ec4388cb900e41a01a053ad98cc23b77571d1b45fbf5e98fe57175f69",
+      "immutable_blob_equal": true
+    },
+    {
+      "path": ".ημ/review/evidence-review.md",
+      "bytes": 4640,
+      "sha256": "ccd3e7356984ddaf865f405f2fbcdc6e96ff048c35eda73470df68cdfc5d4e94",
+      "immutable_blob_equal": true
+    },
+    {
+      "path": ".ημ/config/opencode/agents/github-reviewer.md",
+      "bytes": 11090,
+      "sha256": "9549140ee8678851bd019baa4c8743927575dd812a12cd9064e5c5a18294dc14",
+      "immutable_blob_equal": true
+    }
+  ],
+  "host_inspection": {
+    "assessor": "McClintock read-only agent01a13d58-2934-7c51-b638-e2e1ff3ae7ee",
+    "opencode_actual_consumer": "1.18.31",
+    "eta_default": "1.18.18",
+    "default_tool_output_max_utf8_bytes": 51200,
+    "default_tool_output_max_lines": 2000,
+    "effective_overrides": "UNKNOWN; establish before qualification",
+    "new_batch_limits": "UNSELECTED; measure complete serialized compiled output and request limits",
+    "binary_sha256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+    "truncator_range": [
+      97009810,
+      97012295
+    ],
+    "truncator_sha256": "465d93fe931e5daf859f09eb96542fdff20da5539d2b17d28ccba55cb929d5f4",
+    "credit": "source inspection only; no batch execution, coverage, model understanding, approval or throughput guarantee"
+  },
+  "proposed_owner_allocations": {
+    "Muse": 8,
+    "ETA": 2,
+    "OpenPlanner": 1,
+    "adoption": "provisional; source readiness/current review and separate consumer cards required"
+  },
+  "constraints": [
+    "single invocation; no continuation",
+    "no timeout-only increase/input exclusions",
+    "no credentials/paid model/runtime changes",
+    "heartbeat stays human-paused",
+    "live B1/B2/B3 remain0of3"
+  ]
+}
