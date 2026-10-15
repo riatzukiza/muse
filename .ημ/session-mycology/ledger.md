@@ -485,3 +485,13 @@
   spore: none
   receipt-refs: cephalon-batching-discovery-split-and-compiled-custody-plan-20261015
   note: Verified six Codex findings repaired without expanding the authorized prerequisite. Unknown effective host/profile sizing is a blocking proposed3-point discovery predecessor; joint source5 consumes its qualified exact artifact and ships API+verifier together. Total proposed Muse8 preserved, parent8 excluded; follow-on ETA2/OpenPlanner1 remain separate proposals. All input/context/five stages/publisher/current-head guards stay mandatory, no continuation/timeout-only/exclusion/paid/credential/runtime/heartbeat change; liveB1/B2/B3 remain0/3. No spore.
+
+- ts: 2026-10-15T03:38:27.391Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-bounded-profile-native-readiness-and-start-20261015
+  note: Planning merged and profile3 is actually InProgress; joint5 remains Incoming until qualified profile Done. New branch codex/bounded-review-host-profile starts at exact planning merge, not stale personal main. Initial CLI/config probe bounds12owned children/30sec each/300sec total,2MiB stdout each,256KiB synthetic fixture/2MiB synthetic total. Initial model/provider calls0; no secrets/config dumps, global plugin publication, host/runtime/sysctl/maker/heartbeat/paid/publication change. Effective limits/wire throughput and B1/B2/B3 remain unproved; no spore.
