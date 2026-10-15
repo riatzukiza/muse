@@ -170,6 +170,26 @@
 (deftest recheck-context-after-awaited-host-observation-before-batch-credit
   (async done (context-await-controls! done)))
 
+(defn- ^:async begin-context-await-control! [done]
+  (let [ctx (fixture! "one immutable page")
+        file (.join path (:evidence ctx) "pr-context.md")]
+    (try
+      (let [changed (assoc ctx :review/observe-host
+                           (partial change-context-during-host-observation! file))
+            result (await (infra/begin! {} changed))]
+        (.unlinkSync fs file)
+        (is (false? (:ok? result)))
+        (is (review/restart-required? (state ctx)))
+        (is (not (:begin-pending? (state ctx))))
+        (is (= #{} (:delivered-chunks (state ctx))))
+        (is (= {} (:assessed-chunks (state ctx))))
+        (is (false? (:ok? (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))))))
+      (catch :default error (is false (.-message error)))
+      (finally (clean! ctx) (done)))))
+
+(deftest recheck-context-after-begin-host-await-before-completing-admission
+  (async done (begin-context-await-control! done)))
+
 (deftest host-fingerprint-binds-the-profile-settings-and-selectors
   (let [env #js {:HOME "/owned" :OPENCODE_CONFIG "/owned/config.json"}
         observe #(wire/host-observation batch/host-binary-sha256 % env "/owned/consumer")

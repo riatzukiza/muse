@@ -715,3 +715,13 @@
   spore: none
   receipt-refs: muse-pr12-primary-batch-workflow-postawait-custody-and-success-shape-green-20261015
   note: Primary instructions now explicitly choose exposed qualified batch/single/mixed rather than contradictory single-only flow. Infra observes context after host await before existing shared pure admission and mutation; pure verifier requires literal false success metadata for both batch tools. Retain complete original pages, separate assessments, real call IDs/memberships, all context/source/LAST/five-stage/actual-submit/publisher guards and legacy route. New native diagnostic is scripted localhost, no LLM/review/approval/round/live credit. Grouped current source must be pushed/reviewed once; no approval transfer or paid quota bypass, duplicate pending review or provider cancellation. GoalACTIVE heartbeat humanPAUSED live0/3; no continuation/timeout/model/credentials/global runtime/owner/deployment/publication/spore change.
+
+- ts: 2026-10-15T13:42:38.993Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-begin-host-await-causal-red-20261015
+  note: Actual new begin-await test fails before corresponding production change. Three failed assertions show begin succeeds, no restart latch is retained, and a subsequent read succeeds after context restoration. Delivery and assessment stay empty at the failed admission boundary. Existing batch-await guards remain intact. This is an existing approved context custody obligation. No review/approval/live credit, runtime/model/credential/deployment/heartbeat/spore change; live0/3 and humanPAUSEDheartbeat.
