@@ -1,0 +1,339 @@
+{
+  "schema": "muse.review-host-wire-profile/v1",
+  "tier": "observed isolated native-host controls plus derived compiled-wire projection; independently reviewed artifact required, not provider approval",
+  "generatedAt": "2026-10-15T03:55:29.380655+00:00",
+  "task": "95efe284-754b-4c4c-9a5e-b55b0c3d5d0e",
+  "profile": {
+    "id": "muse-review-batch-profile/2026-10-15-candidate-v1",
+    "response_bytes": 48000,
+    "response_lines": 1,
+    "max_pages": 4,
+    "request_bytes": 16384,
+    "note_utf8_bytes": 2048,
+    "host_bytes": 51200,
+    "host_lines": 2000,
+    "source": "candidate measurement, not production API; historical GHA effective settings unknown"
+  },
+  "source": {
+    "muse": "a9a62f0d509056406f3dd7d8c86a13551be168cd",
+    "eta": "e4fb01ff056f9ac823b2b9659e6bc25ac7fea1f2",
+    "opencode": "1.18.31",
+    "base": "f95a53a4da8ed90588b0be320ba8e86c6a03668d",
+    "head": "3ab5ffbb6e34a2ee3607a74bf421785d47d5391d",
+    "files": 150,
+    "bytes": 11840401,
+    "sha256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+    "independentGitEqualsArtifact": true,
+    "originalPages": 1491,
+    "originalGeometry": "exact compiled 8192 UTF16 /128-line; unchanged"
+  },
+  "projection": {
+    "baselineReadCalls": 1491,
+    "baselineAssessmentCalls": 1491,
+    "batchReadCalls": 375,
+    "batchAssessmentCalls": 375,
+    "baselineCalls": 2982,
+    "batchCalls": 750,
+    "multiPageGroups": 375,
+    "maxMembership": 4,
+    "maximumMeasuredResponse": 47820,
+    "maximumSyntheticRegularRequest": 1010,
+    "reductionPercent": 74.84909456740442,
+    "notThroughputOrCompletionProof": true
+  },
+  "candidateWireContract": {
+    "response": "ok?, chunks(original id,start,end,text + SHA256), input-source, full worst-case coverage/missing, batch IDs/first/last/next/profile, custody source/base/head/profile/128-byte session",
+    "assessment": "ordered vector of original id/start/end/digest and separate nonblank bounded note; profile/source binding; canonical native call/part/event membership retained by verifier; no fabricated per-page events",
+    "read": "only whole-page consecutive prefix selected before delivery mutation",
+    "assessment_atomicity": "all submitted members or refusal; no prefix fallback",
+    "effectiveSettings": "future consumer must capture allowlisted resolved settings/provenance; unknown/different profile refuses before review effects",
+    "capacity": "locally enforceable request shape/serialized bytes only; selected real provider maximum UNKNOWN"
+  },
+  "responseLimits": {
+    "exact": {
+      "bytes": 48000,
+      "lines": 1,
+      "sha256": "ab13aff84f44a6a7517f6a112a811c523e12d5129e1ac1874c078fd13445d377"
+    },
+    "oneOver": {
+      "bytes": 48001,
+      "lines": 1,
+      "sha256": "473e78eebd13e34a9d9220de77bebf6d8cd3779c45bc69b8a0ddb0ade2d80be6"
+    }
+  },
+  "requestCases": {
+    "exactBytes": {
+      "bytes": 16384,
+      "lines": 1,
+      "sha256": "f5455f6e1c271a53ace4701ce7469e1fbf2d1baea2aa6ea86e736e93a17e3888"
+    },
+    "oneOverBytes": {
+      "bytes": 16385,
+      "lines": 1,
+      "sha256": "3466dcd85abe9ece0c10050509db0463ce8d97695e5fc582c24ab5989a4f103e"
+    },
+    "exactNote": {
+      "bytes": 8832,
+      "lines": 1,
+      "sha256": "217c63613aa98eb3fa0fbd97cf59b186f816029c618fc5fb280c7ecc4465daea"
+    },
+    "oneOverNote": {
+      "bytes": 8836,
+      "lines": 1,
+      "sha256": "ea2702e1b0679df3a6a894e8adc04386aa8ff90eddd072c1bad38f5b0fe6b879"
+    },
+    "maxEscapedNotes": {
+      "bytes": 49792,
+      "lines": 1,
+      "sha256": "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
+    },
+    "exactCardinality": 4,
+    "oneOverCardinality": 5,
+    "policy": "candidate mathematical/schema controls only; production request guard not yet implemented; >16384 bytes or >4 members or any >2048-byte note refuses entire vector"
+  },
+  "vectors": [
+    {
+      "name": "unicode",
+      "inputBytes": 17,
+      "inputSHA256": "76f40eddec73b29366c155b48e6e2b6c33cb11f4c5092ff0f03d7f3e2fc3991f",
+      "pages": 1,
+      "wire": {
+        "bytes": 7409,
+        "lines": 1,
+        "sha256": "4afc200455ed8d07ca2f147b1215af0096ca639aae8c8a522124009e5c69eb1e"
+      }
+    },
+    {
+      "name": "escaping",
+      "inputBytes": 6,
+      "inputSHA256": "cf09b6562e69a7379472474834ce188da27a9e275ec27d1ed4c4b84a67b7ffc1",
+      "pages": 1,
+      "wire": {
+        "bytes": 7408,
+        "lines": 1,
+        "sha256": "e61a968cc47dbbce16fb5859d9fcb3880d9e057d8e2ab36e1d77f1f080cde9ac"
+      }
+    },
+    {
+      "name": "long-line",
+      "inputBytes": 8192,
+      "inputSHA256": "91a87117670aa06f604c6c6bf4359e82d09cf581606ce8ca4da87d88ad6268bc",
+      "pages": 1,
+      "wire": {
+        "bytes": 15587,
+        "lines": 1,
+        "sha256": "576ef43a64b285cc30e8834d5eef907d1267387b3091362de841f75a71121806"
+      }
+    },
+    {
+      "name": "surrogate-boundary",
+      "inputBytes": 8199,
+      "inputSHA256": "03e039186ef1c2a1e3519daff49a7ce01f407f32f4a00707644b0dd0b54acfbc",
+      "pages": 2,
+      "wire": {
+        "bytes": 15715,
+        "lines": 1,
+        "sha256": "b8870b460a7ec9d82ba2f877a4c1e89b80efa43fd5b1067ddc936eba929cbbe5"
+      }
+    }
+  ],
+  "effectiveLimits": {
+    "candidateFixture": {
+      "bytes": 51200,
+      "lines": 2000,
+      "resolved_tool_output": "absent",
+      "provenance": "Actual pinned executable debug config under constructed empty HOME/XDG/managed directories, exact selected staged config, fixture-only provider/plugin. Pinned immutable default source plus actual exact/one-over controls independently establish thresholds.",
+      "resolvedRawSHA256": "a3349d3fc942d65ba65517bf08c431981582b3bc1eb656503a152b0cf4da3d39",
+      "proofSHA256": "ca6ab1b8179092939fa29e98e56fff816d2458dc4c157badaa94df6cf940a7c5",
+      "sourcePrecedence": "Pinned Config.get merge order retained in source-discovery and source assessment; actual resolved value controls, no copied config alone treated as effective."
+    },
+    "historicalGHA": "UNKNOWN; no retained merged-config dump. This artifact does not retroactively establish old run settings.",
+    "consumerAdmission": "Joint/ETA must capture actual selected executable and allowlisted resolved byte/line values with selector/source digests before batch effects; require same qualified profile (51200/2000). Unknown/inaccessible/changed limits refuse qualification and coverage. No host-limit changes included."
+  },
+  "requestCapacity": {
+    "localNative16KiB": "Actual pinned host accepted exact16384-byte four-member tool args through bundled OpenAI-compatible SDK and local fixed synthetic SSE; one-over16385 also parsed but fixture rejected entire vector. See native-controls.json.",
+    "providerMaximum": "UNKNOWN. No real model/provider invoked. Locally enforced request bound and synthetic transport do not prove actual free MiMo provider capacity or availability. Genuine full-input downstream review remains required.",
+    "nativeFixtureCaveat": "Synthetic fixture result sha256:null is not digest evidence. Independent actual native state.input JSON byte/hash readback matches expected source for both exact/over arguments; actual stdout hashes retained."
+  },
+  "nativeControls": "native-controls.json",
+  "nativeReadbackChecks": [
+    {
+      "source": "native-boundary",
+      "tool": "profile_bytes_exact",
+      "nativeCallID": "profile-owned-0",
+      "nativePartID": "prt_13dacc4e4001gQYGlJQvo2Tfst",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": "not an assessment request"
+    },
+    {
+      "source": "native-boundary",
+      "tool": "profile_lines_exact",
+      "nativeCallID": "profile-owned-2",
+      "nativePartID": "prt_13dacc4f8001fL1LNgY1WaTEFQ",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": "not an assessment request"
+    },
+    {
+      "source": "native-boundary",
+      "tool": "profile_bytes_over",
+      "nativeCallID": "profile-owned-1",
+      "nativePartID": "prt_13dacc4ee001vL32n5GS6hoDWE",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": "not an assessment request"
+    },
+    {
+      "source": "native-boundary",
+      "tool": "profile_lines_over",
+      "nativeCallID": "profile-owned-3",
+      "nativePartID": "prt_13dacc4fe001JrusUk5RcFdIyO",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": "not an assessment request"
+    },
+    {
+      "source": "native-request",
+      "tool": "profile_request_exact",
+      "nativeCallID": "profile-owned-0",
+      "nativePartID": "prt_13db050a3001ZrDjqJUHN2CXYH",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": true
+    },
+    {
+      "source": "native-request",
+      "tool": "profile_request_over",
+      "nativeCallID": "profile-owned-1",
+      "nativePartID": "prt_13db050b8001FM1IUu1bYj7ozg",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": true
+    }
+  ],
+  "fixtureRecipes": [
+    {
+      "name": "native-boundary-probe.mjs",
+      "bytes": 6450,
+      "sha256": "5c5342da073a7525b46346a980d1559bb039252232aab82c2d05626fa6376570",
+      "privatePath": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/openplanner-context-consumer-20261014/continuation-20261014T2234/profile3-owned-dcf832c7-9945-455f-9348-8e1ab8b4fc39/native-boundary-probe.mjs",
+      "kind": "actual owned diagnostic fixture source, not production/runtime authority"
+    },
+    {
+      "name": "native-request-probe.mjs",
+      "bytes": 8059,
+      "sha256": "c4601d82e72fe091c95f04dd7602949246bb3d4d3d02fbbe625d050e603a93b1",
+      "privatePath": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/openplanner-context-consumer-20261014/continuation-20261014T2234/profile3-owned-dcf832c7-9945-455f-9348-8e1ab8b4fc39/native-request-probe.mjs",
+      "kind": "actual owned diagnostic fixture source, not production/runtime authority"
+    },
+    {
+      "name": "measure-qualified-wire.mjs",
+      "bytes": 8579,
+      "sha256": "8b8f7141e9ed83173a88657d41bf3df43628356df7cd0f134f9af6b3224b7b5a",
+      "privatePath": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/openplanner-context-consumer-20261014/continuation-20261014T2234/profile3-owned-dcf832c7-9945-455f-9348-8e1ab8b4fc39/measure-qualified-wire.mjs",
+      "kind": "actual owned diagnostic fixture source, not production/runtime authority"
+    },
+    {
+      "name": "qualified-serializer-profile.mjs",
+      "bytes": 2309985,
+      "sha256": "c4dbf325d4854b28c370ab11d016614eb550d1ab0e8560b8128bee2cb1982dd4",
+      "privatePath": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/openplanner-context-consumer-20261014/continuation-20261014T2234/profile3-owned-dcf832c7-9945-455f-9348-8e1ab8b4fc39/qualified-serializer-profile.mjs",
+      "kind": "actual owned diagnostic fixture source, not production/runtime authority"
+    },
+    {
+      "name": "native-boundary-fixture.mjs",
+      "bytes": 114732,
+      "sha256": "040156832bbdf2a83a23bd61b5f7ba6fb8f5895751dab1cbcba405e8a0998261",
+      "privatePath": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/openplanner-context-consumer-20261014/continuation-20261014T2234/profile3-owned-dcf832c7-9945-455f-9348-8e1ab8b4fc39/native-boundary-fixture.mjs",
+      "kind": "actual owned diagnostic fixture source, not production/runtime authority"
+    },
+    {
+      "name": "native-request-fixture.mjs",
+      "bytes": 1079,
+      "sha256": "748d6d92ba21be8fe51a4df52a45bb99bf5eb05cd6706020f693f1840399ed89",
+      "privatePath": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/openplanner-context-consumer-20261014/continuation-20261014T2234/profile3-owned-dcf832c7-9945-455f-9348-8e1ab8b4fc39/native-request-fixture.mjs",
+      "kind": "actual owned diagnostic fixture source, not production/runtime authority"
+    },
+    {
+      "name": "measure-qualified-wire-node22.mjs",
+      "bytes": 8593,
+      "sha256": "e4f99fca9e4dff8751205cf2709a4ac5a3468c66dca4e705e8ef4db36e5c5919",
+      "privatePath": "/home/err/.local/share/codex/cephalon-review-artifacts/receipt-river-fixture-20261009/openplanner-context-consumer-20261014/continuation-20261014T2234/profile3-owned-dcf832c7-9945-455f-9348-8e1ab8b4fc39/measure-qualified-wire-node22.mjs",
+      "kind": "explicit selectedNode22.20 replay; outputs byte-identical to initialNode24.14.1 measurement"
+    }
+  ],
+  "primaryHostSource": {
+    "repository": "anomalyco/opencode",
+    "revision": "014614d35b397775e5d397a490fc72368c894ec2",
+    "files": [
+      {
+        "file": "packages_core_src_flag_flag.ts",
+        "bytes": 3298,
+        "sha256": "f387ba5da5b24bb8fa316c8bc32aac778552c7bb199b42ed17adef03714ce6c5"
+      },
+      {
+        "file": "packages_opencode_src_cli_cmd_debug_index.ts",
+        "bytes": 2922,
+        "sha256": "0c44f063daf6779616b3473d9942cb700291c554ac9f7c5f5bd73e0458695b05"
+      },
+      {
+        "file": "packages_opencode_src_cli_cmd_debug_v2.ts",
+        "bytes": 1547,
+        "sha256": "83d25db18d72a95d3c1487c03f84269fa9282f58b1b2fbc70308d8621d9984eb"
+      },
+      {
+        "file": "packages_opencode_src_config_config.ts",
+        "bytes": 27747,
+        "sha256": "87a9071af1ddb04d65947dba49be3fb4c94ecf63e120f17ce46ee81ff25dd45a"
+      },
+      {
+        "file": "packages_opencode_src_plugin_index.ts",
+        "bytes": 11339,
+        "sha256": "47c62b7cfae891d268e6b239edb0f1c46df5cb35eb11ccfd8bd4186c156024e9"
+      },
+      {
+        "file": "packages_opencode_src_provider_provider.ts",
+        "bytes": 80947,
+        "sha256": "77216c71fd0079da036ac25af516a29ee45f58b52e7c63987065ca97583ee364"
+      },
+      {
+        "file": "packages_opencode_src_tool_registry.ts",
+        "bytes": 17374,
+        "sha256": "a8b24a6d58a80c42307e251905dbaa4f25ca0724569b1e531e412da934ab00fe"
+      },
+      {
+        "file": "packages_opencode_src_tool_truncate.ts",
+        "bytes": 6152,
+        "sha256": "d3dc9e7402de74a7652ceb9f7796c970efc4958597b51a94fa264697366ccea5"
+      }
+    ]
+  },
+  "budgetActual": {
+    "isolatedOpenCodeChildren": 8,
+    "syntheticTransportInvocations": 2,
+    "syntheticHTTPRequests": 6,
+    "realModelProviderCalls": 0,
+    "hostOutputProbeMs": 7605,
+    "hostRequestProbeMs": 2662,
+    "perChildLimitMs": 30000,
+    "sourceDiffBytes": 11840401,
+    "sourceDiffIsNotSyntheticFixture": true,
+    "observedBootstrap": "OpenCode initialized package files/dependencies only in the owned XDG config directory; no existing host/global package installation changed.",
+    "cleanup": "Owned fixture retained privately for hash/readback; child processes and local fixture servers terminated after completion. No unrelated cleanup."
+  },
+  "status": {
+    "measurement": "completed for isolated candidate profile",
+    "qualification": "pending owning current-head review and checks",
+    "nativeTask": "InProgress until qualified artifact/source exits",
+    "jointTask": "Incoming; not Ready",
+    "compiledNewBatchAPI": "not implemented or executed",
+    "liveProofs": "0/3",
+    "heartbeat": "human-PAUSED"
+  },
+  "remaining": "Review candidate profile/re-description and actual current source. Complete request shape and native witness validation, actual compiled >=2-page API, mixed-LAST/context/stage/atomic refusals and full owner gates belong joint5. Actual selected free provider maximum remains UNKNOWN.",
+  "hostExecutable": {
+    "version": "1.18.31",
+    "binaryBytes": 185030784,
+    "binarySHA256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+    "archiveSHA256": "6d89da252a8b030d923e728396dc34465cf6095101b78222b0ee337b68140dea",
+    "nativeToolHost": "pinned executable with embedded Bun; no Node daemon/reconfiguration",
+    "wireMeasurementNode": "22.20.0 explicitly invoked; all output bytes equal initial24.14.1 measurement",
+    "localhostFixtureCoordinatorNode": "24.14.1; fixed synthetic SSE, not selected tool host/model",
+    "initialCLIReportSHA256": "290e4d68926adb18778956d1850c36f3508874ec27cd6969f0cc5ade74f7d1bf"
+  }
+}

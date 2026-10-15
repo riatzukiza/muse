@@ -495,3 +495,13 @@
   spore: none
   receipt-refs: cephalon-bounded-profile-native-readiness-and-start-20261015
   note: Planning merged and profile3 is actually InProgress; joint5 remains Incoming until qualified profile Done. New branch codex/bounded-review-host-profile starts at exact planning merge, not stale personal main. Initial CLI/config probe bounds12owned children/30sec each/300sec total,2MiB stdout each,256KiB synthetic fixture/2MiB synthetic total. Initial model/provider calls0; no secrets/config dumps, global plugin publication, host/runtime/sysctl/maker/heartbeat/paid/publication change. Effective limits/wire throughput and B1/B2/B3 remain unproved; no spore.
+
+- ts: 2026-10-15T03:59:10.335Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-bounded-profile-native-controls-compiled-wire-and-corpus-20261015
+  note: Effective candidate51200/2000 observed through actual resolved config plus source/default boundary controls. Historical GHA effective configuration remainsUNKNOWN; future joint/ETA must capture actual selected executable/resolvedlimits/source selectors before effects and refuse unknown/different. General real provider capacity remainsUNKNOWN. New compiled batch API not implemented/executed. Profile artifact/re-description needs owning review before nativeDone/jointReady. All source input/individual assessment/context/five-stage/publisher/once-invocation guards retained. Profile receipt corrects shell Node assumption transparently; synthetic fixture sha256:null supplies no proof, independent actual input hash does. No continuation/paid/realcredentials/live maker/runtime/deployment/publication/heartbeat/spore changes; GoalACTIVE heartbeat humanPAUSED live0/3.

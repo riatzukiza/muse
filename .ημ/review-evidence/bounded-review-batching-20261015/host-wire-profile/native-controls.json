@@ -1,0 +1,293 @@
+{
+  "schema": "muse.observed-native-boundary-controls/v1",
+  "tier": "safe selected transcription from actual owned command-output traces, not raw provider response or production admission",
+  "output": {
+    "schema": "cephalon.native-host-output-boundary/v1",
+    "tier": "actual pinned host with fixed localhost synthetic transport; no model execution or review credit",
+    "version": "1.18.31",
+    "args": [
+      "run",
+      "--model",
+      "profile-fixture/fixed-fixture",
+      "--agent",
+      "profile",
+      "--format",
+      "json",
+      "Fixed synthetic boundary controls only."
+    ],
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "elapsed_ms": 7605,
+    "refusal": null,
+    "stdout": {
+      "bytes": 68232,
+      "sha256": "29d44481e3815fac68cfacf422cef17b45b04096fb2aabae7cab62f596bef9c6"
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "synthetic_requests": 3,
+    "requestProof": [
+      {
+        "path": "/v1/chat/completions",
+        "bytes": 2487,
+        "sha256": "b99ddcea284ca4286d40b2ae7f57ed405b3542eb7273de950d6a323817949e87"
+      },
+      {
+        "path": "/v1/chat/completions",
+        "bytes": 14695,
+        "sha256": "e805db22dfddcdec301e5ec4b5c08b34c74801accda4dd3fbefdb7d3b8c9340c"
+      },
+      {
+        "path": "/v1/chat/completions",
+        "bytes": 80311,
+        "sha256": "42c4424d13910591eeebeb0c8f67b09fe2ef7474da391848de64736c662ca041"
+      }
+    ],
+    "rows": [
+      {
+        "tool": "profile_bytes_exact",
+        "callID": "profile-owned-0",
+        "partID": "prt_13dacc4e4001gQYGlJQvo2Tfst",
+        "status": "completed",
+        "inputBytes": 51200,
+        "inputLines": 1,
+        "inputSHA256": "b100b3001640df908188d88ad8cc4c708c5fd68f70263d3eeb627ae566b6b8e7",
+        "outputBytes": 51200,
+        "outputLines": 1,
+        "outputSHA256": "b100b3001640df908188d88ad8cc4c708c5fd68f70263d3eeb627ae566b6b8e7",
+        "truncated": false,
+        "outputPath": null,
+        "exact": true
+      },
+      {
+        "tool": "profile_lines_exact",
+        "callID": "profile-owned-2",
+        "partID": "prt_13dacc4f8001fL1LNgY1WaTEFQ",
+        "status": "completed",
+        "inputBytes": 3999,
+        "inputLines": 2000,
+        "inputSHA256": "e850fa4111ab14b840aa90f3ce054c3fb1d80d1417325e6ba5c5ca33d2203246",
+        "outputBytes": 3999,
+        "outputLines": 2000,
+        "outputSHA256": "e850fa4111ab14b840aa90f3ce054c3fb1d80d1417325e6ba5c5ca33d2203246",
+        "truncated": false,
+        "outputPath": null,
+        "exact": true
+      },
+      {
+        "tool": "profile_bytes_over",
+        "callID": "profile-owned-1",
+        "partID": "prt_13dacc4ee001vL32n5GS6hoDWE",
+        "status": "completed",
+        "inputBytes": 51201,
+        "inputLines": 1,
+        "inputSHA256": "c4b07faa7bc12f4dd210f7b7d3640855fe19bc7908af77e5a2fa231273e6279d",
+        "outputBytes": 456,
+        "outputLines": 6,
+        "outputSHA256": "2b7692b62e7c4a97e7ddd0f32a71cc3acfb93ae9946efee31bb3214655034f6d",
+        "truncated": true,
+        "outputPath": "owned-private-tool-output/tool_13dacc4f1001hIdVUx7kIzPE81",
+        "exact": false,
+        "retainedOriginalSHA256": "c4b07faa7bc12f4dd210f7b7d3640855fe19bc7908af77e5a2fa231273e6279d"
+      },
+      {
+        "tool": "profile_lines_over",
+        "callID": "profile-owned-3",
+        "partID": "prt_13dacc4fe001JrusUk5RcFdIyO",
+        "status": "completed",
+        "inputBytes": 4001,
+        "inputLines": 2001,
+        "inputSHA256": "2b3f0539d7b20e19374008a3fa1f22d4f04234195c64e3bb4115dcaedffed154",
+        "outputBytes": 4451,
+        "outputLines": 2005,
+        "outputSHA256": "bee5f3dbc5aa47b29e7423291cd1ade7fa4bc330cd271487ddf37de5c7b80820",
+        "truncated": true,
+        "outputPath": "owned-private-tool-output/tool_13dacc5010019XvhSq060W7yFs",
+        "exact": false,
+        "retainedOriginalSHA256": "2b3f0539d7b20e19374008a3fa1f22d4f04234195c64e3bb4115dcaedffed154"
+      }
+    ],
+    "expectedCases": [
+      "profile_bytes_exact",
+      "profile_bytes_over",
+      "profile_lines_exact",
+      "profile_lines_over"
+    ],
+    "effectiveLimits": "not captured yet; absent configured limit uses source defaults in isolated candidate",
+    "historicalGHAEffectiveLimits": "UNKNOWN"
+  },
+  "request": {
+    "schema": "cephalon.native-host-request-boundary/v1",
+    "tier": "actual pinned host with fixed localhost synthetic transport; no model execution or review credit",
+    "version": "1.18.31",
+    "args": [
+      "run",
+      "--model",
+      "profile-fixture/fixed-fixture",
+      "--agent",
+      "profile",
+      "--format",
+      "json",
+      "Fixed synthetic local request transport controls only."
+    ],
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "elapsed_ms": 2662,
+    "refusal": null,
+    "stdout": {
+      "bytes": 35767,
+      "sha256": "fc43bcd111bd2e1972887c1b0574c6727601f3898e2035d4e74b2f2b39f33cd9"
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "synthetic_requests": 3,
+    "requestProof": [
+      {
+        "path": "/v1/chat/completions",
+        "bytes": 2502,
+        "sha256": "8917d4a3020a34cb6f19c7ce4ca2304a2e203611e07d2f0755728dfd86a461c0"
+      },
+      {
+        "path": "/v1/chat/completions",
+        "bytes": 14942,
+        "sha256": "4a9201ce5f3633e29c3c8091168d45435b91b34c34919942a1e09f21ef45d9c5"
+      },
+      {
+        "path": "/v1/chat/completions",
+        "bytes": 54569,
+        "sha256": "85cc1b24103cfde62b291b89ce07cc35973e5f087338e0d607d2f49f5c9952ba"
+      }
+    ],
+    "rows": [
+      {
+        "tool": "profile_request_exact",
+        "callID": "profile-owned-0",
+        "partID": "prt_13db050a3001ZrDjqJUHN2CXYH",
+        "status": "completed",
+        "inputBytes": 16384,
+        "inputLines": 1,
+        "inputSHA256": "9eed4192d5b8ff1d0a9f899bb6645bb21a7023d722174175dc808d51f2e48806",
+        "outputBytes": 145,
+        "outputLines": 1,
+        "outputSHA256": "72e37f922150f82c601db1aec222ea08887b42fe9344ed4d81859f2f342bbbb6",
+        "truncated": false,
+        "outputPath": null,
+        "candidateResult": {
+          "fixture": true,
+          "bytes": 16384,
+          "sha256": null,
+          "members": 4,
+          "noteBytes": [
+            2048,
+            592,
+            12,
+            12
+          ],
+          "candidateAccepted": true,
+          "productionGuardImplemented": false
+        }
+      },
+      {
+        "tool": "profile_request_over",
+        "callID": "profile-owned-1",
+        "partID": "prt_13db050b8001FM1IUu1bYj7ozg",
+        "status": "completed",
+        "inputBytes": 16385,
+        "inputLines": 1,
+        "inputSHA256": "2c5805c96da8105185fb9d7583cc8a0d089a70e4f3f73832b2c59eda441450a3",
+        "outputBytes": 146,
+        "outputLines": 1,
+        "outputSHA256": "06fca845150ea975b3496b48487871580a8c67df20585301b4f222672eadfbae",
+        "truncated": false,
+        "outputPath": null,
+        "candidateResult": {
+          "fixture": true,
+          "bytes": 16385,
+          "sha256": null,
+          "members": 4,
+          "noteBytes": [
+            2048,
+            592,
+            12,
+            13
+          ],
+          "candidateAccepted": false,
+          "productionGuardImplemented": false
+        }
+      }
+    ],
+    "expectedCases": [
+      "profile_request_exact",
+      "profile_request_over"
+    ],
+    "effectiveLimits": "not captured yet; absent configured limit uses source defaults in isolated candidate",
+    "historicalGHAEffectiveLimits": "UNKNOWN"
+  },
+  "effectiveProvenance": {
+    "selectedConfigSHA256": "cc848713b995c981cdc56d2d8af945ec1f256a07ec37215e3d26f21eed7a8f2d",
+    "requestConfigSHA256": "9c2af87e1518c56c4d7dff0f68b1983277ba24703a609089e9dd99badf7e22d1",
+    "actualResolvedRawSHA256": "a3349d3fc942d65ba65517bf08c431981582b3bc1eb656503a152b0cf4da3d39",
+    "tool_output": "absent -> pinned source defaults independently observed by boundary controls",
+    "autoCreatedConfigSHA256": "4e901f9e457c8d52ab31f9fb4ea637a8c9104ebdbf23fe8b3600f35ad46d4a61",
+    "knownSyntheticPlaceholder": "fixture configs contain a synthetic placeholder only; no real credential copied or changed",
+    "historicalGHAEffectiveLimits": "UNKNOWN"
+  },
+  "independentReadback": [
+    {
+      "source": "native-boundary",
+      "tool": "profile_bytes_exact",
+      "nativeCallID": "profile-owned-0",
+      "nativePartID": "prt_13dacc4e4001gQYGlJQvo2Tfst",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": "not an assessment request"
+    },
+    {
+      "source": "native-boundary",
+      "tool": "profile_lines_exact",
+      "nativeCallID": "profile-owned-2",
+      "nativePartID": "prt_13dacc4f8001fL1LNgY1WaTEFQ",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": "not an assessment request"
+    },
+    {
+      "source": "native-boundary",
+      "tool": "profile_bytes_over",
+      "nativeCallID": "profile-owned-1",
+      "nativePartID": "prt_13dacc4ee001vL32n5GS6hoDWE",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": "not an assessment request"
+    },
+    {
+      "source": "native-boundary",
+      "tool": "profile_lines_over",
+      "nativeCallID": "profile-owned-3",
+      "nativePartID": "prt_13dacc4fe001JrusUk5RcFdIyO",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": "not an assessment request"
+    },
+    {
+      "source": "native-request",
+      "tool": "profile_request_exact",
+      "nativeCallID": "profile-owned-0",
+      "nativePartID": "prt_13db050a3001ZrDjqJUHN2CXYH",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": true
+    },
+    {
+      "source": "native-request",
+      "tool": "profile_request_over",
+      "nativeCallID": "profile-owned-1",
+      "nativePartID": "prt_13db050b8001FM1IUu1bYj7ozg",
+      "outputHashMatchesNativeTrace": true,
+      "actualRequestHashMatchesExpected": true
+    }
+  ]
+}
