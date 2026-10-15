@@ -1,0 +1,345 @@
+{
+  "schema": "muse.actual-native-batch-diagnostic/v1",
+  "tier": "actual compiled tools and native host with scripted local SSE; no real model or review credit",
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "refusal": null,
+  "stoppedOnRefusal": false,
+  "elapsedMs": 4968,
+  "requests": 10,
+  "requestProof": [
+    {
+      "bytes": 8711,
+      "sha256": "4ce11b75f9c8b88c84d8cfceca64b53e537ec6f922a6ebb761cd26556a381da6"
+    },
+    {
+      "bytes": 11528,
+      "sha256": "e8e93dabc87812c2b85fa9e299d729bdf1b7ae1256bd78cdc8491c627ae9e71e"
+    },
+    {
+      "bytes": 24278,
+      "sha256": "43288a03beebd08a0e5c5e031d7164215c7f25ee6f0321976174ad29ccd70797"
+    },
+    {
+      "bytes": 25390,
+      "sha256": "4f470abad556fcda17619f6291260365a66bd59d886a8e86c6b409d2d41e5f19"
+    },
+    {
+      "bytes": 25872,
+      "sha256": "184fe203fca9a5509845cc71f33d8c94c231e2952478346394f48ea62b975fa2"
+    },
+    {
+      "bytes": 26351,
+      "sha256": "29095e122abcc0e615cb3d50c30f0f45c5147d1f27bfb82f4052c268f92fdf03"
+    },
+    {
+      "bytes": 26839,
+      "sha256": "f3e4d4405a0d64739d1fd3749522a062b7836159236db27b99cb7cf083d69d3d"
+    },
+    {
+      "bytes": 27328,
+      "sha256": "5c45d905a822d1e7e445b9923d32eaf51cbe99398b1e0e15b16154a4a4bbea90"
+    },
+    {
+      "bytes": 27804,
+      "sha256": "6a004a642fc7ad3d9ae0e8db0624e304951b64a707bc7e3358181ed4cbb51d77"
+    },
+    {
+      "bytes": 28430,
+      "sha256": "485ab828195ed5bdf997269c4973aebb44f2d4cd10b6bf966bec2f6fb5c54c74"
+    }
+  ],
+  "binarySHA256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+  "bundleSHA256": "62015ba81a1ee47aab8e1931c952f779a52378776b25e19bdcd08956bebb4284",
+  "canonicalVerifierSHA256": "4c4a1a88fa04becbd43e5a07e9b2d504c5663d15ce62d99ae925fe22bb470cac",
+  "resolvedConfigSHA256": "6a6d0bbad66600509649c884684330e2f66447742a9536b7264be9eb3d4cb87a",
+  "expectedHost": {
+    "binary-sha256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+    "config-sha256": "6c342206f77390f54d8eddf2caf79cdd4d625eec3a4f87a504d790186d27d1bf",
+    "selectors-sha256": "b5bcb94b60434f26918838c93fc44745c9480406d323c1fc81d2b21c47faf03e",
+    "max-bytes": 51200,
+    "max-lines": 2000
+  },
+  "source": {
+    "kind": "two original real pages as isolated diagnostic source, not the complete150-input review",
+    "fullSourceSHA256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+    "originalHead": "3ab5ffbb6e34a2ee3607a74bf421785d47d5391d",
+    "prefixSHA256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+    "prefixBytes": 10366,
+    "originalPages": [
+      {
+        "id": 1,
+        "start": 0,
+        "end": 4882,
+        "text_utf8_bytes": 4882,
+        "text_sha256": "d7db3ed6779a738be0904f7d2c106093b613a4acdca8898108155272e4b21b84",
+        "single_response": {
+          "bytes": 16527,
+          "lines": 1,
+          "sha256": "1bd44de3d37c54b2b0db55648e0459b17fd49e9d4609a366160bfd75f49a1d44"
+        }
+      },
+      {
+        "id": 2,
+        "start": 4882,
+        "end": 10366,
+        "text_utf8_bytes": 5484,
+        "text_sha256": "434efa776f6dbe98d34264a4b5a9aab3197c6fea8719d2eb2c29e8d552da705e",
+        "single_response": {
+          "bytes": 17172,
+          "lines": 1,
+          "sha256": "e2e2652a0723281eee0c99f49fa95d1aa2c92b57f2dfa0a83e330105916d2b1b"
+        }
+      }
+    ],
+    "tools": [
+      "review_begin",
+      "review_read_diff_chunk",
+      "review_assess_diff_chunk",
+      "review_read_diff_batch",
+      "review_assess_diff_batch",
+      "review_record_evidence",
+      "review_propose_finding",
+      "review_classify_finding",
+      "review_status",
+      "review_submit"
+    ]
+  },
+  "stdout": {
+    "bytes": 29194,
+    "sha256": "258fbe6b0a21450dc7f095e525f2934f7a0b17970cb61c3672ddfed830af6a88"
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "verdict": {
+    "reviewCallCount": 9,
+    "acceptedInvocation": {
+      "sessionID": "ses_ec0fe4f29ffetvQAeEXNCEFl2O",
+      "submissionCallID": "owned-native-batch-8",
+      "submissionPosition": 26,
+      "submissionFile": "/var/tmp/muse-joint5-native-qualified-6bu_d1tc/consumer/.opencode/review-evidence/submission.json",
+      "responseSha256": "258fbe6b0a21450dc7f095e525f2934f7a0b17970cb61c3672ddfed830af6a88",
+      "submissionSha256": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5",
+      "fullInputSha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+      "pageCount": 2
+    },
+    "contextReadCoverage": {
+      "status": "absent",
+      "totalLines": 0,
+      "deliveredLines": 0,
+      "eof": false
+    },
+    "reason": null,
+    "ok": true,
+    "code": "verified-review-invocation",
+    "pageWitnesses": [
+      {
+        "id": 1,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f01b6240011tge6nqfxp00qP",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f01b6240011tge6nqfxp00qP",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 1,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f01b6ca001rQuzGJB0qHmafv",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f01b6ca001rQuzGJB0qHmafv",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      }
+    ],
+    "pageCount": 2,
+    "violations": [],
+    "reasonKind": null,
+    "sessionID": "ses_ec0fe4f29ffetvQAeEXNCEFl2O"
+  },
+  "problem": null,
+  "capture": {
+    "kind": "allowlisted observed projection, not full raw configuration or provider approval",
+    "beforeRawConfigSHA256": "6a6d0bbad66600509649c884684330e2f66447742a9536b7264be9eb3d4cb87a",
+    "afterRawConfigSHA256": "d0af4779a0bbc46980b3e1bb289da1dcdc5581b48afb0c9142955c951c170873",
+    "selectedBefore": {
+      "tool_output": null
+    },
+    "selectedAfter": {
+      "tool_output": null
+    },
+    "canonicalBeforeAfterEqualityActuallyAsserted": true,
+    "completePrivateCaptureRetained": true
+  },
+  "actualCalls": [
+    {
+      "tool": "review_begin",
+      "callID": "owned-native-batch-0",
+      "partID": "prt_13f01b4c70014yzr4eDLvDEfNn",
+      "position": 2,
+      "status": "completed",
+      "outputBytes": 2473,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 2
+    },
+    {
+      "tool": "review_read_diff_batch",
+      "callID": "owned-native-batch-1",
+      "partID": "prt_13f01b6240011tge6nqfxp00qP",
+      "position": 5,
+      "status": "completed",
+      "outputBytes": 11936,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 24
+    },
+    {
+      "tool": "review_assess_diff_batch",
+      "callID": "owned-native-batch-2",
+      "partID": "prt_13f01b6ca001rQuzGJB0qHmafv",
+      "position": 8,
+      "status": "completed",
+      "outputBytes": 246,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 572
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-3",
+      "partID": "prt_13f01b756001k3jaTqqg1crVXD",
+      "position": 11,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 96
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-4",
+      "partID": "prt_13f01b7fc001Uf8Y10i2TwnRjm",
+      "position": 14,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 93
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-5",
+      "partID": "prt_13f01b8b2001I0QTAAZuMhN07Q",
+      "position": 17,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 102
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-6",
+      "partID": "prt_13f01b95a0010aWpj0ZhVQ48lr",
+      "position": 20,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 103
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-7",
+      "partID": "prt_13f01b9dd001FREHhgSbOSKZ5L",
+      "position": 23,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 90
+    },
+    {
+      "tool": "review_submit",
+      "callID": "owned-native-batch-8",
+      "partID": "prt_13f01ba6f001oWDu4F2lZa8Wn5",
+      "position": 26,
+      "status": "completed",
+      "outputBytes": 283,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 98
+    }
+  ],
+  "sourceFiles": {
+    "deps.edn": "8eabd65ea41db900deb987c445c31f03615a2a36928bb6818c778783e28a2be5",
+    "shadow-cljs.edn": "409203bc5f8214710cea01f979141806805169eef374ade54fda406289d476fa",
+    "src/clj/eta_mu/opencode/build.clj": "96008881199a5df5d9aa27200c79e0ca64536c8e84a634692abc111a19fa7c50",
+    ".ημ/plugins/review_pipeline.cljs": "8427e37e4b88d8b9d18e0611c6251b0103eaf061f389a0e72347b25e1531dd87",
+    "src/cljs/eta_mu/boundaries/opencode.cljs": "06a980346494b4fc7aac585d62a44082b72089d01cf59b16a70b6284c999e738",
+    "src/cljs/eta_mu/domain/review.cljc": "0db08df768c86921f81e7500d87cdb4913660ca98b8a4ec03c217f27669ecfba",
+    "src/cljs/eta_mu/law/review_batch.cljc": "8d0493e663cb8f3e5d46c932c6b0a72ff7d805fa43e549480af14e4e2dc5607c",
+    "src/cljs/eta_mu/law/review_invocation.cljc": "a9e64cfdf8bdff20a8881fe43505281a61fd88d3582ef9c0fc854a32410f6850",
+    "src/cljs/eta_mu/shape/review_batch.cljc": "6ba8fcf87ad34faa7817e48d52f33af2520e42f188209109e317818b7902db8e",
+    "src/cljs/eta_mu/extern/review_batch.cljs": "763c092e992de56c8c749cba227326ee6f467bd4d2563526805b2484c4315cec",
+    "src/cljs/eta_mu/extern/review_invocation.cljs": "e8cf71de568f8f638cfaedc2a8a8cd98ba3fd98c348959cc8d0ec628794188e4",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "25257b422c3fe73b0f740f0a6fb76d414d1c6747f9565059725bc9d0aeab77f5"
+  },
+  "evidenceFiles": {
+    "native.jsonl": {
+      "bytes": 29194,
+      "sha256": "258fbe6b0a21450dc7f095e525f2934f7a0b17970cb61c3672ddfed830af6a88"
+    },
+    "submission.json": {
+      "bytes": 1434,
+      "sha256": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5"
+    },
+    "input.diff": {
+      "bytes": 10366,
+      "sha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9"
+    },
+    "input-manifest.json": {
+      "bytes": 585,
+      "sha256": "43f8a85317d3f487b76be716e751bf3364d1bd7eea2b5a34ec9a083f48d51d4a"
+    }
+  },
+  "priorFailures": [
+    "Attempt1 used compiler module rather than generated plugin entry: native unavailable-tool failure; no accepted invocation. Exact raw bytes/recipe retained privately.",
+    "Attempt2 generated-entry tools completed but independent whole-config fingerprint disagreed; no accepted verifier. Raw configuration hashes were not replaced with producer claims. Both observed51200/2000 and binary/selectors matched; current fingerprint binds allowlisted tool_output plus executable and selectors."
+  ]
+}

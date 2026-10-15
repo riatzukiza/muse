@@ -53,6 +53,16 @@
   {:profile batch/profile :source_sha256 (get-in read [:custody :source_sha256])
    :assessments (mapv #(assoc (select-keys % [:id :start :end :sha256]) :note note) (:chunks read))})
 
+(defn exact-request [request]
+  (let [padded (reduce (fn [r i]
+                         (let [remaining (- 16384 (wire/utf8-bytes (wire/encode r)))
+                               note (get-in r [:assessments i :note])
+                               n (min (quot remaining 6) (- 2048 (wire/utf8-bytes note)))]
+                           (update-in r [:assessments i :note] str (apply str (repeat n "\u0000")))))
+                       request (range (count (:assessments request))))
+        remaining (- 16384 (wire/utf8-bytes (wire/encode padded)))]
+    (update-in padded [:assessments 3 :note] str (apply str (repeat remaining "x")))))
+
 (defn- ^:async run-controls! [done]
   (try
     (let [exact (exact-response-text)]
@@ -76,21 +86,47 @@
           (is (= 2 (get-in result [:batch :next-id])))
           (is (= #{1} (:delivered-chunks (state ctx)))))
         (finally (clean! ctx))))
-    (doseq [overflow? [false true]]
+    (doseq [mode [:regular :exact :one-over :escaped]]
       (let [ctx (fixture! (apply str (repeat (* 4 8192) "x")))]
         (try
           (await (infra/begin! {} ctx))
           (let [read (decode (await (infra/read-diff-batch! {:first-id 1 :count 4} ctx)))
-                escaped (assessments read (apply str (repeat 2048 "\u0000"))) ]
+                escaped (assessments read (apply str (repeat 2048 "\u0000")))
+                exact (exact-request (assessments read "Page-specific scripted fixture"))
+                overflow? (contains? #{:one-over :escaped} mode)]
             (is (= [1 2 3 4] (get-in read [:batch :ids])))
             (is (> (wire/utf8-bytes (wire/encode escaped)) 16384))
-            (let [args (if overflow? escaped (assessments read "A separate scripted per-page custody note"))
+            (is (= 16384 (wire/utf8-bytes (wire/encode exact))))
+            (let [args (case mode :escaped escaped :exact exact
+                            :one-over (update-in exact [:assessments 3 :note] str "x")
+                            (assessments read "A separate scripted per-page custody note"))
                   result (decode (await (infra/assess-diff-batch! args ctx)))]
               (is (= (not overflow?) (:ok? result)))
               (if overflow?
                 (do (is (= {} (:assessed-chunks (state ctx))))
                     (is (= #{1 2 3 4} (:delivered-chunks (state ctx)))))
                 (is (= [] (get-in result [:coverage :missing]))))))
+          (finally (clean! ctx)))))
+    (doseq [note [(apply str (repeat 512 "😀")) (str (apply str (repeat 512 "😀")) "x")]]
+      (let [ctx (fixture! "one page")]
+        (try
+          (await (infra/begin! {} ctx))
+          (let [read (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))
+                result (decode (await (infra/assess-diff-batch! (assessments read note) ctx)))
+                accepted? (= 2048 (wire/utf8-bytes note))]
+            (is (= accepted? (:ok? result)))
+            (is (= (if accepted? 1 0) (count (:assessed-chunks (state ctx))))))
+          (finally (clean! ctx)))))
+    (doseq [[session accepted?] [[(apply str (repeat 64 "é")) true]
+                               [(str (apply str (repeat 64 "é")) "x") false]
+                               [(str (apply str (repeat 21 "\u0000")) "xx") true]
+                               [(str (apply str (repeat 21 "\u0000")) "xxx") false]]]
+      (let [ctx (assoc (fixture! "one page") :session/id session)]
+        (try
+          (await (infra/begin! {} ctx))
+          (let [result (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))]
+            (is (= accepted? (:ok? result)))
+            (is (= (if accepted? #{1} #{}) (:delivered-chunks (state ctx)))))
           (finally (clean! ctx)))))
     (catch :default error (is false (.-message error)))
     (finally (done))))

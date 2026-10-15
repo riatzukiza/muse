@@ -31,8 +31,15 @@
 
 (defn read-response [session result fields]
   (let [members (:chunks result) ids (mapv :id members)]
-    (merge fields
-           {:ok? true :restart-required? false :chunks members :input-source (source session)
+    ;; The qualified profile captured observation.source before observation.status.
+    ;; Normalize that same data at this wire morphism; do not silently change
+    ;; the retained profile's serialized bytes or weaken the byte comparison.
+    (merge (array-map :context-protocol (:context-protocol fields)
+                      :context-observation (array-map :source (get-in fields [:context-observation :source])
+                                                       :status (get-in fields [:context-observation :status]))
+                      :context-source (:context-source fields)
+                      :restart-required? false)
+           {:ok? true :chunks members :input-source (source session)
             :coverage (:coverage result)
             :batch {:ids ids :first-id (first ids) :last-id (last ids)
                     :next-id (when (< (last ids) (count (:diff-chunks session))) (inc (last ids)))

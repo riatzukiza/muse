@@ -14,6 +14,11 @@ const verifier = createRequire(import.meta.url)(modulePath);
 assert.equal(typeof verifier.prepareReviewInvocationContext, 'function');
 assert.equal(typeof verifier.verifyReviewInvocation, 'function');
 assert.equal(typeof verifier.classifyLengthEndedReview, 'function');
+assert.equal(typeof verifier.prepareReviewBatchHost, 'function');
+assert.throws(() => verifier.prepareReviewBatchHost(process.execPath, Buffer.from('{}'), {}, repo),
+  /unsupported batch host/, 'An unrelated executable cannot establish the selected host profile');
+assert.throws(() => verifier.prepareReviewBatchHost('/unavailable-owned-fixture', Buffer.from('[]'), {}, repo),
+  /unsupported batch host/, 'Missing binary/config capture stays unavailable');
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const stages = ['deterministic', 'map-change', 'generate-candidates', 'adversarial-validate', 'publish'];
 const tools = ['review_begin', 'review_read_diff_chunk', 'review_assess_diff_chunk',

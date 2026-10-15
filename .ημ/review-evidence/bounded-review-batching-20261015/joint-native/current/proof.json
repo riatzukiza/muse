@@ -1,0 +1,352 @@
+{
+  "schema": "muse.actual-native-batch-diagnostic/v1",
+  "tier": "actual compiled tools and native host with scripted local SSE; no real model or review credit",
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "refusal": null,
+  "stoppedOnRefusal": false,
+  "elapsedMs": 6222,
+  "requests": 10,
+  "requestProof": [
+    {
+      "bytes": 8713,
+      "sha256": "6fa64595522b1b64813a13d6c1080a51dd907d8dded6e6ecbe6f68c3b5d46be8"
+    },
+    {
+      "bytes": 11530,
+      "sha256": "89625b93370e3d8ea60b4d3884769a516d713b62207b7c883d241a7139d32f2f"
+    },
+    {
+      "bytes": 24280,
+      "sha256": "87ff7fb2d67c0781d66de39c5a7b24b6b756c55228c81c64c529231925104b3f"
+    },
+    {
+      "bytes": 25392,
+      "sha256": "8289ebd2099c851c85b79f232a9d755183ae8d768459424a59d9647001ed9c2d"
+    },
+    {
+      "bytes": 25874,
+      "sha256": "d2ae497bb03ef90361b192c639669ce2184d6034c91d1d85b3d829aa36c8237a"
+    },
+    {
+      "bytes": 26353,
+      "sha256": "960598fd012901569881bc917a8579f87e882764ed1c366dc2934a0277ebde82"
+    },
+    {
+      "bytes": 26841,
+      "sha256": "c031135e89695efeeb47bc74a592182a259828cf2daeae1002c88e7dff643006"
+    },
+    {
+      "bytes": 27330,
+      "sha256": "102eb6e4b7bd12f41e6c826f86f49b1331be16af2a221fcce9c4106dc8ef4110"
+    },
+    {
+      "bytes": 27806,
+      "sha256": "9889cfd91086547d0645b333deb276afc026559cf8193a021b7afa82701f6d49"
+    },
+    {
+      "bytes": 28433,
+      "sha256": "95b9ad4d3d8f414f6e98605d5283a656b7de0ca408668b5de9cd1dea2c047f3a"
+    }
+  ],
+  "binarySHA256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+  "bundleSHA256": "7ba22925eb7a1065dcabe967f367e0e5b4ff2025730b2db0537747ae4a3a48ca",
+  "canonicalVerifierSHA256": "4c4a1a88fa04becbd43e5a07e9b2d504c5663d15ce62d99ae925fe22bb470cac",
+  "resolvedConfigSHA256": "48063563a9224c5cdd4f5272567921f94cb84ed4bf67fdcbdfb5bf749bab8182",
+  "expectedHost": {
+    "binary-sha256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+    "config-sha256": "6c342206f77390f54d8eddf2caf79cdd4d625eec3a4f87a504d790186d27d1bf",
+    "selectors-sha256": "383ac97b9efb094ba4e0d7991d05ad58cee26b9526a7ce9569af33d01898598f",
+    "max-bytes": 51200,
+    "max-lines": 2000
+  },
+  "source": {
+    "kind": "two original real pages as isolated diagnostic source, not the complete150-input review",
+    "fullSourceSHA256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+    "originalHead": "3ab5ffbb6e34a2ee3607a74bf421785d47d5391d",
+    "prefixSHA256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+    "prefixBytes": 10366,
+    "originalPages": [
+      {
+        "id": 1,
+        "start": 0,
+        "end": 4882,
+        "text_utf8_bytes": 4882,
+        "text_sha256": "d7db3ed6779a738be0904f7d2c106093b613a4acdca8898108155272e4b21b84",
+        "single_response": {
+          "bytes": 16527,
+          "lines": 1,
+          "sha256": "1bd44de3d37c54b2b0db55648e0459b17fd49e9d4609a366160bfd75f49a1d44"
+        }
+      },
+      {
+        "id": 2,
+        "start": 4882,
+        "end": 10366,
+        "text_utf8_bytes": 5484,
+        "text_sha256": "434efa776f6dbe98d34264a4b5a9aab3197c6fea8719d2eb2c29e8d552da705e",
+        "single_response": {
+          "bytes": 17172,
+          "lines": 1,
+          "sha256": "e2e2652a0723281eee0c99f49fa95d1aa2c92b57f2dfa0a83e330105916d2b1b"
+        }
+      }
+    ],
+    "tools": [
+      "review_begin",
+      "review_read_diff_chunk",
+      "review_assess_diff_chunk",
+      "review_read_diff_batch",
+      "review_assess_diff_batch",
+      "review_record_evidence",
+      "review_propose_finding",
+      "review_classify_finding",
+      "review_status",
+      "review_submit"
+    ]
+  },
+  "stdout": {
+    "bytes": 29195,
+    "sha256": "206882541fb1534c5ad5c1eb115845ca010e948f8df247870fe66eaf6e71724a"
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "verdict": {
+    "reviewCallCount": 9,
+    "acceptedInvocation": {
+      "sessionID": "ses_ec0e23d08ffeGR4bQMRVOCaGJ3",
+      "submissionCallID": "owned-native-batch-8",
+      "submissionPosition": 26,
+      "submissionFile": "/var/tmp/muse-joint5-native-wire-final-9v80k0eq/consumer/.opencode/review-evidence/submission.json",
+      "responseSha256": "206882541fb1534c5ad5c1eb115845ca010e948f8df247870fe66eaf6e71724a",
+      "submissionSha256": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5",
+      "fullInputSha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+      "pageCount": 2
+    },
+    "contextReadCoverage": {
+      "status": "absent",
+      "totalLines": 0,
+      "deliveredLines": 0,
+      "eof": false
+    },
+    "reason": null,
+    "ok": true,
+    "code": "verified-review-invocation",
+    "pageWitnesses": [
+      {
+        "id": 1,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f1dc9ce0016rZVlGoXvac6S8",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f1dc9ce0016rZVlGoXvac6S8",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 1,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f1dcb00001VArx5Hv2EoHbx7",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f1dcb00001VArx5Hv2EoHbx7",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      }
+    ],
+    "pageCount": 2,
+    "violations": [],
+    "reasonKind": null,
+    "sessionID": "ses_ec0e23d08ffeGR4bQMRVOCaGJ3"
+  },
+  "problem": null,
+  "capture": {
+    "kind": "allowlisted observed projection, not full raw configuration or provider approval",
+    "beforeRawConfigSHA256": "48063563a9224c5cdd4f5272567921f94cb84ed4bf67fdcbdfb5bf749bab8182",
+    "afterRawConfigSHA256": "d62c358bfbd8e83ffe574c544e76f6aec6884a7a3d08aadfa8d2fdf6ce195aa4",
+    "selectedBefore": {
+      "tool_output": null
+    },
+    "selectedAfter": {
+      "tool_output": null
+    },
+    "canonicalBeforeAfterEqualityActuallyAsserted": true,
+    "completePrivateCaptureRetained": true
+  },
+  "sourceFiles": {
+    "deps.edn": "8eabd65ea41db900deb987c445c31f03615a2a36928bb6818c778783e28a2be5",
+    "shadow-cljs.edn": "409203bc5f8214710cea01f979141806805169eef374ade54fda406289d476fa",
+    "src/clj/eta_mu/opencode/build.clj": "96008881199a5df5d9aa27200c79e0ca64536c8e84a634692abc111a19fa7c50",
+    ".ημ/plugins/review_pipeline.cljs": "8427e37e4b88d8b9d18e0611c6251b0103eaf061f389a0e72347b25e1531dd87",
+    "src/cljs/eta_mu/boundaries/opencode.cljs": "06a980346494b4fc7aac585d62a44082b72089d01cf59b16a70b6284c999e738",
+    "src/cljs/eta_mu/domain/review.cljc": "0db08df768c86921f81e7500d87cdb4913660ca98b8a4ec03c217f27669ecfba",
+    "src/cljs/eta_mu/law/review_batch.cljc": "8d0493e663cb8f3e5d46c932c6b0a72ff7d805fa43e549480af14e4e2dc5607c",
+    "src/cljs/eta_mu/law/review_invocation.cljc": "a9e64cfdf8bdff20a8881fe43505281a61fd88d3582ef9c0fc854a32410f6850",
+    "src/cljs/eta_mu/shape/review_batch.cljc": "53e21eef95f568e093727782d4294f2e0fd56683dc1d2900d9f1484c476a96ff",
+    "src/cljs/eta_mu/extern/review_batch.cljs": "763c092e992de56c8c749cba227326ee6f467bd4d2563526805b2484c4315cec",
+    "src/cljs/eta_mu/extern/review_invocation.cljs": "e8cf71de568f8f638cfaedc2a8a8cd98ba3fd98c348959cc8d0ec628794188e4",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "25257b422c3fe73b0f740f0a6fb76d414d1c6747f9565059725bc9d0aeab77f5"
+  },
+  "evidenceFiles": {
+    "native.jsonl": {
+      "bytes": 29195,
+      "sha256": "206882541fb1534c5ad5c1eb115845ca010e948f8df247870fe66eaf6e71724a"
+    },
+    "submission.json": {
+      "bytes": 1434,
+      "sha256": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5"
+    },
+    "input.diff": {
+      "bytes": 10366,
+      "sha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9"
+    },
+    "input-manifest.json": {
+      "bytes": 585,
+      "sha256": "43f8a85317d3f487b76be716e751bf3364d1bd7eea2b5a34ec9a083f48d51d4a"
+    }
+  },
+  "actualCalls": [
+    {
+      "tool": "review_begin",
+      "callID": "owned-native-batch-0",
+      "partID": "prt_13f1dc818001v2WLlr1GQvc9ky",
+      "position": 2,
+      "status": "completed",
+      "outputBytes": 2473,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 2
+    },
+    {
+      "tool": "review_read_diff_batch",
+      "callID": "owned-native-batch-1",
+      "partID": "prt_13f1dc9ce0016rZVlGoXvac6S8",
+      "position": 5,
+      "status": "completed",
+      "outputBytes": 11936,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 24
+    },
+    {
+      "tool": "review_assess_diff_batch",
+      "callID": "owned-native-batch-2",
+      "partID": "prt_13f1dcb00001VArx5Hv2EoHbx7",
+      "position": 8,
+      "status": "completed",
+      "outputBytes": 246,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 572
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-3",
+      "partID": "prt_13f1dcbf8001Di2vr1NHNtuObe",
+      "position": 11,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 96
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-4",
+      "partID": "prt_13f1dcc8d001hPP729ojmlKoXQ",
+      "position": 14,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 93
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-5",
+      "partID": "prt_13f1dcd2b001wLaRN47wqK5c9g",
+      "position": 17,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 102
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-6",
+      "partID": "prt_13f1dcdb2001HZ42qO7H6Gj1ue",
+      "position": 20,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 103
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-7",
+      "partID": "prt_13f1dce39001S2IWR4iYcSV6LY",
+      "position": 23,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 90
+    },
+    {
+      "tool": "review_submit",
+      "callID": "owned-native-batch-8",
+      "partID": "prt_13f1dcedd001gMNjEBiNORmzjM",
+      "position": 26,
+      "status": "completed",
+      "outputBytes": 284,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 98
+    }
+  ],
+  "canonicalVerifierStableAcrossCaptures": true,
+  "wireProjection": {
+    "actualProductionScope": "Frozen full150-input/11840401-byte/1491-page source; no model",
+    "groups": 384,
+    "readAndAssessmentCallProjection": 768,
+    "maximumBytes": 47982,
+    "all384SerializedResponseSHA256ExactlyEqualQualifiedProfile": true,
+    "sourcePageGeometryAndTextHashesUnchanged": true,
+    "ownerSuite": "319tests2052assertions0failures0errors0compilerWarnings",
+    "priorFailedComparison": "1failure due to observation object key order; complete old/new first-wire comparison and failed test logs retained; exact byte comparison preserved, not relaxed."
+  }
+}

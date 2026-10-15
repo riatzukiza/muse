@@ -33,10 +33,14 @@
   [binary cfg environment directory]
   (let [selected (:tool_output cfg)
         selectors (mapv (fn [name] [name (aget environment name)]) selector-names)]
-    {:binary-sha256 binary :config-sha256 (sha256 (encode cfg))
-     :selectors-sha256 (sha256 (encode [directory selectors]))
-     :max-bytes (if (contains? selected :max_bytes) (:max_bytes selected) 51200)
-     :max-lines (if (contains? selected :max_lines) (:max_lines selected) 2000)}))
+    (when (and (map? cfg) (or (nil? selected) (map? selected)))
+      ;; CLI/debug and SDK may include different unrelated config projections.
+      ;; The qualified wire profile binds the exact allowlisted output settings;
+      ;; executable/selectors and all invocation/source guards remain separate.
+      {:binary-sha256 binary :config-sha256 (sha256 (encode {:tool_output selected}))
+       :selectors-sha256 (sha256 (encode [directory selectors]))
+       :max-bytes (if (contains? selected :max_bytes) (:max_bytes selected) 51200)
+       :max-lines (if (contains? selected :max_lines) (:max_lines selected) 2000)})))
 
 (defn- ^:async observe-host [client binary directory]
       (try
