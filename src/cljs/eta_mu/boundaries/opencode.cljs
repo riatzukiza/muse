@@ -8,6 +8,7 @@
      tool result  → string | {output, title?, metadata?}
      plugin       → (input) => Promise<Hooks>"
   (:require [eta-mu.dsl.events :as events]
+            [eta-mu.extern.review-batch :as review-batch]
             [eta-mu.dsl.zod :as zod]))
 
 ;; ---------------------------------------------------------------------------
@@ -42,24 +43,25 @@
       out)
     :else (js/JSON.stringify (clj->js result))))
 
-(defn- wrap-execute [handler]
+(defn- wrap-execute [handler observe-host]
   (fn [js-args js-ctx]
-    (-> (js/Promise.resolve (handler (decode-args js-args) (decode-tool-ctx js-ctx)))
+    (-> (js/Promise.resolve (handler (decode-args js-args)
+                                   (assoc (decode-tool-ctx js-ctx) :review/observe-host observe-host)))
         (.then encode-result))))
 
 ;; ---------------------------------------------------------------------------
 ;; Rendering the compiled adapter
 ;; ---------------------------------------------------------------------------
 
-(defn- render-tool [{:keys [description args handler]}]
+(defn- render-tool [{:keys [description args handler]} observe-host]
   #js {:description description
        :args        (zod/args->zod-shape args)
-       :execute     (wrap-execute handler)})
+       :execute     (wrap-execute handler observe-host)})
 
-(defn- render-tools [tools]
+(defn- render-tools [tools observe-host]
   (let [out #js {}]
     (doseq [{:keys [name] :as tool} tools]
-      (unchecked-set out name (render-tool tool)))
+      (unchecked-set out name (render-tool tool observe-host)))
     out))
 
 (defn- wrap-hook
@@ -89,14 +91,14 @@
 
 (defn render-plugin
   "Compiled adapter {:tools [...] :hooks {event fn}} → OpenCode Hooks object."
-  [{:keys [tools hooks]}]
-  (render-hooks-into!
-   #js {:tool (render-tools tools)}
-   hooks))
+  ([adapter] (render-plugin adapter nil))
+  ([{:keys [tools hooks]} observe-host]
+   (render-hooks-into! #js {:tool (render-tools tools observe-host)} hooks)))
 
 (defn activate!
   "Run the adapter's init fns and return what OpenCode expects from a
    plugin function: Promise<Hooks>."
-  [{:keys [inits] :as adapter}]
-  (doseq [init inits] (init))
-  (js/Promise.resolve (render-plugin adapter)))
+  ([adapter] (activate! adapter nil))
+  ([{:keys [inits] :as adapter} host-input]
+   (doseq [init inits] (init))
+   (js/Promise.resolve (render-plugin adapter (review-batch/host-observer host-input)))))

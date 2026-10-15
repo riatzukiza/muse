@@ -3,6 +3,7 @@
   (:require [cljs.test :refer [deftest is]]
             [eta-mu.law.review-batch :as batch]
             [eta-mu.law.review-invocation-test :as fixture]
+            [eta-mu.domain.review :as review]
             [eta-mu.domain.review-invocation :as invocation]))
 
 (def digest (apply str (repeat 64 "a")))
@@ -33,7 +34,7 @@
       (update-in [2 :part :state :output] dissoc :chunk-id)))
 
 (def context (-> fixture/context
-                 (assoc :batch-host host :pages [page])
+                 (assoc :batch-host host :pages [(assoc page :text "diff")])
                  (update :review-tools into ["review_read_diff_batch" "review_assess_diff_batch"])))
 
 (deftest exact-bounds-and-whole-assessment-shape
@@ -69,4 +70,49 @@
                                          {:ok? false :error "refused"})])]]
     (is (false? (:ok? (invocation/verify events fixture/submission context))))))
 
-(cljs.test/run-tests 'eta-mu.law.review-batch-test)
+(defn session []
+  (-> (review/begin (str (apply str (repeat 8191 "x")) "😀" (apply str (repeat 8192 "y"))))
+      (assoc :input-source fixture/manifest)
+      (update :diff-chunks #(mapv (fn [p] (assoc p :sha256 digest)) %))))
+
+(deftest whole-prefix-final-partial-and-atomic-assessment
+  (let [s (session) request {:first-id 1 :count 4}
+        candidates (review/batch-candidates s request)
+        ids (mapv :id (last candidates))
+        read (review/read-diff-batch s request ids)
+        notes (mapv #(assoc (select-keys % [:id :start :end :sha256]) :note (str "Page " (:id %)))
+                    (:diff-chunks s))
+        args {:profile batch/profile :source_sha256 (get-in fixture/manifest [:full_diff :sha256])
+              :assessments notes}
+        assessed (review/assess-diff-batch (:session read) args 1000 (vec (repeat (count notes) 6)))]
+    (is (= 3 (count ids)))
+    (is (= [8191 8192 2] (mapv #(count (:text %)) (:diff-chunks s))) "Surrogate pair never split")
+    (is (= (str (apply str (repeat 8191 "x")) "😀" (apply str (repeat 8192 "y")))
+           (apply str (map :text (:chunks read)))))
+    (is (:ok? read))
+    (is (:ok? assessed))
+    (is (= [] (get-in assessed [:coverage :missing])))
+    (doseq [bad [(assoc-in args [:assessments 1 :id] 999)
+                 (assoc-in args [:assessments 1 :sha256] (apply str (repeat 64 "f")))
+                 (assoc-in args [:assessments 1 :note] " ")
+                 (update args :assessments conj (first notes))]]
+      (let [result (review/assess-diff-batch (:session read) bad 1000 (vec (repeat (count (:assessments bad)) 6)))]
+        (is (false? (:ok? result)))
+        (is (= {} (get-in result [:session :assessed-chunks])))
+        (is (review/restart-required? (:session result)))))
+    (let [oversized (review/assess-diff-batch (:session read) args 16385 [6 6 6])]
+      (is (false? (:ok? oversized)))
+      (is (= {} (get-in oversized [:session :assessed-chunks]))))
+    (let [late (review/read-diff-batch (:session assessed) request ids)]
+      (is (false? (:ok? late)))
+      (is (= (:assessed-chunks (:session assessed)) (:assessed-chunks (:session late)))))))
+
+(deftest undelivered-and-invalid-prefix-have-no-partial-credit
+  (let [s (session)]
+    (doseq [ids [[1 1] [1 3] [2] [1 2 3 4] []]]
+      (let [result (review/read-diff-batch s {:first-id 1 :count 4} ids)]
+        (is (false? (:ok? result)))
+        (is (= #{} (get-in result [:session :delivered-chunks])))))
+    (is (nil? (review/batch-candidates s {:first-id 1 :count 5})))
+    (is (nil? (review/batch-candidates s {:first-id 999 :count 1})))
+    (is (nil? (review/batch-candidates (review/begin "") {:first-id 1 :count 4})))))

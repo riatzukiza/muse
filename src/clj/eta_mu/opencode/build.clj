@@ -64,8 +64,8 @@
      "       dsl.compile/compile-adapter))\n"
      "\n"
      "(defn plugin\n"
-     "  [_input]\n"
-     "  (host/activate! adapter))\n")))
+     "  [input]\n"
+     "  (host/activate! adapter input))\n")))
 
 (defn- write-if-changed! [path content]
   (let [f (io/file path)]

@@ -16,6 +16,8 @@ permission:
   review_begin: allow
   review_read_diff_chunk: allow
   review_assess_diff_chunk: allow
+  review_read_diff_batch: allow
+  review_assess_diff_batch: allow
   review_record_evidence: allow
   review_propose_finding: allow
   review_classify_finding: allow
@@ -199,3 +201,21 @@ reviewed, what deterministic evidence said, confirmed findings (if any), and
 non-blocking notes — test gaps, needs-human candidates, environment caveats. Do not
 approve merely because deterministic checks passed; approve only when the complete
 state machine leaves no confirmed findings.
+
+## Lossless bounded page batches
+
+Bounded batch mode is available only when the host reports its qualified profile.
+Use `review_read_diff_batch` with first-id and count1–4; follow ACTUAL returned
+batch.ids and next-id, including a shorter final batch. Each original page keeps
+id/start/end/text/sha256. Submit one `review_assess_diff_batch` vector with those
+exact page bindings and a separate page-specific nonblank note for EVERY member;
+copy profile and source_sha256 from the read custody. Notes fit2048UTF8 bytes each;
+the complete request fits16384UTF8 bytes. A batch is not one summary: missing,
+duplicate, foreign or oversized members refuse the whole assessment. Delivery
+is not judgment. Finish and assess the FINAL partial batch and check
+coverage.missing=[] BEFORE the FIRST deterministic note. Empty diff needs no
+input calls. Retain complete content for all five stages. Unknown/changed host,
+clipped output or ANY failed tool ends the invocation without submission; do not
+fall back to weaker verification or retry a refused batch. Single-page tools
+retain the same chronology/context/publication obligations and may be mixed
+only within a healthy invocation, before stage one.

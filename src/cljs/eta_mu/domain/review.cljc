@@ -8,6 +8,7 @@
 
    No I/O lives in this namespace."
   (:require [clojure.string :as str]
+            [eta-mu.law.review-batch :as batch]
             [eta-mu.law.review-context :as context-law]
             [eta-mu.shape.git-diff-path :as diff-path]))
 
@@ -184,6 +185,56 @@
     (err "Assess every diff chunk before recording deterministic evidence; post-stage reassessment is refused.")
     :else {:ok? true :session (assoc-in session [:assessed-chunks id] note)
            :chunk-id id :coverage (input-coverage (assoc-in session [:assessed-chunks id] note))}))
+
+(defn refuse-batch
+  "Refusal latches the invocation while preserving prior coverage atomically."
+  [session message]
+  {:ok? false :error message :restart-required? true
+   :session (assoc session :restart-error (or (:restart-error session) message))})
+
+(defn batch-candidates
+  "Whole consecutive prefixes; measurement/selection must precede mutation."
+  [session request]
+  (when (and (batch/read-valid? request)
+             (<= (:first-id request) (count (:diff-chunks session))))
+    (let [at (dec (:first-id request))
+          end (min (count (:diff-chunks session)) (+ at (:count request)))]
+      (mapv #(subvec (:diff-chunks session) at %) (range (inc at) (inc end))))))
+
+(defn read-diff-batch
+  "Commit one already measured complete prefix. All validation precedes credit."
+  [session request selected-ids]
+  (let [prefixes (batch-candidates session request)
+        members (some #(when (= selected-ids (mapv :id %)) %) prefixes)]
+    (cond
+      (or (restart-required? session) (not= :deterministic (:stage session)))
+      (refuse-batch session "Batch input must precede stage one in a healthy invocation.")
+      (not members) (refuse-batch session "Unknown or malformed complete batch prefix.")
+      (some #(contains? (:assessed-chunks session) (:id %)) (last prefixes))
+      (refuse-batch session "A batch reread followed assessment; start a fresh invocation.")
+      :else (let [next (update session :delivered-chunks into selected-ids)]
+              {:ok? true :session next :chunks members :coverage (input-coverage next)
+               :restart-required? false}))))
+
+(defn assess-diff-batch
+  "Atomic per-page assessment. Wire sizes are independently measured at extern."
+  [session request bytes note-bytes]
+  (let [members (:assessments request)
+        source-sha (get-in session [:input-source :full_diff :sha256])
+        valid-member? (fn [member]
+                        (let [page (get (:diff-chunks session) (dec (:id member)))]
+                          (and (= (select-keys member [:id :start :end :sha256])
+                                  (select-keys page [:id :start :end :sha256]))
+                               (contains? (:delivered-chunks session) (:id member)))))]
+    (cond
+      (or (restart-required? session) (not= :deterministic (:stage session)))
+      (refuse-batch session "Batch assessment must precede stage one in a healthy invocation.")
+      (not (and (batch/assessment-shape? request bytes note-bytes)
+                (= source-sha (:source_sha256 request)) (every? valid-member? members)))
+      (refuse-batch session "Malformed, oversized, mismatched or undelivered batch assessment.")
+      :else (let [next (reduce #(assoc-in %1 [:assessed-chunks (:id %2)] (:note %2)) session members)]
+              {:ok? true :session next :chunk-ids (mapv :id members)
+               :coverage (input-coverage next)}))))
 
 (defn- full-input-error [session]
   (cond

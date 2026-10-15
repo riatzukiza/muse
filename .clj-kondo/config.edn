@@ -3,4 +3,9 @@
            eta-mu.dsl/defplugin         clj-kondo.lint-as/def-catch-all
            eta-mu.dsl/defcapability     clj-kondo.lint-as/def-catch-all
            eta-mu.dsl/defimplementation clj-kondo.lint-as/def-catch-all
-           eta-mu.dsl/defexposure       clj-kondo.lint-as/def-catch-all}}
+           eta-mu.dsl/defexposure       clj-kondo.lint-as/def-catch-all}
+ ;; Native ^:async/await is enforced by the current ClojureScript compiler.
+ :config-in-ns
+ {eta-mu.extern.review-batch {:linters {:unresolved-symbol {:exclude [await]}}}
+  eta-mu.infra.review-pipeline {:linters {:unresolved-symbol {:exclude [await]}}}
+  eta-mu.extern.review-batch-wire-test {:linters {:unresolved-symbol {:exclude [await]}}}}}

@@ -5,6 +5,8 @@
    GPL-3.0-or-later."
   (:require [clojure.string :as str]
             [eta-mu.law.review-invocation :as law]
+            [eta-mu.law.review-batch :as batch]
+            [eta-mu.extern.review-batch :as batch-wire]
             [eta-mu.domain.review-invocation :as invocation]
             [eta-mu.domain.review :as review]
             [eta-mu.shape.review-context-delivery :as context-shape]
@@ -95,10 +97,47 @@
                 "n" (literal! "null" nil) (number!)))]
       (let [v (value! 0)] (space!) (when-not (= @at size) (invalid!)) v))))
 
+(defn- batch-wire-valid?
+  "Measure actual native output and arguments, not model-supplied counts."
+  [name state session]
+  (let [wire (:output state) result (strict-json wire) args (:input state)
+        encode #(js/JSON.stringify (clj->js %))
+        bytes #(js/Buffer.byteLength % "utf8")
+        fields (select-keys result [:context-protocol :context-source :context-observation :restart-required?])]
+    (and (not (true? (get-in state [:metadata :truncated])))
+         (not (contains? (:metadata state) :outputPath))
+         (batch/response-fits? {:bytes (bytes wire) :lines (count (str/split wire #"\n" -1))})
+         (<= (bytes (encode fields)) (:context-bytes batch/limits))
+         (batch/session-fits? {:bytes (bytes session) :json-bytes (bytes (encode session))
+                               :nonblank? (not (str/blank? session))})
+         (or (not= name "review_assess_diff_batch")
+             (batch/assessment-shape? args (bytes (encode args))
+                                     (mapv #(bytes (:note %)) (:assessments args)))))))
+
+(defn prepare-review-batch-host
+  "Supervisor API: actual selected executable path, raw resolved config JSON,
+   exact child environment and selected directory. Capture before/after child
+   with independently verified launch/custody. Reads binary bytes and reuses
+   the producer's canonical fingerprint; data alone is not authentication."
+  [executable raw-resolved-config environment directory]
+  (try
+    (when-not (and (string? executable) (str/starts-with? executable "/")
+                   (object? environment) (not (js/Array.isArray environment))
+                   (string? directory) (str/starts-with? directory "/")) (invalid!))
+    (let [cfg (strict-json (raw-text raw-resolved-config))
+          result (batch-wire/host-observation (batch-wire/executable-sha256 executable)
+                                               cfg environment directory)]
+      (when-not (and (map? cfg) (batch/qualified-host? result)) (invalid!))
+      (clj->js result))
+    (catch :default _ (throw (js/Error. "unestablished-review-trace: unsupported batch host")))))
+
 (defn- decode-event [event]
   (when-not (map? event) (invalid!))
   (let [part (:part event) state (:state part) name (:tool part)
         review? (and (string? name) (str/starts-with? name "review_"))]
+    (when (and (contains? law/batch-tools name)
+               (not (batch-wire-valid? name state (:sessionID event))))
+      (invalid!))
     {:type (:type event) :timestamp (:timestamp event) :session-id (:sessionID event)
      :part {:type (:type part) :id (:id part) :session-id (:sessionID part)
             :call-id (:callID part) :tool name :reason (:reason part)
@@ -122,7 +161,11 @@
         digest (-> (js-invoke crypto "createHash" "sha256")
                    (js-invoke "update" bytes)
                    (js-invoke "digest" "hex"))
-        pages (mapv #(select-keys % [:id :start :end]) (review/diff-chunks text))
+        ;; Batch-capable callers retain exact content in private trusted memory.
+        ;; Legacy callers keep the existing geometry-only preparation shape.
+        pages (mapv #(if (some law/batch-tools tools)
+                       (assoc % :sha256 (raw-sha256 (:text %)))
+                       (select-keys % [:id :start :end])) (review/diff-chunks text))
         ctx {:input-source source :pages pages :page-count (count pages)
              :full-input-sha256 digest :review-tools tools :submission-file file}]
     (when-not (and (= (.-length bytes) (get-in source [:full_diff :bytes]))
@@ -180,7 +223,7 @@
     {:input-source (:inputSource ctx) :pages (:pages ctx)
      :page-count (:pageCount ctx) :full-input-sha256 (:fullInputSha256 ctx)
      :review-tools (:reviewTools ctx) :submission-file (:submissionFile ctx)
-     :session-id (:sessionID ctx)
+     :session-id (:sessionID ctx) :batch-host (:batchHost ctx)
      :context-path (:contextPath ctx) :context-lines (:contextLines ctx)
      :context-line-bytes (:contextLineBytes ctx)
      ;; Missing is distinct from explicit null; legacy prepared data refuses.
@@ -209,6 +252,7 @@
                 :code (name (:code result)) :violations (:violations result)
                 :sessionID (:session-id result) :pageCount (:page-count result)
                 :reviewCallCount (:review-call-count result)
+                :pageWitnesses (:page-witnesses result)
                 :contextReadCoverage (when-let [coverage (:context-read-coverage result)]
                                        {:status (name (:status coverage))
                                         :totalLines (:total-lines coverage)
