@@ -1,0 +1,118 @@
+{
+  "schema": "muse.retained-native-current-verifier-reverification/v1",
+  "tier": "Observed current canonical verifier reevaluation of retained authentic diagnostic trace; unchanged producer. No new native capture, model judgment, review, approval, round or live proof.",
+  "observedAt": "2026-10-15T12:04:38.317Z",
+  "retainedProofSHA256": "f933db3a23f402f44be219c034bced5325636934a36cf236228004f3c63ab330",
+  "retainedEvidenceSHA256": {
+    "native.jsonl": "86c1aed3fd3f6b57f2388045509aaa6102b4dd67fc04482efb59f733dbc298b9",
+    "submission.json": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5",
+    "input.diff": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+    "input-manifest.json": "43f8a85317d3f487b76be716e751bf3364d1bd7eea2b5a34ec9a083f48d51d4a"
+  },
+  "producer": {
+    "retainedSHA256": "726f3b2516c179d200321574a6aa74276f2445825df99de4686e1c3512c84699",
+    "rebuiltSHA256": "726f3b2516c179d200321574a6aa74276f2445825df99de4686e1c3512c84699",
+    "byteIdentical": true
+  },
+  "canonicalVerifierSHA256": "6a5822846d3136e8cb27e0b8e7141b4d852631874cbd4a066750b681ed763f2a",
+  "canonicalVerifierStable": true,
+  "currentSourceFiles": {
+    "deps.edn": "8eabd65ea41db900deb987c445c31f03615a2a36928bb6818c778783e28a2be5",
+    "shadow-cljs.edn": "409203bc5f8214710cea01f979141806805169eef374ade54fda406289d476fa",
+    "src/clj/eta_mu/opencode/build.clj": "96008881199a5df5d9aa27200c79e0ca64536c8e84a634692abc111a19fa7c50",
+    ".ημ/plugins/review_pipeline.cljs": "8427e37e4b88d8b9d18e0611c6251b0103eaf061f389a0e72347b25e1531dd87",
+    "src/cljs/eta_mu/boundaries/opencode.cljs": "06a980346494b4fc7aac585d62a44082b72089d01cf59b16a70b6284c999e738",
+    "src/cljs/eta_mu/domain/review.cljc": "76045a6f3838a9a17cc7fa4bdb65cbccaefccfeadcc38aa2f016ec7a1c6f4a7a",
+    "src/cljs/eta_mu/law/review_batch.cljc": "e4232dd460406513399f07b380146eff5cb0a2a71f8e775a23c33771e97be98d",
+    "src/cljs/eta_mu/law/review_invocation.cljc": "a2cedd6bf92b9cd8f3a94705cb13a116c1f021d2b6fbea9355382b71a14febf7",
+    "src/cljs/eta_mu/shape/review_batch.cljc": "f4f0dfd5421d29f7c68331d054e5f515b68e706755bd4d106a7d5fb6d8a05501",
+    "src/cljs/eta_mu/extern/review_batch.cljs": "763c092e992de56c8c749cba227326ee6f467bd4d2563526805b2484c4315cec",
+    "src/cljs/eta_mu/extern/review_invocation.cljs": "2305384440dd0e35236b2bb3bd4da182ce26262a8b8316df7bf2ee1bfca9f58e",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "2ee871bf407b59f9fc05e6ee052e22e85c2c51aa284df8c86782b76d1aec0cdc",
+    "src/cljs/eta_mu/domain/review_invocation.cljc": "99be3227e388124af996cb9b9f985bbc9fa6c2d3ae625d0ec2c74733dcc23647"
+  },
+  "hostEvidence": "Recomputed by current canonical API from retained actual6 binary, launch selectors and before/after private config captures; no fresh host observation.",
+  "expectedHost": {
+    "binary-sha256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+    "config-sha256": "6c342206f77390f54d8eddf2caf79cdd4d625eec3a4f87a504d790186d27d1bf",
+    "selectors-sha256": "d395e2bd91430a1179f836fad3643a985b3d3171f1a558b6c9a8d5ba420bfdfa",
+    "max-bytes": 51200,
+    "max-lines": 2000
+  },
+  "verdict": {
+    "reviewCallCount": 9,
+    "acceptedInvocation": {
+      "sessionID": "ses_ec0bf6ae4ffeF5F1jUjSsKRCVM",
+      "submissionCallID": "owned-native-batch-8",
+      "submissionPosition": 26,
+      "submissionFile": "/var/tmp/muse-joint5-native-pr12-qualified-oo6lwvjj/consumer/.opencode/review-evidence/submission.json",
+      "responseSha256": "86c1aed3fd3f6b57f2388045509aaa6102b4dd67fc04482efb59f733dbc298b9",
+      "submissionSha256": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5",
+      "fullInputSha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+      "pageCount": 2
+    },
+    "contextReadCoverage": {
+      "status": "absent",
+      "totalLines": 0,
+      "deliveredLines": 0,
+      "eof": false
+    },
+    "reason": null,
+    "ok": true,
+    "code": "verified-review-invocation",
+    "pageWitnesses": [
+      {
+        "id": 1,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f4099df0012S6mBALgaINOdB",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f4099df0012S6mBALgaINOdB",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 1,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f409a75001dBL16PKrBUCKMs",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f409a75001dBL16PKrBUCKMs",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      }
+    ],
+    "pageCount": 2,
+    "violations": [],
+    "reasonKind": null,
+    "sessionID": "ses_ec0bf6ae4ffeF5F1jUjSsKRCVM"
+  }
+}

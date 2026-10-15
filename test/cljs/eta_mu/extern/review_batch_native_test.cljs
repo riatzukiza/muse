@@ -47,13 +47,23 @@
 (deftest retained-current-native-wire-and-source-binding
   (binding [*fixture-root* (str root "review-fixes/")]
     (let [{:keys [proof context]} (data)
+          reverified (read-json "reverification.json")
           result (js->clj (extern/verify-review-invocation (read-bytes "native.jsonl")
                                                            (read-bytes "submission.json") context)
                           :keywordize-keys true)]
       (is (:ok result))
       (is (= 4 (count (:pageWitnesses result))))
       (is (true? (:canonicalVerifierStableAcrossCaptures proof)))
-      (doseq [[file digest] (:sourceFiles proof)]
+      (is (= "muse.retained-native-current-verifier-reverification/v1" (:schema reverified)))
+      (is (= (:retainedProofSHA256 reverified) (wire/sha256 (read-bytes "proof.json"))))
+      (is (= (set (keys (:sourceFiles proof))) (set (keys (:currentSourceFiles reverified)))))
+      (is (= (:bundleSHA256 proof) (get-in reverified [:producer :retainedSHA256])
+             (get-in reverified [:producer :rebuiltSHA256])))
+      (is (true? (:canonicalVerifierStable reverified)))
+      (doseq [[file digest] (:retainedEvidenceSHA256 reverified)]
+        (let [file (if (keyword? file) (subs (str file) 1) file)]
+          (is (= digest (wire/sha256 (read-bytes file))) file)))
+      (doseq [[file digest] (:currentSourceFiles reverified)]
         (let [file (if (keyword? file) (subs (str file) 1) file)]
           (is (= digest (wire/sha256 (.readFileSync fs file))) file)))
       (is (= 2 (:pageCount result)))

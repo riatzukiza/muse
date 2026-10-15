@@ -149,7 +149,8 @@
       :else nil)))
 
 (defn- call-error [calls {:keys [pages review-tools] :as context}]
-  (let [page-by-id (into {} (map (juxt :id identity) pages))]
+  (let [page-by-id (into {} (map (juxt :id identity) pages))
+        batch-capable? (some batch-tools review-tools)]
     (some
      (fn [call]
        (let [name (tool call) args (input call) result (output call) id (:id args)
@@ -174,7 +175,11 @@
                 (not (and (map? (:chunk result))
                           (= (select-keys page [:id :start :end]) (select-keys (:chunk result) [:id :start :end]))
                           (string? (get-in result [:chunk :text]))
-                          (= (- (:end page) (:start page)) (count (get-in result [:chunk :text])))))) :returned-page-binding
+                          (= (- (:end page) (:start page)) (count (get-in result [:chunk :text])))
+                          (or (not batch-capable?)
+                              (and (string? (:text page)) (sha? 64 (:sha256 page))
+                                   (= (select-keys page [:id :start :end :text :sha256])
+                                      (select-keys (:chunk result) [:id :start :end :text :sha256]))))))) :returned-page-binding
            (and (= "review_assess_diff_chunk" name) (success? call)
                 (not (and (= id (:chunk-id result))
                           (map? (:coverage result)) (= (count pages) (get-in result [:coverage :chunks]))

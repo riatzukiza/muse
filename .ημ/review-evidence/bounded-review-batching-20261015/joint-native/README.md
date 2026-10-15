@@ -61,3 +61,29 @@ and exact raw response/submission bytes are retained in the current proof.
 New actual native diagnostic after Codex coverage/layer/selected-prefix repairs: one real compiled read of both original prefix pages, one vector with separate notes, all five stages and diagnostic submit; nine actual native calls/four real-call witness relations. The canonical independent verifier accepts the actual raw output/submission and before/after host captures match. This is fixed localhost scripted SSE with no LLM, publisher, semantic review, approval, round or live B1/B2/B3 credit. Synthetic input-manifest OIDs remain visibly fixture identities. Existing root/current diagnostic bytes and their historical source hashes are unchanged. Current source hashes are bound by the new proof, including the domain witness composition.
 
 A failed prior attempt accidentally used the generic default plugin build rather than the selected review exposure, yielding actual unavailable tools and no accepted invocation. Its raw failure remains private evidence. The selected-profile build first warned about external classpath symlinks; a bounded 60-file/302120-byte source projection corrected that and rebuilt without warnings. Neither failure is relabeled as a pass or a production regression. Current full owner/build/cold/input/lint gates and source qualification remain separate obligations.
+
+
+## Immutable mixed-read correction and retained-trace re-verification
+
+A later Codex P1 exposed a mixed trace whose single-page read could return
+same-length changed content while the batch read supplied another page. The
+causal regression executed 325 tests/2,105 assertions with eight failures and
+zero errors/compiler warnings. Batch-capable invocations now require every
+successful single-page read to match the canonical prepared page's exact
+text and SHA256, in addition to its original ID and geometry. Legacy callers
+without batch exposure retain their existing geometry-only contract.
+
+`review-fixes/reverification.json` records a current canonical verifier
+re-evaluation of the unchanged authentic diagnostic trace. A rebuild with the
+updated source produces the exact same producer bundle SHA256
+`726f3b2516c179d200321574a6aa74276f2445825df99de4686e1c3512c84699`.
+The current verifier CJS SHA256 is
+`6a5822846d3136e8cb27e0b8e7141b4d852631874cbd4a066750b681ed763f2a`.
+The original `proof.json`, native JSONL, submission, input and manifest bytes
+remain immutable. The new record binds all 13 current source files, original
+proof and evidence hashes, byte-identical producer, stable current verifier,
+and its actual accepted result/four real-call witnesses. The canonical host
+API recomputes identity using the retained actual binary, launch selectors and
+private before/after configuration captures; this is explicitly recorded
+capture evidence, not a new native host observation. No new model, semantic
+review, publication, approval, round or live B1/B2/B3 credit is claimed.

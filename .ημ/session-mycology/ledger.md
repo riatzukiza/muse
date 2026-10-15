@@ -675,3 +675,13 @@
   spore: none
   receipt-refs: muse-pr12-mixed-single-page-immutable-source-causal-red-20261015
   note: Causal RED uses visibly synthetic edited unit events and preserves every authentic native/proof byte. Correct batch-capable single reads must bind exact prepared text/digest; legacy nonbatch callers retain prior geometry contract. Current MiMo APPROVED5532538742/all43inputs46pages and required CI are real e5 evidence but do not dismiss the new P1 or transfer to a new head. No model/paid/credentials/runtime/heartbeat/deployment/spore change; goalACTIVE, humanPAUSEDheartbeat, live0/3.
+
+- ts: 2026-10-15T12:07:03.853Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-mixed-single-page-exact-source-current-green-20261015
+  note: Single reads under batch-capable registry require exact prepared text and valid matching SHA; no pure-law I/O or crypto duplication. Legacy nonbatch contract retained. Reverification is a new explicit observed current-evaluation record, never an overwritten proof/native capture or source-hash exception. Current-head review and every gate must requalify after push; old MiMo approval supplies no transferred credit. GoalACTIVE heartbeat humanPAUSED live0/3; no continuation/timeout/model/paid/credentials/runtime/deployment/spore change.
