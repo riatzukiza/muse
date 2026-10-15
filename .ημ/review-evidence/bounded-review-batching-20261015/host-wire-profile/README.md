@@ -1,10 +1,10 @@
 # Bounded review host/wire measurement
 
-This is an observed measurement artifact with a derived candidate profile. It is
+This observed artifact derives candidate profile version2. It is diagnostic source,
 not a production batch API, approved review, provider capacity guarantee or live
-cephalon proof. Native task `95efe284-754b-4c4c-9a5e-b55b0c3d5d0e` remains
-InProgress; dependent joint implementation remains Incoming. The qualified
-planning body is preserved; discovery and measurement are native comments.
+cephalon proof. Native profile task `95efe284-754b-4c4c-9a5e-b55b0c3d5d0e`
+remains InProgress pending current qualification; joint task remains Incoming.
+Its qualified planning body stays intact; refinements use native comments.
 
 ## Inputs and provenance
 
@@ -28,120 +28,108 @@ planning body is preserved; discovery and measurement are native comments.
   no genuine model or approval, no production source substitution, and no global
   plugin publication. They are not a new executable consumer contract.
 
-## What was actually measured
+## Current complete wire and bounds
 
-The original compiled `diff_chunks` and `encode_result` functions were invoked
-through a private test export bridge appended after the unchanged original
-compiled artifact bytes. The existing zod dependency was reused. Neither function
-was changed. Maps were converted through the compiled CLJS ingress; complete
-rendered output, rather than the raw page length, was measured. The bridge is a
-test seam, not execution of the future compiled batch API.
+The unchanged original compiled `diff_chunks`, `encode_result`, and
+`infra.review_pipeline.observed_fields` functions execute through private test
+exports appended after the exact original bundle prefix. Existing zod4.4.3 is
+reused. This measures a candidate complete response through the original encoder;
+it does not execute a future compiled batching tool.
 
-The candidate response includes original IDs/ranges/text/digests, full input
-identity, full worst-case coverage/missing IDs, actual selected membership/next
-identity, profile and bounded session custody. See the exact wire-field contract
-in `profile.json`. The response is a JSON string: embedded newlines/quotes/control
-characters are escaped before the native host measures UTF8 bytes. Outer NDJSON
-escaping is a later transport and is not the truncation boundary. Original page
-geometry remains8192UTF16 units/128lines and does not split surrogate pairs.
+Every original and synthetic response includes original page IDs/ranges/text/
+digests, full input source, full worst-case coverage/missing IDs, actual batch
+membership/first/last/next/profile, bounded session custody, and ALL mandatory
+context fields: `context-protocol`, `context-source`, `context-observation`, and
+successful-read `restart-required? false`. The present observation comes from
+the original compiled context admission/observed-fields function. Its source
+is a clearly synthetic descriptor for one-byte `x` with its actual SHA256;
+it supplies no real context-read or assessment evidence.
 
-`corpus-pages.jsonl` retains all1491 original IDs, ranges, text digests and single
-complete-response measurements. `corpus-batches.jsonl` retains every consecutive
-whole-page membership and rendered wire digest/bytes/lines for375 batches. The
-selected48000-byte/one-line/max4-page bound fits every original whole page. It
-projects750 read+assessment calls versus2982. This is a frozen worst-coverage
-projection, not elapsed time, substantive assessment, current large-review
-completion or a promise that the two-hour budget will suffice.
+Version2 requires the complete encoded context metadata object (including braces)
+to fit4096UTF8 bytes. The controlled valid present descriptor fills exactly4096;
+its next valid path extension yields4098 and diagnostic refusal. A mathematical
+4097-byte negative is separately tested. Joint5 must check valid unchanged current
+custody AND the actual serialized metadata budget before effects; unknown,
+unavailable, changed or oversized context refuses before delivery/coverage state
+mutation. This metadata budget changes no host limit or context-read obligation.
 
-Pinned executable controls really invoked four fixed tools through the host and
-bundled OpenAI-compatible SDK with localhost synthetic SSE. Exactly51200bytes
-and2000lines arrived unchanged;51201bytes and2001lines returned native
-truncated=true/outputPath. Saved full output originals hash to the supplied
-input; output and real call/part IDs were independently read back. A truncated
-response may itself contain warning overhead; do not interpret its rendered
-warning line count as the input threshold. Tool execution precedes truncation.
+Response limits remain48000UTF8 bytes/one line/max4 original pages. The encoder
+escapes internal newlines/control characters; outer NDJSON escaping happens later
+and is not this boundary. Page geometry remains8192UTF16 units/128lines, without
+splitting surrogate pairs. All1491 IDs/ranges/text bytes/digests match prior source.
+`corpus-pages.jsonl` now measures complete single-page responses;
+`corpus-batches.jsonl` records384 consecutive whole batches, max47982 rendered
+bytes, projecting768 read+assessment calls versus2982. This is a frozen
+worst-coverage/4096-byte-context projection, not elapsed throughput, substantive
+assessment, current large-review completion or a two-hour completion guarantee.
 
-A second local synthetic invocation passed valid four-member16384-byte arguments
-and16385-byte one-over through the same native host/parser. Independent actual
-state.input byte/hash readback matched the fixture. Its candidate check accepted
-the first and refused the second as a whole. That check is a fixture, not the
-future production law. The fixture's sha256:null result supplies no hash proof;
-the independent native input/output readback does. Production note/cardinality/
-byte enforcement and the exact native verifier still belong to joint5.
+## Executed controls and historical correction
 
-Mathematical/serializer controls separately cover Unicode, escaping, long lines,
-surrogate boundaries, full coverage overhead, exact48000/48001 rendered bytes,
-16384/16385 serialized argument bytes,4/5 members and2048/2049-byte notes. The
-generic exact-byte argument vector uses explicit padding to isolate serialization;
-the native exact/over controls use only candidate fields. Escaped max-length notes
-can exceed the total request bound even when each note fits; refuse the entire
-submitted vector. Never silently reduce assessment membership.
+At immutable source42015d9, the largest unwrapped group601–604 measured47820bytes
+and was incorrectly called complete. Adding even a minimal valid344-byte context
+metadata object through the original compiled function yields48163bytes, exceeding
+48000. Its375group/750call projection is incomplete. `priorUnwrappedProfile` binds
+its immutable source and original record hashes and preserves old derived values;
+current measurements replace them. Historical receipts are unchanged.
 
-## Configuration discovery and revised admission boundary
+Current complete synthetic controls execute48000/48001-byte acceptance/refusal,
+one/two-line receiver checks with equal decoded objects, and intact read-prefix
+selection (13330-byte first page versus48001-byte two-page candidate). A single
+48001-byte page refuses. Same-source five-page cardinality controls measure7036
+bytes for four members and7161 for five, sharing custody/context/coverage and exact
+firstfour pages. Four accepts/five refuses; only reads may select a whole prefix.
+All13 synthetic response wires independently carry the four mandatory fields.
+Unicode, escaping,8192-unit long-line and surrogate-boundary payloads round-trip.
 
-The staged config has no tool_output setting. Historical GHA merged/effective
-settings were not retained and remain UNKNOWN. No copied config/default-only
-assumption repairs that gap. The candidate fixture was resolved by the actual
-pinned executable under owned HOME/XDG/managed directories; tool_output remained
-absent. Pinned source defaults plus independent exact/one-over controls establish
-51200bytes/2000lines only for this fixture. OpenCode initialized dependencies in
-its owned XDG config directory; existing host dependencies were not changed.
+Complete request controls execute16384/16385 serialized bytes,4/5 members and
+2048/2049UTF8-byte notes. Four2048NUL-byte notes serialize to49792bytes and the
+entire vector refuses with zero accepted members. Version2 changes profile
+identity and therefore request/wire hashes. Original native version1 argument
+controls remain historical host observations; they are not version2 host execution.
+All current vectors/outcomes/hashes are retained in profile.json and regenerated
+private output. The diagnostic fixture tests pass4tests/14assertions; scoped
+clj-kondo has0errors/0warnings. The new context test first failed on the missing
+fixture function; it is not a production-law RED result.
 
-Joint/ETA must obtain the actual selected executable and allowlisted resolved
-limits plus source/selector digests before batch effects, requiring the qualified
-profile. Unknown/inaccessible/different values refuse qualification/coverage and
-publication. This is a measured candidate plus a mandatory future evidence gate,
-not retrospective GHA qualification or permission to change host limits. The
-current artifact/re-description requires owning independent review before joint
-Ready. Full private config values and credential material are never published.
+## Actual host observations and unresolved capacity
+
+Pinned OpenCode1.18.31 was exercised with owned empty HOME/XDG directories and
+fixed localhost synthetic SSE, with zero real model calls.51200bytes/2000lines
+arrived unchanged;51201bytes/2001lines produced actual native truncation/outputPath.
+Saved originals independently matched supplied input hashes, real call/part IDs,
+and native traces. Tool execution precedes truncation. A second native synthetic
+invocation parsed exact16384-byte and16385-byte version1 arguments; its diagnostic
+fixture accepted/refused them wholly. These original native controls and allfour
+host-input bytes are unchanged and retained in native-controls.json.
+
+Historical GHA effective tool_output settings remain UNKNOWN. Initial uncaptured
+labels and the later actually captured isolated-candidate51200/2000 settings are
+distinguished in native-controls.json. Actual OpenCode executable/source identities,
+allowlisted resolved config limits/source-selector digests and original private
+recipes are retained. Future joint/ETA consumer must capture its OWN selected
+executable/effective limits/provenance before batch effects; unknown/different
+values refuse qualification/publication. No copied default proves historical GHA.
 
 The actual free MiMo provider maximum and future availability remain UNKNOWN.
-These local synthetic observations establish local host encoding/truncation and
-argument transport only. They make no claim that a real provider generated or
-assessed these arguments. Genuine full-input downstream model completion remains
-a separate exit.
+Native tool/argument observations do not prove a genuine model generated or
+assessed them. Actual full-input free-model completion remains a separate exit.
+Original native run38662896086 failed after29of1491 accepted pages; assessments
+30–37 lacked reads. Wrapper refused read-assessment-not-established with no
+submission/publication (OpenCode0/wrapper1), not a timeout. All original guards
+remain: complete context before stage1, one invocation, distinct per-page notes,
+real call/part/event membership, LAST across mixed/failed calls, allfive stages,
+final full coverage, publisher custody and head-guarded merge admission.
 
-## Existing guard behavior retained
+## Reproduce and protect source output
 
-Actual real run38662896086 failed after29of1491 accepted pages. Assessments30–37
-had no preceding reads; the wrapper rejected read-assessment-not-established,
-with no submission or publication. OpenCode exited0, wrapper1; this was not a
-timeout. Batching preserves that refusal, actual call/part/event membership, LAST
-across mixed/failed calls, distinct per-page notes, full context before stage1,
-one invocation, all five stages, final full coverage and publisher custody.
-
-No continuation, timeout increase, paid model, real credential change, live
-runtime/maker/clock/PM2/owner/deployment/publication/heartbeat change occurred.
-B1/B2/B3 remain0/3.
-
-## Measurement host runtime correction
-
-The shell default Node was24.14.1. The compiled wire measurement was explicitly
-replayed with pinned Node22.20.0, producing byte-identical profile and response
-files. Fixed localhost SSE coordinators used24.14.1; the actual native tool host
-was the pinned OpenCode binary with embedded Bun throughout. These roles are
-recorded separately; no global Node selection or running host changed.
-
-## Reproduce from a clean checkout — corrected after review
-
-The repository now supplies `scripts/extern/verify_review_batch_profile.cljs`,
-portable `test/cljs/eta_mu/fixtures/review_batch_profile.cljc`, and its test suite.
-The older private recipe addresses above preserve historical observations; they
-are not required to regenerate the profile. No provider/model/server runs,
-installation, host reconfiguration or production batch API are used by this
-reproduction. Use Node22.20.0 and NBB1.3.204, with existing zod4.4.3.
-
-Prepare a private inputs directory with the exact qualified bundle and selected
-corpus/manifest. The pinned native artifact ZIP IDs/digests are listed above;
-verify those digests and extract only `muse/opencode/dist/eta-mu-actors.js` from
-context ZIP11943802939, and `basehead.diff`/`input-manifest.json` from evidence
-ZIP11943674576. The native full-diff bytes may also be reconstructed independently
-from the exact OpenPlanner Git refs shown above. Do not print protected content.
-The generator verifies the full corpus and compiled bundle hashes, frozen
-head/base/diff-base identity, byte count and existing zod version before executing
-the original compiled code through a test-only export bridge. It writes into a
-new private directory outside the checkout; no bundle/source substitution or
-global plugin publication occurs. The bridge retains the original prefix exactly.
+The checked-in generator, portable fixture and tests replace author-private
+recipes for reproduction. Node22.20.0 and actual NBB1.3.204 are required before
+input/output access; use that Node executable with NBB cli.js if shell Node differs.
+Prepare exact bundle/corpus/manifest from the pinned native artifact ZIPs above,
+or independently reconstruct the full diff from the frozen Git refs. Verify
+ZIP digests and extract only selected files. Never print protected source.
+Generator verifies exact corpus/bundle hashes, source head/base/diff-base,
+full_diff metadata and zod version before executing original compiled functions.
 
 ```sh
 nbb -cp test/cljs -e "(require '[cljs.test :as t] '[eta-mu.fixtures.review-batch-profile-test]) (t/run-tests 'eta-mu.fixtures.review-batch-profile-test)"
@@ -154,100 +142,18 @@ nbb -cp test/cljs scripts/extern/verify_review_batch_profile.cljs \
   --out "$profile_private_parent/new-owned-run"
 ```
 
-Inputs are explicit operator-chosen paths; the output path must not exist. The
-result contains complete regenerated wire/request values and Unicode/escaping/
-long-line/surrogate vectors, all four original native host-control inputs, all
-1491 original page measurements and all375 batch measurements. Protected
-corpus-bearing outputs stay private. Standard output contains counts/status only.
-Actual Node22.20 execution reproduced every committed page/group record and all
-six previously observed native input digests exactly. Existing owner test
-classpath includes `test/cljs`, so no build-policy change is needed.
+The output parent must exist and the selected output must be new and private.
+The guard derives the physical checkout root from realpath(nbb/invoked-file) and
+its scripts/extern layout, independently of caller cwd; it resolves the existing
+output parent physically before containment checks. Actual old420 invocation from
+an unrelated cwd wrote inside a private simulated checkout. Current root,
+subdirectory and unrelated-cwd cases all refuse before creating output. Earlier
+symlink-parent, wrongNode/wrongNBB and malformed manifest controls stay historical
+proof; no real Git checkout received protected corpus files. Equal metadata maps
+are serialized in fixed field order. Full corpus-bearing output remains private.
 
-Selected response exact/one-over outcomes now use complete synthetic envelopes
-with actual original compiled page geometry, bound synthetic text/byte hashes
-and no extra padding field:48000 accepts and48001 refuses in the diagnostic
-fixture. A two-page48001-byte response selects its intact9235-byte first-page
-prefix; a single complete48001-byte page refuses. Request cases isolate total
-16384/16385 bytes,4/5 members and2048/2049-byte notes while other bounds fit;
-any invalid vector returns zero accepted members. `profile.json` records every
-executed outcome and measurement. These fixture decisions prescribe the chosen
-profile; they do not imply that the51200-byte host rejects48001, or that the
-production guard/new compiled API already exists.
-
-`native-controls.json` now distinguishes its initial uncaptured label from the
-later actually captured allowlisted isolated-candidate51200/2000 values and
-resolved-config digest. Historical GHA merged settings and general real-provider
-capacity remain UNKNOWN. The future consumer still must capture its own actual
-effective settings before any batch effects.
-
-The initial RED commit2500121 observed a missing fixture function but also had a
-later delimiter defect masked by that earlier analysis failure. That result
-cannot establish that all test forms were executable. After correcting syntax,
-the same test bodies were run against the frozen absent-outcome fixture and
-again failed for the missing function; implemented fixture outcomes then passed
-3tests/12assertions. Scoped lint is0errors/0warnings. The ledger appends this
-correction rather than rewriting the earlier receipt. Full owner hosted tests
-still must pass at the final current source before qualification.
-
-
-## Complete synthetic custody and independent limits — review correction
-
-The Unicode, escaping, long-line and surrogate-boundary response regressions
-now bind their own exact synthetic text/bytes/SHA256, synthetic base/head,
-custody, page coverage/IDs and terminal next marker. Each complete wire is
-JSON-round-tripped and those bindings are asserted. The earlier inconsistent
-measurements remain labelled historical in profile.json and immutable62d1a8c;
-they are not valid custody vectors. Original1491 page and375 group records are
-byte-for-byte unchanged.
-
-The concrete four-note escaped request is now generated and executed: each
-note has2048 NUL UTF8 bytes, the complete request has49792 serialized bytes and
-exact original digest f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0.
-The diagnostic fixture refuses it with zero accepted members. Complete four-
-and five-page response candidates now use one five-page source, with2941 and3066
-bytes respectively, both below48000; four accepts, five refuses, and selecting
-the intact four-page prefix remains lawful only for reads. Every vector and actual outcome is
-retained in the private generated output and the nonsecret profile summary.
-
-The generator now refuses any process.version other than v22.20.0 before
-opening inputs or creating output. Use the selected Node22.20.0 executable to
-invoke NBB's cli.js when the shell default differs; plain nbb under another
-Node intentionally fails. It also validates the exact serialized full_diff
-map (basehead.diff,11840401 bytes and frozen SHA256), refusing additional keys
-or changed path. Head/base/diff-base bindings remain exact. Before this repair,
-real Node24 and modified-manifest runs both incorrectly printed PASS; the same
-negative inputs now exit1 before output-directory creation. This is diagnostic
-source qualification, not an actual provider limit or implemented batch guard.
-
-
-## Qualified runtime, physical isolation and complete boundary rendering
-
-The generator now requires both Node22.20.0 and actual nbb.core/version1.3.204.
-A cached realNBB1.4.207 under selectedNode printedPASS before the guard; it now
-exits1 before creating output. No package was installed or global runtime changed.
-Existing output parents are resolved with realpath before containment checks;
-a symlink-to-checkout parent is refused before writes. The actual old/new
-regression used only a private simulated checkout, with complete source inputs
-and no real Git checkout exposure. The selected output parent must already exist.
-
-Both cardinality candidates now come from the same five-page synthetic source.
-Their source/custody/coverage and firstfour complete original pages match;
-fourmember output names page5 as next, and fivemember output is terminal.
-The earlier9b fourmember envelope came from another source and did not establish
-an intact prefix. Its immutable source/history remains; currentprofile outcomes
-replace that invalid regression claim.
-
-The complete line-limit control starts with a small one-line original-encoded
-response. Inserting valid JSON whitespace after its first brace produces an
-exactlytwo-line complete response decoding to the same object, still below the
-byte cap. Actual receiver fixture accepts one line and refuses two. This is a
-deliberate alternate rendering, not a claim that the selected serializer itself
-produced two lines.
-
-The serialized input-source map is now constructed in a fixed field order after
-exact field/value validation. At9b, reordered equal full_diff fields still
-printedPASS but changed page-wire digests. With the canonical construction,
-the same reordered metadata yields allfive byte-identical generated artifacts.
-The original1491page/375group measurements and fourhost inputs remain unchanged.
-All these controls are diagnostic-only; jointtools/nativeverifier and actual
-large free-model review remain separate required source/consumer exits.
+No production batching API, continuation, timeout increase, real provider call,
+installation, paid use, credential/model-routing/runtime/maker/clock/PM2/owner/
+deployment/publication/heartbeat change occurred. Source/profile qualification
+precedes joint Ready; actual compiled tools/native verifier precede consumer
+large-review qualification. B1/B2/B3 remain0/3; heartbeat remains human-PAUSED.

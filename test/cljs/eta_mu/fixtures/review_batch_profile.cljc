@@ -5,7 +5,12 @@
 
 (def profile
   {:response-bytes 48000 :response-lines 1 :max-pages 4
-   :request-bytes 16384 :note-bytes 2048})
+   :context-metadata-bytes 4096 :request-bytes 16384 :note-bytes 2048})
+
+(defn context-outcome [bytes]
+  {:outcome (if (and (nat-int? bytes) (<= bytes (:context-metadata-bytes profile)))
+              :accept :refuse)
+   :credit :fixture-only})
 
 (defn response-outcome [{:keys [bytes lines]}]
   {:outcome (if (and (nat-int? bytes) (pos-int? lines)

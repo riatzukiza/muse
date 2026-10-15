@@ -7,6 +7,10 @@
   (is (= :refuse (:outcome (fixture/response-outcome {:bytes 48001 :lines 1}))))
   (is (= :refuse (:outcome (fixture/response-outcome {:bytes 100 :lines 2})))))
 
+(deftest complete-context-metadata-boundaries
+  (is (= :accept (:outcome (fixture/context-outcome 4096))))
+  (is (= :refuse (:outcome (fixture/context-outcome 4097)))))
+
 (deftest whole-request-boundaries
   (is (= :accept (:outcome (fixture/request-outcome 16384 [2048 10 10 10]
                                                  ["a" "b" "c" "d"]))))

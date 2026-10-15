@@ -545,3 +545,13 @@
   spore: none
   receipt-refs: cephalon-profile3-realpath-nbb-source-prefix-line-and-metadata-order-20261015
   note: AllknownprofilefindingscollectedaftercurrentMiMocompletionandfixedtogether. Existingselectedbounds/inputgeometry/free route unchanged; originaltaskbody/InProgress andjointIncoming preservedviaactualnativecomment/readback. Sourcefixture-only/no productionbatchAPI/law/state/verifier/providermax. No continuation/timeoutincrease/paid/realcredentials/runtime/maker/deployment/publication/heartbeat/sporechange. GoalACTIVE humanPAUSED live0/3.
+
+- ts: 2026-10-15T06:18:48.006Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-complete-context-envelope-and-source-root-20261015
+  note: Complete diagnostic profile v2 replaces omitted-field measurements. No productionbatchAPI/law/state/nativeverifier/modelcall/providermax/continuation/timeout/paid/credentials/modelrouting/runtime/maker/deployment/publication/heartbeat change. Original profilebody/InProgress and jointIncoming retained; final-head review/checks required. GoalACTIVE humanPAUSED live0/3; no spore.

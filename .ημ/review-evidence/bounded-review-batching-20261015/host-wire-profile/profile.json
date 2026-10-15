@@ -1,10 +1,10 @@
 {
   "schema": "muse.review-host-wire-profile/v1",
   "tier": "observed isolated native-host controls plus derived compiled-wire projection; independently reviewed artifact required, not provider approval",
-  "generatedAt": "2026-10-15T03:55:29.380655+00:00",
+  "generatedAt": "2026-10-15T06:15:23.135559Z",
   "task": "95efe284-754b-4c4c-9a5e-b55b0c3d5d0e",
   "profile": {
-    "id": "muse-review-batch-profile/2026-10-15-candidate-v1",
+    "id": "muse-review-batch-profile/2026-10-15-candidate-v2",
     "response_bytes": 48000,
     "response_lines": 1,
     "max_pages": 4,
@@ -12,7 +12,8 @@
     "note_utf8_bytes": 2048,
     "host_bytes": 51200,
     "host_lines": 2000,
-    "source": "candidate measurement, not production API; historical GHA effective settings unknown"
+    "source": "complete original compiled context fields + candidate wire measurement; no production API; historical GHA effective settings unknown",
+    "context_metadata_bytes": 4096
   },
   "source": {
     "muse": "a9a62f0d509056406f3dd7d8c86a13551be168cd",
@@ -30,31 +31,34 @@
   "projection": {
     "baselineReadCalls": 1491,
     "baselineAssessmentCalls": 1491,
-    "batchReadCalls": 375,
-    "batchAssessmentCalls": 375,
+    "batchReadCalls": 384,
+    "batchAssessmentCalls": 384,
     "baselineCalls": 2982,
-    "batchCalls": 750,
-    "multiPageGroups": 375,
+    "batchCalls": 768,
+    "multiPageGroups": 384,
     "maxMembership": 4,
-    "maximumMeasuredResponse": 47820,
+    "maximumMeasuredResponse": 47982,
     "maximumSyntheticRegularRequest": 1010,
-    "reductionPercent": 74.84909456740442,
-    "notThroughputOrCompletionProof": true
+    "reductionPercent": 74.24547283702213,
+    "notThroughputOrCompletionProof": true,
+    "contextMetadataBudget": 4096,
+    "boundBeforeEffects": true
   },
   "candidateWireContract": {
-    "response": "ok?, chunks(original id,start,end,text + SHA256), input-source, full worst-case coverage/missing, batch IDs/first/last/next/profile, custody source/base/head/profile/128-byte session",
+    "response": "ok?, chunks(original id,start,end,text + SHA256), input-source, worst-case coverage/missing, batch IDs/first/last/next/profile, custody source/base/head/profile/128-byte session, and all original compiled observed_fields: context-protocol/context-observation/context-source + actual successful-read restart-required? false",
     "assessment": "ordered vector of original id/start/end/digest and separate nonblank bounded note; profile/source binding; canonical native call/part/event membership retained by verifier; no fabricated per-page events",
     "read": "only whole-page consecutive prefix selected before delivery mutation",
     "assessment_atomicity": "all submitted members or refusal; no prefix fallback",
     "effectiveSettings": "future consumer must capture allowlisted resolved settings/provenance; unknown/different profile refuses before review effects",
-    "capacity": "locally enforceable request shape/serialized bytes only; selected real provider maximum UNKNOWN"
+    "capacity": "locally enforceable request shape/serialized bytes only; selected real provider maximum UNKNOWN",
+    "contextMetadata": "Complete encoded metadata object including braces <=4096UTF8 bytes, verified valid current custody before effects; unknown/unavailable/changed/oversized refuses whole invocation before delivery/coverage mutation. Measurement uses valid synthetic present observation with maximal4096-byte metadata; next valid path extension4098 refuses. Synthetic descriptor is not actual context-read evidence."
   },
   "responseLimits": {
     "exact": {
       "measurement": {
         "bytes": 48000,
         "lines": 1,
-        "sha256": "f9fa541b2f7ba6ac3905a67acc96f26aa3ed5cdfbad93756f89404914ff54760"
+        "sha256": "9242c1a1c591301badefa4c9859ad5e07fb5ebf79b177d52a73211bc42bd0777"
       },
       "result": {
         "outcome": "accept",
@@ -65,30 +69,18 @@
       "measurement": {
         "bytes": 48001,
         "lines": 1,
-        "sha256": "3fc0db34a4d92ce63e9cb69e21510b3bbe30695165c1e2d323282b7de83626d0"
+        "sha256": "f690593d2df8c8846918c3b5681f9ebc0ce7db7827a319cf7aa345a80664761e"
       },
       "result": {
         "outcome": "refuse",
         "credit": "fixture-only"
       }
     },
-    "initialPaddedSerializationControl": {
-      "exact": {
-        "bytes": 48000,
-        "lines": 1,
-        "sha256": "ab13aff84f44a6a7517f6a112a811c523e12d5129e1ac1874c078fd13445d377"
-      },
-      "oneOver": {
-        "bytes": 48001,
-        "lines": 1,
-        "sha256": "473e78eebd13e34a9d9220de77bebf6d8cd3779c45bc69b8a0ddb0ade2d80be6"
-      }
-    },
     "exactLines": {
       "measurement": {
-        "bytes": 1060,
+        "bytes": 5155,
         "lines": 1,
-        "sha256": "70ee668c2e97ac311a4d799a8cac8f697f3aba489252b43b0a6af58a32139e49"
+        "sha256": "2b1d0fc2d57f40dae69b2d8b3dc0c36f9f6e6805228a0eb3b2a1fc486e386fa7"
       },
       "result": {
         "outcome": "accept",
@@ -97,52 +89,24 @@
     },
     "oneOverLines": {
       "measurement": {
-        "bytes": 1061,
+        "bytes": 5156,
         "lines": 2,
-        "sha256": "aa25b73735abcd72dc9124f8c62ba94f7c233bea6191ffd44227462507a65c5f"
+        "sha256": "ab90916a66840cc083b61db48f1921bda98237255c0537314c65a7d295aee61f"
       },
       "result": {
         "outcome": "refuse",
         "credit": "fixture-only"
       }
-    },
-    "lineRendering": "Same complete original-encoded object; valid JSON whitespace newline inserted after first brace for2-line receiver refusal control. Not an observation that original serializer emits2lines."
+    }
   },
   "requestCases": {
-    "exactBytes": {
-      "bytes": 16384,
-      "lines": 1,
-      "sha256": "f5455f6e1c271a53ace4701ce7469e1fbf2d1baea2aa6ea86e736e93a17e3888"
-    },
-    "oneOverBytes": {
-      "bytes": 16385,
-      "lines": 1,
-      "sha256": "3466dcd85abe9ece0c10050509db0463ce8d97695e5fc582c24ab5989a4f103e"
-    },
-    "exactNote": {
-      "bytes": 8832,
-      "lines": 1,
-      "sha256": "217c63613aa98eb3fa0fbd97cf59b186f816029c618fc5fb280c7ecc4465daea"
-    },
-    "oneOverNote": {
-      "bytes": 8836,
-      "lines": 1,
-      "sha256": "ea2702e1b0679df3a6a894e8adc04386aa8ff90eddd072c1bad38f5b0fe6b879"
-    },
-    "maxEscapedNotes": {
-      "bytes": 49792,
-      "lines": 1,
-      "sha256": "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
-    },
-    "exactCardinality": 4,
-    "oneOverCardinality": 5,
-    "policy": "candidate mathematical/schema controls only; production request guard not yet implemented; >16384 bytes or >4 members or any >2048-byte note refuses entire vector",
+    "policy": "Version2 diagnostic only: entire submitted vector or refusal; production API/guard remains joint5.",
     "executedValidCandidateVectors": {
       "exact-bytes": {
         "measurement": {
           "bytes": 16384,
           "lines": 1,
-          "sha256": "9eed4192d5b8ff1d0a9f899bb6645bb21a7023d722174175dc808d51f2e48806"
+          "sha256": "08ce93410a05fa12ab2c775d641c48fe96b901375c8b3329ac01c2844a10e298"
         },
         "result": {
           "outcome": "accept",
@@ -154,7 +118,7 @@
         "measurement": {
           "bytes": 16385,
           "lines": 1,
-          "sha256": "2c5805c96da8105185fb9d7583cc8a0d089a70e4f3f73832b2c59eda441450a3"
+          "sha256": "e9ea228d41029030aa26165af1db2c9e792b11e78f4c9bdaf28104e110dd6606"
         },
         "result": {
           "outcome": "refuse",
@@ -166,7 +130,7 @@
         "measurement": {
           "bytes": 2326,
           "lines": 1,
-          "sha256": "90e63f73347a166dcca3866b775888a4822e08df62c19f1c565543fd5968fafe"
+          "sha256": "cdf811dc237414532fd05eb1fa77ee97dc6d759cb8df71764ef80b696b9d2c04"
         },
         "result": {
           "outcome": "accept",
@@ -178,7 +142,7 @@
         "measurement": {
           "bytes": 2327,
           "lines": 1,
-          "sha256": "45c2e6cd58f2242452102e35a2582bf1309e2e4b77e62d13fc5ee086bd01091d"
+          "sha256": "ad736c47e9261a65f757f10a7e41d521c6c67245e5f210e43b3d03d0c6319c5a"
         },
         "result": {
           "outcome": "refuse",
@@ -190,7 +154,7 @@
         "measurement": {
           "bytes": 688,
           "lines": 1,
-          "sha256": "815240ec54cc2acfb797bad99c5aa8dc9fa4cc6228cde139a7c9620c015ceb87"
+          "sha256": "1bd81c9d2621742be7e3fcc4f3c392805c7234190d94f9b2045b8ce4e66bbb0f"
         },
         "result": {
           "outcome": "accept",
@@ -202,7 +166,7 @@
         "measurement": {
           "bytes": 821,
           "lines": 1,
-          "sha256": "63430fe07eb9acb18fa4e4f2e1e7bdeea27341e61383afec20470772c7d83475"
+          "sha256": "086e52b022642fac212cece5898562eabe445fc9f4d6b85908c8710db4330bc8"
         },
         "result": {
           "outcome": "refuse",
@@ -214,7 +178,7 @@
         "measurement": {
           "bytes": 49792,
           "lines": 1,
-          "sha256": "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
+          "sha256": "84cb38fee26f6b27ff3e8bb9fd644ab2a961afaf57db4ebb4ee86495e66afb5a"
         },
         "result": {
           "outcome": "refuse",
@@ -270,9 +234,9 @@
       "inputSHA256": "76f40eddec73b29366c155b48e6e2b6c33cb11f4c5092ff0f03d7f3e2fc3991f",
       "pages": 1,
       "wire": {
-        "bytes": 1055,
+        "bytes": 5150,
         "lines": 1,
-        "sha256": "4040051c651838b95e479a169ee462ca5d411df460c79d9c1ed1f7a8f51f33f9"
+        "sha256": "c89a2d774e3e8b6e9e8dd168417ab7932bc703b2526c21e6fa61df85410829a2"
       }
     },
     {
@@ -281,9 +245,9 @@
       "inputSHA256": "cf09b6562e69a7379472474834ce188da27a9e275ec27d1ed4c4b84a67b7ffc1",
       "pages": 1,
       "wire": {
-        "bytes": 1053,
+        "bytes": 5148,
         "lines": 1,
-        "sha256": "3e513f6a0723869d16c5e7f83a8ee0f8917aa917230392bef58b885a55a1b65b"
+        "sha256": "03bd3a8664bb9c732a473f7fc099a3231136578c4986577844117b77dd272613"
       }
     },
     {
@@ -292,9 +256,9 @@
       "inputSHA256": "91a87117670aa06f604c6c6bf4359e82d09cf581606ce8ca4da87d88ad6268bc",
       "pages": 1,
       "wire": {
-        "bytes": 9235,
+        "bytes": 13330,
         "lines": 1,
-        "sha256": "c86278a27472e99b1d7fe400727d0ccb778bb7bb1b1bc96a9119ee98dece7ea1"
+        "sha256": "51f0207ce0dcb12b71fd4b4c5ffdfa8d6188ab6f56a4149f65c943c2fc1ad87c"
       }
     },
     {
@@ -303,9 +267,9 @@
       "inputSHA256": "03e039186ef1c2a1e3519daff49a7ce01f407f32f4a00707644b0dd0b54acfbc",
       "pages": 2,
       "wire": {
-        "bytes": 9365,
+        "bytes": 13460,
         "lines": 1,
-        "sha256": "5e1234a24ed8a71d01ccc4cb9531aa764bb51c60b9a5531e5ecc1b1761260cb7"
+        "sha256": "7c9cd84ac635d571a93fa7ef7184571b6bc5d7ebe349dfc4368bfd3f09416822"
       }
     }
   ],
@@ -497,7 +461,7 @@
     "liveProofs": "0/3",
     "heartbeat": "human-PAUSED"
   },
-  "remaining": "Review candidate profile/re-description and actual current source. Complete request shape and native witness validation, actual compiled >=2-page API, mixed-LAST/context/stage/atomic refusals and full owner gates belong joint5. Actual selected free provider maximum remains UNKNOWN.",
+  "remaining": "Owning current-head profile/re-description review and checks; joint5 must enforce complete context metadata/custody/response preflight, actual compiled batch state/API/native witnesses and all existing guards. Genuine large free-model completion and live0/3 remain separate.",
   "hostExecutable": {
     "version": "1.18.31",
     "binaryBytes": 185030784,
@@ -517,20 +481,22 @@
     "modelCalls": 0,
     "productionAPI": false,
     "actualRuntime": "Node22.20.0/nbb1.3.204",
-    "actualAll1491PageAnd375GroupRecordsEqualCommitted": true,
-    "fixtureSHA256": "bf78e492ace8d50ca18afec0f187b24f890d3fe9007d536909a3488d4e43cb9d",
-    "testSHA256": "5312d9e32032dbd018644593ae83282b1e6e2f38e2426e715c9a58a0b1951ae1",
+    "actualAll1491PageAnd375GroupRecordsEqualCommitted": false,
+    "fixtureSHA256": "60e5c2b1536c77831629ff9d7bbef8c4702eb1a1ad60b4fc850f684dbe730a09",
+    "testSHA256": "77fd12a75371907ba41c6dd113220b62b221e38099028245a607c6bc84c19ef7",
     "runtimeGuard": "Node22.20.0 and actual nbb.core/version1.3.204 required before inputs/output/bundle. Cached actualNBB1.4.207 RED printedPASS at9b; current guard exits1 before output. Selectedpair passes.",
     "metadataGuard": "Exact full_diff shape/values plus canonical literal serialized source map; reordered validmetadata previouslychangedallpagewires, now all5generatedoutputs byteequal.",
     "actualAll4HostInputsEqualPreviousReproduction": true,
-    "summarySHA256": "264596336ba628796c2a2c2520882a96425460b0f18064d96745ebe0baa6df03",
-    "generatorSHA256": "e02736c3ea8ec1e63504a8b8f46da8a96023df7124bf95fc2ee342eb9b9e449d",
+    "summarySHA256": "c3095f1f53af9fa8d9b22d6eddaba80aae7557408bf5edb6aa08e5e2dd06674d",
+    "generatorSHA256": "26e73a9af3eaead8af7882d5b6be042452d9e6db9ca6d921c624aa2a5ecc141e",
     "syntheticCustody": "All4 round-tripped synthetic text/hash/bytes/source/custody/coverage/IDs/next/head/base bindings checked. Synthetic heads a*40/b*40 are fixture-only.",
-    "escapedRequest": "All4 notes2048NUL bytes; full49792-byte wire reproduces original digest; actual whole-vector refusal/0members.",
-    "responseCardinality": "Four/five candidates use SAME5-page source, same source/custody/coverage and exact first4members;4page2941bytes accepts;5page3066bytes refuses;4prefix accepted.",
-    "outputGuard": "Resolve existing output parent physically withrealpath before canonical repo containment/nonexistent-output checks. Actual symlink-to-private-simulated-repo before9b guard incorrectly wrote there; current guard exits1 before output. No actual Git checkout received protected files.",
+    "escapedRequest": "Version2 complete49792-byte four2048NUL-note wire wholly refused; original native version1 argument controls stay historical observations, not byte-equal version2 host execution.",
+    "responseCardinality": "Same5-page source, exact4page prefix/shared source/custody/coverage/context. Complete current metrics in executedCandidateOutcomes.",
+    "outputGuard": "Derive actual source checkout root from realpath(nbb/invoked-file) and script layout, independently ofcwd; realpath existing output parent before containment. Actual420 private simulated checkout accepted output from unrelatedcwd; current root/subdirectory/unrelatedcwd each exits1 before output. No realGit checkout received protected files.",
     "lineControl": "Complete one/twoline wires decode to same object, each under48000bytes; fixture accepts1/refuses2 independently ofbytecap.",
-    "nativeVersionAndIsolationProof": "profile3-four-findings-and-order-boundary-proof.json retains actualbefore/after outcomes; selected corpus and everycommitted1491page/375group record unchanged. Fixture-only, no productionAPI."
+    "nativeVersionAndIsolationProof": "profile3-complete-context-and-cwd-proof.json contains current source-root and mandatory-wire checks. Previous9b/420 controls remain immutable history.",
+    "actualOriginal1491PageGeometryAndTextDigestsUnchanged": true,
+    "completeContext": "Original qualified compiled observed_fields via appended test export, merged with restart-required? false in every corpus/synthetic/limit response.4096-byte valid present metadata and4098-byte next representable over control; complete original1491 pages/384groups/768projectedcalls. No production API."
   },
   "executedCandidateOutcomes": {
     "fixture-only": true,
@@ -541,7 +507,7 @@
         "measurement": {
           "bytes": 16384,
           "lines": 1,
-          "sha256": "9eed4192d5b8ff1d0a9f899bb6645bb21a7023d722174175dc808d51f2e48806"
+          "sha256": "08ce93410a05fa12ab2c775d641c48fe96b901375c8b3329ac01c2844a10e298"
         },
         "result": {
           "outcome": "accept",
@@ -553,7 +519,7 @@
         "measurement": {
           "bytes": 16385,
           "lines": 1,
-          "sha256": "2c5805c96da8105185fb9d7583cc8a0d089a70e4f3f73832b2c59eda441450a3"
+          "sha256": "e9ea228d41029030aa26165af1db2c9e792b11e78f4c9bdaf28104e110dd6606"
         },
         "result": {
           "outcome": "refuse",
@@ -565,7 +531,7 @@
         "measurement": {
           "bytes": 2326,
           "lines": 1,
-          "sha256": "90e63f73347a166dcca3866b775888a4822e08df62c19f1c565543fd5968fafe"
+          "sha256": "cdf811dc237414532fd05eb1fa77ee97dc6d759cb8df71764ef80b696b9d2c04"
         },
         "result": {
           "outcome": "accept",
@@ -577,7 +543,7 @@
         "measurement": {
           "bytes": 2327,
           "lines": 1,
-          "sha256": "45c2e6cd58f2242452102e35a2582bf1309e2e4b77e62d13fc5ee086bd01091d"
+          "sha256": "ad736c47e9261a65f757f10a7e41d521c6c67245e5f210e43b3d03d0c6319c5a"
         },
         "result": {
           "outcome": "refuse",
@@ -589,7 +555,7 @@
         "measurement": {
           "bytes": 688,
           "lines": 1,
-          "sha256": "815240ec54cc2acfb797bad99c5aa8dc9fa4cc6228cde139a7c9620c015ceb87"
+          "sha256": "1bd81c9d2621742be7e3fcc4f3c392805c7234190d94f9b2045b8ce4e66bbb0f"
         },
         "result": {
           "outcome": "accept",
@@ -601,7 +567,7 @@
         "measurement": {
           "bytes": 821,
           "lines": 1,
-          "sha256": "63430fe07eb9acb18fa4e4f2e1e7bdeea27341e61383afec20470772c7d83475"
+          "sha256": "086e52b022642fac212cece5898562eabe445fc9f4d6b85908c8710db4330bc8"
         },
         "result": {
           "outcome": "refuse",
@@ -613,7 +579,7 @@
         "measurement": {
           "bytes": 49792,
           "lines": 1,
-          "sha256": "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
+          "sha256": "84cb38fee26f6b27ff3e8bb9fd644ab2a961afaf57db4ebb4ee86495e66afb5a"
         },
         "result": {
           "outcome": "refuse",
@@ -631,7 +597,7 @@
         "measurement": {
           "bytes": 48000,
           "lines": 1,
-          "sha256": "f9fa541b2f7ba6ac3905a67acc96f26aa3ed5cdfbad93756f89404914ff54760"
+          "sha256": "9242c1a1c591301badefa4c9859ad5e07fb5ebf79b177d52a73211bc42bd0777"
         },
         "result": {
           "outcome": "accept",
@@ -642,7 +608,7 @@
         "measurement": {
           "bytes": 48001,
           "lines": 1,
-          "sha256": "3fc0db34a4d92ce63e9cb69e21510b3bbe30695165c1e2d323282b7de83626d0"
+          "sha256": "f690593d2df8c8846918c3b5681f9ebc0ce7db7827a319cf7aa345a80664761e"
         },
         "result": {
           "outcome": "refuse",
@@ -651,9 +617,9 @@
       },
       "exact-lines": {
         "measurement": {
-          "bytes": 1060,
+          "bytes": 5155,
           "lines": 1,
-          "sha256": "70ee668c2e97ac311a4d799a8cac8f697f3aba489252b43b0a6af58a32139e49"
+          "sha256": "2b1d0fc2d57f40dae69b2d8b3dc0c36f9f6e6805228a0eb3b2a1fc486e386fa7"
         },
         "result": {
           "outcome": "accept",
@@ -662,9 +628,9 @@
       },
       "over-lines": {
         "measurement": {
-          "bytes": 1061,
+          "bytes": 5156,
           "lines": 2,
-          "sha256": "aa25b73735abcd72dc9124f8c62ba94f7c233bea6191ffd44227462507a65c5f"
+          "sha256": "ab90916a66840cc083b61db48f1921bda98237255c0537314c65a7d295aee61f"
         },
         "result": {
           "outcome": "refuse",
@@ -711,10 +677,33 @@
         "credit": "fixture-only"
       }
     },
-    "calls": 750,
-    "groups": 375,
+    "context": {
+      "limit": 4096,
+      "synthetic-present": true,
+      "measurement": {
+        "bytes": 4096,
+        "lines": 1,
+        "sha256": "e0cb7259f1b07775789cb1be0d3672e6503123afb0d0d826b9ab04caa46b399e"
+      },
+      "outcome": {
+        "outcome": "accept",
+        "credit": "fixture-only"
+      },
+      "next-valid-over-measurement": {
+        "bytes": 4098,
+        "lines": 1,
+        "sha256": "ab0c1323be8926bf3c85cc272f7f4f5be65cf600f3a6f69ec550cbc5958458bd"
+      },
+      "next-valid-over-outcome": {
+        "outcome": "refuse",
+        "credit": "fixture-only"
+      }
+    },
+    "calls": 768,
+    "groups": 384,
     "baseline-calls": 2982,
     "nbb": "1.3.204",
+    "profile": "muse-review-batch-profile/2026-10-15-candidate-v2",
     "read-vectors": {
       "first-page": {
         "ids": [
@@ -722,9 +711,9 @@
         ],
         "pages": 2,
         "measurement": {
-          "bytes": 9235,
+          "bytes": 13330,
           "lines": 1,
-          "sha256": "37b80e8ebe9d81c2a8aeb7f6873a80745eab4b4ee4ee22118bb324d2179e2fdd"
+          "sha256": "ddf21f96510fca9b5786647d09111f874f98dbc713d767c6d32289a7c083adc8"
         }
       },
       "two-page-over": {
@@ -736,7 +725,7 @@
         "measurement": {
           "bytes": 48001,
           "lines": 1,
-          "sha256": "a3129438b0ede18459b8ce0740595353550720962f19ac5cd4b2cdfc71d92fdf"
+          "sha256": "7b01919bf567260f92ac1b92e32ed3d4c259b17168e9115dd9f689280f3abf7f"
         }
       },
       "single-page-over": {
@@ -747,7 +736,7 @@
         "measurement": {
           "bytes": 48001,
           "lines": 1,
-          "sha256": "3fc0db34a4d92ce63e9cb69e21510b3bbe30695165c1e2d323282b7de83626d0"
+          "sha256": "f690593d2df8c8846918c3b5681f9ebc0ce7db7827a319cf7aa345a80664761e"
         }
       },
       "four-pages": {
@@ -759,9 +748,9 @@
         ],
         "pages": 5,
         "measurement": {
-          "bytes": 2941,
+          "bytes": 7036,
           "lines": 1,
-          "sha256": "65673967f4c47136e0f62736968c5b5a5eb12daa12d6e32aaaa3bdb86f85bbe4"
+          "sha256": "9ce5aa72300968ec1a3aea1c1d1a4fa28c3f6c394043bab165f894243a40d980"
         }
       },
       "five-pages": {
@@ -774,9 +763,9 @@
         ],
         "pages": 5,
         "measurement": {
-          "bytes": 3066,
+          "bytes": 7161,
           "lines": 1,
-          "sha256": "a8dd497cfb2957d2c63b255bc447f50a27462e0a5f1a0b4b61298b0bae5be560"
+          "sha256": "1c3242845b1ca6ef0850aaa3817cc5c48155e43ff8f6074c73e287dd45820ce9"
         }
       }
     }
@@ -848,6 +837,578 @@
       "generatorSHA256": "d11b59e4a1d2ad0cbe59a9cee143862919a5a1609aeeafc5c83982097b0a5f4a",
       "fixtureSHA256": "bf78e492ace8d50ca18afec0f187b24f890d3fe9007d536909a3488d4e43cb9d",
       "testSHA256": "5312d9e32032dbd018644593ae83282b1e6e2f38e2426e715c9a58a0b1951ae1"
+    }
+  },
+  "priorUnwrappedProfile": {
+    "sourceCommit": "42015d986fd6f2fa006af8e2113bec80650159b8",
+    "qualification": "INCOMPLETE: omitted mandatory real-pipeline context/restart fields; not a valid complete-wire projection",
+    "projection": {
+      "baselineReadCalls": 1491,
+      "baselineAssessmentCalls": 1491,
+      "batchReadCalls": 375,
+      "batchAssessmentCalls": 375,
+      "baselineCalls": 2982,
+      "batchCalls": 750,
+      "multiPageGroups": 375,
+      "maxMembership": 4,
+      "maximumMeasuredResponse": 47820,
+      "maximumSyntheticRegularRequest": 1010,
+      "reductionPercent": 74.84909456740442,
+      "notThroughputOrCompletionProof": true
+    },
+    "profile": {
+      "id": "muse-review-batch-profile/2026-10-15-candidate-v1",
+      "response_bytes": 48000,
+      "response_lines": 1,
+      "max_pages": 4,
+      "request_bytes": 16384,
+      "note_utf8_bytes": 2048,
+      "host_bytes": 51200,
+      "host_lines": 2000,
+      "source": "candidate measurement, not production API; historical GHA effective settings unknown"
+    },
+    "vectors": [
+      {
+        "name": "unicode",
+        "inputBytes": 17,
+        "inputSHA256": "76f40eddec73b29366c155b48e6e2b6c33cb11f4c5092ff0f03d7f3e2fc3991f",
+        "pages": 1,
+        "wire": {
+          "bytes": 1055,
+          "lines": 1,
+          "sha256": "4040051c651838b95e479a169ee462ca5d411df460c79d9c1ed1f7a8f51f33f9"
+        }
+      },
+      {
+        "name": "escaping",
+        "inputBytes": 6,
+        "inputSHA256": "cf09b6562e69a7379472474834ce188da27a9e275ec27d1ed4c4b84a67b7ffc1",
+        "pages": 1,
+        "wire": {
+          "bytes": 1053,
+          "lines": 1,
+          "sha256": "3e513f6a0723869d16c5e7f83a8ee0f8917aa917230392bef58b885a55a1b65b"
+        }
+      },
+      {
+        "name": "long-line",
+        "inputBytes": 8192,
+        "inputSHA256": "91a87117670aa06f604c6c6bf4359e82d09cf581606ce8ca4da87d88ad6268bc",
+        "pages": 1,
+        "wire": {
+          "bytes": 9235,
+          "lines": 1,
+          "sha256": "c86278a27472e99b1d7fe400727d0ccb778bb7bb1b1bc96a9119ee98dece7ea1"
+        }
+      },
+      {
+        "name": "surrogate-boundary",
+        "inputBytes": 8199,
+        "inputSHA256": "03e039186ef1c2a1e3519daff49a7ce01f407f32f4a00707644b0dd0b54acfbc",
+        "pages": 2,
+        "wire": {
+          "bytes": 9365,
+          "lines": 1,
+          "sha256": "5e1234a24ed8a71d01ccc4cb9531aa764bb51c60b9a5531e5ecc1b1761260cb7"
+        }
+      }
+    ],
+    "executedCandidateOutcomes": {
+      "fixture-only": true,
+      "model-calls": 0,
+      "corpus-sha256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+      "requests": {
+        "exact-bytes": {
+          "measurement": {
+            "bytes": 16384,
+            "lines": 1,
+            "sha256": "9eed4192d5b8ff1d0a9f899bb6645bb21a7023d722174175dc808d51f2e48806"
+          },
+          "result": {
+            "outcome": "accept",
+            "members": 4,
+            "credit": "fixture-only"
+          }
+        },
+        "over-bytes": {
+          "measurement": {
+            "bytes": 16385,
+            "lines": 1,
+            "sha256": "2c5805c96da8105185fb9d7583cc8a0d089a70e4f3f73832b2c59eda441450a3"
+          },
+          "result": {
+            "outcome": "refuse",
+            "members": 0,
+            "credit": "fixture-only"
+          }
+        },
+        "exact-note": {
+          "measurement": {
+            "bytes": 2326,
+            "lines": 1,
+            "sha256": "90e63f73347a166dcca3866b775888a4822e08df62c19f1c565543fd5968fafe"
+          },
+          "result": {
+            "outcome": "accept",
+            "members": 1,
+            "credit": "fixture-only"
+          }
+        },
+        "over-note": {
+          "measurement": {
+            "bytes": 2327,
+            "lines": 1,
+            "sha256": "45c2e6cd58f2242452102e35a2582bf1309e2e4b77e62d13fc5ee086bd01091d"
+          },
+          "result": {
+            "outcome": "refuse",
+            "members": 0,
+            "credit": "fixture-only"
+          }
+        },
+        "exact-cardinality": {
+          "measurement": {
+            "bytes": 688,
+            "lines": 1,
+            "sha256": "815240ec54cc2acfb797bad99c5aa8dc9fa4cc6228cde139a7c9620c015ceb87"
+          },
+          "result": {
+            "outcome": "accept",
+            "members": 4,
+            "credit": "fixture-only"
+          }
+        },
+        "over-cardinality": {
+          "measurement": {
+            "bytes": 821,
+            "lines": 1,
+            "sha256": "63430fe07eb9acb18fa4e4f2e1e7bdeea27341e61383afec20470772c7d83475"
+          },
+          "result": {
+            "outcome": "refuse",
+            "members": 0,
+            "credit": "fixture-only"
+          }
+        },
+        "max-escaped-notes": {
+          "measurement": {
+            "bytes": 49792,
+            "lines": 1,
+            "sha256": "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
+          },
+          "result": {
+            "outcome": "refuse",
+            "members": 0,
+            "credit": "fixture-only"
+          }
+        }
+      },
+      "bundle-sha256": "9902552ea853a30fd20ec1d35e980416406ae2b161217017f58480ba324056ff",
+      "pages": 1491,
+      "production-api": false,
+      "runtime": "v22.20.0",
+      "responses": {
+        "exact": {
+          "measurement": {
+            "bytes": 48000,
+            "lines": 1,
+            "sha256": "f9fa541b2f7ba6ac3905a67acc96f26aa3ed5cdfbad93756f89404914ff54760"
+          },
+          "result": {
+            "outcome": "accept",
+            "credit": "fixture-only"
+          }
+        },
+        "over": {
+          "measurement": {
+            "bytes": 48001,
+            "lines": 1,
+            "sha256": "3fc0db34a4d92ce63e9cb69e21510b3bbe30695165c1e2d323282b7de83626d0"
+          },
+          "result": {
+            "outcome": "refuse",
+            "credit": "fixture-only"
+          }
+        },
+        "exact-lines": {
+          "measurement": {
+            "bytes": 1060,
+            "lines": 1,
+            "sha256": "70ee668c2e97ac311a4d799a8cac8f697f3aba489252b43b0a6af58a32139e49"
+          },
+          "result": {
+            "outcome": "accept",
+            "credit": "fixture-only"
+          }
+        },
+        "over-lines": {
+          "measurement": {
+            "bytes": 1061,
+            "lines": 2,
+            "sha256": "aa25b73735abcd72dc9124f8c62ba94f7c233bea6191ffd44227462507a65c5f"
+          },
+          "result": {
+            "outcome": "refuse",
+            "credit": "fixture-only"
+          }
+        }
+      },
+      "read-cases": {
+        "whole-prefix": {
+          "outcome": "accept",
+          "ids": [
+            1
+          ],
+          "credit": "fixture-only"
+        },
+        "whole-page-refusal": {
+          "outcome": "refuse",
+          "ids": [],
+          "credit": "fixture-only"
+        },
+        "cardinality-exact": {
+          "outcome": "accept",
+          "ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "credit": "fixture-only"
+        },
+        "cardinality-over": {
+          "outcome": "refuse",
+          "ids": [],
+          "credit": "fixture-only"
+        },
+        "cardinality-prefix": {
+          "outcome": "accept",
+          "ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "credit": "fixture-only"
+        }
+      },
+      "calls": 750,
+      "groups": 375,
+      "baseline-calls": 2982,
+      "nbb": "1.3.204",
+      "read-vectors": {
+        "first-page": {
+          "ids": [
+            1
+          ],
+          "pages": 2,
+          "measurement": {
+            "bytes": 9235,
+            "lines": 1,
+            "sha256": "37b80e8ebe9d81c2a8aeb7f6873a80745eab4b4ee4ee22118bb324d2179e2fdd"
+          }
+        },
+        "two-page-over": {
+          "ids": [
+            1,
+            2
+          ],
+          "pages": 2,
+          "measurement": {
+            "bytes": 48001,
+            "lines": 1,
+            "sha256": "a3129438b0ede18459b8ce0740595353550720962f19ac5cd4b2cdfc71d92fdf"
+          }
+        },
+        "single-page-over": {
+          "ids": [
+            1
+          ],
+          "pages": 1,
+          "measurement": {
+            "bytes": 48001,
+            "lines": 1,
+            "sha256": "3fc0db34a4d92ce63e9cb69e21510b3bbe30695165c1e2d323282b7de83626d0"
+          }
+        },
+        "four-pages": {
+          "ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "pages": 5,
+          "measurement": {
+            "bytes": 2941,
+            "lines": 1,
+            "sha256": "65673967f4c47136e0f62736968c5b5a5eb12daa12d6e32aaaa3bdb86f85bbe4"
+          }
+        },
+        "five-pages": {
+          "ids": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "pages": 5,
+          "measurement": {
+            "bytes": 3066,
+            "lines": 1,
+            "sha256": "a8dd497cfb2957d2c63b255bc447f50a27462e0a5f1a0b4b61298b0bae5be560"
+          }
+        }
+      }
+    },
+    "reproduction": {
+      "generator": "scripts/extern/verify_review_batch_profile.cljs",
+      "fixture": "test/cljs/eta_mu/fixtures/review_batch_profile.cljc",
+      "tests": "test/cljs/eta_mu/fixtures/review_batch_profile_test.cljs",
+      "inputs": "Explicit corpus/manifest/qualified bundle/zod4.4.3/new private output flags; no author-specific generator required. Fetch pinned native artifacts or provide equivalent exact hashed bytes. Source corpus remains protected.",
+      "regressionOutputs": "Full nonsecret synthetic wire/argument contents and Unicode/escaping/host controls generated into private output, plus all original page/group measurements. Existing initial private recipes are historical observations only.",
+      "modelCalls": 0,
+      "productionAPI": false,
+      "actualRuntime": "Node22.20.0/nbb1.3.204",
+      "actualAll1491PageAnd375GroupRecordsEqualCommitted": true,
+      "fixtureSHA256": "bf78e492ace8d50ca18afec0f187b24f890d3fe9007d536909a3488d4e43cb9d",
+      "testSHA256": "5312d9e32032dbd018644593ae83282b1e6e2f38e2426e715c9a58a0b1951ae1",
+      "runtimeGuard": "Node22.20.0 and actual nbb.core/version1.3.204 required before inputs/output/bundle. Cached actualNBB1.4.207 RED printedPASS at9b; current guard exits1 before output. Selectedpair passes.",
+      "metadataGuard": "Exact full_diff shape/values plus canonical literal serialized source map; reordered validmetadata previouslychangedallpagewires, now all5generatedoutputs byteequal.",
+      "actualAll4HostInputsEqualPreviousReproduction": true,
+      "summarySHA256": "264596336ba628796c2a2c2520882a96425460b0f18064d96745ebe0baa6df03",
+      "generatorSHA256": "e02736c3ea8ec1e63504a8b8f46da8a96023df7124bf95fc2ee342eb9b9e449d",
+      "syntheticCustody": "All4 round-tripped synthetic text/hash/bytes/source/custody/coverage/IDs/next/head/base bindings checked. Synthetic heads a*40/b*40 are fixture-only.",
+      "escapedRequest": "All4 notes2048NUL bytes; full49792-byte wire reproduces original digest; actual whole-vector refusal/0members.",
+      "responseCardinality": "Four/five candidates use SAME5-page source, same source/custody/coverage and exact first4members;4page2941bytes accepts;5page3066bytes refuses;4prefix accepted.",
+      "outputGuard": "Resolve existing output parent physically withrealpath before canonical repo containment/nonexistent-output checks. Actual symlink-to-private-simulated-repo before9b guard incorrectly wrote there; current guard exits1 before output. No actual Git checkout received protected files.",
+      "lineControl": "Complete one/twoline wires decode to same object, each under48000bytes; fixture accepts1/refuses2 independently ofbytecap.",
+      "nativeVersionAndIsolationProof": "profile3-four-findings-and-order-boundary-proof.json retains actualbefore/after outcomes; selected corpus and everycommitted1491page/375group record unchanged. Fixture-only, no productionAPI."
+    },
+    "records": {
+      "corpus-pages.jsonl": {
+        "sha256": "5b64024ba02cf0fe8a8bd6c39c526591c7b387a188f7a14fe9beaba7d611e27b",
+        "records": 1491
+      },
+      "corpus-batches.jsonl": {
+        "sha256": "95a7072826759698e044c55f77c65ab3f9d7b3b34041d6d9c995ffc1a4a5bec7",
+        "records": 375
+      }
+    },
+    "responseLimits": {
+      "exact": {
+        "measurement": {
+          "bytes": 48000,
+          "lines": 1,
+          "sha256": "f9fa541b2f7ba6ac3905a67acc96f26aa3ed5cdfbad93756f89404914ff54760"
+        },
+        "result": {
+          "outcome": "accept",
+          "credit": "fixture-only"
+        }
+      },
+      "oneOver": {
+        "measurement": {
+          "bytes": 48001,
+          "lines": 1,
+          "sha256": "3fc0db34a4d92ce63e9cb69e21510b3bbe30695165c1e2d323282b7de83626d0"
+        },
+        "result": {
+          "outcome": "refuse",
+          "credit": "fixture-only"
+        }
+      },
+      "initialPaddedSerializationControl": {
+        "exact": {
+          "bytes": 48000,
+          "lines": 1,
+          "sha256": "ab13aff84f44a6a7517f6a112a811c523e12d5129e1ac1874c078fd13445d377"
+        },
+        "oneOver": {
+          "bytes": 48001,
+          "lines": 1,
+          "sha256": "473e78eebd13e34a9d9220de77bebf6d8cd3779c45bc69b8a0ddb0ade2d80be6"
+        }
+      },
+      "exactLines": {
+        "measurement": {
+          "bytes": 1060,
+          "lines": 1,
+          "sha256": "70ee668c2e97ac311a4d799a8cac8f697f3aba489252b43b0a6af58a32139e49"
+        },
+        "result": {
+          "outcome": "accept",
+          "credit": "fixture-only"
+        }
+      },
+      "oneOverLines": {
+        "measurement": {
+          "bytes": 1061,
+          "lines": 2,
+          "sha256": "aa25b73735abcd72dc9124f8c62ba94f7c233bea6191ffd44227462507a65c5f"
+        },
+        "result": {
+          "outcome": "refuse",
+          "credit": "fixture-only"
+        }
+      },
+      "lineRendering": "Same complete original-encoded object; valid JSON whitespace newline inserted after first brace for2-line receiver refusal control. Not an observation that original serializer emits2lines."
+    },
+    "requestCases": {
+      "exactBytes": {
+        "bytes": 16384,
+        "lines": 1,
+        "sha256": "f5455f6e1c271a53ace4701ce7469e1fbf2d1baea2aa6ea86e736e93a17e3888"
+      },
+      "oneOverBytes": {
+        "bytes": 16385,
+        "lines": 1,
+        "sha256": "3466dcd85abe9ece0c10050509db0463ce8d97695e5fc582c24ab5989a4f103e"
+      },
+      "exactNote": {
+        "bytes": 8832,
+        "lines": 1,
+        "sha256": "217c63613aa98eb3fa0fbd97cf59b186f816029c618fc5fb280c7ecc4465daea"
+      },
+      "oneOverNote": {
+        "bytes": 8836,
+        "lines": 1,
+        "sha256": "ea2702e1b0679df3a6a894e8adc04386aa8ff90eddd072c1bad38f5b0fe6b879"
+      },
+      "maxEscapedNotes": {
+        "bytes": 49792,
+        "lines": 1,
+        "sha256": "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
+      },
+      "exactCardinality": 4,
+      "oneOverCardinality": 5,
+      "policy": "candidate mathematical/schema controls only; production request guard not yet implemented; >16384 bytes or >4 members or any >2048-byte note refuses entire vector",
+      "executedValidCandidateVectors": {
+        "exact-bytes": {
+          "measurement": {
+            "bytes": 16384,
+            "lines": 1,
+            "sha256": "9eed4192d5b8ff1d0a9f899bb6645bb21a7023d722174175dc808d51f2e48806"
+          },
+          "result": {
+            "outcome": "accept",
+            "members": 4,
+            "credit": "fixture-only"
+          }
+        },
+        "over-bytes": {
+          "measurement": {
+            "bytes": 16385,
+            "lines": 1,
+            "sha256": "2c5805c96da8105185fb9d7583cc8a0d089a70e4f3f73832b2c59eda441450a3"
+          },
+          "result": {
+            "outcome": "refuse",
+            "members": 0,
+            "credit": "fixture-only"
+          }
+        },
+        "exact-note": {
+          "measurement": {
+            "bytes": 2326,
+            "lines": 1,
+            "sha256": "90e63f73347a166dcca3866b775888a4822e08df62c19f1c565543fd5968fafe"
+          },
+          "result": {
+            "outcome": "accept",
+            "members": 1,
+            "credit": "fixture-only"
+          }
+        },
+        "over-note": {
+          "measurement": {
+            "bytes": 2327,
+            "lines": 1,
+            "sha256": "45c2e6cd58f2242452102e35a2582bf1309e2e4b77e62d13fc5ee086bd01091d"
+          },
+          "result": {
+            "outcome": "refuse",
+            "members": 0,
+            "credit": "fixture-only"
+          }
+        },
+        "exact-cardinality": {
+          "measurement": {
+            "bytes": 688,
+            "lines": 1,
+            "sha256": "815240ec54cc2acfb797bad99c5aa8dc9fa4cc6228cde139a7c9620c015ceb87"
+          },
+          "result": {
+            "outcome": "accept",
+            "members": 4,
+            "credit": "fixture-only"
+          }
+        },
+        "over-cardinality": {
+          "measurement": {
+            "bytes": 821,
+            "lines": 1,
+            "sha256": "63430fe07eb9acb18fa4e4f2e1e7bdeea27341e61383afec20470772c7d83475"
+          },
+          "result": {
+            "outcome": "refuse",
+            "members": 0,
+            "credit": "fixture-only"
+          }
+        },
+        "max-escaped-notes": {
+          "measurement": {
+            "bytes": 49792,
+            "lines": 1,
+            "sha256": "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
+          },
+          "result": {
+            "outcome": "refuse",
+            "members": 0,
+            "credit": "fixture-only"
+          }
+        }
+      },
+      "executedWholeReadPrefixOrRefusal": {
+        "whole-prefix": {
+          "outcome": "accept",
+          "ids": [
+            1
+          ],
+          "credit": "fixture-only"
+        },
+        "whole-page-refusal": {
+          "outcome": "refuse",
+          "ids": [],
+          "credit": "fixture-only"
+        },
+        "cardinality-exact": {
+          "outcome": "accept",
+          "ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "credit": "fixture-only"
+        },
+        "cardinality-over": {
+          "outcome": "refuse",
+          "ids": [],
+          "credit": "fixture-only"
+        },
+        "cardinality-prefix": {
+          "outcome": "accept",
+          "ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "credit": "fixture-only"
+        }
+      }
     }
   }
 }

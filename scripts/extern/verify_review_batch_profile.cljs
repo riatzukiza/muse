@@ -31,7 +31,7 @@
       zod (fs/realpathSync (get opts "--zod"))
       requested-out (path/resolve (get opts "--out"))
       out (path/join (fs/realpathSync (path/dirname requested-out)) (path/basename requested-out))
-      repo (fs/realpathSync (.cwd js/process))
+      repo (path/resolve (path/dirname (fs/realpathSync (nbb/invoked-file))) "../..")
       _ (assert (and (not= repo out) (not (str/starts-with? out (str repo path/sep))))
                 "Protected corpus wires must be written outside this checkout.")
       _ (assert (not (fs/existsSync out)) "Output must be a new owned directory.")
@@ -52,7 +52,8 @@
       bridge-file (path/join out "qualified-test-bridge.mjs")
       suffix (str "\n// Private test exports; qualified original prefix unchanged.\n"
                   "export function profileEncode(v){return eta_mu.boundaries.opencode.encode_result(cljs.core.js__GT_clj(v,cljs.core.keyword('keywordize-keys'),true));}\n"
-                  "export function profilePages(t){return cljs.core.clj__GT_js(eta_mu.domain.review.diff_chunks(t));}\n")
+                  "export function profilePages(t){return cljs.core.clj__GT_js(eta_mu.domain.review.diff_chunks(t));}\n"
+                  "export function profileContext(s){let o=cljs.core.js__GT_clj({source:s},cljs.core.keyword('keywordize-keys'),true);o=cljs.core.assoc(o,cljs.core.keyword('status'),cljs.core.keyword('present'));return cljs.core.clj__GT_js(cljs.core.assoc(eta_mu.infra.review_pipeline.observed_fields(o),cljs.core.keyword('restart-required?'),false));}\n")
       _ (fs/writeFileSync bridge-file (js/Buffer.concat #js [original (js/Buffer.from suffix)]) #js {:mode 384})
       load (modules/createRequire (path/join out "fixture-driver.cjs"))
       bridge (load bridge-file)
@@ -63,7 +64,24 @@
       _ (assert (= 1491 (count original-pages)))
       pages (mapv #(assoc % :sha256 (sha (:text %))) original-pages)
       ids (mapv :id pages)
-      profile-id "muse-review-batch-profile/2026-10-15-candidate-v1"
+      profile-id "muse-review-batch-profile/2026-10-15-candidate-v2"
+      context-fields (fn [source]
+                       (js->clj (.profileContext bridge (clj->js source)) :keywordize-keys true))
+      context-source {:path "/profile-fixture/x" :bytes 1 :sha256 (sha "x")}
+      context-base-bytes (utf8-bytes (encode (context-fields context-source)))
+      context-padding (quot (- (:context-metadata-bytes fixture/profile) context-base-bytes) 2)
+      context-source (update context-source :path str (apply str (repeat context-padding "p")))
+      context (context-fields context-source)
+      context-bytes (utf8-bytes (encode context))
+      over-context (context-fields (update context-source :path str "p"))
+      over-context-bytes (utf8-bytes (encode over-context))
+      _ (assert (= 4096 context-bytes))
+      _ (assert (= :accept (:outcome (fixture/context-outcome context-bytes))))
+      _ (assert (= 4098 over-context-bytes))
+      _ (assert (= :refuse (:outcome (fixture/context-outcome over-context-bytes))))
+      _ (assert (= context-source (:context-source context) (get-in context [:context-observation :source])))
+      _ (assert (= #{:context-protocol :context-source :context-observation :restart-required?} (set (keys context))))
+      _ (assert (= false (:restart-required? context)))
       source {:base_sha (:base_sha manifest) :head_sha (:head_sha manifest)
               :diff_base_sha (:diff_base_sha manifest)
               :full_diff {:path "basehead.diff" :bytes 11840401 :sha256 (sha corpus)}}
@@ -71,12 +89,12 @@
       custody {:profile profile-id :session (apply str (repeat 128 "s"))
                :source_sha256 (sha corpus) :head_sha (:head_sha manifest) :base_sha (:base_sha manifest)}
       response (fn [members]
-                 {:ok? true :chunks members :input-source source :coverage coverage
+                 (merge context {:ok? true :chunks members :input-source source :coverage coverage
                   :batch {:ids (mapv :id members) :first-id (:id (first members))
                           :last-id (:id (last members))
                           :next-id (when (< (:id (last members)) (count pages)) (inc (:id (last members))))
                           :profile profile-id}
-                  :custody custody})
+                  :custody custody}))
       request (fn [members note]
                 {:assessments (mapv #(assoc (select-keys % [:id :start :end :sha256]) :note note) members)
                  :profile profile-id :source_sha256 (sha corpus)})
@@ -94,7 +112,6 @@
                        _ (assert (= :accept (:outcome selected)) "A whole original page cannot fit.")
                        n (count (:ids selected))]
                    (recur (+ at n) (conj result (nth prefixes (dec n)))))))
-      _ (assert (= 375 (count groups)))
       _ (assert (= ids (vec (mapcat :ids groups))))
       synthetic-wire (fn [value member-count]
                        (let [all (mapv #(assoc % :sha256 (sha (:text %)))
@@ -200,7 +217,7 @@
     (assert (= :refuse (get-in requests [key :result :outcome])))
     (assert (zero? (get-in requests [key :result :members]))))
   (assert (= 49792 (get-in requests [:max-escaped-notes :measurement :bytes])))
-  (assert (= "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
+  (assert (= "84cb38fee26f6b27ff3e8bb9fd644ab2a961afaf57db4ebb4ee86495e66afb5a"
              (get-in requests [:max-escaped-notes :measurement :sha256])))
   (doseq [[n v] [[4 four-pages] [5 five-pages]]]
     (assert (= n (count (:ids v))))
@@ -224,7 +241,9 @@
   (assert (= :refuse (get-in responses [:over :result :outcome])))
   (assert (= [1] (get-in read-cases [:whole-prefix :ids])))
   (assert (= :refuse (get-in read-cases [:whole-page-refusal :outcome])))
-  (write! out "synthetic-vectors.json" {:responses responses :requests requests :read-cases read-cases :read-vectors read-vectors :unicode unicode})
+  (write! out "synthetic-vectors.json" {:responses responses :requests requests :read-cases read-cases :read-vectors read-vectors :unicode unicode
+                                       :context {:fields context :measurement (metrics (encode context))
+                                                 :over-fields over-context :over-measurement (metrics (encode over-context))}})
   (write! out "host-control-inputs.json"
           {:byte-exact (apply str (repeat 51200 "x"))
            :byte-over (apply str (repeat 51201 "x"))
@@ -239,11 +258,18 @@
   (write! out "summary.json"
           {:fixture-only true :production-api false :model-calls 0
            :runtime (.-version js/process) :nbb (nbb/version) :corpus-sha256 (sha corpus)
-           :bundle-sha256 (sha original) :pages (count pages) :groups (count groups)
+           :bundle-sha256 (sha original)
+           :profile profile-id :context {:limit 4096 :synthetic-present true
+                                        :measurement (metrics (encode context))
+                                        :outcome (fixture/context-outcome context-bytes)
+                                        :next-valid-over-measurement (metrics (encode over-context))
+                                        :next-valid-over-outcome (fixture/context-outcome over-context-bytes)}
+           :pages (count pages) :groups (count groups)
            :calls (* 2 (count groups)) :baseline-calls (* 2 (count pages))
            :responses (into {} (map (fn [[k v]] [k (dissoc v :wire)]) responses))
            :requests (into {} (map (fn [[k v]] [k (dissoc v :value :wire)]) requests))
            :read-cases read-cases
            :read-vectors (into {} (map (fn [[k v]] [k {:ids (:ids v) :pages (:pages v)
                                                        :measurement (metrics (:wire v))}]) read-vectors))})
-  (println "PASS diagnostic vectors, every selected exact/over outcome,1491original pages/375whole groups; model0/productionAPI=false"))
+  (println (str "PASS diagnostic vectors, complete4096-byte context,1491original pages/" (count groups)
+                "whole groups; model0/productionAPI=false")))
