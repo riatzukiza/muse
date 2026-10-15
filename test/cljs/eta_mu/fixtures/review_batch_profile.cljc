@@ -5,7 +5,14 @@
 
 (def profile
   {:response-bytes 48000 :response-lines 1 :max-pages 4
-   :context-metadata-bytes 4096 :request-bytes 16384 :note-bytes 2048})
+   :context-metadata-bytes 4096 :request-bytes 16384 :note-bytes 2048
+   :session-id-bytes 128 :session-json-bytes 130})
+
+(defn session-outcome [{:keys [bytes json-bytes nonblank?]}]
+  {:outcome (if (and (true? nonblank?) (pos-int? bytes) (pos-int? json-bytes)
+                     (<= bytes (:session-id-bytes profile))
+                     (<= json-bytes (:session-json-bytes profile))) :accept :refuse)
+   :credit :fixture-only})
 
 (defn context-outcome [bytes]
   {:outcome (if (and (nat-int? bytes) (<= bytes (:context-metadata-bytes profile)))

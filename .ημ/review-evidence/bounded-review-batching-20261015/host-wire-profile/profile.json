@@ -13,7 +13,10 @@
     "host_bytes": 51200,
     "host_lines": 2000,
     "source": "complete original compiled context fields + candidate wire measurement; no production API; historical GHA effective settings unknown",
-    "context_metadata_bytes": 4096
+    "context_metadata_bytes": 4096,
+    "session_utf8_bytes": 128,
+    "session_json_utf8_bytes": 130,
+    "sessionBoundScope": "Selected candidate batch profile only; not a claimed host maximum or change to existing single-page review law."
   },
   "source": {
     "muse": "a9a62f0d509056406f3dd7d8c86a13551be168cd",
@@ -47,13 +50,14 @@
     "boundBeforeEffects": true
   },
   "candidateWireContract": {
-    "response": "ok?, chunks(original id,start,end,text + SHA256), input-source, worst-case coverage/missing, batch IDs/first/last/next/profile, custody source/base/head/profile/128-byte session, and all original compiled observed_fields: context-protocol/context-observation/context-source + actual successful-read restart-required? false",
+    "response": "ok?, chunks(original id,start,end,text + SHA256), input-source, worst-case coverage/missing, batch IDs/first/last/next/profile, custody source/base/head/profile/profile-bounded128-UTF8/130-JSON-byte session, and all original compiled observed_fields: context-protocol/context-observation/context-source + actual successful-read restart-required? false",
     "assessment": "ordered vector of original id/start/end/digest and separate nonblank bounded note; profile/source binding; canonical native call/part/event membership retained by verifier; no fabricated per-page events",
     "read": "only whole-page consecutive prefix selected before delivery mutation",
     "assessment_atomicity": "all submitted members or refusal; no prefix fallback",
     "effectiveSettings": "future consumer must capture allowlisted resolved settings/provenance; unknown/different profile refuses before review effects",
     "capacity": "locally enforceable request shape/serialized bytes only; selected real provider maximum UNKNOWN",
-    "contextMetadata": "Complete encoded metadata object including braces <=4096UTF8 bytes, verified valid current custody before effects; unknown/unavailable/changed/oversized refuses whole invocation before delivery/coverage mutation. Measurement uses valid synthetic present observation with maximal4096-byte metadata; next valid path extension4098 refuses. Synthetic descriptor is not actual context-read evidence."
+    "contextMetadata": "Complete encoded metadata object including braces <=4096UTF8 bytes, verified valid current custody before effects; unknown/unavailable/changed/oversized refuses whole invocation before delivery/coverage mutation. Measurement uses valid synthetic present observation with maximal4096-byte metadata; next valid path extension4098 refuses. Synthetic descriptor is not actual context-read evidence.",
+    "session": "Actual nonblank native session ID must fit128UTF8 bytes AND its complete JSON string token (including quotes/escaping)130UTF8 bytes before batch effects. Derive both counts from actual string, never caller counts; unknown/oversized refuses this batch profile. Existing single-page/native identity semantics unchanged. No inferred general host maximum."
   },
   "responseLimits": {
     "exact": {
@@ -483,31 +487,103 @@
     "modelCalls": 0,
     "productionAPI": false,
     "actualRuntime": "Node22.20.0/nbb1.3.204",
-    "fixtureSHA256": "60e5c2b1536c77831629ff9d7bbef8c4702eb1a1ad60b4fc850f684dbe730a09",
-    "testSHA256": "77fd12a75371907ba41c6dd113220b62b221e38099028245a607c6bc84c19ef7",
+    "fixtureSHA256": "4d42052b84fdbb356d83e81d5d05a65e7448fe1aeeba8091918da39d4884e0b6",
+    "testSHA256": "638f564c5b30954d737044c214b5908c506fd30b7481a86aadcde14794c7868f",
     "runtimeGuard": "Node22.20.0 and actual nbb.core/version1.3.204 required before inputs/output/bundle. Cached actualNBB1.4.207 RED printedPASS at9b; current guard exits1 before output. Selectedpair passes.",
     "metadataGuard": "Exact full_diff shape/values plus canonical literal serialized source map; reordered validmetadata previouslychangedallpagewires, now all5generatedoutputs byteequal.",
     "actualAll4HostInputsEqualPreviousReproduction": true,
-    "summarySHA256": "3012f41375f1d5f2ac87209ee75c837264cffb20bd68d5ed4290e0be4dcc6606",
-    "generatorSHA256": "f10543954db14a7e0f7f4bba35f071904ab7ce0c3e0302d9be5b63b66b7e05f2",
+    "summarySHA256": "d385012dfa9cf7abcdecfe25374ce653a388a2761c58c2c31b302f9b68be81ce",
+    "generatorSHA256": "d002d31bfb43325c21b098fd29d896e3680a6cc8165f72a4ef8b317b4b7ca0a5",
     "syntheticCustody": "All4 round-tripped synthetic text/hash/bytes/source/custody/coverage/IDs/next/head/base bindings checked. Synthetic heads a*40/b*40 are fixture-only.",
     "escapedRequest": "Version2 complete49792-byte four2048NUL-note wire wholly refused; original native version1 argument controls stay historical observations, not byte-equal version2 host execution.",
     "responseCardinality": "Same5-page source, exact4page prefix/shared source/custody/coverage/context. Complete current metrics in executedCandidateOutcomes.",
-    "outputGuard": "Derive actual source checkout root from realpath(nbb/invoked-file) and script layout, independently ofcwd; realpath existing output parent before containment. Actual420 private simulated checkout accepted output from unrelatedcwd; current root/subdirectory/unrelatedcwd each exits1 before output. No realGit checkout received protected files.",
+    "outputGuard": "Resolve output parent physically and inspect every ancestor for .git file/directory and Git admin/bare HEAD+objects+refs. Symlink metadata is detected, inaccessible stat errors remain errors. New linked-worktree/parent-repo/Git-admin controls refuse before output. Actual old446 exact guards plus a single stop before firstmkdir accepted each; no protected corpus written by negative probes. Discovery found/home/err/.git, so older private reproduction was insideGit; preserve history without retroclaim. New positive runs under verified0700nonrepo private root.",
     "lineControl": "Complete one/twoline wires decode to same object, each under48000bytes; fixture accepts1/refuses2 independently ofbytecap.",
-    "nativeVersionAndIsolationProof": "profile3-complete-context-and-cwd-proof.json contains current source-root and mandatory-wire checks. Previous9b/420 controls remain immutable history.",
+    "nativeVersionAndIsolationProof": "profile3-session-and-all-git-guard-proof.json/profile3-isolated-nonrepo-git-controls.json retain current actual measurements and prewrite refusals. Previous proof paths remain immutable history; prior output ancestor assumptions are explicitly corrected.",
     "actualOriginal1491PageGeometryAndTextDigestsUnchanged": true,
     "completeContext": "Original qualified compiled observed_fields via appended test export, merged with restart-required? false in every corpus/synthetic/limit response.4096-byte valid present metadata and4098-byte next representable over control; complete original1491 pages/384groups/768projectedcalls. No production API.",
-    "dependencyIdentity": {"schema": "regular-file-tree-sha256/1","name": "zod","version": "4.4.3","files": 718,"bytes": 4558122,"sha256": "4e9594f99b06cc281e1f38c5319c6442ba017073f533fb526c1ba9ac628c4cd1"},
+    "dependencyIdentity": {
+      "schema": "regular-file-tree-sha256/1",
+      "name": "zod",
+      "version": "4.4.3",
+      "files": 718,
+      "bytes": 4558122,
+      "sha256": "4e9594f99b06cc281e1f38c5319c6442ba017073f533fb526c1ba9ac628c4cd1"
+    },
     "dependencyIdentityAlgorithm": "Sort slash-separated relative regular file paths lexically; hash UTF8 concatenation of path NUL decimal bytes NUL file SHA256 LF. Reject symlinks/special files. Capture bounded bytes before output and materialize only those bytes, never symlink the supplied package.",
     "dependencyRegistryIntegrity": "sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==",
     "dependencyExecutedProof": "Current4.4.3 tree equals all718files in the SHA512-integrity-verified published package. Oldc499 accepted same-version harmless modification; new code refuses both appended-comment and same-size whitespace controls before creating output. Qualified regular snapshot passes; all4wireoutputs unchanged, summary only adds dependency identity. First unsuccessful operator controls were corrected and do not supply verification.",
-    "groupComposition": "384total=341four+42three+1single;383multi-page groups. All1491original pages, every original group and768projected calls unchanged. Historical375-group profile retained unchanged."
+    "groupComposition": "384total=341four+42three+1single;383multi-page groups. All1491original pages, every original group and768projected calls unchanged. Historical375-group profile retained unchanged.",
+    "sessionGuard": "Explicit candidate batch bounds128UTF8 bytes and130completeJSON-tokenbytes. Actual64-é exact128/130 accepts, oneadditionalx129/131refuses;21NUL+xx raw23/encoded130 accepts, +x encoded131refuses even below rawcap. Worst current47982-byte group grows to48110 with otherwise nonblank256byte session; new profile refuses before effects. Fixture5tests21assertions; no production implementation or hostmaximum claim.",
+    "actualCorpusAndHostOutputsUnchangedWithSessionBounds": true,
+    "allPriorSyntheticVectorsUnchangedWithAddedSessionControls": true
   },
   "executedCandidateOutcomes": {
     "fixture-only": true,
+    "dependency": {
+      "schema": "regular-file-tree-sha256/1",
+      "name": "zod",
+      "version": "4.4.3",
+      "files": 718,
+      "bytes": 4558122,
+      "sha256": "4e9594f99b06cc281e1f38c5319c6442ba017073f533fb526c1ba9ac628c4cd1"
+    },
     "model-calls": 0,
+    "session-limits": {
+      "session-id-bytes": 128,
+      "session-json-bytes": 130
+    },
     "corpus-sha256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+    "session-controls": [
+      {
+        "label": "unicode-exact",
+        "measurement": {
+          "bytes": 128,
+          "json-bytes": 130,
+          "nonblank?": true
+        },
+        "result": {
+          "outcome": "accept",
+          "credit": "fixture-only"
+        }
+      },
+      {
+        "label": "unicode-over",
+        "measurement": {
+          "bytes": 129,
+          "json-bytes": 131,
+          "nonblank?": true
+        },
+        "result": {
+          "outcome": "refuse",
+          "credit": "fixture-only"
+        }
+      },
+      {
+        "label": "escaped-exact",
+        "measurement": {
+          "bytes": 23,
+          "json-bytes": 130,
+          "nonblank?": true
+        },
+        "result": {
+          "outcome": "accept",
+          "credit": "fixture-only"
+        }
+      },
+      {
+        "label": "escaped-over",
+        "measurement": {
+          "bytes": 24,
+          "json-bytes": 131,
+          "nonblank?": true
+        },
+        "result": {
+          "outcome": "refuse",
+          "credit": "fixture-only"
+        }
+      }
+    ],
     "requests": {
       "exact-bytes": {
         "measurement": {
@@ -597,6 +673,29 @@
     "bundle-sha256": "9902552ea853a30fd20ec1d35e980416406ae2b161217017f58480ba324056ff",
     "pages": 1491,
     "production-api": false,
+    "session-growth": {
+      "ids": [
+        942,
+        943,
+        944,
+        945
+      ],
+      "bounded-response-bytes": 47982,
+      "unsupported-response": {
+        "bytes": 48110,
+        "lines": 1,
+        "sha256": "efb3dacaa32cfaa202e6172f24708dc0d22407942aea8e6ff89b8bfebe4db4d2"
+      },
+      "unsupported-session": {
+        "bytes": 256,
+        "json-bytes": 258,
+        "nonblank?": true
+      },
+      "result": {
+        "outcome": "refuse",
+        "credit": "fixture-only"
+      }
+    },
     "runtime": "v22.20.0",
     "responses": {
       "exact": {

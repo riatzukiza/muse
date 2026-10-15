@@ -46,6 +46,17 @@ the original compiled context admission/observed-fields function. Its source
 is a clearly synthetic descriptor for one-byte `x` with its actual SHA256;
 it supplies no real context-read or assessment evidence.
 
+The selected candidate batch profile requires the actual nonblank native session
+ID to fit128UTF8 bytes AND its complete JSON string token, including quotes and
+escaping, to fit130UTF8 bytes. Derive both counts from the actual ID before batch
+effects; unknown/oversized values refuse this profile. This is no claimed host
+maximum or change to the existing single-page identity law.64 `é` characters
+measure128/130 and accept; adding `x` gives129/131 and refuses.21NUL characters
+plus `xx` measure23/130 and accept; another `x` gives24/131 and refuses despite
+the raw bytes fitting. The original128ASCII session occupies the full130-byte
+token budget. An unsupported256-byte session makes the actual largest47982-byte
+group48110bytes; the new profile refuses it. Original384groups stay unchanged.
+
 Version2 requires the complete encoded context metadata object (including braces)
 to fit4096UTF8 bytes. The controlled valid present descriptor fills exactly4096;
 its next valid path extension yields4098 and diagnostic refusal. A mathematical
@@ -89,7 +100,7 @@ entire vector refuses with zero accepted members. Version2 changes profile
 identity and therefore request/wire hashes. Original native version1 argument
 controls remain historical host observations; they are not version2 host execution.
 All current vectors/outcomes/hashes are retained in profile.json and regenerated
-private output. The diagnostic fixture tests pass4tests/14assertions; scoped
+private output. The diagnostic fixture tests pass5tests/21assertions; scoped
 clj-kondo has0errors/0warnings. The new context test first failed on the missing
 fixture function; it is not a production-law RED result.
 
@@ -163,14 +174,30 @@ nbb -cp test/cljs scripts/extern/verify_review_batch_profile.cljs \
   --out "$profile_private_parent/new-owned-run"
 ```
 
-The output parent must exist and the selected output must be new and private.
+The output parent must exist and the selected output must be new and private,
+outside every Git repository. Inspect every physically resolved parent for a
+`.git` file/directory, including linked worktrees, or Git-admin/bare
+`HEAD`+`objects`+`refs`; inaccessible metadata checks remain errors. Actual old446
+guard probes accepted other linked worktree, parent-repository and Git-admin
+destinations; each probe stopped immediately before its first output write.
+Current controls refuse all three before creating output. No protected corpus
+was written by these negative probes.
+
+Ancestor discovery found `/home/err/.git`: the older private reproduction
+directories beneath that home were inside Git. Their original bytes remain
+history; earlier claims that no Git checkout received source were too broad.
+The current positive reproduction uses a separately verified non-repository
+owner-only directory under `/var/tmp`, with0700 parent/output and0600 files.
+The old home location now correctly refuses. Do not relax the guard for ignored
+files or reuse a merely named “private” directory as non-repository evidence.
+
 The guard derives the physical checkout root from realpath(nbb/invoked-file) and
 its scripts/extern layout, independently of caller cwd; it resolves the existing
 output parent physically before containment checks. Actual old420 invocation from
 an unrelated cwd wrote inside a private simulated checkout. Current root,
 subdirectory and unrelated-cwd cases all refuse before creating output. Earlier
 symlink-parent, wrongNode/wrongNBB and malformed manifest controls stay historical
-proof; no real Git checkout received protected corpus files. Equal metadata maps
+proof subject to the ancestor correction above. Equal metadata maps
 are serialized in fixed field order. Full corpus-bearing output remains private.
 
 No production batching API, continuation, timeout increase, real provider call,

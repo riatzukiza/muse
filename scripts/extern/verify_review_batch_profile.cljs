@@ -59,6 +59,21 @@
       (fs/mkdirSync (path/dirname file) #js {:recursive true :mode 448})
       (fs/writeFileSync file bytes #js {:mode 384 :flag "wx"}))))
 
+(defn repository-destination? [directory]
+  (let [exists? #(some? (fs/lstatSync % #js {:throwIfNoEntry false}))]
+    (loop [at directory]
+      (if (or (exists? (path/join at ".git"))
+              (and (exists? (path/join at "HEAD"))
+                   (exists? (path/join at "objects"))
+                   (exists? (path/join at "refs"))))
+        true
+        (let [parent (path/dirname at)]
+          (if (= at parent) false (recur parent)))))))
+
+(defn session-measurement [value]
+  {:bytes (utf8-bytes value) :json-bytes (utf8-bytes (json value))
+   :nonblank? (not (str/blank? value))})
+
 (assert (= "v22.20.0" (.-version js/process)) "Qualified reproduction requires Node22.20.0.")
 (assert (= "1.3.204" (nbb/version)) "Qualified reproduction requires NBB1.3.204.")
 (assert (even? (count *command-line-args*)) "Arguments are flag/value pairs.")
@@ -75,6 +90,8 @@
       repo (path/resolve (path/dirname (fs/realpathSync (nbb/invoked-file))) "../..")
       _ (assert (and (not= repo out) (not (str/starts-with? out (str repo path/sep))))
                 "Protected corpus wires must be written outside this checkout.")
+      _ (assert (not (repository-destination? (path/dirname out)))
+                "Protected corpus output must be outside every Git worktree or repository.")
       _ (assert (not (fs/existsSync out)) "Output must be a new owned directory.")
       _ (assert (= "9902552ea853a30fd20ec1d35e980416406ae2b161217017f58480ba324056ff" (sha original))
                 "Only the exact qualified original compiled bundle is executable.")
@@ -127,7 +144,18 @@
               :diff_base_sha (:diff_base_sha manifest)
               :full_diff {:path "basehead.diff" :bytes 11840401 :sha256 (sha corpus)}}
       coverage {:chunks (count pages) :delivered (count pages) :assessed 0 :missing ids}
-      custody {:profile profile-id :session (apply str (repeat 128 "s"))
+      session (apply str (repeat 128 "s"))
+      _ (assert (= :accept (:outcome (fixture/session-outcome (session-measurement session)))))
+      session-controls (mapv (fn [[label value]]
+                               (let [measurement (session-measurement value)]
+                                 {:label label :value value :measurement measurement
+                                  :result (fixture/session-outcome measurement)}))
+                             [["unicode-exact" (apply str (repeat 64 "é"))]
+                              ["unicode-over" (str (apply str (repeat 64 "é")) "x")]
+                              ["escaped-exact" (str (apply str (repeat 21 "\u0000")) "xx")]
+                              ["escaped-over" (str (apply str (repeat 21 "\u0000")) "xxx")]])
+      _ (assert (= [:accept :refuse :accept :refuse] (mapv #(get-in % [:result :outcome]) session-controls)))
+      custody {:profile profile-id :session session
                :source_sha256 (sha corpus) :head_sha (:head_sha manifest) :base_sha (:base_sha manifest)}
       response (fn [members]
                  (merge context {:ok? true :chunks members :input-source source :coverage coverage
@@ -154,6 +182,17 @@
                        n (count (:ids selected))]
                    (recur (+ at n) (conj result (nth prefixes (dec n)))))))
       _ (assert (= ids (vec (mapcat :ids groups))))
+      largest (apply max-key :bytes groups)
+      long-session (apply str (repeat 256 "s"))
+      long-session-wire (encode (assoc-in (response (mapv #(nth pages (dec %)) (:ids largest)))
+                                         [:custody :session] long-session))
+      session-growth {:ids (:ids largest) :bounded-response-bytes (:bytes largest)
+                      :unsupported-response (metrics long-session-wire)
+                      :unsupported-session (session-measurement long-session)
+                      :result (fixture/session-outcome (session-measurement long-session))}
+      _ (assert (= [47982 48110 :refuse]
+                   [(:bytes largest) (get-in session-growth [:unsupported-response :bytes])
+                    (get-in session-growth [:result :outcome])]))
       synthetic-wire (fn [value member-count]
                        (let [all (mapv #(assoc % :sha256 (sha (:text %)))
                                        (js->clj (.profilePages bridge value) :keywordize-keys true))
@@ -283,6 +322,8 @@
   (assert (= [1] (get-in read-cases [:whole-prefix :ids])))
   (assert (= :refuse (get-in read-cases [:whole-page-refusal :outcome])))
   (write! out "synthetic-vectors.json" {:responses responses :requests requests :read-cases read-cases :read-vectors read-vectors :unicode unicode
+                                       :sessions session-controls
+                                       :session-growth session-growth
                                        :context {:fields context :measurement (metrics (encode context))
                                                  :over-fields over-context :over-measurement (metrics (encode over-context))}})
   (write! out "host-control-inputs.json"
@@ -301,6 +342,9 @@
            :runtime (.-version js/process) :nbb (nbb/version) :corpus-sha256 (sha corpus)
            :bundle-sha256 (sha original)
            :dependency zod-identity
+           :session-limits (select-keys fixture/profile [:session-id-bytes :session-json-bytes])
+           :session-controls (mapv #(dissoc % :value) session-controls)
+           :session-growth session-growth
            :profile profile-id :context {:limit 4096 :synthetic-present true
                                         :measurement (metrics (encode context))
                                         :outcome (fixture/context-outcome context-bytes)

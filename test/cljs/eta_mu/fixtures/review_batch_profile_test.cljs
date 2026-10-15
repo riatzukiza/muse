@@ -11,6 +11,17 @@
   (is (= :accept (:outcome (fixture/context-outcome 4096))))
   (is (= :refuse (:outcome (fixture/context-outcome 4097)))))
 
+(deftest complete-session-boundaries
+  (doseq [[measurement expected]
+          [[{:bytes 128 :json-bytes 130 :nonblank? true} :accept]
+           [{:bytes 129 :json-bytes 131 :nonblank? true} :refuse]
+           [{:bytes 24 :json-bytes 131 :nonblank? true} :refuse]
+           [{:bytes 23 :json-bytes 130 :nonblank? true} :accept]
+           [{:bytes 1 :json-bytes 3 :nonblank? false} :refuse]
+           [{:bytes -1 :json-bytes 3 :nonblank? true} :refuse]
+           [nil :refuse]]]
+    (is (= expected (:outcome (fixture/session-outcome measurement))))))
+
 (deftest whole-request-boundaries
   (is (= :accept (:outcome (fixture/request-outcome 16384 [2048 10 10 10]
                                                  ["a" "b" "c" "d"]))))
