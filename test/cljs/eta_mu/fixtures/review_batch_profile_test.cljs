@@ -1,5 +1,5 @@
 (ns eta-mu.fixtures.review-batch-profile-test
-  (:require [cljs.test :refer [deftest is run-tests]]
+  (:require [cljs.test :refer [deftest is]]
             [eta-mu.fixtures.review-batch-profile :as fixture]))
 
 (deftest whole-response-boundaries
@@ -23,9 +23,7 @@
                     [{:ids [1] :bytes 48000 :lines 1}
                      {:ids [1 2] :bytes 48001 :lines 1}]))))
   (is (= :refuse (:outcome (fixture/read-outcome
-                           [{:ids [1] :bytes 48001 :lines 1}])))))
+                           [{:ids [1] :bytes 48001 :lines 1}]))))
   (is (= [1 2] (:ids (fixture/read-outcome
                       [{:ids [1] :bytes 100 :lines 1}
                        {:ids [1 2] :bytes 200 :lines 1}])))))
-
-(run-tests)

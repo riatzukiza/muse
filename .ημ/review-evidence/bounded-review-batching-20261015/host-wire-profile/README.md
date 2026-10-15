@@ -121,3 +121,70 @@ replayed with pinned Node22.20.0, producing byte-identical profile and response
 files. Fixed localhost SSE coordinators used24.14.1; the actual native tool host
 was the pinned OpenCode binary with embedded Bun throughout. These roles are
 recorded separately; no global Node selection or running host changed.
+
+## Reproduce from a clean checkout — corrected after review
+
+The repository now supplies `scripts/extern/verify_review_batch_profile.cljs`,
+portable `test/cljs/eta_mu/fixtures/review_batch_profile.cljc`, and its test suite.
+The older private recipe addresses above preserve historical observations; they
+are not required to regenerate the profile. No provider/model/server runs,
+installation, host reconfiguration or production batch API are used by this
+reproduction. Use Node22.20.0 and NBB1.3.204, with existing zod4.4.3.
+
+Prepare a private inputs directory with the exact qualified bundle and selected
+corpus/manifest. The pinned native artifact ZIP IDs/digests are listed above;
+verify those digests and extract only `muse/opencode/dist/eta-mu-actors.js` from
+context ZIP11943802939, and `basehead.diff`/`input-manifest.json` from evidence
+ZIP11943674576. The native full-diff bytes may also be reconstructed independently
+from the exact OpenPlanner Git refs shown above. Do not print protected content.
+The generator verifies the full corpus and compiled bundle hashes, frozen
+head/base/diff-base identity, byte count and existing zod version before executing
+the original compiled code through a test-only export bridge. It writes into a
+new private directory outside the checkout; no bundle/source substitution or
+global plugin publication occurs. The bridge retains the original prefix exactly.
+
+```sh
+nbb -cp test/cljs -e "(require '[cljs.test :as t] '[eta-mu.fixtures.review-batch-profile-test]) (t/run-tests 'eta-mu.fixtures.review-batch-profile-test)"
+
+nbb -cp test/cljs scripts/extern/verify_review_batch_profile.cljs \
+  --corpus "$profile_input_dir/basehead.diff" \
+  --manifest "$profile_input_dir/input-manifest.json" \
+  --bundle "$profile_input_dir/eta-mu-actors.js" \
+  --zod "$profile_zod_dir" \
+  --out "$profile_private_parent/new-owned-run"
+```
+
+Inputs are explicit operator-chosen paths; the output path must not exist. The
+result contains complete regenerated wire/request values and Unicode/escaping/
+long-line/surrogate vectors, all four original native host-control inputs, all
+1491 original page measurements and all375 batch measurements. Protected
+corpus-bearing outputs stay private. Standard output contains counts/status only.
+Actual Node22.20 execution reproduced every committed page/group record and all
+six previously observed native input digests exactly. Existing owner test
+classpath includes `test/cljs`, so no build-policy change is needed.
+
+Selected response exact/one-over outcomes now use complete synthetic envelopes
+with actual original compiled page geometry, bound synthetic text/byte hashes
+and no extra padding field:48000 accepts and48001 refuses in the diagnostic
+fixture. A two-page48001-byte response selects its intact9235-byte first-page
+prefix; a single complete48001-byte page refuses. Request cases isolate total
+16384/16385 bytes,4/5 members and2048/2049-byte notes while other bounds fit;
+any invalid vector returns zero accepted members. `profile.json` records every
+executed outcome and measurement. These fixture decisions prescribe the chosen
+profile; they do not imply that the51200-byte host rejects48001, or that the
+production guard/new compiled API already exists.
+
+`native-controls.json` now distinguishes its initial uncaptured label from the
+later actually captured allowlisted isolated-candidate51200/2000 values and
+resolved-config digest. Historical GHA merged settings and general real-provider
+capacity remain UNKNOWN. The future consumer still must capture its own actual
+effective settings before any batch effects.
+
+The initial RED commit2500121 observed a missing fixture function but also had a
+later delimiter defect masked by that earlier analysis failure. That result
+cannot establish that all test forms were executable. After correcting syntax,
+the same test bodies were run against the frozen absent-outcome fixture and
+again failed for the missing function; implemented fixture outcomes then passed
+3tests/12assertions. Scoped lint is0errors/0warnings. The ledger appends this
+correction rather than rewriting the earlier receipt. Full owner hosted tests
+still must pass at the final current source before qualification.

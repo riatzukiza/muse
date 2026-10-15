@@ -515,3 +515,13 @@
   spore: none
   receipt-refs: cephalon-profile3-reproducible-fixture-red-20261015
   note: Three native findings verified in already included profile scope. Portable fixture profile/constants and boundary tests precede new fixture outcomes/generator; final tests must establish every selected boundary without weakening guards. This red local commit is not pushed alone. Original native snapshots/generators retained, no new production state/law/tool/verifier, no live/runtime/paid/credentials/heartbeat change; joint remains Incoming.
+
+- ts: 2026-10-15T04:35:22.133Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-reproducible-fixture-green-and-red-receipt-correction-20261015
+  note: All3current profile findings verified and repaired in accepted scope. Generator receives explicit paths and exact hashed corpus/bundle/manifest identities, preserves original compiled prefix, reuses existing measured zod, outputs private data and never invokes model/provider or changes host. Portable fixture policy lives only under test; it is not production state/law/tool/verifier and grants no review credit. General provider maximum and historical GHA effective settings remainUNKNOWN; future actual-consumer capture/refusal and genuine full-input review still required. Local RED commit was not pushed alone; ordinary GREEN push includes its truthful correction. No source geometry/input omission, continuation, timeout increase, paid route, real credentials, runtime/maker/deployment/publication/heartbeat/spore change; GoalACTIVE heartbeat humanPAUSED live0/3.

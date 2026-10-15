@@ -117,8 +117,16 @@
       "profile_lines_exact",
       "profile_lines_over"
     ],
-    "effectiveLimits": "not captured yet; absent configured limit uses source defaults in isolated candidate",
-    "historicalGHAEffectiveLimits": "UNKNOWN"
+    "effectiveLimits": {
+      "status": "captured-isolated-candidate",
+      "utf8_bytes": 51200,
+      "newline_lines": 2000,
+      "resolved_tool_output": "absent, pinned source defaults independently confirmed by actual B/B+1 and L/L+1 controls",
+      "resolvedRawSHA256": "a3349d3fc942d65ba65517bf08c431981582b3bc1eb656503a152b0cf4da3d39",
+      "scope": "isolated fixture only; historicalGHA remainsUNKNOWN"
+    },
+    "historicalGHAEffectiveLimits": "UNKNOWN",
+    "initialRecordedEffectiveLimits": "not captured yet; absent configured limit uses source defaults in isolated candidate"
   },
   "request": {
     "schema": "cephalon.native-host-request-boundary/v1",
@@ -228,8 +236,16 @@
       "profile_request_exact",
       "profile_request_over"
     ],
-    "effectiveLimits": "not captured yet; absent configured limit uses source defaults in isolated candidate",
-    "historicalGHAEffectiveLimits": "UNKNOWN"
+    "effectiveLimits": {
+      "status": "captured-isolated-candidate",
+      "utf8_bytes": 51200,
+      "newline_lines": 2000,
+      "resolved_tool_output": "absent, pinned source defaults independently confirmed by actual B/B+1 and L/L+1 controls",
+      "resolvedRawSHA256": "a3349d3fc942d65ba65517bf08c431981582b3bc1eb656503a152b0cf4da3d39",
+      "scope": "isolated fixture only; historicalGHA remainsUNKNOWN"
+    },
+    "historicalGHAEffectiveLimits": "UNKNOWN",
+    "initialRecordedEffectiveLimits": "not captured yet; absent configured limit uses source defaults in isolated candidate"
   },
   "effectiveProvenance": {
     "selectedConfigSHA256": "cc848713b995c981cdc56d2d8af945ec1f256a07ec37215e3d26f21eed7a8f2d",

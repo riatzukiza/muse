@@ -51,14 +51,38 @@
   },
   "responseLimits": {
     "exact": {
-      "bytes": 48000,
-      "lines": 1,
-      "sha256": "ab13aff84f44a6a7517f6a112a811c523e12d5129e1ac1874c078fd13445d377"
+      "measurement": {
+        "bytes": 48000,
+        "lines": 1,
+        "sha256": "980bf90ba88bd7470c3f740fcebb79640b3a280a629c2fd851c5c800c214d48e"
+      },
+      "result": {
+        "outcome": "accept",
+        "credit": "fixture-only"
+      }
     },
     "oneOver": {
-      "bytes": 48001,
-      "lines": 1,
-      "sha256": "473e78eebd13e34a9d9220de77bebf6d8cd3779c45bc69b8a0ddb0ade2d80be6"
+      "measurement": {
+        "bytes": 48001,
+        "lines": 1,
+        "sha256": "e55744ae4dcac0d616cd1b570e655fb7733586e9c7b53d595bda1cb4143fc821"
+      },
+      "result": {
+        "outcome": "refuse",
+        "credit": "fixture-only"
+      }
+    },
+    "initialPaddedSerializationControl": {
+      "exact": {
+        "bytes": 48000,
+        "lines": 1,
+        "sha256": "ab13aff84f44a6a7517f6a112a811c523e12d5129e1ac1874c078fd13445d377"
+      },
+      "oneOver": {
+        "bytes": 48001,
+        "lines": 1,
+        "sha256": "473e78eebd13e34a9d9220de77bebf6d8cd3779c45bc69b8a0ddb0ade2d80be6"
+      }
     }
   },
   "requestCases": {
@@ -89,7 +113,95 @@
     },
     "exactCardinality": 4,
     "oneOverCardinality": 5,
-    "policy": "candidate mathematical/schema controls only; production request guard not yet implemented; >16384 bytes or >4 members or any >2048-byte note refuses entire vector"
+    "policy": "candidate mathematical/schema controls only; production request guard not yet implemented; >16384 bytes or >4 members or any >2048-byte note refuses entire vector",
+    "executedValidCandidateVectors": {
+      "exact-bytes": {
+        "measurement": {
+          "bytes": 16384,
+          "lines": 1,
+          "sha256": "9eed4192d5b8ff1d0a9f899bb6645bb21a7023d722174175dc808d51f2e48806"
+        },
+        "result": {
+          "outcome": "accept",
+          "members": 4,
+          "credit": "fixture-only"
+        }
+      },
+      "over-bytes": {
+        "measurement": {
+          "bytes": 16385,
+          "lines": 1,
+          "sha256": "2c5805c96da8105185fb9d7583cc8a0d089a70e4f3f73832b2c59eda441450a3"
+        },
+        "result": {
+          "outcome": "refuse",
+          "members": 0,
+          "credit": "fixture-only"
+        }
+      },
+      "exact-note": {
+        "measurement": {
+          "bytes": 2326,
+          "lines": 1,
+          "sha256": "90e63f73347a166dcca3866b775888a4822e08df62c19f1c565543fd5968fafe"
+        },
+        "result": {
+          "outcome": "accept",
+          "members": 1,
+          "credit": "fixture-only"
+        }
+      },
+      "over-note": {
+        "measurement": {
+          "bytes": 2327,
+          "lines": 1,
+          "sha256": "45c2e6cd58f2242452102e35a2582bf1309e2e4b77e62d13fc5ee086bd01091d"
+        },
+        "result": {
+          "outcome": "refuse",
+          "members": 0,
+          "credit": "fixture-only"
+        }
+      },
+      "exact-cardinality": {
+        "measurement": {
+          "bytes": 688,
+          "lines": 1,
+          "sha256": "815240ec54cc2acfb797bad99c5aa8dc9fa4cc6228cde139a7c9620c015ceb87"
+        },
+        "result": {
+          "outcome": "accept",
+          "members": 4,
+          "credit": "fixture-only"
+        }
+      },
+      "over-cardinality": {
+        "measurement": {
+          "bytes": 821,
+          "lines": 1,
+          "sha256": "63430fe07eb9acb18fa4e4f2e1e7bdeea27341e61383afec20470772c7d83475"
+        },
+        "result": {
+          "outcome": "refuse",
+          "members": 0,
+          "credit": "fixture-only"
+        }
+      }
+    },
+    "executedWholeReadPrefixOrRefusal": {
+      "whole-prefix": {
+        "outcome": "accept",
+        "ids": [
+          1
+        ],
+        "credit": "fixture-only"
+      },
+      "whole-page-refusal": {
+        "outcome": "refuse",
+        "ids": [],
+        "credit": "fixture-only"
+      }
+    }
   },
   "vectors": [
     {
@@ -335,5 +447,181 @@
     "wireMeasurementNode": "22.20.0 explicitly invoked; all output bytes equal initial24.14.1 measurement",
     "localhostFixtureCoordinatorNode": "24.14.1; fixed synthetic SSE, not selected tool host/model",
     "initialCLIReportSHA256": "290e4d68926adb18778956d1850c36f3508874ec27cd6969f0cc5ade74f7d1bf"
+  },
+  "reproduction": {
+    "generator": "scripts/extern/verify_review_batch_profile.cljs",
+    "fixture": "test/cljs/eta_mu/fixtures/review_batch_profile.cljc",
+    "tests": "test/cljs/eta_mu/fixtures/review_batch_profile_test.cljs",
+    "inputs": "Explicit corpus/manifest/qualified bundle/zod4.4.3/new private output flags; no author-specific generator required. Fetch pinned native artifacts or provide equivalent exact hashed bytes. Source corpus remains protected.",
+    "regressionOutputs": "Full nonsecret synthetic wire/argument contents and Unicode/escaping/host controls generated into private output, plus all original page/group measurements. Existing initial private recipes are historical observations only.",
+    "modelCalls": 0,
+    "productionAPI": false,
+    "actualRuntime": "Node22.20.0/nbb1.3.204",
+    "actualAll1491PageAnd375GroupRecordsEqualCommitted": true,
+    "actualAll4HostInputAnd2NativeArgumentDigestsEqual": true,
+    "summarySHA256": "48c8352dfa0186ba44a42e6d59c81859c40450e12d671c453865175bab98d5e0",
+    "generatorSHA256": "d11b59e4a1d2ad0cbe59a9cee143862919a5a1609aeeafc5c83982097b0a5f4a",
+    "fixtureSHA256": "bf78e492ace8d50ca18afec0f187b24f890d3fe9007d536909a3488d4e43cb9d",
+    "testSHA256": "5312d9e32032dbd018644593ae83282b1e6e2f38e2426e715c9a58a0b1951ae1"
+  },
+  "executedCandidateOutcomes": {
+    "fixture-only": true,
+    "model-calls": 0,
+    "corpus-sha256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+    "requests": {
+      "exact-bytes": {
+        "measurement": {
+          "bytes": 16384,
+          "lines": 1,
+          "sha256": "9eed4192d5b8ff1d0a9f899bb6645bb21a7023d722174175dc808d51f2e48806"
+        },
+        "result": {
+          "outcome": "accept",
+          "members": 4,
+          "credit": "fixture-only"
+        }
+      },
+      "over-bytes": {
+        "measurement": {
+          "bytes": 16385,
+          "lines": 1,
+          "sha256": "2c5805c96da8105185fb9d7583cc8a0d089a70e4f3f73832b2c59eda441450a3"
+        },
+        "result": {
+          "outcome": "refuse",
+          "members": 0,
+          "credit": "fixture-only"
+        }
+      },
+      "exact-note": {
+        "measurement": {
+          "bytes": 2326,
+          "lines": 1,
+          "sha256": "90e63f73347a166dcca3866b775888a4822e08df62c19f1c565543fd5968fafe"
+        },
+        "result": {
+          "outcome": "accept",
+          "members": 1,
+          "credit": "fixture-only"
+        }
+      },
+      "over-note": {
+        "measurement": {
+          "bytes": 2327,
+          "lines": 1,
+          "sha256": "45c2e6cd58f2242452102e35a2582bf1309e2e4b77e62d13fc5ee086bd01091d"
+        },
+        "result": {
+          "outcome": "refuse",
+          "members": 0,
+          "credit": "fixture-only"
+        }
+      },
+      "exact-cardinality": {
+        "measurement": {
+          "bytes": 688,
+          "lines": 1,
+          "sha256": "815240ec54cc2acfb797bad99c5aa8dc9fa4cc6228cde139a7c9620c015ceb87"
+        },
+        "result": {
+          "outcome": "accept",
+          "members": 4,
+          "credit": "fixture-only"
+        }
+      },
+      "over-cardinality": {
+        "measurement": {
+          "bytes": 821,
+          "lines": 1,
+          "sha256": "63430fe07eb9acb18fa4e4f2e1e7bdeea27341e61383afec20470772c7d83475"
+        },
+        "result": {
+          "outcome": "refuse",
+          "members": 0,
+          "credit": "fixture-only"
+        }
+      }
+    },
+    "bundle-sha256": "9902552ea853a30fd20ec1d35e980416406ae2b161217017f58480ba324056ff",
+    "pages": 1491,
+    "production-api": false,
+    "runtime": "v22.20.0",
+    "responses": {
+      "exact": {
+        "measurement": {
+          "bytes": 48000,
+          "lines": 1,
+          "sha256": "980bf90ba88bd7470c3f740fcebb79640b3a280a629c2fd851c5c800c214d48e"
+        },
+        "result": {
+          "outcome": "accept",
+          "credit": "fixture-only"
+        }
+      },
+      "over": {
+        "measurement": {
+          "bytes": 48001,
+          "lines": 1,
+          "sha256": "e55744ae4dcac0d616cd1b570e655fb7733586e9c7b53d595bda1cb4143fc821"
+        },
+        "result": {
+          "outcome": "refuse",
+          "credit": "fixture-only"
+        }
+      }
+    },
+    "read-cases": {
+      "whole-prefix": {
+        "outcome": "accept",
+        "ids": [
+          1
+        ],
+        "credit": "fixture-only"
+      },
+      "whole-page-refusal": {
+        "outcome": "refuse",
+        "ids": [],
+        "credit": "fixture-only"
+      }
+    },
+    "calls": 750,
+    "groups": 375,
+    "baseline-calls": 2982,
+    "read-vectors": {
+      "first-page": {
+        "ids": [
+          1
+        ],
+        "pages": 2,
+        "measurement": {
+          "bytes": 9235,
+          "lines": 1,
+          "sha256": "b3d7a11023a5201ec8aed78cce15fac4ef030470a66b45cf884c4cc357b00bfc"
+        }
+      },
+      "two-page-over": {
+        "ids": [
+          1,
+          2
+        ],
+        "pages": 2,
+        "measurement": {
+          "bytes": 48001,
+          "lines": 1,
+          "sha256": "83769b4977773834dbf3a7a8cb0e08b84df9fd30db0d4c6b37106a0851ff5513"
+        }
+      },
+      "single-page-over": {
+        "ids": [
+          1
+        ],
+        "pages": 1,
+        "measurement": {
+          "bytes": 48001,
+          "lines": 1,
+          "sha256": "e55744ae4dcac0d616cd1b570e655fb7733586e9c7b53d595bda1cb4143fc821"
+        }
+      }
+    }
   }
 }
