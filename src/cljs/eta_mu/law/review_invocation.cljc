@@ -1,7 +1,8 @@
 (ns eta-mu.law.review-invocation
   "Pure closure of one complete HOST tool trace. This is not all INPUT49,
    authentication, or authority to invoke a model. GPL-3.0-or-later."
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [eta-mu.law.review-batch :as batch]))
 
 (def stages ["deterministic" "map-change" "generate-candidates"
              "adversarial-validate" "publish"])
@@ -10,6 +11,9 @@
                     "review_assess_diff_chunk" "review_record_evidence"
                     "review_propose_finding" "review_classify_finding"
                     "review_status" "review_submit"})
+
+(def batch-tools #{"review_read_diff_batch" "review_assess_diff_batch"})
+(def all-review-tools (into review-tools batch-tools))
 
 (def host-tools
   "Known generic host tools. Additional names require actual staged registry
@@ -78,8 +82,76 @@
                 (= terminal-reason (get-in (last events) [:part :reason])))) :unterminated-host-trace
       :else nil))))
 
-(defn- call-error [calls {:keys [pages review-tools]}]
-  (let [page-by-id (into {} (map (juxt :id identity) pages))]
+(defn- read-call? [c] (contains? #{"review_read_diff_chunk" "review_read_diff_batch"} (tool c)))
+(defn- assessment-call? [c] (contains? #{"review_assess_diff_chunk" "review_assess_diff_batch"} (tool c)))
+
+(defn- attempted-ids [c]
+  (let [args (input c)]
+    (case (tool c)
+      "review_read_diff_chunk" [(:id args)]
+      "review_assess_diff_chunk" [(:id args)]
+      "review_read_diff_batch" (if (batch/read-valid? args)
+                                 (vec (range (:first-id args) (+ (:first-id args) (:count args)))) [])
+      "review_assess_diff_batch" (if (vector? (:assessments args)) (mapv :id (:assessments args)) [])
+      [])))
+
+(defn- delivered-ids [c]
+  (if (= "review_read_diff_batch" (tool c)) (get-in (output c) [:batch :ids]) (attempted-ids c)))
+
+(defn- assessment-notes [c]
+  (if (= "review_assess_diff_batch" (tool c)) (:assessments (input c))
+      [{:id (:id (input c)) :note (:note (input c))}]))
+
+(defn- coverage-valid? [coverage pages]
+  (and (map? coverage) (= (count pages) (:chunks coverage))
+       (every? #(and (natural? %) (<= % (count pages))) [(:delivered coverage) (:assessed coverage)])
+       (vector? (:missing coverage))
+       (= (count (:missing coverage)) (count (set (:missing coverage))))
+       (every? (set (map :id pages)) (:missing coverage))))
+
+(defn- batch-call-error [c {:keys [pages input-source batch-host]}]
+  (let [args (input c) result (output c) page-by-id (into {} (map (juxt :id identity) pages))
+        read? (= "review_read_diff_batch" (tool c))
+        ids (if read? (get-in result [:batch :ids]) (attempted-ids c))
+        source (select-keys input-source [:base_sha :head_sha :diff_base_sha :full_diff])]
+    (cond
+      (not (batch/qualified-host? batch-host)) :batch-host-unestablished
+      (if read? (not (batch/read-valid? args)) (not (batch/assess-valid? args))) :batch-input-shape
+      (and (not read?) (or (not= batch/profile (:profile args))
+                                  (not= (get-in source [:full_diff :sha256]) (:source_sha256 args))
+                                  (not= (count ids) (count (set ids)))
+                                  (not= ids (vec (sort ids)))
+                                  (some #(not (and (nonblank? (:note %))
+                                                   (= (select-keys % [:id :start :end :sha256])
+                                                      (select-keys (page-by-id (:id %)) [:id :start :end :sha256]))))
+                                        (:assessments args)))) :batch-assessment-binding
+      (not (success? c)) nil
+      (not (false? (:restart-required? result))) :batch-success-shape
+      (not (coverage-valid? (:coverage result) pages)) :batch-coverage-binding
+      (and read?
+           (not (and (vector? ids) (seq ids)
+                     (= ids (vec (take (count ids) (attempted-ids c))))
+                     (<= (count ids) (:count args))
+                     (= ids (mapv :id (:chunks result)))
+                     (= {:ids ids :first-id (first ids) :last-id (last ids)
+                         :next-id (when (< (last ids) (count pages)) (inc (last ids)))
+                         :profile batch/profile} (:batch result))
+                     (= source (:input-source result))
+                     (= {:profile batch/profile :session (:session-id c)
+                         :source_sha256 (get-in source [:full_diff :sha256])
+                         :head_sha (:head_sha source) :base_sha (:base_sha source)} (:custody result))
+                     (every? (fn [p]
+                               (let [expected (page-by-id (:id p))]
+                                 (and expected (string? (:text p)) (string? (:sha256 expected))
+                                      (= (select-keys expected [:id :start :end :sha256 :text])
+                                         (select-keys p [:id :start :end :sha256 :text])))))
+                             (:chunks result))))) :batch-returned-pages
+      (and (not read?) (not= ids (:chunk-ids result))) :batch-returned-assessments
+      :else nil)))
+
+(defn- call-error [calls {:keys [pages review-tools] :as context}]
+  (let [page-by-id (into {} (map (juxt :id identity) pages))
+        batch-capable? (some batch-tools review-tools)]
     (some
      (fn [call]
        (let [name (tool call) args (input call) result (output call) id (:id args)
@@ -87,12 +159,13 @@
          (cond
            (= "invalid" name) :unavailable-host-tool
            (and (str/starts-with? name "review_") (not (contains? (set review-tools) name))) :unexposed-review-tool
-           (and (str/starts-with? name "review_") (not (contains? eta-mu.law.review-invocation/review-tools name))) :unknown-review-tool
+           (and (str/starts-with? name "review_") (not (contains? all-review-tools name))) :unknown-review-tool
            (and (not (str/starts-with? name "review_"))
                 (not (or (contains? host-tools name) (contains? (set review-tools) name)))) :unknown-host-tool
            (not (str/starts-with? name "review_")) (when-not (string? result) :host-tool-output)
            (not (and (map? result) (or (true? (:ok? result)) (false? (:ok? result))))) :review-tool-output
            (and (false? (:ok? result)) (not (nonblank? (:error result)))) :review-tool-output
+           (contains? batch-tools name) (batch-call-error call context)
            (and (#{"review_read_diff_chunk" "review_assess_diff_chunk"} name)
                 (not (and (positive? id) page))) :page-id-binding
            (and (= "review_assess_diff_chunk" name) (not (nonblank? (:note args)))) :assessment-note-shape
@@ -103,7 +176,11 @@
                 (not (and (map? (:chunk result))
                           (= (select-keys page [:id :start :end]) (select-keys (:chunk result) [:id :start :end]))
                           (string? (get-in result [:chunk :text]))
-                          (= (- (:end page) (:start page)) (count (get-in result [:chunk :text])))))) :returned-page-binding
+                          (= (- (:end page) (:start page)) (count (get-in result [:chunk :text])))
+                          (or (not batch-capable?)
+                              (and (string? (:text page)) (sha? 64 (:sha256 page))
+                                   (= (select-keys page [:id :start :end :text :sha256])
+                                      (select-keys (:chunk result) [:id :start :end :text :sha256]))))))) :returned-page-binding
            (and (= "review_assess_diff_chunk" name) (success? call)
                 (not (and (= id (:chunk-id result))
                           (map? (:coverage result)) (= (count pages) (get-in result [:coverage :chunks]))
@@ -114,27 +191,50 @@
            :else nil)))
      calls)))
 
+(defn- coverage-history-error
+  "Every returned batch coverage must equal actual successful call history.
+   Metadata cannot create delivery/assessment or conceal missing original pages."
+  [calls pages]
+  (loop [remaining calls delivered #{} assessed #{}]
+    (when-let [c (first remaining)]
+      (let [read? (and (read-call? c) (success? c))
+            assessment? (and (assessment-call? c) (success? c))
+            delivered-now (if read? (into delivered (delivered-ids c)) delivered)
+            assessed-now (cond
+                           read? (reduce disj assessed (delivered-ids c))
+                           assessment? (into assessed (attempted-ids c))
+                           :else assessed)
+            expected {:chunks (count pages) :delivered (count delivered-now)
+                      :assessed (count assessed-now)
+                      :missing (filterv #(not (contains? assessed-now %)) (mapv :id pages))}
+            returned? (and (success? c)
+                           (or (contains? batch-tools (tool c))
+                               (= "review_assess_diff_chunk" (tool c))))]
+        (if (and returned? (not= expected (:coverage (output c))))
+          (if (contains? batch-tools (tool c)) :batch-coverage-binding :returned-assessment-binding)
+          (recur (next remaining) delivered-now assessed-now))))))
+
 (defn last-read-violations
-  "Original LAST predicate over ALL calls, including failed read/assessment
+  "LAST predicate over delivered successful reads and every failed read/assessment
    calls and calls around resets. Never partition by host session or keep only
    the final assessment. Positions are complete host event positions."
   [calls]
-  (let [last-read (into {} (for [c calls :when (= "review_read_diff_chunk" (tool c))]
-                            [(:id (input c)) (:position c)]))]
-    (vec (for [c calls :when (= "review_assess_diff_chunk" (tool c))
-               :let [r (get last-read (:id (input c)))]
+  (let [last-read (into {} (for [c calls :when (read-call? c)
+                                  id (if (success? c) (delivered-ids c) (attempted-ids c))]
+                            [id (:position c)]))]
+    (vec (for [c calls :when (assessment-call? c) id (attempted-ids c)
+               :let [r (get last-read id)]
                :when (not (and r (< r (:position c))))]
-           {:id (:id (input c)) :assessment-position (:position c)
-            :last-read-position r}))))
+           {:id id :assessment-position (:position c) :last-read-position r}))))
 
 (defn- witnessed-stale? [calls violations]
   (some (fn [{:keys [id assessment-position last-read-position]}]
           (and last-read-position (> last-read-position assessment-position)
                (some #(and (= assessment-position (:position %)) (success? %)) calls)
-               (some #(and (= "review_read_diff_chunk" (tool %)) (success? %)
-                           (= id (:id (input %))) (> (:position %) assessment-position)) calls)
-               (some #(and (= "review_read_diff_chunk" (tool %)) (success? %)
-                           (= id (:id (input %))) (< (:position %) assessment-position)) calls)))
+               (some #(and (read-call? %) (success? %)
+                           (contains? (set (delivered-ids %)) id) (> (:position %) assessment-position)) calls)
+               (some #(and (read-call? %) (success? %)
+                           (contains? (set (delivered-ids %)) id) (< (:position %) assessment-position)) calls)))
         violations))
 
 (defn- begin-admitted? [calls review-calls begins]
@@ -150,8 +250,8 @@
 
 (defn- serialized-error [submission context calls]
   (when submission
-    (let [pages (:pages context) notes (into {} (for [c calls :when (and (= "review_assess_diff_chunk" (tool c)) (success? c))]
-                                                [(:id (input c)) (:note (input c))]))
+    (let [pages (:pages context) notes (into {} (for [c calls :when (and (assessment-call? c) (success? c))
+                                                 item (assessment-notes c)] [(:id item) (:note item)]))
           assessments (:input-assessments submission)]
       (cond
         (not (and (map? submission) (= "open-hax.github-review/v1" (:schema submission))
@@ -183,6 +283,7 @@
                (not (context-valid? context)) :trusted-context-unestablished
                :else (or (event-error events (:session-id context) terminal-reason)
                          (call-error calls context)
+                         (coverage-history-error calls (:pages context))
                          (when (and (seq review-calls) (not (begin-admitted? calls review-calls begins))) :begin-cardinality)
                          (when (and begin (not (and (= "deterministic" (:stage began)) (= stages (:stages began))
                                          (= (:input-source context) (:input-source began))
@@ -190,6 +291,8 @@
                                          (= {:chunks (count (:pages context)) :delivered 0 :assessed 0
                                              :missing (mapv :id (:pages context))}
                                             (:input-coverage began))))) :begin-source-binding)
+                         (when (and (some #(contains? batch-tools (tool %)) calls)
+                                    (not (batch/host-matches? (:batch-host context) (:batch-host began)))) :batch-host-binding)
                          (when-not (and (<= (count stage-calls) 5)
                                          (= stage-names (vec (take (count stage-calls) stages)))
                                          (every? success? stage-calls)) :stage-order)
@@ -204,11 +307,11 @@
    No recorded stage is an unfinished prefix; empty verified input is vacuous."
   [review-calls stage-calls context]
   (if-let [first-stage (first stage-calls)]
-    (let [reads (filterv #(= "review_read_diff_chunk" (tool %)) review-calls)
-          assessed (filterv #(= "review_assess_diff_chunk" (tool %)) review-calls)
+    (let [reads (filterv read-call? review-calls)
+          assessed (filterv assessment-call? review-calls)
           ids (set (map :id (:pages context)))]
-      (and (= ids (set (map #(get (input %) :id) reads)))
-           (= ids (set (map #(get (input %) :id) assessed)))
+      (and (= ids (set (mapcat delivered-ids reads)))
+           (= ids (set (mapcat attempted-ids assessed)))
            (every? #(< (:position %) (:position first-stage)) (concat reads assessed))))
     true))
 
@@ -218,7 +321,7 @@
    Missing/malformed/session/source/cardinality evidence is unestablished."
   [events submission context]
   (let [calls (vec (keep-indexed #(when (= "tool_use" (:type %2)) (assoc %2 :position (inc %1))) events))
-        review-calls (filterv #(contains? review-tools (tool %)) calls)
+        review-calls (filterv #(contains? all-review-tools (tool %)) calls)
         begins (filterv #(= "review_begin" (tool %)) review-calls)
         submits (filterv #(= "review_submit" (tool %)) review-calls)
         stage-calls (filterv #(= "review_record_evidence" (tool %)) review-calls)
@@ -243,12 +346,12 @@
                 (= "review_submit" (tool (last review-calls))))) (refuse :unestablished-review-trace :submission-not-established)
       :else
       (let [submit (first submits)
-            reads (filterv #(= "review_read_diff_chunk" (tool %)) review-calls)
-            assessed (filterv #(= "review_assess_diff_chunk" (tool %)) review-calls)
+            reads (filterv read-call? review-calls)
+            assessed (filterv assessment-call? review-calls)
             ids (set (map :id (:pages context)))]
         (cond
-          (not (and (= ids (set (map #(get (input %) :id) reads)))
-                    (= ids (set (map #(get (input %) :id) assessed))))) (refuse :unestablished-review-trace :incomplete-page-calls)
+          (not (and (= ids (set (mapcat delivered-ids reads)))
+                    (= ids (set (mapcat attempted-ids assessed))))) (refuse :unestablished-review-trace :incomplete-page-calls)
           (not (and (< (:position begin) (:position (first stage-calls)))
                     (< (:position (last stage-calls)) (:position submit)))) (refuse :unestablished-review-trace :stage-chronology)
           (not (submit-bound? submission context submits)) (refuse :unestablished-review-trace :actual-submit-binding)
@@ -275,15 +378,15 @@
      :violations []}
     (let [calls (vec (keep-indexed #(when (= "tool_use" (:type %2))
                                     (assoc %2 :position (inc %1))) events))
-          review-calls (filterv #(contains? review-tools (tool %)) calls)
+          review-calls (filterv #(contains? all-review-tools (tool %)) calls)
           begins (filterv #(= "review_begin" (tool %)) review-calls)
           submits (filterv #(= "review_submit" (tool %)) review-calls)
           stage-calls (filterv #(= "review_record_evidence" (tool %)) review-calls)
           stage-names (mapv #(get (input %) :stage) stage-calls)
           violations (last-read-violations calls)
           begin (first (filter success? begins))
-          reads (filterv #(= "review_read_diff_chunk" (tool %)) review-calls)
-          assessed (filterv #(= "review_assess_diff_chunk" (tool %)) review-calls)
+          reads (filterv read-call? review-calls)
+          assessed (filterv assessment-call? review-calls)
           ids (set (map :id (:pages context)))
           text (:full-input-text context)
           code (or (invocation-error events submission context calls review-calls
@@ -317,11 +420,14 @@
                    (when-not (and (seq ids) (string? text)
                                   (= (count text) (:end (last (:pages context)))))
                      :full-input-not-established)
-                   (when-not (and (= ids (set (map #(get (input %) :id) reads)))
-                                  (= ids (set (map #(get (input %) :id) assessed))))
+                   (when-not (and (= ids (set (mapcat delivered-ids reads)))
+                                  (= ids (set (mapcat attempted-ids assessed))))
                      :incomplete-page-calls)
-                   (when-not (every? #(let [{:keys [start end text]} (:chunk (output %))]
-                                       (= text (subs (:full-input-text context) start end))) reads)
+                   (when-not (every? (fn [c]
+                                      (every? (fn [{:keys [start end text]}]
+                                                (= text (subs (:full-input-text context) start end)))
+                                              (if (= "review_read_diff_batch" (tool c))
+                                                (:chunks (output c)) [(:chunk (output c))]))) reads)
                      :returned-page-content)
                    (when-not (seq stage-calls) :first-stage-not-established)
                    (when-not (and (< (:position begin) (:position (first stage-calls)))

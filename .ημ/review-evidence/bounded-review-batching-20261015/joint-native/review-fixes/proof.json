@@ -1,0 +1,344 @@
+{
+  "schema": "muse.actual-native-batch-diagnostic/v1",
+  "tier": "actual compiled tools and native host with scripted local SSE; no real model or review credit",
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "refusal": null,
+  "stoppedOnRefusal": false,
+  "elapsedMs": 4472,
+  "requests": 10,
+  "requestProof": [
+    {
+      "bytes": 8721,
+      "sha256": "f4a1bf0b39e138b63ef3bffeb4b96897abe90956e1fe17156c663999127dd018"
+    },
+    {
+      "bytes": 11538,
+      "sha256": "1fae132c4e158eb900cea897bafbfd79b7fa63643ad51045a7c8b3c3e4c302e0"
+    },
+    {
+      "bytes": 24288,
+      "sha256": "8682b3077c71b5175b3072772e71a5c79321647580094b920906c3460547f4da"
+    },
+    {
+      "bytes": 25400,
+      "sha256": "e594a7fb2280a712aae7b4ea2e6a3b3aad2839c010b6dec60a57efa25884aa77"
+    },
+    {
+      "bytes": 25882,
+      "sha256": "a6439ec37fffa1ebba62c2f7189896a87b60d52c9c3dc794b09330c42e3c0924"
+    },
+    {
+      "bytes": 26361,
+      "sha256": "d4d3f3ebc51a2156792e305cb12bf54dc079a360428832d157f6158aded4ba2c"
+    },
+    {
+      "bytes": 26849,
+      "sha256": "27340a5aaa206b92b604c1dec7a0f36cf5d467590788d97347f639a70e7f351c"
+    },
+    {
+      "bytes": 27338,
+      "sha256": "b38ac194b49e042b635fdd4a7f4f9aaa5855b4682958e196085c49579157c812"
+    },
+    {
+      "bytes": 27814,
+      "sha256": "e53828fe562e2ce593281caa693fd7be6a587bc9e740bd54267416490be2bab6"
+    },
+    {
+      "bytes": 28445,
+      "sha256": "1633bfdd735c590ce70110473d91d0403859e562d3c706073a503b2916de7bdf"
+    }
+  ],
+  "binarySHA256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+  "bundleSHA256": "726f3b2516c179d200321574a6aa74276f2445825df99de4686e1c3512c84699",
+  "canonicalVerifierSHA256": "d05494e224fb4b99b2235c1de81731b6480af503e77cb311c3f3fed0e9e37c19",
+  "resolvedConfigSHA256": "a1ecba0209f4455ac66e8cefd467f52e14f714b025cfee94753688c2c8aad19a",
+  "expectedHost": {
+    "binary-sha256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+    "config-sha256": "6c342206f77390f54d8eddf2caf79cdd4d625eec3a4f87a504d790186d27d1bf",
+    "selectors-sha256": "d395e2bd91430a1179f836fad3643a985b3d3171f1a558b6c9a8d5ba420bfdfa",
+    "max-bytes": 51200,
+    "max-lines": 2000
+  },
+  "source": {
+    "kind": "two original real pages as isolated diagnostic source, not the complete150-input review",
+    "fullSourceSHA256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+    "originalHead": "3ab5ffbb6e34a2ee3607a74bf421785d47d5391d",
+    "prefixSHA256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+    "prefixBytes": 10366,
+    "originalPages": [
+      {
+        "id": 1,
+        "start": 0,
+        "end": 4882,
+        "text_utf8_bytes": 4882,
+        "text_sha256": "d7db3ed6779a738be0904f7d2c106093b613a4acdca8898108155272e4b21b84",
+        "single_response": {
+          "bytes": 16527,
+          "lines": 1,
+          "sha256": "1bd44de3d37c54b2b0db55648e0459b17fd49e9d4609a366160bfd75f49a1d44"
+        }
+      },
+      {
+        "id": 2,
+        "start": 4882,
+        "end": 10366,
+        "text_utf8_bytes": 5484,
+        "text_sha256": "434efa776f6dbe98d34264a4b5a9aab3197c6fea8719d2eb2c29e8d552da705e",
+        "single_response": {
+          "bytes": 17172,
+          "lines": 1,
+          "sha256": "e2e2652a0723281eee0c99f49fa95d1aa2c92b57f2dfa0a83e330105916d2b1b"
+        }
+      }
+    ],
+    "tools": [
+      "review_begin",
+      "review_read_diff_chunk",
+      "review_assess_diff_chunk",
+      "review_read_diff_batch",
+      "review_assess_diff_batch",
+      "review_record_evidence",
+      "review_propose_finding",
+      "review_classify_finding",
+      "review_status",
+      "review_submit"
+    ]
+  },
+  "stdout": {
+    "bytes": 29199,
+    "sha256": "86c1aed3fd3f6b57f2388045509aaa6102b4dd67fc04482efb59f733dbc298b9"
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "verdict": {
+    "reviewCallCount": 9,
+    "acceptedInvocation": {
+      "sessionID": "ses_ec0bf6ae4ffeF5F1jUjSsKRCVM",
+      "submissionCallID": "owned-native-batch-8",
+      "submissionPosition": 26,
+      "submissionFile": "/var/tmp/muse-joint5-native-pr12-qualified-oo6lwvjj/consumer/.opencode/review-evidence/submission.json",
+      "responseSha256": "86c1aed3fd3f6b57f2388045509aaa6102b4dd67fc04482efb59f733dbc298b9",
+      "submissionSha256": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5",
+      "fullInputSha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+      "pageCount": 2
+    },
+    "contextReadCoverage": {
+      "status": "absent",
+      "totalLines": 0,
+      "deliveredLines": 0,
+      "eof": false
+    },
+    "reason": null,
+    "ok": true,
+    "code": "verified-review-invocation",
+    "pageWitnesses": [
+      {
+        "id": 1,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f4099df0012S6mBALgaINOdB",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f4099df0012S6mBALgaINOdB",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 1,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f409a75001dBL16PKrBUCKMs",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f409a75001dBL16PKrBUCKMs",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      }
+    ],
+    "pageCount": 2,
+    "violations": [],
+    "reasonKind": null,
+    "sessionID": "ses_ec0bf6ae4ffeF5F1jUjSsKRCVM"
+  },
+  "problem": null,
+  "capture": {
+    "kind": "actual independently captured allowlisted profile; private full raw captures retained",
+    "beforeRawConfigSHA256": "a1ecba0209f4455ac66e8cefd467f52e14f714b025cfee94753688c2c8aad19a",
+    "afterRawConfigSHA256": "4e1d6423c712fdd28c34b8589c6d8c544b94293bfe94dc156bfdce14f1a7a5c8",
+    "selectedBefore": {
+      "tool_output": null
+    },
+    "selectedAfter": {
+      "tool_output": null
+    },
+    "canonicalBeforeAfterEqualityActuallyAsserted": true,
+    "completePrivateCaptureRetained": true
+  },
+  "sourceFiles": {
+    "deps.edn": "8eabd65ea41db900deb987c445c31f03615a2a36928bb6818c778783e28a2be5",
+    "shadow-cljs.edn": "409203bc5f8214710cea01f979141806805169eef374ade54fda406289d476fa",
+    "src/clj/eta_mu/opencode/build.clj": "96008881199a5df5d9aa27200c79e0ca64536c8e84a634692abc111a19fa7c50",
+    ".ημ/plugins/review_pipeline.cljs": "8427e37e4b88d8b9d18e0611c6251b0103eaf061f389a0e72347b25e1531dd87",
+    "src/cljs/eta_mu/boundaries/opencode.cljs": "06a980346494b4fc7aac585d62a44082b72089d01cf59b16a70b6284c999e738",
+    "src/cljs/eta_mu/domain/review.cljc": "76045a6f3838a9a17cc7fa4bdb65cbccaefccfeadcc38aa2f016ec7a1c6f4a7a",
+    "src/cljs/eta_mu/law/review_batch.cljc": "e4232dd460406513399f07b380146eff5cb0a2a71f8e775a23c33771e97be98d",
+    "src/cljs/eta_mu/law/review_invocation.cljc": "245a5ba601c42317a7e05e7f6dbb8a5bcd86433fc19859af0b5289e3381d9b80",
+    "src/cljs/eta_mu/shape/review_batch.cljc": "f4f0dfd5421d29f7c68331d054e5f515b68e706755bd4d106a7d5fb6d8a05501",
+    "src/cljs/eta_mu/extern/review_batch.cljs": "763c092e992de56c8c749cba227326ee6f467bd4d2563526805b2484c4315cec",
+    "src/cljs/eta_mu/extern/review_invocation.cljs": "2305384440dd0e35236b2bb3bd4da182ce26262a8b8316df7bf2ee1bfca9f58e",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "2ee871bf407b59f9fc05e6ee052e22e85c2c51aa284df8c86782b76d1aec0cdc",
+    "src/cljs/eta_mu/domain/review_invocation.cljc": "99be3227e388124af996cb9b9f985bbc9fa6c2d3ae625d0ec2c74733dcc23647"
+  },
+  "evidenceFiles": {
+    "input.diff": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+    "input-manifest.json": "43f8a85317d3f487b76be716e751bf3364d1bd7eea2b5a34ec9a083f48d51d4a",
+    "native.jsonl": "86c1aed3fd3f6b57f2388045509aaa6102b4dd67fc04482efb59f733dbc298b9",
+    "submission.json": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5"
+  },
+  "actualCalls": [
+    {
+      "tool": "review_begin",
+      "callID": "owned-native-batch-0",
+      "partID": "prt_13f4098990018twctmBIPx0Gki",
+      "position": 2,
+      "status": "completed",
+      "outputBytes": 2473,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 2
+    },
+    {
+      "tool": "review_read_diff_batch",
+      "callID": "owned-native-batch-1",
+      "partID": "prt_13f4099df0012S6mBALgaINOdB",
+      "position": 5,
+      "status": "completed",
+      "outputBytes": 11936,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 24
+    },
+    {
+      "tool": "review_assess_diff_batch",
+      "callID": "owned-native-batch-2",
+      "partID": "prt_13f409a75001dBL16PKrBUCKMs",
+      "position": 8,
+      "status": "completed",
+      "outputBytes": 246,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 572
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-3",
+      "partID": "prt_13f409aef001RB9gLWUKnc6XAX",
+      "position": 11,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 96
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-4",
+      "partID": "prt_13f409b6a0015R6nFLa5AfosTN",
+      "position": 14,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 93
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-5",
+      "partID": "prt_13f409bf9001Unr2I1SqEkIlbm",
+      "position": 17,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 102
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-6",
+      "partID": "prt_13f409c960018FC50THicBbj9E",
+      "position": 20,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 103
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-7",
+      "partID": "prt_13f409d1f001wVBCTCMPVVfiFE",
+      "position": 23,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 90
+    },
+    {
+      "tool": "review_submit",
+      "callID": "owned-native-batch-8",
+      "partID": "prt_13f409d920017SwUca5nzmF9sg",
+      "position": 26,
+      "status": "completed",
+      "outputBytes": 288,
+      "outputLines": 1,
+      "truncated": false,
+      "inputJSONUTF8Bytes": 98
+    }
+  ],
+  "canonicalVerifierStableAcrossCaptures": true,
+  "wireProjection": {
+    "kind": "actual production projection executed in owner suite; not real model throughput",
+    "originalPages": 1491,
+    "groups": 384,
+    "projectedCalls": 768,
+    "maximumResponseBytes": 47982,
+    "all384QualifiedResponseHashesMatched": true,
+    "logSHA256": "fc0d65bb7f33e83d27dbff49cf417531e4b30d29f7a22658be3e0103ee51e683"
+  },
+  "retainedFailures": {
+    "attempt5": "generic default host build omitted the selected review exposure; two actual unavailable-tool calls, no accepted invocation. Full raw failure retained separately.",
+    "sourceViewBuild": "external-source-path deprecation warnings retained; corrected bounded302120-byte/60-file source projection rebuilt with zero warnings."
+  }
+}

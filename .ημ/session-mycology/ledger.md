@@ -595,3 +595,143 @@
   spore: none
   receipt-refs: cephalon-profile3-all-git-output-and-explicit-session-wire-bounds-20261015
   note: Diagnostic source only; no productionbatchstate/API/nativeverifier/actualprovidermax/liveproof. Includes immutable97threceipt after96prefix; currentnewhead hostedfullsourceapproval/checks required. GoalACTIVE heartbeat humanPAUSED live0/3; no continuation/timeoutincrease/paid/credentials/modelrouting/runtime/maker/owner/deployment/publication/sporechange.
+
+- ts: 2026-10-15T08:41:58.266Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-aeca-publication-and-native-settlement-custody-20261015
+  note: PublishedconcreteallGitancestor/sessionwirefix, currentnewheadqualificationpending. Preserveall97receiptprefixbytes andcurrentnativebody/oldsnapshots, holdobservationfornextconcretesourcechange/noheadchurn. ProfileInProgress/jointIncoming/no productionbatchAPI/nativeverifier/liveproof; goalACTIVE heartbeat humanPAUSED. No paid/credentials/continuation/timeoutincrease/runtime/maker/clock/owner/deployment/publication/sporechange.
+
+- ts: 2026-10-15T09:17:28.927Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/joint5
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-joint5-qualified-profile-merge-and-pre-red-freeze-20261015
+  note: Actual profile merged and Done; joint implementation is InProgress on new branch from qualified merge. Includes held98 observation without rewriting historical claims. Target complete original pages and separate per-page notes in one actual native call, actual host/wire measurement, atomic transitions and canonical verifier together. GoalACTIVE heartbeat humanPAUSED live0/3; no paid/model/credentials/continuation/timeout/host/runtime/deployment change; no spore.
+
+- ts: 2026-10-15T09:22:10.049Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/joint5
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-joint5-canonical-native-batch-causal-red-20261015
+  note: This local RED commit contains the qualified pure schema/bound predicates and actual failing verifier tests, not production batching or source qualification. No host/global config, sysctl, paid/model/credential/runtime/heartbeat/deployment change. Full joint implementation and real native compiled multi-page fixture remain. GoalACTIVE heartbeat humanPAUSED live0/3; no spore.
+
+- ts: 2026-10-15T09:56:55.052Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/joint5
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-joint5-compiled-production-wire-and-observed-host-fingerprint-red-20261015
+  note: Local WIP/RED only, not pushed or approved. Joint card remains InProgress. All100 receipt/reflection prefixes preserved. Need correct selected-setting fingerprint, refresh actual native supervised positive/adversarial proofs and owner gates, then source review before ETA/OpenPlanner consumption and unchanged full150-input real free MiMo review. GoalACTIVE heartbeat humanPAUSED live0/3; no paid/model/credentials/continuation/timeout/global host/runtime/maker/deployment/publication change; no spore.
+
+- ts: 2026-10-15T10:40:10.782Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/joint5
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-joint5-exact-production-wire-native-supervision-and-owner-green-20261015
+  note: Local coupled source GREEN; native Review, not Done or approved. Source must now qualify against exact personal ad115 base before MERGE; parent sync/main/release gates remain independent. Canonical supervisor API prevents a duplicated consumer fingerprint. Current profile limits and original page geometry unchanged. ETA2/OpenPlanner1 consumption and actual unchanged full150-input free OpenCode MiMo review remain required. GoalACTIVE heartbeat humanPAUSED live0/3; no paid/credentials/modelrouting/continuation/timeout/global host/runtime/maker/deployment/publication/spore change.
+
+- ts: 2026-10-15T11:00:42.124Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-coverage-and-selected-prefix-causal-red-20261015
+  note: Native authentic fixture bytes remain immutable; explicitly edited negatives are unit test data. New coverage exact-history and delivered-prefix LAST cases prove causal failures; architecture fixes will move witness construction to shape and producer policy to shared pure contracts/domain. Existing failed attempts/actual rereads, full page/context/five-stage/submission/publisher guards remain mandatory. No review approval or live0/3 credit, runtime/paid/credentials/heartbeat/spore change.
+
+- ts: 2026-10-15T11:13:15.291Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-current-coverage-shape-admission-and-prefix-green-20261015
+  note: Witness construction now shape/domain composition; infra only observes/orchestrates one pure domain admission using shared host/profile laws consumed by verifier. Coverage must exactly equal accumulated successful reads/assessments at every returned batch call, retaining missing IDs. Successful LAST uses actual delivered prefix; every failed attempt and actual late reread remains invalidating. One requested but undelivered tail cannot manufacture a read. New current native source hashes replace no historical bytes; all inputs/assessment/context/five-stage/submission/publisher guards remain. No continuation, timeout/model/credential/paid/runtime/heartbeat change; goalACTIVE/humanPAUSEDheartbeat/live0/3. Source current review/qualification and downstream ETA/OpenPlanner consumption remain.
+
+- ts: 2026-10-15T12:02:53.976Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-mixed-single-page-immutable-source-causal-red-20261015
+  note: Causal RED uses visibly synthetic edited unit events and preserves every authentic native/proof byte. Correct batch-capable single reads must bind exact prepared text/digest; legacy nonbatch callers retain prior geometry contract. Current MiMo APPROVED5532538742/all43inputs46pages and required CI are real e5 evidence but do not dismiss the new P1 or transfer to a new head. No model/paid/credentials/runtime/heartbeat/deployment/spore change; goalACTIVE, humanPAUSEDheartbeat, live0/3.
+
+- ts: 2026-10-15T12:07:03.853Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-mixed-single-page-exact-source-current-green-20261015
+  note: Single reads under batch-capable registry require exact prepared text and valid matching SHA; no pure-law I/O or crypto duplication. Legacy nonbatch contract retained. Reverification is a new explicit observed current-evaluation record, never an overwritten proof/native capture or source-hash exception. Current-head review and every gate must requalify after push; old MiMo approval supplies no transferred credit. GoalACTIVE heartbeat humanPAUSED live0/3; no continuation/timeout/model/paid/credentials/runtime/deployment/spore change.
+
+- ts: 2026-10-15T12:31:00.403Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-model-facing-limit-spacing-and-current-native-source-green-20261015
+  note: Insert exactly requested spaces in three model-facing strings; numerical limits, schemas and runtime gates unchanged, so no invented behavioral RED. Actual tool metadata changes bundle identity; collect fresh native diagnostic rather than relabel old producer. Current old-head Codex/MiMo attempts are allowed to finish before next push, grouping any findings; no manual provider cancellation or unchanged duplicate request. This local concrete source correction is held pending those reviews and fresh exact-head qualification. No continuation/timeout/paid/credentials/global host/runtime/owner/deployment/publication/heartbeat/spore change. GoalACTIVE heartbeat humanPAUSED live0/3.
+
+- ts: 2026-10-15T12:41:00.345Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-await-context-and-success-shape-causal-red-20261015
+  note: These are verified missing obligations within the already approved coupled transport/verifier scope, not new prerequisites. Correct primary prompt's contradictory single-page-only mandate, observe context again after host await before existing pure admission/mutation, and require declared false success flag for both batch variants. Keep namespace boundaries and all input/context/LAST/stage/submission/publisher guards. Current1a9 reviews completed with these findings and one CR wording finding; group all corrections for next push. No continuation/timeout/model/paid/credentials/runtime/deploy/publication/heartbeat/spore change. GoalACTIVE heartbeat humanPAUSED live0/3.
+
+- ts: 2026-10-15T12:53:10.909Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-primary-batch-workflow-postawait-custody-and-success-shape-green-20261015
+  note: Primary instructions now explicitly choose exposed qualified batch/single/mixed rather than contradictory single-only flow. Infra observes context after host await before existing shared pure admission and mutation; pure verifier requires literal false success metadata for both batch tools. Retain complete original pages, separate assessments, real call IDs/memberships, all context/source/LAST/five-stage/actual-submit/publisher guards and legacy route. New native diagnostic is scripted localhost, no LLM/review/approval/round/live credit. Grouped current source must be pushed/reviewed once; no approval transfer or paid quota bypass, duplicate pending review or provider cancellation. GoalACTIVE heartbeat humanPAUSED live0/3; no continuation/timeout/model/credentials/global runtime/owner/deployment/publication/spore change.
+
+- ts: 2026-10-15T13:42:38.993Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-begin-host-await-causal-red-20261015
+  note: Actual new begin-await test fails before corresponding production change. Three failed assertions show begin succeeds, no restart latch is retained, and a subsequent read succeeds after context restoration. Delivery and assessment stay empty at the failed admission boundary. Existing batch-await guards remain intact. This is an existing approved context custody obligation. No review/approval/live credit, runtime/model/credential/deployment/heartbeat/spore change; live0/3 and humanPAUSEDheartbeat.
+
+- ts: 2026-10-15T13:50:02.019Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-begin-await-custody-current-native-countercontrols-green-20261015
+  note: Begin reobserves through existing guard after host await before completing admission, preserving original binding/restart. Native closed-map allegation conflicts with pinned registry predicate safeParse(u).success passing original u and three actual domain refusals; original finding remains open until actual opener independently reassesses. No shape/Zod workaround, author self-settlement or synthetic Bot verdict. Old proofs/receipts/reflections stay immutable. Initial lint/public smoke used defaultNode24 with existing npm user-config notice; preserved and repeated in isolated Node22 for qualified gates. No continuation/timeout/model/paid/credential/runtime/deployment/heartbeat/spore change; goalACTIVE heartbeat humanPAUSED live0of3. New current head must independently qualify all checks/reviews.

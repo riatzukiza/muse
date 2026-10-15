@@ -1,0 +1,47 @@
+{
+  "schema": "open-hax.github-review/v1",
+  "context-protocol": "open-hax.review-context/v1",
+  "comments": [],
+  "input-coverage": {
+    "chunks": 2,
+    "delivered": 2,
+    "assessed": 2,
+    "missing": []
+  },
+  "input-source": {
+    "schema": "open-hax.review-input/v1",
+    "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "head_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "diff_base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "full_diff": {
+      "path": "basehead.diff",
+      "bytes": 10366,
+      "sha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9"
+    },
+    "provenance": {
+      "repository": "synthetic/owned-real-prefix-test",
+      "pull_request": "1",
+      "run_id": "1",
+      "run_attempt": "1",
+      "workflow_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "workflow_ref": "synthetic/owned-real-prefix-test/local"
+    }
+  },
+  "context-source": null,
+  "summary": "Scripted two-page transport/verifier diagnostic only. No real review or publication.",
+  "event": "APPROVE",
+  "input-assessments": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 4882,
+      "note": "Synthetic diagnostic for original page 1; scripted custody control, not model judgment."
+    },
+    {
+      "id": 2,
+      "start": 4882,
+      "end": 10366,
+      "note": "Synthetic diagnostic for original page 2; scripted custody control, not model judgment."
+    }
+  ]
+}

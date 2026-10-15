@@ -9,6 +9,8 @@
    .opencode/review-evidence/submission.json. Nothing is parsed from model
    output text."
   (:require [eta-mu.infra.review-pipeline :as infra]
+            [eta-mu.law.review-batch :as batch]
+            [eta-mu.shape.review-batch :as batch-shape]
             [eta-mu.dsl :refer [deftool defplugin]]))
 
 ;; ---------------------------------------------------------------------------
@@ -46,6 +48,20 @@
    :tags        #{:review}}
   [params ctx]
   (infra/record-evidence! params ctx))
+
+(deftool read-diff-batch
+  {:id :review/read_diff_batch
+   :description "Read up to four consecutive whole original diff pages starting at first-id. This requires the exact qualified host profile; unknown or changed settings refuse. The tool selects the largest complete prefix within 48000 UTF8 bytes, one JSON line and four pages BEFORE delivery mutation. Use actual batch.ids and next-id, not requested count. Keep each original id/start/end/text/sha256. Delivery is not assessment. Finish every page read before assessing it; any late reread or failed review call ends the invocation. Existing single-page tools remain available."
+   :args (batch-shape/tool-args ::batch/read) :tags #{:review}}
+  [params ctx]
+  (infra/read-diff-batch! params ctx))
+
+(deftool assess-diff-batch
+  {:id :review/assess_diff_batch
+   :description "Assess an ordered vector of one to four DISTINCT delivered original pages. Each member needs its own exact id/start/end/sha256 and separate nonblank page-specific model-authored note (at most 2048 UTF8 bytes). Copy the profile and full source_sha256 binding from the read. Complete encoded args must fit 16384 UTF8 bytes; oversized or any invalid member refuses the ENTIRE vector, with no prefix credit. Read is not judgment. Use returned coverage.missing and finish the final partial batch BEFORE the FIRST deterministic stage; retain content for all five stages. Mechanical admission proves custody only, not semantic substance."
+   :args (batch-shape/tool-args ::batch/assess) :tags #{:review}}
+  [params ctx]
+  (infra/assess-diff-batch! params ctx))
 
 (deftool propose-finding
   {:id          :review/propose_finding
@@ -96,6 +112,8 @@
   begin
   read-diff-chunk
   assess-diff-chunk
+  read-diff-batch
+  assess-diff-batch
   record-evidence
   propose-finding
   classify-finding

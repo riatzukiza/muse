@@ -1,0 +1,278 @@
+{
+  "schema": "muse.actual-native-wording-correction-diagnostic/v1",
+  "tier": "Actual selected compiled producer and native host using fixed localhost scripted SSE; no real model, review, publication, approval, round or live B credit",
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "refusal": null,
+  "stoppedOnRefusal": false,
+  "elapsedMs": 5180,
+  "requests": 10,
+  "binarySHA256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+  "bundleSHA256": "553233fd3044ea4667e07fbd35a97913a967b35790ca1dbf84fec0d8d2b4e4b1",
+  "canonicalVerifierSHA256": "6a5822846d3136e8cb27e0b8e7141b4d852631874cbd4a066750b681ed763f2a",
+  "resolvedConfigSHA256": "fc95d9d1055f61edec6c4b1497fdfe530b4f189ecdbe4f253b5f754ea6912af9",
+  "expectedHost": {
+    "binary-sha256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+    "config-sha256": "6c342206f77390f54d8eddf2caf79cdd4d625eec3a4f87a504d790186d27d1bf",
+    "selectors-sha256": "c7a6bba9afb12485785975fd752e0072d914c1e40de8a5642bb57bed486b15b8",
+    "max-bytes": 51200,
+    "max-lines": 2000
+  },
+  "source": {
+    "kind": "two original real pages as isolated diagnostic source, not the complete150-input review",
+    "fullSourceSHA256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+    "originalHead": "3ab5ffbb6e34a2ee3607a74bf421785d47d5391d",
+    "prefixSHA256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+    "prefixBytes": 10366,
+    "originalPages": [
+      {
+        "id": 1,
+        "start": 0,
+        "end": 4882,
+        "text_utf8_bytes": 4882,
+        "text_sha256": "d7db3ed6779a738be0904f7d2c106093b613a4acdca8898108155272e4b21b84",
+        "single_response": {
+          "bytes": 16527,
+          "lines": 1,
+          "sha256": "1bd44de3d37c54b2b0db55648e0459b17fd49e9d4609a366160bfd75f49a1d44"
+        }
+      },
+      {
+        "id": 2,
+        "start": 4882,
+        "end": 10366,
+        "text_utf8_bytes": 5484,
+        "text_sha256": "434efa776f6dbe98d34264a4b5a9aab3197c6fea8719d2eb2c29e8d552da705e",
+        "single_response": {
+          "bytes": 17172,
+          "lines": 1,
+          "sha256": "e2e2652a0723281eee0c99f49fa95d1aa2c92b57f2dfa0a83e330105916d2b1b"
+        }
+      }
+    ],
+    "tools": [
+      "review_begin",
+      "review_read_diff_chunk",
+      "review_assess_diff_chunk",
+      "review_read_diff_batch",
+      "review_assess_diff_batch",
+      "review_record_evidence",
+      "review_propose_finding",
+      "review_classify_finding",
+      "review_status",
+      "review_submit"
+    ]
+  },
+  "stdout": {
+    "bytes": 29192,
+    "sha256": "64091c77ea18103d0bbbe5be0657ba44ec1f439644b41e3f7ceb968fd46468fb"
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "verdict": {
+    "reviewCallCount": 9,
+    "acceptedInvocation": {
+      "sessionID": "ses_ec0798594ffeVB9eVsgg7kn92b",
+      "submissionCallID": "owned-native-batch-8",
+      "submissionPosition": 26,
+      "submissionFile": "/var/tmp/muse-joint5-native-wording-cj98bbzo/consumer/.opencode/review-evidence/submission.json",
+      "responseSha256": "64091c77ea18103d0bbbe5be0657ba44ec1f439644b41e3f7ceb968fd46468fb",
+      "submissionSha256": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5",
+      "fullInputSha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+      "pageCount": 2
+    },
+    "contextReadCoverage": {
+      "status": "absent",
+      "totalLines": 0,
+      "deliveredLines": 0,
+      "eof": false
+    },
+    "reason": null,
+    "ok": true,
+    "code": "verified-review-invocation",
+    "pageWitnesses": [
+      {
+        "id": 1,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f867fbd001PC4E3dOpGRyTP8",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_13f867fbd001PC4E3dOpGRyTP8",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 1,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f8680560014UZfn72TD4mCaT",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_13f8680560014UZfn72TD4mCaT",
+        "position": 8,
+        "tool": "review_assess_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      }
+    ],
+    "pageCount": 2,
+    "violations": [],
+    "reasonKind": null,
+    "sessionID": "ses_ec0798594ffeVB9eVsgg7kn92b"
+  },
+  "problem": null,
+  "sourceFiles": {
+    "deps.edn": "8eabd65ea41db900deb987c445c31f03615a2a36928bb6818c778783e28a2be5",
+    "shadow-cljs.edn": "409203bc5f8214710cea01f979141806805169eef374ade54fda406289d476fa",
+    "src/clj/eta_mu/opencode/build.clj": "96008881199a5df5d9aa27200c79e0ca64536c8e84a634692abc111a19fa7c50",
+    ".ημ/plugins/review_pipeline.cljs": "228722277260b16cb2f628ee78b03c576b0e4cbdfd1c6c166eda1ff5ad4fd025",
+    "src/cljs/eta_mu/boundaries/opencode.cljs": "06a980346494b4fc7aac585d62a44082b72089d01cf59b16a70b6284c999e738",
+    "src/cljs/eta_mu/domain/review.cljc": "76045a6f3838a9a17cc7fa4bdb65cbccaefccfeadcc38aa2f016ec7a1c6f4a7a",
+    "src/cljs/eta_mu/law/review_batch.cljc": "e4232dd460406513399f07b380146eff5cb0a2a71f8e775a23c33771e97be98d",
+    "src/cljs/eta_mu/law/review_invocation.cljc": "a2cedd6bf92b9cd8f3a94705cb13a116c1f021d2b6fbea9355382b71a14febf7",
+    "src/cljs/eta_mu/shape/review_batch.cljc": "f4f0dfd5421d29f7c68331d054e5f515b68e706755bd4d106a7d5fb6d8a05501",
+    "src/cljs/eta_mu/extern/review_batch.cljs": "763c092e992de56c8c749cba227326ee6f467bd4d2563526805b2484c4315cec",
+    "src/cljs/eta_mu/extern/review_invocation.cljs": "2305384440dd0e35236b2bb3bd4da182ce26262a8b8316df7bf2ee1bfca9f58e",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "2ee871bf407b59f9fc05e6ee052e22e85c2c51aa284df8c86782b76d1aec0cdc",
+    "src/cljs/eta_mu/domain/review_invocation.cljc": "99be3227e388124af996cb9b9f985bbc9fa6c2d3ae625d0ec2c74733dcc23647",
+    ".ημ/config/opencode/agents/github-reviewer.md": "5cf16f4a75abcb5ea376323f49844cead9f70270c4fbe786e96fa2a25818ac51",
+    ".ημ/review/evidence-review.md": "ba73ffdf89a9c83f5aa42e3da01bebce1ec9b7c07fcd7503e4b1e8ae5f1eff52"
+  },
+  "actualCalls": [
+    {
+      "tool": "review_begin",
+      "callID": "owned-native-batch-0",
+      "partID": "prt_13f867e7e001LoyLfBftbaFJpK",
+      "position": 2,
+      "status": "completed",
+      "outputBytes": 2473,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_read_diff_batch",
+      "callID": "owned-native-batch-1",
+      "partID": "prt_13f867fbd001PC4E3dOpGRyTP8",
+      "position": 5,
+      "status": "completed",
+      "outputBytes": 11936,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_assess_diff_batch",
+      "callID": "owned-native-batch-2",
+      "partID": "prt_13f8680560014UZfn72TD4mCaT",
+      "position": 8,
+      "status": "completed",
+      "outputBytes": 246,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-3",
+      "partID": "prt_13f8680ec001vkios6wqf2ET2P",
+      "position": 11,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-4",
+      "partID": "prt_13f86817b001RdhRCdik6ctrkk",
+      "position": 14,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-5",
+      "partID": "prt_13f86827d001uteYD358ewVjAX",
+      "position": 17,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-6",
+      "partID": "prt_13f86835b001GIlzddRHlRybjV",
+      "position": 20,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-7",
+      "partID": "prt_13f86841b001pSHJrPdsRfXCak",
+      "position": 23,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_submit",
+      "callID": "owned-native-batch-8",
+      "partID": "prt_13f8684d9001LD59vTrYIEJQS5",
+      "position": 26,
+      "status": "completed",
+      "outputBytes": 281,
+      "outputLines": 1,
+      "truncated": false
+    }
+  ],
+  "sharedEvidenceSHA256": {
+    "input.diff": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+    "input-manifest.json": "43f8a85317d3f487b76be716e751bf3364d1bd7eea2b5a34ec9a083f48d51d4a",
+    "submission.json": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5"
+  },
+  "sharedEvidenceActualFreshBytesEqualRetained": true,
+  "nativeFile": "wording-native.jsonl",
+  "canonicalVerifierStableAcrossCaptures": true,
+  "capture": {
+    "beforeRawConfigSHA256": "fc95d9d1055f61edec6c4b1497fdfe530b4f189ecdbe4f253b5f754ea6912af9",
+    "afterRawConfigSHA256": "7a73acb2c6cb0c38d8003404079c122d0bccfec7cc32fb6d8063faeba75a8732",
+    "canonicalBeforeAfterEqualityActuallyAsserted": true,
+    "completePrivateCaptureRetained": true
+  },
+  "priorNativeAndReverificationUnchanged": true,
+  "scope": "Model-facing instruction spacing only; limits and call/coverage/context/submission laws unchanged. Fresh actual diagnostic binds changed producer metadata instead of claiming old bundle identity."
+}
