@@ -665,3 +665,13 @@
   spore: none
   receipt-refs: muse-pr12-current-coverage-shape-admission-and-prefix-green-20261015
   note: Witness construction now shape/domain composition; infra only observes/orchestrates one pure domain admission using shared host/profile laws consumed by verifier. Coverage must exactly equal accumulated successful reads/assessments at every returned batch call, retaining missing IDs. Successful LAST uses actual delivered prefix; every failed attempt and actual late reread remains invalidating. One requested but undelivered tail cannot manufacture a read. New current native source hashes replace no historical bytes; all inputs/assessment/context/five-stage/submission/publisher guards remain. No continuation, timeout/model/credential/paid/runtime/heartbeat change; goalACTIVE/humanPAUSEDheartbeat/live0/3. Source current review/qualification and downstream ETA/OpenPlanner consumption remain.
+
+- ts: 2026-10-15T12:02:53.976Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-mixed-single-page-immutable-source-causal-red-20261015
+  note: Causal RED uses visibly synthetic edited unit events and preserves every authentic native/proof byte. Correct batch-capable single reads must bind exact prepared text/digest; legacy nonbatch callers retain prior geometry contract. Current MiMo APPROVED5532538742/all43inputs46pages and required CI are real e5 evidence but do not dismiss the new P1 or transfer to a new head. No model/paid/credentials/runtime/heartbeat/deployment/spore change; goalACTIVE, humanPAUSEDheartbeat, live0/3.

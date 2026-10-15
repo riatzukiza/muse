@@ -132,3 +132,43 @@
       (is (:ok result))
       (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "native.jsonl"))))
       (is (= 4 (count (:pageWitnesses result)))))))
+
+
+(deftest mixed-single-page-read-must-match-the-prepared-immutable-page
+  (let [{:keys [proof context events submission]} (data)
+        r (dec (:position (first (filter #(= "review_read_diff_batch" (:tool %)) (:actualCalls proof)))))
+        original (extern/strict-json (get-in events [r :part :state :output]))
+        page1 (first (:chunks original)) page2 (second (:chunks original))
+        ;; Explicitly edited UNIT TEST input, never a native capture or review.
+        batch2 (-> events
+                   (assoc-in [r :part :state :input] {:first-id 2 :count 1})
+                   (change-output r #(-> % (assoc :chunks [page2])
+                                          (assoc :batch {:ids [2] :first-id 2 :last-id 2
+                                                         :next-id nil :profile (get-in % [:batch :profile])})
+                                          (assoc :coverage {:chunks 2 :delivered 1 :assessed 0 :missing [1 2]}))))
+        synthetic (-> (nth events r)
+                      (assoc :timestamp (:timestamp (nth events (inc r))))
+                      (assoc-in [:part :id] "synthetic-exact-single-part")
+                      (assoc-in [:part :callID] "synthetic-exact-single-call")
+                      (assoc-in [:part :tool] "review_read_diff_chunk")
+                      (assoc-in [:part :state :input] {:id 1})
+                      (assoc-in [:part :state :output]
+                                (wire/encode (merge (select-keys original [:context-protocol :context-source :context-observation])
+                                                    {:ok? true :chunk page1}))))
+        mixed (vec (concat (subvec batch2 0 (inc r)) [synthetic] (subvec batch2 (inc r))))
+        single-position (inc r)]
+    (is (:ok (verdict mixed submission context)))
+    (doseq [[label edited]
+            [["equal-length altered text" (change-output mixed single-position
+                                           #(update-in % [:chunk :text] (fn [s] (str "X" (subs s 1)))))]
+             ["forged returned digest" (change-output mixed single-position
+                                        #(assoc-in % [:chunk :sha256] (apply str (repeat 64 "0"))))]
+             ["missing returned digest" (change-output mixed single-position #(update % :chunk dissoc :sha256))]]]
+      (testing label
+        (let [result (verdict edited submission context)]
+          (is (false? (:ok result)))
+          (is (nil? (:acceptedInvocation result))))))
+    (let [without-text (js->clj context :keywordize-keys true)
+          result (verdict mixed submission (clj->js (update-in without-text [:pages 0] dissoc :text)))]
+      (is (false? (:ok result)))
+      (is (nil? (:acceptedInvocation result))))))
