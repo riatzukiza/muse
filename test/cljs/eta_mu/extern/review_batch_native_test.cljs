@@ -98,6 +98,10 @@
         r (position "review_read_diff_batch") a (position "review_assess_diff_batch")
         cases
         {"forged delivered coverage" (change-output events r #(assoc-in % [:coverage :delivered] 0))
+         "missing read success restart flag" (change-output events r #(dissoc % :restart-required?))
+         "missing assessment success restart flag" (change-output events a #(dissoc % :restart-required?))
+         "malformed read success restart flag" (change-output events r #(assoc % :restart-required? "false"))
+         "malformed assessment success restart flag" (change-output events a #(assoc % :restart-required? "false"))
          "forged assessment coverage" (change-output events a #(assoc-in % [:coverage :assessed] 0))
          "forged missing coverage" (change-output events r #(assoc-in % [:coverage :missing] [1]))
          "membership" (change-output events r #(assoc-in % [:batch :ids] [2 1]))

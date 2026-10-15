@@ -695,3 +695,13 @@
   spore: none
   receipt-refs: muse-pr12-model-facing-limit-spacing-and-current-native-source-green-20261015
   note: Insert exactly requested spaces in three model-facing strings; numerical limits, schemas and runtime gates unchanged, so no invented behavioral RED. Actual tool metadata changes bundle identity; collect fresh native diagnostic rather than relabel old producer. Current old-head Codex/MiMo attempts are allowed to finish before next push, grouping any findings; no manual provider cancellation or unchanged duplicate request. This local concrete source correction is held pending those reviews and fresh exact-head qualification. No continuation/timeout/paid/credentials/global host/runtime/owner/deployment/publication/heartbeat/spore change. GoalACTIVE heartbeat humanPAUSED live0/3.
+
+- ts: 2026-10-15T12:41:00.345Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-await-context-and-success-shape-causal-red-20261015
+  note: These are verified missing obligations within the already approved coupled transport/verifier scope, not new prerequisites. Correct primary prompt's contradictory single-page-only mandate, observe context again after host await before existing pure admission/mutation, and require declared false success flag for both batch variants. Keep namespace boundaries and all input/context/LAST/stage/submission/publisher guards. Current1a9 reviews completed with these findings and one CR wording finding; group all corrections for next push. No continuation/timeout/model/paid/credentials/runtime/deploy/publication/heartbeat/spore change. GoalACTIVE heartbeat humanPAUSED live0/3.

@@ -134,6 +134,42 @@
 (deftest actual-wire-cap-before-credit-and-whole-request-refusal
   (async done (run-controls! done)))
 
+(defn- ^:async change-context-during-host-observation! [file _directory]
+  ;; Controlled host-adapter test double; this is not native observation proof.
+  (.writeFileSync fs file "Changed context while host observation is awaited.")
+  fixture/host)
+
+(defn- ^:async context-await-controls! [done]
+  (try
+    (doseq [assessment? [false true]]
+      (let [ctx (fixture! "one immutable page")
+            file (.join path (:evidence ctx) "pr-context.md")]
+        (try
+          (is (:ok? (await (infra/begin! {} ctx))))
+          (let [args (if assessment?
+                       (assessments (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))
+                                    "Separate page assessment")
+                       {:first-id 1 :count 1})
+                changed (assoc ctx :review/observe-host
+                               (partial change-context-during-host-observation! file))
+                result (decode (await (if assessment?
+                                       (infra/assess-diff-batch! args changed)
+                                       (infra/read-diff-batch! args changed))))]
+            ;; Restore before the next call: later guards cannot erase the
+            ;; custody violation witnessed at the actual mutation boundary.
+            (.unlinkSync fs file)
+            (is (false? (:ok? result)))
+            (is (review/restart-required? (state ctx)))
+            (is (= (if assessment? #{1} #{}) (:delivered-chunks (state ctx))))
+            (is (= {} (:assessed-chunks (state ctx))))
+            (is (false? (:ok? (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))))))
+          (finally (clean! ctx)))))
+    (catch :default error (is false (.-message error)))
+    (finally (done))))
+
+(deftest recheck-context-after-awaited-host-observation-before-batch-credit
+  (async done (context-await-controls! done)))
+
 (deftest host-fingerprint-binds-the-profile-settings-and-selectors
   (let [env #js {:HOME "/owned" :OPENCODE_CONFIG "/owned/config.json"}
         observe #(wire/host-observation batch/host-binary-sha256 % env "/owned/consumer")
