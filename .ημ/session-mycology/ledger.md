@@ -485,3 +485,113 @@
   spore: none
   receipt-refs: cephalon-batching-discovery-split-and-compiled-custody-plan-20261015
   note: Verified six Codex findings repaired without expanding the authorized prerequisite. Unknown effective host/profile sizing is a blocking proposed3-point discovery predecessor; joint source5 consumes its qualified exact artifact and ships API+verifier together. Total proposed Muse8 preserved, parent8 excluded; follow-on ETA2/OpenPlanner1 remain separate proposals. All input/context/five stages/publisher/current-head guards stay mandatory, no continuation/timeout-only/exclusion/paid/credential/runtime/heartbeat change; liveB1/B2/B3 remain0/3. No spore.
+
+- ts: 2026-10-15T03:38:27.391Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-bounded-profile-native-readiness-and-start-20261015
+  note: Planning merged and profile3 is actually InProgress; joint5 remains Incoming until qualified profile Done. New branch codex/bounded-review-host-profile starts at exact planning merge, not stale personal main. Initial CLI/config probe bounds12owned children/30sec each/300sec total,2MiB stdout each,256KiB synthetic fixture/2MiB synthetic total. Initial model/provider calls0; no secrets/config dumps, global plugin publication, host/runtime/sysctl/maker/heartbeat/paid/publication change. Effective limits/wire throughput and B1/B2/B3 remain unproved; no spore.
+
+- ts: 2026-10-15T03:59:10.335Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-bounded-profile-native-controls-compiled-wire-and-corpus-20261015
+  note: Effective candidate51200/2000 observed through actual resolved config plus source/default boundary controls. Historical GHA effective configuration remainsUNKNOWN; future joint/ETA must capture actual selected executable/resolvedlimits/source selectors before effects and refuse unknown/different. General real provider capacity remainsUNKNOWN. New compiled batch API not implemented/executed. Profile artifact/re-description needs owning review before nativeDone/jointReady. All source input/individual assessment/context/five-stage/publisher/once-invocation guards retained. Profile receipt corrects shell Node assumption transparently; synthetic fixture sha256:null supplies no proof, independent actual input hash does. No continuation/paid/realcredentials/live maker/runtime/deployment/publication/heartbeat/spore changes; GoalACTIVE heartbeat humanPAUSED live0/3.
+
+- ts: 2026-10-15T04:22:57.705Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-reproducible-fixture-red-20261015
+  note: Three native findings verified in already included profile scope. Portable fixture profile/constants and boundary tests precede new fixture outcomes/generator; final tests must establish every selected boundary without weakening guards. This red local commit is not pushed alone. Original native snapshots/generators retained, no new production state/law/tool/verifier, no live/runtime/paid/credentials/heartbeat change; joint remains Incoming.
+
+- ts: 2026-10-15T04:35:22.133Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-reproducible-fixture-green-and-red-receipt-correction-20261015
+  note: All3current profile findings verified and repaired in accepted scope. Generator receives explicit paths and exact hashed corpus/bundle/manifest identities, preserves original compiled prefix, reuses existing measured zod, outputs private data and never invokes model/provider or changes host. Portable fixture policy lives only under test; it is not production state/law/tool/verifier and grants no review credit. General provider maximum and historical GHA effective settings remainUNKNOWN; future actual-consumer capture/refusal and genuine full-input review still required. Local RED commit was not pushed alone; ordinary GREEN push includes its truthful correction. No source geometry/input omission, continuation, timeout increase, paid route, real credentials, runtime/maker/deployment/publication/heartbeat/spore change; GoalACTIVE heartbeat humanPAUSED live0/3.
+
+- ts: 2026-10-15T05:05:58.297Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-complete-synthetic-custody-and-all-selected-bounds-20261015
+  note: All5verified findings repaired together. Reproduction is fixture-only/no model calls; earlier inconsistentvectors labelledhistorical, receipts/raw evidence unchanged. Native profilecomment/readback preserves original qualified body/InProgress, jointIncoming until exactprofilequalifiesDone. No productionlaw/state/batchAPI/verifier, continuation, timeoutincrease, omissions, paidroute, credentials, runtime/maker/clock/deployment/publication/heartbeat/spore change. GoalACTIVE heartbeat humanPAUSED live0/3.
+
+- ts: 2026-10-15T05:33:27.724Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-realpath-nbb-source-prefix-line-and-metadata-order-20261015
+  note: AllknownprofilefindingscollectedaftercurrentMiMocompletionandfixedtogether. Existingselectedbounds/inputgeometry/free route unchanged; originaltaskbody/InProgress andjointIncoming preservedviaactualnativecomment/readback. Sourcefixture-only/no productionbatchAPI/law/state/verifier/providermax. No continuation/timeoutincrease/paid/realcredentials/runtime/maker/deployment/publication/heartbeat/sporechange. GoalACTIVE humanPAUSED live0/3.
+
+- ts: 2026-10-15T06:18:48.006Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-complete-context-envelope-and-source-root-20261015
+  note: Complete diagnostic profile v2 replaces omitted-field measurements. No productionbatchAPI/law/state/nativeverifier/modelcall/providermax/continuation/timeout/paid/credentials/modelrouting/runtime/maker/deployment/publication/heartbeat change. Original profilebody/InProgress and jointIncoming retained; final-head review/checks required. GoalACTIVE humanPAUSED live0/3; no spore.
+
+- ts: 2026-10-15T06:41:07.265Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-remove-stale-current375-equality-field-20261015
+  note: Current metadata now matches384group completeprofile; immutable prior375 unwrapped history preserved. Finalnewhead current checks/fullinputreview remain mandatory. Diagnostic-only/no productionbatchAPI/verifier/providermax/liveproof. ProfileInProgress/jointIncoming; goalACTIVE humanPAUSED heartbeat live0/3; no continuation/timeout/paid/credentials/runtime/deployment/publication/spore change.
+
+- ts: 2026-10-15T07:19:27.550Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-c499-incomplete-native-review-and-one-full-rerun-20261015
+  note: OwnedUNCOMMITTED appendonly observation; holdfornext concrete sourcechange, no observation-only push/headchurn. No further automatic manualreruns promised; assess actualattempt2 outcome. GoalACTIVE heartbeat humanPAUSED live0/3; profileInProgress/jointIncoming. No paid/credentials/modelrouting/limits/runtime/maker/owner/deployment/publication/sporechange. Pendingcanonicalextension question remainsunapplied; priorapprovals not transferred.
+
+- ts: 2026-10-15T08:05:10.925Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-exact-dependency-snapshot-and-actual-group-composition-20261015
+  note: Concrete diagnostic fix includes preserved owned receipt95/reflection unchanged. No production batch API/native verifier/providermaximum/liveproof; goalACTIVE heartbeat humanPAUSED live0/3. No continuation, timeout increase, paid/credentials/modelrouting/runtime/deployment/publication/spore change. Current exact-head reviews/checks required after push; pending canonical outdated-withdrawal scope not applied.
+
+- ts: 2026-10-15T08:33:47.797Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-all-git-output-and-explicit-session-wire-bounds-20261015
+  note: Diagnostic source only; no productionbatchstate/API/nativeverifier/actualprovidermax/liveproof. Includes immutable97threceipt after96prefix; currentnewhead hostedfullsourceapproval/checks required. GoalACTIVE heartbeat humanPAUSED live0/3; no continuation/timeoutincrease/paid/credentials/modelrouting/runtime/maker/owner/deployment/publication/sporechange.
