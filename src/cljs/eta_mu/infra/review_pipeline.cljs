@@ -125,11 +125,14 @@
 
 (defn- ^:async batch-step! [params ctx read?]
   (if-let [session (require-session ctx)]
-    (let [custody (guard! ctx session)
-          fields (assoc (select-keys custody [:context-protocol :context-source :context-observation])
-                        :restart-required? false)
+    (let [initial-custody (guard! ctx session)
           host (when-let [observe (:review/observe-host ctx)]
-                 (await (observe (or (:worktree ctx) (:directory ctx)))))]
+                 (await (observe (or (:worktree ctx) (:directory ctx)))))
+          custody (if (:ok? initial-custody)
+                    (guard! ctx (require-session ctx))
+                    initial-custody)
+          fields (assoc (select-keys custody [:context-protocol :context-source :context-observation])
+                        :restart-required? false)]
       (if-not (review/batch-admissible? session (require-session ctx) custody host
                                            (:session/id ctx)
                                            (wire/session-measurement (:session/id ctx))

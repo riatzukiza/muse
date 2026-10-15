@@ -113,3 +113,37 @@ sources remain included. This is fixed localhost scripted SSE with no LLM,
 semantic review, publication, approval, round or live B credit. The bounded
 producer build uses sixty source files/302501bytes with zero warnings; no
 global runtime, credential or capacity change is made.
+
+
+## Post-await context custody, success shape and primary workflow correction
+
+Native Codex5533073234 found the contradictory single-page-only primary
+instructions and two missing contracts. The primary workflows now explicitly
+choose qualified batch, single-page or mixed operation, preserving every
+original page, its separate assessment and read-before-assessment chronology.
+The producer re-observes context after awaited host observation immediately
+before the existing pure admission/credit mutation; a changed context latches
+refusal even when restored before a subsequent call. The independent verifier
+requires literal false restart-required? in both successful batch output shapes.
+
+Causal RED executed327tests2149assertions15failures0errors0compilerwarnings.
+The initial post-fix suite had seven remaining failures: a synthetic batch
+assessment inherited legacy metadata and omitted the new required false flag.
+Adding that emitted producer field preserves every assertion. Final owner
+GREEN is328tests2152assertions0failures0errors0compilerwarnings, including both
+awaited filesystem mutation/restore controls and malformed native DATA refusals.
+The actual full1491page/384group production-wire projection and current complete
+input/context/CJS smoke, full lint and hygiene also pass. Mongo authentication
+remains unavailable and supplies no integration pass.
+
+Fresh selected producer/native diagnostic:9actual calls/4witnesses in
+6745ms; producerSHA256 `4f7b06436d139867033e5e9176e21279790d11ac2d8e2837f35e757db038a683`;
+stable canonical verifierSHA256 `b56daf2c15b5cdf43596a72cbcd330eb1af0845cdf21ce2c974026e15e8fb665`.
+Independent before/after host captures match. postawait-native.jsonl and
+postawait-proof.json preserve the new actual raw trace and fifteen-file source
+binding; the actual three input/manifest/submission files again equal the
+retained shared bytes exactly. The earlier wording capture remains an authentic
+historical compatibility regression; all fifteen current source bindings move
+together to this new proof, without exceptions or overwritten old bytes.
+Fixed localhost scripted SSE supplies no real-model, semantic review, approval,
+round, publication or live B credit.

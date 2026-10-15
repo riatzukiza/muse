@@ -68,18 +68,18 @@
       (is (= 2 (:pageCount result)))
       (is (= 9 (:reviewCallCount result))))))
 
-(deftest current-wording-producer-native-wire-and-complete-source-binding
+(deftest current-postawait-producer-native-wire-and-complete-source-binding
   (binding [*fixture-root* (str root "review-fixes/")]
-    (let [{:keys [proof context]} (data "wording-proof.json" "wording-native.jsonl")
+    (let [{:keys [proof context]} (data "postawait-proof.json" "postawait-native.jsonl")
           prior (read-json "proof.json")
-          result (js->clj (extern/verify-review-invocation (read-bytes "wording-native.jsonl")
+          result (js->clj (extern/verify-review-invocation (read-bytes "postawait-native.jsonl")
                                                           (read-bytes "submission.json") context)
                          :keywordize-keys true)]
       (is (:ok result))
       (is (= 4 (count (:pageWitnesses result))))
       (is (= 2 (:pageCount result)))
       (is (= 9 (:reviewCallCount result)))
-      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "wording-native.jsonl"))))
+      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "postawait-native.jsonl"))))
       (is (true? (:canonicalVerifierStableAcrossCaptures proof)))
       (is (true? (get-in proof [:capture :canonicalBeforeAfterEqualityActuallyAsserted])))
       (is (true? (:sharedEvidenceActualFreshBytesEqualRetained proof)))
@@ -91,6 +91,16 @@
       (doseq [[file digest] (:sourceFiles proof)]
         (let [file (if (keyword? file) (subs (str file) 1) file)]
           (is (= digest (wire/sha256 (.readFileSync fs file))) file))))))
+
+(deftest retained-wording-native-transcript-remains-authentic-compatible-data
+  (binding [*fixture-root* (str root "review-fixes/")]
+    (let [{:keys [proof context]} (data "wording-proof.json" "wording-native.jsonl")
+          result (js->clj (extern/verify-review-invocation (read-bytes "wording-native.jsonl")
+                                                          (read-bytes "submission.json") context)
+                         :keywordize-keys true)]
+      (is (:ok result))
+      (is (= 4 (count (:pageWitnesses result))))
+      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "wording-native.jsonl")))))))
 
 (deftest edited-actual-trace-never-manufactures-coverage
   (let [{:keys [proof context events submission]} (data)

@@ -705,3 +705,13 @@
   spore: none
   receipt-refs: muse-pr12-await-context-and-success-shape-causal-red-20261015
   note: These are verified missing obligations within the already approved coupled transport/verifier scope, not new prerequisites. Correct primary prompt's contradictory single-page-only mandate, observe context again after host await before existing pure admission/mutation, and require declared false success flag for both batch variants. Keep namespace boundaries and all input/context/LAST/stage/submission/publisher guards. Current1a9 reviews completed with these findings and one CR wording finding; group all corrections for next push. No continuation/timeout/model/paid/credentials/runtime/deploy/publication/heartbeat/spore change. GoalACTIVE heartbeat humanPAUSED live0/3.
+
+- ts: 2026-10-15T12:53:10.909Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-primary-batch-workflow-postawait-custody-and-success-shape-green-20261015
+  note: Primary instructions now explicitly choose exposed qualified batch/single/mixed rather than contradictory single-only flow. Infra observes context after host await before existing shared pure admission and mutation; pure verifier requires literal false success metadata for both batch tools. Retain complete original pages, separate assessments, real call IDs/memberships, all context/source/LAST/five-stage/actual-submit/publisher guards and legacy route. New native diagnostic is scripted localhost, no LLM/review/approval/round/live credit. Grouped current source must be pushed/reviewed once; no approval transfer or paid quota bypass, duplicate pending review or provider cancellation. GoalACTIVE heartbeat humanPAUSED live0/3; no continuation/timeout/model/credentials/global runtime/owner/deployment/publication/spore change.

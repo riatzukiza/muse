@@ -30,6 +30,7 @@
                                   :head_sha (:head_sha fixture/manifest) :base_sha (:base_sha fixture/manifest)}}))
       (assoc-in [2 :part :tool] "review_assess_diff_batch")
       (assoc-in [2 :part :state :input] request)
+      (assoc-in [2 :part :state :output :restart-required?] false)
       (assoc-in [2 :part :state :output :chunk-ids] [1])
       (update-in [2 :part :state :output] dissoc :chunk-id)))
 

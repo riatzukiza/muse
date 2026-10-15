@@ -126,6 +126,7 @@
                                                       (select-keys (page-by-id (:id %)) [:id :start :end :sha256]))))
                                         (:assessments args)))) :batch-assessment-binding
       (not (success? c)) nil
+      (not (false? (:restart-required? result))) :batch-success-shape
       (not (coverage-valid? (:coverage result) pages)) :batch-coverage-binding
       (and read?
            (not (and (vector? ids) (seq ids)
