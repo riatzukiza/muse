@@ -2,6 +2,7 @@
 ;; No model, production batching API, host reconfiguration or publication.
 (ns extern.verify-review-batch-profile
   (:require [clojure.string :as str]
+            [nbb.core :as nbb]
             [eta-mu.fixtures.review-batch-profile :as fixture]
             ["node:fs" :as fs]
             ["node:path" :as path]
@@ -18,6 +19,7 @@
   (fs/writeFileSync (path/join out name) (str (json value) "\n") #js {:mode 384}))
 
 (assert (= "v22.20.0" (.-version js/process)) "Qualified reproduction requires Node22.20.0.")
+(assert (= "1.3.204" (nbb/version)) "Qualified reproduction requires NBB1.3.204.")
 (assert (even? (count *command-line-args*)) "Arguments are flag/value pairs.")
 (let [opts (apply hash-map *command-line-args*)
       required #{"--corpus" "--manifest" "--bundle" "--zod" "--out"}
@@ -27,7 +29,8 @@
       manifest (decode (get opts "--manifest"))
       original (fs/readFileSync (get opts "--bundle"))
       zod (fs/realpathSync (get opts "--zod"))
-      out (path/resolve (get opts "--out"))
+      requested-out (path/resolve (get opts "--out"))
+      out (path/join (fs/realpathSync (path/dirname requested-out)) (path/basename requested-out))
       repo (fs/realpathSync (.cwd js/process))
       _ (assert (and (not= repo out) (not (str/starts-with? out (str repo path/sep))))
                 "Protected corpus wires must be written outside this checkout.")
@@ -61,7 +64,9 @@
       pages (mapv #(assoc % :sha256 (sha (:text %))) original-pages)
       ids (mapv :id pages)
       profile-id "muse-review-batch-profile/2026-10-15-candidate-v1"
-      source (select-keys manifest [:base_sha :head_sha :diff_base_sha :full_diff])
+      source {:base_sha (:base_sha manifest) :head_sha (:head_sha manifest)
+              :diff_base_sha (:diff_base_sha manifest)
+              :full_diff {:path "basehead.diff" :bytes 11840401 :sha256 (sha corpus)}}
       coverage {:chunks (count pages) :delivered (count pages) :assessed 0 :missing ids}
       custody {:profile profile-id :session (apply str (repeat 128 "s"))
                :source_sha256 (sha corpus) :head_sha (:head_sha manifest) :base_sha (:base_sha manifest)}
@@ -131,8 +136,11 @@
       over-synthetic (boundary-value "" 48001 1)
       two-page-over (boundary-value (apply str (repeat 8192 "x")) 48001 2)
       first-page (synthetic-wire (:source-text two-page-over) 1)
-      four-pages (synthetic-wire (str/join "\n" (repeat 512 "x")) 4)
-      five-pages (synthetic-wire (str/join "\n" (repeat 513 "x")) 5)
+      cardinality-source (str/join "\n" (repeat 513 "x"))
+      four-pages (synthetic-wire cardinality-source 4)
+      five-pages (synthetic-wire cardinality-source 5)
+      one-line (:wire (synthetic-wire "Line-boundary control" 1))
+      two-lines (str (subs one-line 0 1) "\n" (subs one-line 1))
       exact-response (:wire exact-synthetic)
       over-response (:wire over-synthetic)
       padded-request (loop [v (request (subvec pages 0 4) "Fixture only") at 0]
@@ -152,7 +160,11 @@
       responses {:exact {:wire exact-response :measurement (metrics exact-response)
                          :result (fixture/response-outcome (metrics exact-response))}
                  :over {:wire over-response :measurement (metrics over-response)
-                        :result (fixture/response-outcome (metrics over-response))}}
+                        :result (fixture/response-outcome (metrics over-response))}
+                 :exact-lines {:wire one-line :measurement (metrics one-line)
+                               :result (fixture/response-outcome (metrics one-line))}
+                 :over-lines {:wire two-lines :measurement (metrics two-lines)
+                              :result (fixture/response-outcome (metrics two-lines))}}
       read-vectors {:first-page first-page :two-page-over two-page-over :single-page-over over-synthetic
                     :four-pages four-pages :five-pages five-pages}
       read-measurement (fn [v] (assoc (metrics (:wire v)) :ids (:ids v)))
@@ -191,8 +203,19 @@
   (assert (= "f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0"
              (get-in requests [:max-escaped-notes :measurement :sha256])))
   (doseq [[n v] [[4 four-pages] [5 five-pages]]]
-    (assert (= n (:pages v) (count (:ids v))))
+    (assert (= n (count (:ids v))))
+    (assert (= 5 (:pages v)))
     (assert (< (utf8-bytes (:wire v)) 48000)))
+  (let [four (js->clj (js/JSON.parse (:wire four-pages)) :keywordize-keys true)
+        five (js->clj (js/JSON.parse (:wire five-pages)) :keywordize-keys true)]
+    (assert (= (:input-source four) (:input-source five)))
+    (assert (= (:custody four) (:custody five)))
+    (assert (= (:chunks four) (subvec (:chunks five) 0 4))))
+  (assert (= (js->clj (js/JSON.parse one-line)) (js->clj (js/JSON.parse two-lines))))
+  (assert (= [1 2] (mapv #(get-in responses [% :measurement :lines]) [:exact-lines :over-lines])))
+  (assert (every? #(< (get-in responses [% :measurement :bytes]) 48000) [:exact-lines :over-lines]))
+  (assert (= :accept (get-in responses [:exact-lines :result :outcome])))
+  (assert (= :refuse (get-in responses [:over-lines :result :outcome])))
   (assert (= [1 2 3 4] (get-in read-cases [:cardinality-exact :ids])
              (get-in read-cases [:cardinality-prefix :ids])))
   (assert (= :refuse (get-in read-cases [:cardinality-over :outcome])))
@@ -215,7 +238,7 @@
   (write! out "corpus-groups.json" groups)
   (write! out "summary.json"
           {:fixture-only true :production-api false :model-calls 0
-           :runtime (.-version js/process) :corpus-sha256 (sha corpus)
+           :runtime (.-version js/process) :nbb (nbb/version) :corpus-sha256 (sha corpus)
            :bundle-sha256 (sha original) :pages (count pages) :groups (count groups)
            :calls (* 2 (count groups)) :baseline-calls (* 2 (count pages))
            :responses (into {} (map (fn [[k v]] [k (dissoc v :wire)]) responses))

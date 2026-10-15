@@ -204,9 +204,9 @@ The concrete four-note escaped request is now generated and executed: each
 note has2048 NUL UTF8 bytes, the complete request has49792 serialized bytes and
 exact original digest f4eb1fef4f4a0440e28d889d968cff0d5d03ec38ffe469c36bf9f052233958e0.
 The diagnostic fixture refuses it with zero accepted members. Complete four-
-and five-page response envelopes have2940 and3066 bytes respectively, both
-below48000; four accepts, five refuses, and selecting the intact four-page
-prefix remains lawful only for reads. Every vector and actual outcome is
+and five-page response candidates now use one five-page source, with2941 and3066
+bytes respectively, both below48000; four accepts, five refuses, and selecting
+the intact four-page prefix remains lawful only for reads. Every vector and actual outcome is
 retained in the private generated output and the nonsecret profile summary.
 
 The generator now refuses any process.version other than v22.20.0 before
@@ -218,3 +218,36 @@ or changed path. Head/base/diff-base bindings remain exact. Before this repair,
 real Node24 and modified-manifest runs both incorrectly printed PASS; the same
 negative inputs now exit1 before output-directory creation. This is diagnostic
 source qualification, not an actual provider limit or implemented batch guard.
+
+
+## Qualified runtime, physical isolation and complete boundary rendering
+
+The generator now requires both Node22.20.0 and actual nbb.core/version1.3.204.
+A cached realNBB1.4.207 under selectedNode printedPASS before the guard; it now
+exits1 before creating output. No package was installed or global runtime changed.
+Existing output parents are resolved with realpath before containment checks;
+a symlink-to-checkout parent is refused before writes. The actual old/new
+regression used only a private simulated checkout, with complete source inputs
+and no real Git checkout exposure. The selected output parent must already exist.
+
+Both cardinality candidates now come from the same five-page synthetic source.
+Their source/custody/coverage and firstfour complete original pages match;
+fourmember output names page5 as next, and fivemember output is terminal.
+The earlier9b fourmember envelope came from another source and did not establish
+an intact prefix. Its immutable source/history remains; currentprofile outcomes
+replace that invalid regression claim.
+
+The complete line-limit control starts with a small one-line original-encoded
+response. Inserting valid JSON whitespace after its first brace produces an
+exactlytwo-line complete response decoding to the same object, still below the
+byte cap. Actual receiver fixture accepts one line and refuses two. This is a
+deliberate alternate rendering, not a claim that the selected serializer itself
+produced two lines.
+
+The serialized input-source map is now constructed in a fixed field order after
+exact field/value validation. At9b, reordered equal full_diff fields still
+printedPASS but changed page-wire digests. With the canonical construction,
+the same reordered metadata yields allfive byte-identical generated artifacts.
+The original1491page/375group measurements and fourhost inputs remain unchanged.
+All these controls are diagnostic-only; jointtools/nativeverifier and actual
+large free-model review remain separate required source/consumer exits.
