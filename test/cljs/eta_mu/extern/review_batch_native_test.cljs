@@ -64,7 +64,10 @@
         position (fn [tool] (dec (:position (first (filter #(= tool (:tool %)) (:actualCalls proof))))))
         r (position "review_read_diff_batch") a (position "review_assess_diff_batch")
         cases
-        {"membership" (change-output events r #(assoc-in % [:batch :ids] [2 1]))
+        {"forged delivered coverage" (change-output events r #(assoc-in % [:coverage :delivered] 0))
+         "forged assessment coverage" (change-output events a #(assoc-in % [:coverage :assessed] 0))
+         "forged missing coverage" (change-output events r #(assoc-in % [:coverage :missing] [1]))
+         "membership" (change-output events r #(assoc-in % [:batch :ids] [2 1]))
          "member order" (change-output events r #(update % :chunks (comp vec reverse)))
          "same-size altered content" (change-output events r #(update-in % [:chunks 0 :text] (fn [s] (str "X" (subs s 1)))))
          "forged digest" (change-output events r #(assoc-in % [:chunks 0 :sha256] (apply str (repeat 64 "0"))))

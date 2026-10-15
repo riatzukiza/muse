@@ -116,3 +116,36 @@
     (is (nil? (review/batch-candidates s {:first-id 1 :count 5})))
     (is (nil? (review/batch-candidates s {:first-id 999 :count 1})))
     (is (nil? (review/batch-candidates (review/begin "") {:first-id 1 :count 4})))))
+
+
+(deftest every-returned-coverage-matches-accumulated-successful-calls
+  (doseq [[position coverage]
+          [[1 {:chunks 1 :delivered 0 :assessed 0 :missing [1]}]
+           [1 {:chunks 1 :delivered 1 :assessed 1 :missing []}]
+           [1 {:chunks 1 :delivered 1 :assessed 0 :missing []}]
+           [2 {:chunks 1 :delivered 0 :assessed 1 :missing []}]
+           [2 {:chunks 1 :delivered 1 :assessed 0 :missing [1]}]]]
+    (let [events (assoc-in (batch-trace) [position :part :state :output :coverage] coverage)
+          result (invocation/verify events fixture/submission context)]
+      (is (false? (:ok? result)) (pr-str [position coverage result]))
+      (is (= :batch-coverage-binding (:code result))))))
+
+(deftest undelivered-request-tail-is-not-a-reread
+  (let [s (-> (review/begin (apply str (repeat 32768 "x")))
+              (assoc :delivered-chunks #{4} :assessed-chunks {4 "Previously assessed page four"}))
+        result (review/read-diff-batch s {:first-id 1 :count 4} [1 2 3])]
+    (is (:ok? result))
+    (is (= [1 2 3] (mapv :id (:chunks result))))
+    (is (= {4 "Previously assessed page four"} (get-in result [:session :assessed-chunks])))
+    (is (false? (:ok? (review/read-diff-batch s {:first-id 1 :count 4} [1 2 3 4]))))))
+
+(deftest LAST-counts-real-successful-members-and-every-failed-attempt
+  (let [calls [(assoc (fixture/tool-event 1 "review_read_diff_chunk" {:id 4} {:ok? true}) :position 1)
+               (assoc (fixture/tool-event 2 "review_assess_diff_chunk" {:id 4 :note "Page four"} {:ok? true}) :position 2)
+               (assoc (fixture/tool-event 3 "review_read_diff_batch" {:first-id 1 :count 4}
+                                          {:ok? true :batch {:ids [1 2 3]}}) :position 3)]]
+    (is (= [] (invocation/last-read-violations calls)))
+    (is (= [4] (mapv :id (invocation/last-read-violations
+                           (assoc-in calls [2 :part :state :output :batch :ids] [1 2 3 4])))))
+    (is (= [4] (mapv :id (invocation/last-read-violations
+                           (assoc-in calls [2 :part :state :output] {:ok? false :error "refused"})))))))
