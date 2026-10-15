@@ -87,3 +87,29 @@ API recomputes identity using the retained actual binary, launch selectors and
 private before/after configuration captures; this is explicitly recorded
 capture evidence, not a new native host observation. No new model, semantic
 review, publication, approval, round or live B1/B2/B3 credit is claimed.
+
+
+## Model-facing wording correction and fresh selected producer
+
+CodeRabbit5532927173/root4282826241 identified joined words/numbers in three
+model-facing instruction strings. Insert the requested spaces; all numerical
+bounds, field names and guards remain unchanged. The changed tool description
+changes the selected producer bytes, so the old byte-identical producer claim
+above remains dated to the mixed-read correction. It is not relabeled current.
+
+A fresh selected-profile native diagnostic completed nine actual calls and four
+call/page witness relations in 5180ms. The current producer SHA256 is
+`553233fd3044ea4667e07fbd35a97913a967b35790ca1dbf84fec0d8d2b4e4b1`. The canonical verifier remains
+`6a5822846d3136e8cb27e0b8e7141b4d852631874cbd4a066750b681ed763f2a` and accepts the actual raw
+response/submission, with independently captured before/after host identity.
+`wording-native.jsonl` preserves those new raw bytes; `wording-proof.json` binds
+them, all fifteen current source/instruction files and the actual verdict. The
+fresh actual input.diff, input-manifest.json and machine-written submission.json
+bytes equal the retained three files exactly, so those immutable bytes are shared
+without copying or omitting data. Original proofs, JSONL and re-verification stay
+unchanged as authentic historical regression data. The current source-binding
+regression checks the complete new fifteen-file set; the thirteen old core
+sources remain included. This is fixed localhost scripted SSE with no LLM,
+semantic review, publication, approval, round or live B credit. The bounded
+producer build uses sixty source files/302501bytes with zero warnings; no
+global runtime, credential or capacity change is made.

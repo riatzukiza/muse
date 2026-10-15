@@ -58,7 +58,7 @@
 
 (deftool assess-diff-batch
   {:id :review/assess_diff_batch
-   :description "Assess an ordered vector of one to four DISTINCT delivered original pages. Each member needs its own exact id/start/end/sha256 and separate nonblank page-specific model-authored note (at most2048 UTF8 bytes). Copy the profile and full source_sha256 binding from the read. Complete encoded args must fit16384 UTF8 bytes; oversized or any invalid member refuses the ENTIRE vector, with no prefix credit. Read is not judgment. Use returned coverage.missing and finish the final partial batch BEFORE the FIRST deterministic stage; retain content for all five stages. Mechanical admission proves custody only, not semantic substance."
+   :description "Assess an ordered vector of one to four DISTINCT delivered original pages. Each member needs its own exact id/start/end/sha256 and separate nonblank page-specific model-authored note (at most 2048 UTF8 bytes). Copy the profile and full source_sha256 binding from the read. Complete encoded args must fit 16384 UTF8 bytes; oversized or any invalid member refuses the ENTIRE vector, with no prefix credit. Read is not judgment. Use returned coverage.missing and finish the final partial batch BEFORE the FIRST deterministic stage; retain content for all five stages. Mechanical admission proves custody only, not semantic substance."
    :args (batch-shape/tool-args ::batch/assess) :tags #{:review}}
   [params ctx]
   (infra/assess-diff-batch! params ctx))

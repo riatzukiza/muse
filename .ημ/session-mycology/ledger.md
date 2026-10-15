@@ -685,3 +685,13 @@
   spore: none
   receipt-refs: muse-pr12-mixed-single-page-exact-source-current-green-20261015
   note: Single reads under batch-capable registry require exact prepared text and valid matching SHA; no pure-law I/O or crypto duplication. Legacy nonbatch contract retained. Reverification is a new explicit observed current-evaluation record, never an overwritten proof/native capture or source-hash exception. Current-head review and every gate must requalify after push; old MiMo approval supplies no transferred credit. GoalACTIVE heartbeat humanPAUSED live0/3; no continuation/timeout/model/paid/credentials/runtime/deployment/spore change.
+
+- ts: 2026-10-15T12:31:00.403Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-model-facing-limit-spacing-and-current-native-source-green-20261015
+  note: Insert exactly requested spaces in three model-facing strings; numerical limits, schemas and runtime gates unchanged, so no invented behavioral RED. Actual tool metadata changes bundle identity; collect fresh native diagnostic rather than relabel old producer. Current old-head Codex/MiMo attempts are allowed to finish before next push, grouping any findings; no manual provider cancellation or unchanged duplicate request. This local concrete source correction is held pending those reviews and fresh exact-head qualification. No continuation/timeout/paid/credentials/global host/runtime/owner/deployment/publication/heartbeat/spore change. GoalACTIVE heartbeat humanPAUSED live0/3.

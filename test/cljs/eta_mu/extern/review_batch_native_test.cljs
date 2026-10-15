@@ -11,15 +11,17 @@
 (def ^:dynamic *fixture-root* root)
 (defn read-bytes [file] (.readFileSync fs (str *fixture-root* file)))
 (defn read-json [file] (extern/strict-json (.toString (read-bytes file) "utf8")))
-(defn data []
-  (let [proof (read-json "proof.json") file (get-in proof [:verdict :acceptedInvocation :submissionFile])
+(defn data
+  ([] (data "proof.json" "native.jsonl"))
+  ([proof-file native-file]
+  (let [proof (read-json proof-file) file (get-in proof [:verdict :acceptedInvocation :submissionFile])
         context (extern/prepare-review-invocation-context
                   (read-bytes "input.diff") (read-bytes "input-manifest.json")
                   (clj->js (get-in proof [:source :tools])) file nil
                   (str (subs file 0 (- (count file) (count "submission.json"))) "pr-context.md"))]
     (aset context "batchHost" (clj->js (:expectedHost proof)))
     {:proof proof :context context :submission (read-json "submission.json")
-     :events (mapv extern/strict-json (str/split-lines (.toString (read-bytes "native.jsonl") "utf8")))}))
+     :events (mapv extern/strict-json (str/split-lines (.toString (read-bytes native-file) "utf8")))})))
 (defn raw-events [events] (str (str/join "\n" (map wire/encode events)) "\n"))
 (defn verdict [events submission context]
   (js->clj (extern/verify-review-invocation (raw-events events) (wire/encode submission) context)
@@ -44,7 +46,7 @@
     (is (= before (mapv #(wire/sha256 (read-bytes %)) ["native.jsonl" "submission.json" "input.diff"])))
     (is (true? (get-in proof [:capture :canonicalBeforeAfterEqualityActuallyAsserted])))))
 
-(deftest retained-current-native-wire-and-source-binding
+(deftest retained-prior-exact-source-reverification-stays-historical-data
   (binding [*fixture-root* (str root "review-fixes/")]
     (let [{:keys [proof context]} (data)
           reverified (read-json "reverification.json")
@@ -63,11 +65,32 @@
       (doseq [[file digest] (:retainedEvidenceSHA256 reverified)]
         (let [file (if (keyword? file) (subs (str file) 1) file)]
           (is (= digest (wire/sha256 (read-bytes file))) file)))
-      (doseq [[file digest] (:currentSourceFiles reverified)]
-        (let [file (if (keyword? file) (subs (str file) 1) file)]
-          (is (= digest (wire/sha256 (.readFileSync fs file))) file)))
       (is (= 2 (:pageCount result)))
       (is (= 9 (:reviewCallCount result))))))
+
+(deftest current-wording-producer-native-wire-and-complete-source-binding
+  (binding [*fixture-root* (str root "review-fixes/")]
+    (let [{:keys [proof context]} (data "wording-proof.json" "wording-native.jsonl")
+          prior (read-json "proof.json")
+          result (js->clj (extern/verify-review-invocation (read-bytes "wording-native.jsonl")
+                                                          (read-bytes "submission.json") context)
+                         :keywordize-keys true)]
+      (is (:ok result))
+      (is (= 4 (count (:pageWitnesses result))))
+      (is (= 2 (:pageCount result)))
+      (is (= 9 (:reviewCallCount result)))
+      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "wording-native.jsonl"))))
+      (is (true? (:canonicalVerifierStableAcrossCaptures proof)))
+      (is (true? (get-in proof [:capture :canonicalBeforeAfterEqualityActuallyAsserted])))
+      (is (true? (:sharedEvidenceActualFreshBytesEqualRetained proof)))
+      (is (= 15 (count (:sourceFiles proof))))
+      (is (every? (set (keys (:sourceFiles proof))) (keys (:sourceFiles prior))))
+      (doseq [[file digest] (:sharedEvidenceSHA256 proof)]
+        (let [file (if (keyword? file) (subs (str file) 1) file)]
+          (is (= digest (wire/sha256 (read-bytes file))) file)))
+      (doseq [[file digest] (:sourceFiles proof)]
+        (let [file (if (keyword? file) (subs (str file) 1) file)]
+          (is (= digest (wire/sha256 (.readFileSync fs file))) file))))))
 
 (deftest edited-actual-trace-never-manufactures-coverage
   (let [{:keys [proof context events submission]} (data)
