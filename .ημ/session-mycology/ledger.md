@@ -565,3 +565,23 @@
   spore: none
   receipt-refs: cephalon-profile3-remove-stale-current375-equality-field-20261015
   note: Current metadata now matches384group completeprofile; immutable prior375 unwrapped history preserved. Finalnewhead current checks/fullinputreview remain mandatory. Diagnostic-only/no productionbatchAPI/verifier/providermax/liveproof. ProfileInProgress/jointIncoming; goalACTIVE humanPAUSED heartbeat live0/3; no continuation/timeout/paid/credentials/runtime/deployment/publication/spore change.
+
+- ts: 2026-10-15T07:19:27.550Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-c499-incomplete-native-review-and-one-full-rerun-20261015
+  note: OwnedUNCOMMITTED appendonly observation; holdfornext concrete sourcechange, no observation-only push/headchurn. No further automatic manualreruns promised; assess actualattempt2 outcome. GoalACTIVE heartbeat humanPAUSED live0/3; profileInProgress/jointIncoming. No paid/credentials/modelrouting/limits/runtime/maker/owner/deployment/publication/sporechange. Pendingcanonicalextension question remainsunapplied; priorapprovals not transferred.
+
+- ts: 2026-10-15T08:05:10.925Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-exact-dependency-snapshot-and-actual-group-composition-20261015
+  note: Concrete diagnostic fix includes preserved owned receipt95/reflection unchanged. No production batch API/native verifier/providermaximum/liveproof; goalACTIVE heartbeat humanPAUSED live0/3. No continuation, timeout increase, paid/credentials/modelrouting/runtime/deployment/publication/spore change. Current exact-head reviews/checks required after push; pending canonical outdated-withdrawal scope not applied.

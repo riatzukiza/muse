@@ -32,8 +32,9 @@ Its qualified planning body stays intact; refinements use native comments.
 
 The unchanged original compiled `diff_chunks`, `encode_result`, and
 `infra.review_pipeline.observed_fields` functions execute through private test
-exports appended after the exact original bundle prefix. Existing zod4.4.3 is
-reused. This measures a candidate complete response through the original encoder;
+exports appended after the exact original bundle prefix. Exact zod4.4.3 package
+bytes are verified and copied before use (dependency identity below). This measures
+a candidate complete response through the original encoder;
 it does not execute a future compiled batching tool.
 
 Every original and synthetic response includes original page IDs/ranges/text/
@@ -58,7 +59,8 @@ escapes internal newlines/control characters; outer NDJSON escaping happens late
 and is not this boundary. Page geometry remains8192UTF16 units/128lines, without
 splitting surrogate pairs. All1491 IDs/ranges/text bytes/digests match prior source.
 `corpus-pages.jsonl` now measures complete single-page responses;
-`corpus-batches.jsonl` records384 consecutive whole batches, max47982 rendered
+`corpus-batches.jsonl` records384 consecutive whole batches:341 four-page,
+42 three-page and one single-page batch, hence383 multi-page groups. Max47982 rendered
 bytes, projecting768 read+assessment calls versus2982. This is a frozen
 worst-coverage/4096-byte-context projection, not elapsed throughput, substantive
 assessment, current large-review completion or a two-hour completion guarantee.
@@ -129,7 +131,26 @@ Prepare exact bundle/corpus/manifest from the pinned native artifact ZIPs above,
 or independently reconstruct the full diff from the frozen Git refs. Verify
 ZIP digests and extract only selected files. Never print protected source.
 Generator verifies exact corpus/bundle hashes, source head/base/diff-base,
-full_diff metadata and zod version before executing original compiled functions.
+full_diff metadata and exact zod package identity before executing original compiled functions.
+
+### Executable dependency identity
+
+The measured zod4.4.3 package contains718 regular files/4558122 bytes. Its exact
+file-tree SHA256 is
+`4e9594f99b06cc281e1f38c5319c6442ba017073f533fb526c1ba9ac628c4cd1`.
+Sort slash-separated relative file paths lexically, concatenate each path, NUL,
+decimal byte count, NUL, file SHA256 and LF, then hash those UTF8 bytes. Symlinks
+and special files refuse. Modes and timestamps do not affect code identity.
+The current local tree was independently compared file-for-file with the published
+package whose compressed bytes match package-lock.json's SHA512 integrity:
+`sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==`.
+
+Capture all bounded regular-file bytes before creating output, verify the complete
+tree, then materialize those captured bytes under the new private output's
+node_modules/zod. The bridge loads that owned snapshot; it has no mutable symlink
+to the supplied package. A same-version altered package accepted by oldc499 is
+now refused before output/bridge execution. This is newly measured dependency
+identity, not retrospective proof that historical version-only runs recorded it.
 
 ```sh
 nbb -cp test/cljs -e "(require '[cljs.test :as t] '[eta-mu.fixtures.review-batch-profile-test]) (t/run-tests 'eta-mu.fixtures.review-batch-profile-test)"

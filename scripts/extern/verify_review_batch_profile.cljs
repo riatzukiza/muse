@@ -18,6 +18,47 @@
 (defn write! [out name value]
   (fs/writeFileSync (path/join out name) (str (json value) "\n") #js {:mode 384}))
 
+(def zod-identity
+  {:schema "regular-file-tree-sha256/1" :name "zod" :version "4.4.3"
+   :files 718 :bytes 4558122
+   :sha256 "4e9594f99b06cc281e1f38c5319c6442ba017073f533fb526c1ba9ac628c4cd1"})
+
+(defn capture-zod [root]
+  ;; Hash captured regular bytes, then execute copies of those same bytes.
+  ;; Relative slash paths sort lexically; records are path NUL bytes NUL SHA LF.
+  (let [captured (atom [])
+        total (atom 0)
+        walk (fn walk [dir prefix]
+               (doseq [name (js->clj (fs/readdirSync dir))]
+                 (let [file (path/join dir name)
+                       relative (str prefix name)
+                       stat (fs/lstatSync file)]
+                   (cond
+                     (.isDirectory stat) (walk file (str relative "/"))
+                     (.isFile stat)
+                     (do
+                       (assert (and (< (count @captured) (:files zod-identity))
+                                    (<= (+ @total (.-size stat)) (:bytes zod-identity)))
+                               "Zod package exceeds qualified file/byte bounds.")
+                       (let [bytes (fs/readFileSync file)]
+                         (swap! total + (.-length bytes))
+                         (assert (<= @total (:bytes zod-identity)) "Zod package exceeds qualified byte bound.")
+                         (swap! captured conj {:path relative :bytes bytes :sha256 (sha bytes)})))
+                     :else (assert false "Zod package must contain only directories and regular files.")))))]
+    (walk root "")
+    (let [files (vec (sort-by :path @captured))
+          digest (sha (apply str (map #(str (:path %) "\u0000" (.-length (:bytes %))
+                                           "\u0000" (:sha256 %) "\n") files)))]
+      (assert (= [(:files zod-identity) (:bytes zod-identity) (:sha256 zod-identity)]
+                 [(count files) @total digest]) "Zod package content identity differs from qualified package.")
+      files)))
+
+(defn materialize-zod! [root files]
+  (doseq [{:keys [path bytes]} files]
+    (let [file (path/join root path)]
+      (fs/mkdirSync (path/dirname file) #js {:recursive true :mode 448})
+      (fs/writeFileSync file bytes #js {:mode 384 :flag "wx"}))))
+
 (assert (= "v22.20.0" (.-version js/process)) "Qualified reproduction requires Node22.20.0.")
 (assert (= "1.3.204" (nbb/version)) "Qualified reproduction requires NBB1.3.204.")
 (assert (even? (count *command-line-args*)) "Arguments are flag/value pairs.")
@@ -45,10 +86,10 @@
       _ (assert (= {:path "basehead.diff" :bytes 11840401
                     :sha256 "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248"}
                    (:full_diff manifest)) "Serialized full_diff metadata must match the frozen source exactly.")
-      _ (assert (= "4.4.3" (:version (decode (path/join zod "package.json")))) "Use measured zod4.4.3.")
+      zod-files (capture-zod zod)
       _ (fs/mkdirSync out #js {:mode 448})
       _ (fs/mkdirSync (path/join out "node_modules") #js {:mode 448})
-      _ (fs/symlinkSync zod (path/join out "node_modules/zod") "dir")
+      _ (materialize-zod! (path/join out "node_modules/zod") zod-files)
       bridge-file (path/join out "qualified-test-bridge.mjs")
       suffix (str "\n// Private test exports; qualified original prefix unchanged.\n"
                   "export function profileEncode(v){return eta_mu.boundaries.opencode.encode_result(cljs.core.js__GT_clj(v,cljs.core.keyword('keywordize-keys'),true));}\n"
@@ -259,6 +300,7 @@
           {:fixture-only true :production-api false :model-calls 0
            :runtime (.-version js/process) :nbb (nbb/version) :corpus-sha256 (sha corpus)
            :bundle-sha256 (sha original)
+           :dependency zod-identity
            :profile profile-id :context {:limit 4096 :synthetic-present true
                                         :measurement (metrics (encode context))
                                         :outcome (fixture/context-outcome context-bytes)
