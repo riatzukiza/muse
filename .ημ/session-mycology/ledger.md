@@ -555,3 +555,13 @@
   spore: none
   receipt-refs: cephalon-profile3-complete-context-envelope-and-source-root-20261015
   note: Complete diagnostic profile v2 replaces omitted-field measurements. No productionbatchAPI/law/state/nativeverifier/modelcall/providermax/continuation/timeout/paid/credentials/modelrouting/runtime/maker/deployment/publication/heartbeat change. Original profilebody/InProgress and jointIncoming retained; final-head review/checks required. GoalACTIVE humanPAUSED live0/3; no spore.
+
+- ts: 2026-10-15T06:41:07.265Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-remove-stale-current375-equality-field-20261015
+  note: Current metadata now matches384group completeprofile; immutable prior375 unwrapped history preserved. Finalnewhead current checks/fullinputreview remain mandatory. Diagnostic-only/no productionbatchAPI/verifier/providermax/liveproof. ProfileInProgress/jointIncoming; goalACTIVE humanPAUSED heartbeat live0/3; no continuation/timeout/paid/credentials/runtime/deployment/publication/spore change.
