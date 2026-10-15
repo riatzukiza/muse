@@ -655,3 +655,13 @@
   spore: none
   receipt-refs: muse-pr12-coverage-and-selected-prefix-causal-red-20261015
   note: Native authentic fixture bytes remain immutable; explicitly edited negatives are unit test data. New coverage exact-history and delivered-prefix LAST cases prove causal failures; architecture fixes will move witness construction to shape and producer policy to shared pure contracts/domain. Existing failed attempts/actual rereads, full page/context/five-stage/submission/publisher guards remain mandatory. No review approval or live0/3 credit, runtime/paid/credentials/heartbeat/spore change.
+
+- ts: 2026-10-15T11:13:15.291Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse-pr12-current-coverage-shape-admission-and-prefix-green-20261015
+  note: Witness construction now shape/domain composition; infra only observes/orchestrates one pure domain admission using shared host/profile laws consumed by verifier. Coverage must exactly equal accumulated successful reads/assessments at every returned batch call, retaining missing IDs. Successful LAST uses actual delivered prefix; every failed attempt and actual late reread remains invalidating. One requested but undelivered tail cannot manufacture a read. New current native source hashes replace no historical bytes; all inputs/assessment/context/five-stage/submission/publisher guards remain. No continuation, timeout/model/credential/paid/runtime/heartbeat change; goalACTIVE/humanPAUSEDheartbeat/live0/3. Source current review/qualification and downstream ETA/OpenPlanner consumption remain.

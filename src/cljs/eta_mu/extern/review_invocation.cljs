@@ -107,9 +107,9 @@
     (and (not (true? (get-in state [:metadata :truncated])))
          (not (contains? (:metadata state) :outputPath))
          (batch/response-fits? {:bytes (bytes wire) :lines (count (str/split wire #"\n" -1))})
-         (<= (bytes (encode fields)) (:context-bytes batch/limits))
-         (batch/session-fits? {:bytes (bytes session) :json-bytes (bytes (encode session))
-                               :nonblank? (not (str/blank? session))})
+         (batch/profile-fits? {:bytes (bytes session) :json-bytes (bytes (encode session))
+                               :nonblank? (not (str/blank? session))}
+                              (bytes (encode fields)))
          (or (not= name "review_assess_diff_batch")
              (batch/assessment-shape? args (bytes (encode args))
                                      (mapv #(bytes (:note %)) (:assessments args)))))))

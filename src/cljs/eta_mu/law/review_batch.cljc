@@ -45,6 +45,15 @@
   (and (true? nonblank?) (pos-int? bytes) (pos-int? json-bytes)
        (<= bytes (:session-bytes limits)) (<= json-bytes (:session-json-bytes limits))))
 
+(defn profile-fits?
+  "Shared native measurements; neither producer nor verifier owns a second cap."
+  [session-measurement context-bytes]
+  (and (session-fits? session-measurement) (nat-int? context-bytes)
+       (<= context-bytes (:context-bytes limits))))
+
+(defn host-matches? [expected observed]
+  (and (qualified-host? expected) (qualified-host? observed) (= expected observed)))
+
 (defn assessment-shape?
   "Measurements are supplied by the wire boundary, never trusted model args."
   [request bytes note-bytes]

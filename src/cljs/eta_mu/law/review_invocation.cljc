@@ -98,17 +98,6 @@
 (defn- delivered-ids [c]
   (if (= "review_read_diff_batch" (tool c)) (get-in (output c) [:batch :ids]) (attempted-ids c)))
 
-(defn page-witnesses
-  "Relations derived from genuine calls, never fictional expanded HOST events."
-  [calls]
-  (vec (mapcat
-         (fn [c]
-           (when (and (success? c) (or (read-call? c) (assessment-call? c)))
-             (let [members (if (read-call? c) (delivered-ids c) (attempted-ids c))]
-               (mapv (fn [id] {:id id :kind (if (read-call? c) :read :assessment)
-                               :call-id (get-in c [:part :call-id]) :part-id (get-in c [:part :id])
-                               :position (:position c) :tool (tool c) :members members}) members)))) calls)))
-
 (defn- assessment-notes [c]
   (if (= "review_assess_diff_batch" (tool c)) (:assessments (input c))
       [{:id (:id (input c)) :note (:note (input c))}]))
@@ -196,12 +185,36 @@
            :else nil)))
      calls)))
 
+(defn- coverage-history-error
+  "Every returned batch coverage must equal actual successful call history.
+   Metadata cannot create delivery/assessment or conceal missing original pages."
+  [calls pages]
+  (loop [remaining calls delivered #{} assessed #{}]
+    (when-let [c (first remaining)]
+      (let [read? (and (read-call? c) (success? c))
+            assessment? (and (assessment-call? c) (success? c))
+            delivered-now (if read? (into delivered (delivered-ids c)) delivered)
+            assessed-now (cond
+                           read? (reduce disj assessed (delivered-ids c))
+                           assessment? (into assessed (attempted-ids c))
+                           :else assessed)
+            expected {:chunks (count pages) :delivered (count delivered-now)
+                      :assessed (count assessed-now)
+                      :missing (filterv #(not (contains? assessed-now %)) (mapv :id pages))}
+            returned? (and (success? c)
+                           (or (contains? batch-tools (tool c))
+                               (= "review_assess_diff_chunk" (tool c))))]
+        (if (and returned? (not= expected (:coverage (output c))))
+          (if (contains? batch-tools (tool c)) :batch-coverage-binding :returned-assessment-binding)
+          (recur (next remaining) delivered-now assessed-now))))))
+
 (defn last-read-violations
-  "Original LAST predicate over ALL calls, including failed read/assessment
+  "LAST predicate over delivered successful reads and every failed read/assessment
    calls and calls around resets. Never partition by host session or keep only
    the final assessment. Positions are complete host event positions."
   [calls]
-  (let [last-read (into {} (for [c calls :when (read-call? c) id (attempted-ids c)]
+  (let [last-read (into {} (for [c calls :when (read-call? c)
+                                  id (if (success? c) (delivered-ids c) (attempted-ids c))]
                             [id (:position c)]))]
     (vec (for [c calls :when (assessment-call? c) id (attempted-ids c)
                :let [r (get last-read id)]
@@ -264,6 +277,7 @@
                (not (context-valid? context)) :trusted-context-unestablished
                :else (or (event-error events (:session-id context) terminal-reason)
                          (call-error calls context)
+                         (coverage-history-error calls (:pages context))
                          (when (and (seq review-calls) (not (begin-admitted? calls review-calls begins))) :begin-cardinality)
                          (when (and begin (not (and (= "deterministic" (:stage began)) (= stages (:stages began))
                                          (= (:input-source context) (:input-source began))
@@ -272,8 +286,7 @@
                                              :missing (mapv :id (:pages context))}
                                             (:input-coverage began))))) :begin-source-binding)
                          (when (and (some #(contains? batch-tools (tool %)) calls)
-                                    (not (and (batch/qualified-host? (:batch-host context))
-                                              (= (:batch-host context) (:batch-host began))))) :batch-host-binding)
+                                    (not (batch/host-matches? (:batch-host context) (:batch-host began)))) :batch-host-binding)
                          (when-not (and (<= (count stage-calls) 5)
                                          (= stage-names (vec (take (count stage-calls) stages)))
                                          (every? success? stage-calls)) :stage-order)
@@ -338,7 +351,7 @@
           (not (submit-bound? submission context submits)) (refuse :unestablished-review-trace :actual-submit-binding)
           :else {:ok? true :reason-kind nil :code :verified-review-invocation
                  :session-id (:session-id (first events)) :review-call-count (count review-calls)
-                 :page-count (count ids) :violations [] :page-witnesses (page-witnesses calls)
+                 :page-count (count ids) :violations []
                  :accepted-invocation {:session-id (:session-id (first events))
                                        :submission-call-id (get-in submit [:part :call-id])
                                        :submission-position (:position submit)

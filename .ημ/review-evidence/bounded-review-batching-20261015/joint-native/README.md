@@ -54,3 +54,10 @@ The initial exact-hash failure and its failed top-level-order hypothesis remain
 retained; the comparison was preserved and the actual nested ordering repaired.
 Current source file hashes, independent supervisor captures, actual call IDs
 and exact raw response/submission bytes are retained in the current proof.
+
+
+## PR12 correction diagnostic (`review-fixes/`)
+
+New actual native diagnostic after Codex coverage/layer/selected-prefix repairs: one real compiled read of both original prefix pages, one vector with separate notes, all five stages and diagnostic submit; nine actual native calls/four real-call witness relations. The canonical independent verifier accepts the actual raw output/submission and before/after host captures match. This is fixed localhost scripted SSE with no LLM, publisher, semantic review, approval, round or live B1/B2/B3 credit. Synthetic input-manifest OIDs remain visibly fixture identities. Existing root/current diagnostic bytes and their historical source hashes are unchanged. Current source hashes are bound by the new proof, including the domain witness composition.
+
+A failed prior attempt accidentally used the generic default plugin build rather than the selected review exposure, yielding actual unavailable tools and no accepted invocation. Its raw failure remains private evidence. The selected-profile build first warned about external classpath symlinks; a bounded 60-file/302120-byte source projection corrected that and rebuilt without warnings. Neither failure is relabeled as a pass or a production regression. Current full owner/build/cold/input/lint gates and source qualification remain separate obligations.

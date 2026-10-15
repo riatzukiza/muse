@@ -45,7 +45,7 @@
     (is (true? (get-in proof [:capture :canonicalBeforeAfterEqualityActuallyAsserted])))))
 
 (deftest retained-current-native-wire-and-source-binding
-  (binding [*fixture-root* (str root "current/")]
+  (binding [*fixture-root* (str root "review-fixes/")]
     (let [{:keys [proof context]} (data)
           result (js->clj (extern/verify-review-invocation (read-bytes "native.jsonl")
                                                            (read-bytes "submission.json") context)
@@ -121,3 +121,14 @@
     (is (false? (:ok late)))
     (is (= "last-read-order" (:code late)))
     (is (nil? (:acceptedInvocation late)))))
+
+
+(deftest retained-prior-source-native-transcript-stays-authentic-data
+  (binding [*fixture-root* (str root "current/")]
+    (let [{:keys [proof context]} (data)
+          result (js->clj (extern/verify-review-invocation (read-bytes "native.jsonl")
+                                                           (read-bytes "submission.json") context)
+                          :keywordize-keys true)]
+      (is (:ok result))
+      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "native.jsonl"))))
+      (is (= 4 (count (:pageWitnesses result)))))))

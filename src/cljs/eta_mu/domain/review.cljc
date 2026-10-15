@@ -192,6 +192,16 @@
   {:ok? false :error message :restart-required? true
    :session (assoc session :restart-error (or (:restart-error session) message))})
 
+(defn batch-admissible?
+  "One pure producer admission decision after current host/context observations.
+   Host/profile laws are also consumed by the independent native verifier."
+  [session current-session custody host native-session session-measurement context-bytes]
+  (and (:ok? custody) (not (:begin-pending? session))
+       (= session current-session)
+       (batch/host-matches? (:batch-host session) host)
+       (= (:native-session session) native-session)
+       (batch/profile-fits? session-measurement context-bytes)))
+
 (defn batch-candidates
   "Whole consecutive prefixes; measurement/selection must precede mutation."
   [session request]
@@ -210,7 +220,7 @@
       (or (restart-required? session) (not= :deterministic (:stage session)))
       (refuse-batch session "Batch input must precede stage one in a healthy invocation.")
       (not members) (refuse-batch session "Unknown or malformed complete batch prefix.")
-      (some #(contains? (:assessed-chunks session) (:id %)) (last prefixes))
+      (some #(contains? (:assessed-chunks session) (:id %)) members)
       (refuse-batch session "A batch reread followed assessment; start a fresh invocation.")
       :else (let [next (update session :delivered-chunks into selected-ids)]
               {:ok? true :session next :chunks members :coverage (input-coverage next)

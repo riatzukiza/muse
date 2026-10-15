@@ -130,12 +130,10 @@
                         :restart-required? false)
           host (when-let [observe (:review/observe-host ctx)]
                  (await (observe (or (:worktree ctx) (:directory ctx)))))]
-      (if-not (and (:ok? custody) (not (:begin-pending? session))
-                   (= session (require-session ctx))
-                   (batch/qualified-host? host) (= host (:batch-host session))
-                   (= (:native-session session) (:session/id ctx))
-                   (batch/session-fits? (wire/session-measurement (:session/id ctx)))
-                   (<= (wire/utf8-bytes (wire/encode fields)) (:context-bytes batch/limits)))
+      (if-not (review/batch-admissible? session (require-session ctx) custody host
+                                           (:session/id ctx)
+                                           (wire/session-measurement (:session/id ctx))
+                                           (wire/utf8-bytes (wire/encode fields)))
         (refuse-batch! ctx (require-session ctx) "Batch host, session or complete context profile is unavailable or changed.")
         (if read?
           (let [candidates (review/batch-candidates session params)
