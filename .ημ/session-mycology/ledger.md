@@ -505,3 +505,13 @@
   spore: none
   receipt-refs: cephalon-bounded-profile-native-controls-compiled-wire-and-corpus-20261015
   note: Effective candidate51200/2000 observed through actual resolved config plus source/default boundary controls. Historical GHA effective configuration remainsUNKNOWN; future joint/ETA must capture actual selected executable/resolvedlimits/source selectors before effects and refuse unknown/different. General real provider capacity remainsUNKNOWN. New compiled batch API not implemented/executed. Profile artifact/re-description needs owning review before nativeDone/jointReady. All source input/individual assessment/context/five-stage/publisher/once-invocation guards retained. Profile receipt corrects shell Node assumption transparently; synthetic fixture sha256:null supplies no proof, independent actual input hash does. No continuation/paid/realcredentials/live maker/runtime/deployment/publication/heartbeat/spore changes; GoalACTIVE heartbeat humanPAUSED live0/3.
+
+- ts: 2026-10-15T04:22:57.705Z
+  session: /home/err/.codex/worktrees/cephalon-review-batching/muse
+  task: cephalon-character-memory/B3/review-throughput/profile3
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-profile3-reproducible-fixture-red-20261015
+  note: Three native findings verified in already included profile scope. Portable fixture profile/constants and boundary tests precede new fixture outcomes/generator; final tests must establish every selected boundary without weakening guards. This red local commit is not pushed alone. Original native snapshots/generators retained, no new production state/law/tool/verifier, no live/runtime/paid/credentials/heartbeat change; joint remains Incoming.
