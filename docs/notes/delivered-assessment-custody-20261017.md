@@ -45,9 +45,16 @@ invocations were consumed; no third unchanged-head retry is included.
 The governing card is
 [`1d7a2cfe-80c1-4857-adf2-b3c86972b6db`](../agile/kanban/1d7a2cfe-80c1-4857-adf2-b3c86972b6db.md),
 proposed3 points with predecessor d5bd4e91-8717-4da0-8e13-e307972ecd32. That
-predecessor is still recorded Review in259; its actual native completion must
-be established lawfully. Initial Markdown is supported; this new card supplies
-no board validation, Ready, implementation or adopted aggregate estimate.
+predecessor is recorded Review in259. Its later native source completion is
+now reconciled through Rheos: Review → Document → Done, with the original body
+and comment prefix preserved and three actual events appended. Personal PR12
+merged reviewed head44deecf77ea1dded9fd147f38fbc5c99026f62c0 as259; their trees
+are identical. Fresh canonical status confirms five passing checks,13 settled
+threads and the exact-head CodeRabbit/Codex/MiMo cohort. This is source
+completion; the failed large OpenPlanner reviews remain downstream failures.
+The new corrective card remains Incoming pending its own planning qualification
+and native Ready. Initial Markdown supplies no implementation or adopted
+aggregate estimate.
 
 ## Candidate correction and qualification boundary
 
