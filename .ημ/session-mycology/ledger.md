@@ -805,3 +805,13 @@
   spore: none
   receipt-refs: cephalon-delivered3-causal-red-unknown-native-tool-20261017
   note: NamedclosedMalliid/noteprotocoldeclaredusingexistingrequest/note/cardinalitycaps; sharedmeasurementslawkeepsoldstrictgrammar. Newsyntheticnative-shapedtwopagecompletepositive correctlyfailsbecausecanonicaltoolrouteisabsent. FixturecallIDsarenotactualnativehostcalls/providerreview/approval. Exactprocesslogs committedseparatelyandwillremainimmutable. CommitREDbeforeproductionGreen; actualcompiled/nativepositiveandadversarialcontrols/fullownergatesstillrequired. Processbounded1536MiBJava/768MiBNode/2CPUs/nice10/force-spawn,no cgroup/resourceincreaseorwatcherconnection. Npmci hadcachetarballretrywarningsandexit0/118packages; lock/packageunchanged, no installwarningclaimedascompilerpass. Source13qualifiedplanmerge/nativeReadyarenot codeapproval/largeconsumercompletion. No thirdunchangedOpenPlanner92retry/paid/credentials/Fieldnewpin/runtime/maker/clock/cloud/deploy/heartbeat/sporechange; live0of3/goalACTIVE/humanPAUSEDheartbeat.
+
+- ts: 2026-10-17T05:38:12.889Z
+  session: /home/err/spaces/cephalon-muse-delivery-custody/muse
+  task: Qualified3point1d7a2cfe-80c1-4857-adf2-b3c86972b6db
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-delivered3-raw-red-evidence-index-correction-20261017
+  note: Correction toreceipt118 narrative logscommitted: initialREDcommit5145includedtheREADME/law/tests/nativecard/events/journalsbutnot2logpathsbecausetheexistingignorerulewarned. Exactlogsremainedon disk/privatecopies. Nowaddthoseexactfilesinthenextordinarycommit; preserve118and5145withoutamend/historyrewrite. Capturethisoperatorstagingerrorasanerror,notatestfailure/newruntimecondition. Futuremutatingcommandsstoponerrorandchecktheindexexplicitpaths. No productionGreen/APIimplementation yet; no extra model/paid/credential/runtime/Fieldpin/deploy/heartbeat/sporechange.

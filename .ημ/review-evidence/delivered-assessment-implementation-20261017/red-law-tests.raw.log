@@ -1,0 +1,18 @@
+
+Testing eta-mu.law.review-batch-test
+
+Testing eta-mu.law.review-delivered-batch-test
+
+FAIL in (delivered-native-trace-binds-two-pages-to-one-real-assessment-call) (eta_mu/law/review_delivered_batch_test.cljs:76:9)
+{:ok? false, :reason-kind :unestablished-review-trace, :code :unknown-review-tool, :violations []}
+expected: (:ok? result)
+  actual: false
+
+FAIL in (delivered-native-trace-binds-two-pages-to-one-real-assessment-call) (eta_mu/law/review_delivered_batch_test.cljs:77:9)
+expected: (= [{:id 1, :kind :read, :call-id "call-2", :part-id "part-2", :position 2, :tool "review_read_diff_batch", :members [1 2]} {:id 2, :kind :read, :call-id "call-2", :part-id "part-2", :position 2, :tool "review_read_diff_batch", :members [1 2]} {:id 1, :kind :assessment, :call-id "call-3", :part-id "part-3", :position 3, :tool tool, :members [1 2]} {:id 2, :kind :assessment, :call-id "call-3", :part-id "part-3", :position 3, :tool tool, :members [1 2]}] (:page-witnesses result))
+  actual: (not (= [{:id 1, :kind :read, :call-id "call-2", :part-id "part-2", :position 2, :tool "review_read_diff_batch", :members [1 2]} {:id 2, :kind :read, :call-id "call-2", :part-id "part-2", :position 2, :tool "review_read_diff_batch", :members [1 2]} {:id 1, :kind :assessment, :call-id "call-3", :part-id "part-3", :position 3, :tool "review_assess_delivered_diff_batch", :members [1 2]} {:id 2, :kind :assessment, :call-id "call-3", :part-id "part-3", :position 3, :tool "review_assess_delivered_diff_batch", :members [1 2]}] nil))
+
+Testing eta-mu.law.review-invocation-test
+
+Ran 45 tests containing 570 assertions.
+2 failures, 0 errors.
