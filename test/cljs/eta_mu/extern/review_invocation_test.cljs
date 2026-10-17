@@ -1143,3 +1143,22 @@
         result (js->clj (extern/verify-review-invocation (response changed) (json submission) prepared)
                        :keywordize-keys true)]
     (is (:ok result) "legacy behavior tolerates unrelated descriptor metadata")))
+
+
+(deftest typed-body-rejection-uses-the-unchanged-public-byte-and-invocation-exports
+  (let [{:keys [context submission events]} (fixture/body-rejection-fixture)
+        source fixture/body-rejection-manifest
+        tools (clj->js (:review-tools context))]
+    (doseq [raw ["diff" (js/Buffer.from "diff" "utf8") (js/Uint8Array. (js/Buffer.from "diff" "utf8"))]]
+      (let [prepared (prepare-native-context raw (json source) tools (:submission-file context))
+            result (js->clj (extern/verify-review-invocation (response events) (json submission) prepared)
+                            :keywordize-keys true)]
+        (is (= source (:inputSource (js->clj prepared :keywordize-keys true))))
+        (is (true? (:ok result)))
+        (is (some? (:acceptedInvocation result)))
+        (is (nil? (:agreement result)))))
+    (doseq [changed [(assoc-in source [:target :thread_id] "PRRT_fake")
+                     (assoc-in source [:target :review_id] 0)
+                     (assoc-in source [:target :kind] "unknown")]]
+      (is (thrown? js/Error (prepare-native-context "diff" (json changed) tools (:submission-file context)))))
+    (is (thrown? js/Error (prepare-native-context "changed" (json source) tools (:submission-file context))))))

@@ -428,8 +428,14 @@ try {
     catch (error) { result.pass = false; result.error = {name: error.name, message: error.message}; }
     rejectionResults.push(result);
   };
-  await rejectionCheck('rejection-complete-pages-and-accepted-invocation', async () => {
-    const {dir, context} = rejectionConsumer('rejection-complete', rejectionFull, JSON.stringify(rejectionManifest));
+  const threadRejectionManifest = rejectionManifest;
+  const bodyRejectionManifest = {...rejectionManifest, target: {
+    repository_id: 'R_fixture', repository_database_id: 3, pr_id: 'PR_fixture', pr_number: 1,
+    kind: 'review-body-item', review_id: 101, item_id: 'd9618d1e6c3cf0ee5e35cc46', review_node_id: 'PRR_inert_body',
+    review_commit: rejectionManifest.head_sha, review_body_sha256: 'a'.repeat(64), review_updated_at: '2026-10-03T11:31:00Z'}};
+  for (const [mode, rejectionManifest] of [['thread', threadRejectionManifest], ['body-item', bodyRejectionManifest]]) {
+  await rejectionCheck(mode === 'thread' ? 'rejection-complete-pages-and-accepted-invocation' : 'rejection-body-item-complete-pages-and-accepted-invocation', async () => {
+    const {dir, context} = rejectionConsumer(mode === 'thread' ? 'rejection-complete' : 'rejection-body-item-complete', rejectionFull, JSON.stringify(rejectionManifest));
     const calls = [];
     const recorded = async (name, args) => {
       const output = await call(name, args, context), index = calls.length + 1;
@@ -476,7 +482,7 @@ try {
       {...rejectionManifest, context_sha256: 'f'.repeat(64)},
       {...rejectionManifest, proposal_body_sha256: 'f'.repeat(64)},
       {...rejectionManifest, source_inventory_sha256: 'f'.repeat(64)},
-      {...rejectionManifest, target: {...rejectionManifest.target, root_comment_id: 8}},
+      {...rejectionManifest, target: {...rejectionManifest.target, [mode === 'thread' ? 'root_comment_id' : 'review_id']: mode === 'thread' ? 8 : 102}},
     ]) {
       const changedContext = verifier.prepareReviewInvocationContext(rejectionFull, Buffer.from(JSON.stringify(changed)),
         tools, path.join(dir, 'submission.json'));
@@ -490,6 +496,7 @@ try {
     assert.equal(forged.ok, false);
     assert.equal(forged.acceptedInvocation, null);
   });
+  }
   const rejectedSources = [
     {...rejectionManifest, purpose: 'actionability'},
     {...rejectionManifest, schema: 'open-hax.actionability-input/v1'},

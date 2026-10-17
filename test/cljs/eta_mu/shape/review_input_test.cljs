@@ -148,3 +148,12 @@
                            (assoc-in pages [0 :changed-spans] [[0 1]])
                            (assoc-in pages [0 :hunk-spans] [[1 0]])]]
       (is (false? (invocation/component-pages-valid? source (:components source) (:view source) changed-pages))))))
+
+
+(deftest typed-body-rejection-descriptor-preserves-the-original-full-input
+  (let [descriptor (assoc (:full_input fixture/body-rejection-manifest) :retained-extra "unprojected complete bytes")
+        source (assoc fixture/body-rejection-manifest :full_input descriptor)]
+    (is (true? (invocation/input-source-valid? source)))
+    (is (identical? descriptor (shape/input-descriptor source)))
+    (is (= descriptor (shape/input-descriptor source)))
+    (is (nil? (shape/input-descriptor (assoc-in source [:target :thread_id] "PRRT_fake"))))))

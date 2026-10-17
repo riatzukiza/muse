@@ -164,6 +164,39 @@ for (const [representation, encode] of [['string', bytes => bytes.toString('utf8
   }
   results.push(result);
 }
+// Typed body targets keep the same complete input and cold public CJS exports.
+const bodyRejectionSource = {...nativeSource, schema: 'open-hax.rejection-assessment-input/v1',
+  purpose: 'rejection-assessment', target: {repository_id: 'R_fixture', repository_database_id: 3,
+    pr_id: 'PR_fixture', pr_number: 1, kind: 'review-body-item', review_id: 101,
+    item_id: 'd9618d1e6c3cf0ee5e35cc46', review_node_id: 'PRR_inert_body', review_commit: nativeSource.head_sha,
+    review_body_sha256: 'a'.repeat(64), review_updated_at: '2026-10-03T11:31:00Z'},
+  full_input: {...nativeSource.full_input, path: 'rejection-assessment-input.txt'}};
+for (const [representation, encode] of [['string', bytes => bytes.toString('utf8')],
+  ['Buffer', bytes => bytes], ['Uint8Array', bytes => new Uint8Array(bytes)]]) {
+  const result = {representation, purpose: 'rejection-body-item', assertions: 0};
+  const equal = (actual, expected) => { result.assertions++; assert.deepEqual(actual, expected); };
+  try {
+    const context = verifier.prepareReviewInvocationContext(encode(nativeInput),
+      encode(Buffer.from(JSON.stringify(bodyRejectionSource))), tools, submissionFile);
+    equal(context.inputSource, bodyRejectionSource);
+    const {response, submission} = smokeInvocation(context, nativeInput);
+    const verdict = verifier.verifyReviewInvocation(encode(response), encode(submission), context);
+    equal(verdict.ok, true); equal(verdict.acceptedInvocation.fullInputSha256, sha256(nativeInput));
+    for (const [key, value] of [['review_id', 102], ['review_body_sha256', 'f'.repeat(64)],
+      ['review_updated_at', '2026-10-03T11:32:00Z']]) {
+      const changed = {...bodyRejectionSource, target: {...bodyRejectionSource.target, [key]: value}};
+      const other = verifier.prepareReviewInvocationContext(encode(nativeInput), JSON.stringify(changed), tools, submissionFile);
+      equal(verifier.verifyReviewInvocation(encode(response), encode(submission), other).ok, false);
+    }
+    for (const target of [{...bodyRejectionSource.target, kind: 'unknown'},
+      {...bodyRejectionSource.target, thread_id: 'PRRT_fake'}, {...bodyRejectionSource.target, review_id: 0}]) {
+      result.assertions++; assert.throws(() => verifier.prepareReviewInvocationContext(encode(nativeInput),
+        JSON.stringify({...bodyRejectionSource, target}), tools, submissionFile));
+    }
+    result.pass = true;
+  } catch (error) { result.pass = false; result.error = {name: error.name, message: error.message}; }
+  results.push(result);
+}
 // Leading BOM is full input, including the positive-byte BOM-only case.
 for (const [representation, encode] of [['string', bytes => bytes.toString('utf8')],
   ['Buffer', bytes => bytes], ['Uint8Array', bytes => new Uint8Array(bytes)]]) {

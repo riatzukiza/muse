@@ -1458,3 +1458,61 @@
       (is (invocation/coverage-valid? legacy pages nil #{1 2} #{1 2} #{}))
       (is (= #{:chunks :delivered :assessed :missing} (set (keys legacy))))
       (is (false? (invocation/coverage-valid? (assoc legacy :roles {}) pages nil #{1 2} #{1 2} #{}))))))
+
+
+;; Native-shaped typed coordinates are inert transport data, never native admission.
+(def body-rejection-manifest
+  (assoc rejection-manifest :target
+         {:repository_id "R_fixture" :repository_database_id 3 :pr_id "PR_fixture" :pr_number 1
+          :kind "review-body-item" :review_id 101 :item_id "d9618d1e6c3cf0ee5e35cc46"
+          :review_node_id "PRR_inert_body" :review_commit (:head_sha rejection-manifest)
+          :review_body_sha256 (apply str (repeat 64 "a")) :review_updated_at "2026-10-03T11:31:00Z"}))
+(defn body-rejection-fixture []
+  (let [{:keys [context submission events]} (rejection-fixture)]
+    {:context (assoc context :input-source body-rejection-manifest)
+     :submission (assoc submission :input-source body-rejection-manifest)
+     :events (assoc-in events [0 :part :state :output :input-source] body-rejection-manifest)}))
+
+(deftest typed-body-rejection-retains-complete-source-and-trace-binding
+  (let [{:keys [context submission events]} (body-rejection-fixture)
+        result (invocation/verify events submission context)]
+    (is (true? (invocation/input-source-valid? body-rejection-manifest)))
+    (is (true? (invocation/context-valid? context)))
+    (is (true? (:ok? result)))
+    (is (some? (:accepted-invocation result)))
+    (is (nil? (:agreement result))) (is (nil? (:disposition result)))
+    (doseq [[key value] [[:review_id 102] [:item_id "anotheritem"] [:review_node_id "PRR_other"]
+                         [:review_commit (apply str (repeat 40 "f"))]
+                         [:review_body_sha256 (apply str (repeat 64 "f"))]
+                         [:review_updated_at "2026-10-03T11:32:00Z"]]]
+      (let [changed (assoc-in body-rejection-manifest [:target key] value)
+            begin-refused (invocation/verify events submission (assoc context :input-source changed))
+            serialized-refused (invocation/verify events (assoc submission :input-source changed) context)]
+        (is (= :begin-source-binding (:code begin-refused)))
+        (is (nil? (:accepted-invocation begin-refused)))
+        (is (= :serialized-source-binding (:code serialized-refused)))
+        (is (nil? (:accepted-invocation serialized-refused)))))
+    (doseq [changed [(vec (concat [(first events)] (subvec events 3)))
+                     (assoc-in events [3 :part :state :output] {:ok? false :error "Refused stage."})]]
+      (is (false? (:ok? (invocation/verify changed submission context)))))))
+
+(deftest typed-rejection-targets-refuse-mixed-malformed-and-other-purposes
+  (let [target (:target body-rejection-manifest)]
+    (doseq [changed [(assoc target :kind "unknown") (assoc target :kind nil)
+                     (dissoc target :review_id) (assoc target :review_id 0) (assoc target :review_id 1.5)
+                     (assoc target :review_id 9007199254740992)
+                     (assoc target :item_id "") (assoc target :item_id "a,b")
+                     (assoc target :review_node_id " ") (assoc target :review_commit "unknown")
+                     (assoc target :review_body_sha256 "bad") (assoc target :review_updated_at " ")
+                     (assoc target :thread_id nil) (assoc target :root_comment_id nil)
+                     (assoc target :cohort_targets [])
+                     (assoc target :repository_database_id 0) (assoc target :pr_number 0)]]
+      (is (false? (invocation/input-source-valid? (assoc body-rejection-manifest :target changed)))))
+    (doseq [key [:review_id :item_id :review_node_id :review_commit :review_body_sha256 :review_updated_at]]
+      (is (false? (invocation/input-source-valid?
+                    (assoc-in rejection-manifest [:target key] (get target key))))))
+    (is (false? (invocation/input-source-valid? (assoc-in rejection-manifest [:target :kind] "thread"))))
+    (is (false? (invocation/input-source-valid?
+                  (assoc native-manifest :target target))))
+    (is (false? (invocation/input-source-valid?
+                  (assoc cohort-manifest :target target))))))
