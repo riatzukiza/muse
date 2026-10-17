@@ -1,0 +1,81 @@
+
+Testing eta-mu.actor-test
+
+Testing eta-mu.actor.monitor-test
+
+Testing eta-mu.actor.muse-test
+
+Testing eta-mu.actor.task-test
+
+Testing eta-mu.actor.watch-test
+
+Testing eta-mu.boundaries.claude-test
+
+Testing eta-mu.boundaries.mongo.ledger-test
+mongo unavailable — skipping integration test: Command createIndexes requires authentication
+
+Testing eta-mu.boundaries.node.fs-test
+
+Testing eta-mu.boundaries.node.ledger-test
+
+Testing eta-mu.domain.agent-test
+
+Testing eta-mu.domain.daemon-test
+
+Testing eta-mu.domain.mailbox-test
+
+Testing eta-mu.domain.mycology-test
+
+Testing eta-mu.domain.receipts-test
+
+Testing eta-mu.domain.repo-test
+
+Testing eta-mu.domain.review-test
+
+Testing eta-mu.domain.task-test
+
+Testing eta-mu.domain.watch-test
+
+Testing eta-mu.domain.websearch-test
+
+Testing eta-mu.dsl-test
+
+Testing eta-mu.dsl.normalize-test
+
+Testing eta-mu.dsl.schema-test
+
+Testing eta-mu.extern.review-batch-native-test
+
+Testing eta-mu.extern.review-batch-projection-test
+PASS actual production-wire projection:1491unchanged pages/384groups/768calls, not model throughput
+
+Testing eta-mu.extern.review-batch-wire-test
+
+Testing eta-mu.extern.review-context-delivery-test
+
+Testing eta-mu.extern.review-invocation-test
+
+Testing eta-mu.fixtures.review-batch-profile-test
+
+Testing eta-mu.law.review-batch-test
+
+Testing eta-mu.law.review-context-delivery-test
+
+Testing eta-mu.law.review-context-test
+
+Testing eta-mu.law.review-delivered-batch-test
+
+Testing eta-mu.law.review-invocation-test
+
+Testing eta-mu.opencode.agents-test
+
+Testing eta-mu.opencode.config-test
+
+Testing eta-mu.opencode.settings-test
+
+Testing eta-mu.shape.review-submission-test
+
+Testing eta-mu.util.prompt-section-test
+
+Ran 343 tests containing 2445 assertions.
+0 failures, 0 errors.

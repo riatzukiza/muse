@@ -52,6 +52,8 @@
 (defn assessments [read note]
   {:profile batch/profile :source_sha256 (get-in read [:custody :source_sha256])
    :assessments (mapv #(assoc (select-keys % [:id :start :end :sha256]) :note note) (:chunks read))})
+(defn delivered-assessments [read note]
+  {:assessments (mapv #(assoc (select-keys % [:id]) :note note) (:chunks read))})
 
 (defn exact-request [request]
   (let [padded (reduce (fn [r i]
@@ -86,33 +88,37 @@
           (is (= 2 (get-in result [:batch :next-id])))
           (is (= #{1} (:delivered-chunks (state ctx)))))
         (finally (clean! ctx))))
-    (doseq [mode [:regular :exact :one-over :escaped]]
+    (doseq [[make-args assess!] [[assessments infra/assess-diff-batch!]
+                                [delivered-assessments infra/assess-delivered-diff-batch!]]
+            mode [:regular :exact :one-over :escaped]]
       (let [ctx (fixture! (apply str (repeat (* 4 8192) "x")))]
         (try
           (await (infra/begin! {} ctx))
           (let [read (decode (await (infra/read-diff-batch! {:first-id 1 :count 4} ctx)))
-                escaped (assessments read (apply str (repeat 2048 "\u0000")))
-                exact (exact-request (assessments read "Page-specific scripted fixture"))
+                escaped (make-args read (apply str (repeat 2048 "\u0000")))
+                exact (exact-request (make-args read "Page-specific scripted fixture"))
                 overflow? (contains? #{:one-over :escaped} mode)]
             (is (= [1 2 3 4] (get-in read [:batch :ids])))
             (is (> (wire/utf8-bytes (wire/encode escaped)) 16384))
             (is (= 16384 (wire/utf8-bytes (wire/encode exact))))
             (let [args (case mode :escaped escaped :exact exact
                             :one-over (update-in exact [:assessments 3 :note] str "x")
-                            (assessments read "A separate scripted per-page custody note"))
-                  result (decode (await (infra/assess-diff-batch! args ctx)))]
+                            (make-args read "A separate scripted per-page custody note"))
+                  result (decode (await (assess! args ctx)))]
               (is (= (not overflow?) (:ok? result)))
               (if overflow?
                 (do (is (= {} (:assessed-chunks (state ctx))))
                     (is (= #{1 2 3 4} (:delivered-chunks (state ctx)))))
                 (is (= [] (get-in result [:coverage :missing]))))))
           (finally (clean! ctx)))))
-    (doseq [note [(apply str (repeat 512 "😀")) (str (apply str (repeat 512 "😀")) "x")]]
+    (doseq [[make-args assess!] [[assessments infra/assess-diff-batch!]
+                                [delivered-assessments infra/assess-delivered-diff-batch!]]
+            note [(apply str (repeat 512 "😀")) (str (apply str (repeat 512 "😀")) "x")]]
       (let [ctx (fixture! "one page")]
         (try
           (await (infra/begin! {} ctx))
           (let [read (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))
-                result (decode (await (infra/assess-diff-batch! (assessments read note) ctx)))
+                result (decode (await (assess! (make-args read note) ctx)))
                 accepted? (= 2048 (wire/utf8-bytes note))]
             (is (= accepted? (:ok? result)))
             (is (= (if accepted? 1 0) (count (:assessed-chunks (state ctx))))))
@@ -141,20 +147,23 @@
 
 (defn- ^:async context-await-controls! [done]
   (try
-    (doseq [assessment? [false true]]
+    (doseq [operation [:read :strict :delivered]]
       (let [ctx (fixture! "one immutable page")
             file (.join path (:evidence ctx) "pr-context.md")]
         (try
           (is (:ok? (await (infra/begin! {} ctx))))
-          (let [args (if assessment?
-                       (assessments (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))
-                                    "Separate page assessment")
+          (let [assessment? (not= :read operation)
+                args (if assessment?
+                       ((if (= :delivered operation) delivered-assessments assessments)
+                        (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))
+                        "Separate page assessment")
                        {:first-id 1 :count 1})
                 changed (assoc ctx :review/observe-host
                                (partial change-context-during-host-observation! file))
-                result (decode (await (if assessment?
-                                       (infra/assess-diff-batch! args changed)
-                                       (infra/read-diff-batch! args changed))))]
+                result (decode (await ((case operation
+                                        :strict infra/assess-diff-batch!
+                                        :delivered infra/assess-delivered-diff-batch!
+                                        infra/read-diff-batch!) args changed)))]
             ;; Restore before the next call: later guards cannot erase the
             ;; custody violation witnessed at the actual mutation boundary.
             (.unlinkSync fs file)
@@ -199,3 +208,45 @@
     (is (not= base (observe {:tool_output {:max_bytes 51200}})))
     (is (not= base (wire/host-observation batch/host-binary-sha256 {}
                                          #js {:HOME "/other"} "/owned/consumer")))))
+
+(defn- ^:async delivered-refusal-controls! [done]
+  (try
+    (doseq [mode [:partial :unknown-root :unknown-member :duplicate :undelivered
+                  :nil-note :number-note :host-change :session-change]]
+      (let [ctx (fixture! (str (apply str (repeat 8192 "x")) "final ημ page"))]
+        (try
+          (is (:ok? (await (infra/begin! {} ctx))))
+          (let [read (decode (await (infra/read-diff-batch! {:first-id 1 :count 1} ctx)))
+                prior (decode (await (infra/assess-delivered-diff-batch!
+                                      (delivered-assessments read "First page retained") ctx)))
+                prefix (:assessed-chunks (state ctx))
+                _ (when-not (= :undelivered mode)
+                    (await (infra/read-diff-batch! {:first-id 2 :count 1} ctx)))
+                good {:assessments [{:id 2 :note "Final partial page"}]}
+                args (case mode
+                       :partial {:assessments [{:id 2 :note "Valid member"} {:id 3 :note "Absent member"}]}
+                       :unknown-root (assoc good :source_sha256 "not accepted by this grammar")
+                       :unknown-member (assoc-in good [:assessments 0 :start] 8192)
+                       :duplicate (update good :assessments #(vec (concat % %)))
+                       :nil-note (assoc-in good [:assessments 0 :note] nil)
+                       :number-note (assoc-in good [:assessments 0 :note] 42)
+                       good)
+                changed (case mode
+                          :host-change (assoc ctx :review/observe-host (constantly (assoc fixture/host :binary-sha256 "changed")))
+                          :session-change (assoc ctx :session/id "foreign")
+                          ctx)
+                stale (.join path (:evidence ctx) "submission.json")
+                _ (.writeFileSync fs stale "uncredited stale fixture")
+                result (decode (await (infra/assess-delivered-diff-batch! args changed)))]
+            (is (:ok? prior))
+            (is (false? (:ok? result)) (name mode))
+            (is (review/restart-required? (state ctx)))
+            (is (= prefix (:assessed-chunks (state ctx))))
+            (is (not (.existsSync fs stale)))
+            (is (false? (:ok? (decode (await (infra/assess-delivered-diff-batch! good ctx)))))))
+          (finally (clean! ctx)))))
+    (catch :default error (is false (.-message error)))
+    (finally (done))))
+
+(deftest delivered-request-refuses-atomically-and-retains-prefix-and-restart
+  (async done (delivered-refusal-controls! done)))

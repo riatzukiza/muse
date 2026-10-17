@@ -114,3 +114,65 @@
         (is (false? (:ok? result)))
         (is (= {} (get-in result [:session :assessed-chunks])))
         (is (review/restart-required? (:session result)))))))
+
+(defn measured-assess [session args]
+  (let [{:keys [bytes note-bytes]} (wire/assessment-measurement args)]
+    (review/assess-delivered-diff-batch session args bytes note-bytes)))
+
+(deftest producer-derives-delivery-and-refuses-the-whole-invalid-vector
+  (let [s (strict/session)
+        ids (mapv :id (:diff-chunks s))
+        read (review/read-diff-batch s {:first-id 1 :count 4} ids)
+        args {:assessments (mapv #(hash-map :id % :note (str "Original page " %)) ids)}
+        accepted (measured-assess (:session read) args)
+        prior (assoc-in (:session read) [:assessed-chunks 1] "Retained earlier judgment")]
+    (is (:ok? accepted))
+    (is (= ids (:chunk-ids accepted)))
+    (is (= [] (get-in accepted [:coverage :missing])))
+    (is (false? (:ok? (review/assess-diff-batch (:session read) args 100 [1 1 1])))
+        "The old operation cannot reinterpret the new grammar")
+    (doseq [bad [(assoc args :source_sha256 (get-in manifest [:full_diff :sha256]))
+                 (assoc-in args [:assessments 0 :sha256] strict/digest)
+                 (assoc-in args [:assessments 1 :id] 999)
+                 (assoc-in args [:assessments 1 :id] 1)
+                 (assoc-in args [:assessments 1 :note] " ")
+                 (assoc-in args [:assessments 1 :note] nil)
+                 (assoc-in args [:assessments 1 :note] 17)
+                 (update args :assessments #(vec (reverse %)))]]
+      (let [refused (measured-assess prior bad)]
+        (is (false? (:ok? refused)))
+        (is (= (:assessed-chunks prior) (get-in refused [:session :assessed-chunks])))
+        (is (review/restart-required? (:session refused)))))
+    (is (false? (:ok? (measured-assess s args))) "Delivery cannot be inferred from a valid ID")
+    (let [staged (review/record-evidence (:session accepted) :deterministic "Complete input")
+          late (review/read-diff-chunk (:session accepted) 1)]
+      (is (false? (:ok? (measured-assess (:session staged) args))))
+      (is (false? (:ok? (measured-assess (:session late) args)))))))
+
+(defn single-read-trace []
+  (let [base (trace)]
+    (vec (concat [(first base)
+                  (fixture/tool-event 2 "review_read_diff_chunk" {:id 1} {:ok? true :chunk (first pages)})
+                  (fixture/tool-event 3 "review_read_diff_chunk" {:id 2} {:ok? true :chunk (second pages)})
+                  (fixture/tool-event 4 tool request (get-in base [2 :part :state :output]))]
+                 (map-indexed #(fixture/tool-event (+ 5 %1) "review_record_evidence"
+                                                   {:stage %2 :note "Stage after complete delivered input"}
+                                                   {:ok? true}) invocation/stages)
+                 [(fixture/tool-event 10 "review_submit" {:summary "fixture summary"} fixture/submit-output)
+                  (fixture/terminal 11)]))))
+
+(deftest explicit-new-assessment-keeps-single-read-source-checks-and-LAST
+  (let [ctx (update context :review-tools #(vec (remove #{"review_read_diff_batch"} %)))
+        events (single-read-trace)
+        good (invocation/verify events submission ctx)
+        late (fixture/append-calls events
+               [(fixture/tool-event 11 "review_read_diff_chunk" {:id 1}
+                                    {:ok? false :error "Late attempted read"})])]
+    (is (:ok? good) (pr-str good))
+    (is (= 4 (count (:page-witnesses good))))
+    (is (false? (:ok? (invocation/verify
+                       (assoc-in events [1 :part :state :output :chunk :sha256] strict/digest)
+                       submission ctx))) "Selecting only the new batch tool must not fall back to legacy text-only binding")
+    (let [result (invocation/verify late submission ctx)]
+      (is (false? (:ok? result)))
+      (is (= [1] (mapv :id (:violations result)))))))

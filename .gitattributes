@@ -1,0 +1,4 @@
+# Exact native input fixtures retain original bytes, including context whitespace.
+.ημ/review-evidence/delivered-assessment-implementation-20261017/input.diff -text -whitespace
+.ημ/review-evidence/delivered-assessment-implementation-20261017/mixed/input.diff -text -whitespace
+.ημ/review-evidence/delivered-assessment-implementation-20261017/unassessed-tail-negative/input.diff -text -whitespace

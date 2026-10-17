@@ -12,6 +12,13 @@
       (js-invoke "update" value) (js-invoke "digest" "hex")))
 (defn measure [wire]
   {:bytes (utf8-bytes wire) :lines (count (str/split wire #"\n" -1))})
+(defn assessment-measurement
+  "Measure actual arguments; malformed note types remain invalid data for law."
+  [request]
+  {:bytes (utf8-bytes (encode request))
+   :note-bytes (when (vector? (:assessments request))
+                 (mapv #(if (string? (:note %)) (utf8-bytes (:note %)) 0)
+                       (:assessments request)))})
 (defn session-measurement [value]
   (when (string? value)
     {:bytes (utf8-bytes value) :json-bytes (utf8-bytes (encode value))

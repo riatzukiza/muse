@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-10-17T06:09:01.400209+00:00",
+  "card": "1d7a2cfe-80c1-4857-adf2-b3c86972b6db",
+  "from": "in_progress",
+  "to": "review",
+  "qualifiedRheosSHA256": "85369213440634989365f75929045d36eb69b6c6b1e7679f68d483374a0d526b",
+  "bodyExact": true,
+  "priorCommentPrefixExact": true,
+  "allOtherFrontmatterExact": true,
+  "eventPrefixExact": true,
+  "eventSuffixBytes": 2124,
+  "writeId": "1792217340860-0.bfhgelr554i9fn0zrx",
+  "sourceCodeReviewStillRequired": true
+}

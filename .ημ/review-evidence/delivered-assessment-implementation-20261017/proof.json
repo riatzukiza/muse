@@ -1,0 +1,295 @@
+{
+  "schema": "muse.actual-native-delivered-assessment-diagnostic/v1",
+  "tier": "actual compiled tools and native host with scripted local SSE; no real model or review credit",
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "refusal": null,
+  "stoppedOnRefusal": false,
+  "elapsedMs": 4453,
+  "requests": 10,
+  "requestProof": [
+    {
+      "bytes": 9884,
+      "sha256": "62e6cddcb850087a4d3157da16503c0305b94dbb13bcf95ccf0aea46daab0b8d"
+    },
+    {
+      "bytes": 12859,
+      "sha256": "9d7ff48df26ec636ea2449b9071bfa1bdab78ca81e9dc411317e7170d3357388"
+    },
+    {
+      "bytes": 25609,
+      "sha256": "5db3fcd9c0a2f2c4bb3e5697e87ec8a338f13e6bd50f79438a5cd29a399f3e3f"
+    },
+    {
+      "bytes": 26364,
+      "sha256": "d28e374dd8f263e48705a4a641d6230602b375290a81b5e4cc538b89f93b3679"
+    },
+    {
+      "bytes": 26846,
+      "sha256": "652fe5438f5f4865c3266463408cfc10b74ed8eb19f660dcb52e6de1b6c8433b"
+    },
+    {
+      "bytes": 27325,
+      "sha256": "2c73733c461285103907973d8973ced244828a6fc820f6e3933524c7a9ad67a5"
+    },
+    {
+      "bytes": 27813,
+      "sha256": "7229354d707c1b8e9672b66ed9f1690af6f5508f6e81e3e943d7c944863d1255"
+    },
+    {
+      "bytes": 28302,
+      "sha256": "5e9dc44a282e05204d5942e90f5dddd8ffd8fcbfdb31cba35ec7623af9c99288"
+    },
+    {
+      "bytes": 28778,
+      "sha256": "32edd8d45b27b26432b6e7010a1d5c06a973732e5a0c5ff963acf77b212022e3"
+    },
+    {
+      "bytes": 29407,
+      "sha256": "5d5b26c0dc69bd8bd8f28d2369eec121b3bdc8a5400fe3e7ab55da3e4aaa15b2"
+    }
+  ],
+  "binarySHA256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+  "bundleSHA256": "4a96324de3fbd59bc395b6ac96c1fa7cfa63e55fcc02ae11a42d7ae7090bd91f",
+  "canonicalVerifierSHA256": "238504dfbf7190a3f103cde533143a58322eb5ec98a5c8ece221d01795c13678",
+  "resolvedConfigSHA256": "30f9a36847e8fa030a7dc2c1c468293cb9c912c4f37fcbaf8cd94038fb099d6f",
+  "expectedHost": {
+    "binary-sha256": "f9dab32248695e9ebd56b16a1921798fd85112cf5a69c7dfd0cabc1e17be4a11",
+    "config-sha256": "6c342206f77390f54d8eddf2caf79cdd4d625eec3a4f87a504d790186d27d1bf",
+    "selectors-sha256": "16fdd06d862f76b2743c0c1220fb2a6151ec92c0162e15480becfe89efdcbb9b",
+    "max-bytes": 51200,
+    "max-lines": 2000
+  },
+  "source": {
+    "sourceRoot": "/home/err/spaces/cephalon-muse-delivery-custody/muse",
+    "sourceHead": "f5dac556ac1b9d7c1dabb8aeb80bc11f3838d4ee",
+    "tools": [
+      "review_begin",
+      "review_read_diff_chunk",
+      "review_assess_diff_chunk",
+      "review_read_diff_batch",
+      "review_assess_diff_batch",
+      "review_assess_delivered_diff_batch",
+      "review_record_evidence",
+      "review_propose_finding",
+      "review_classify_finding",
+      "review_status",
+      "review_submit"
+    ],
+    "input": "retained public synthetic two-page fixture"
+  },
+  "stdout": {
+    "bytes": 29022,
+    "sha256": "8d645749198c552633634b31d5bc3a1fb87f857d54be898f7959b3af78277a4d"
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "verdict": {
+    "reviewCallCount": 9,
+    "acceptedInvocation": {
+      "sessionID": "ses_eb792e907ffeON1L2EDS4zlVKr",
+      "submissionCallID": "owned-native-batch-8",
+      "submissionPosition": 26,
+      "submissionFile": "/var/tmp/muse-delivered3-native-complete-s9kyerna/consumer/.opencode/review-evidence/submission.json",
+      "responseSha256": "8d645749198c552633634b31d5bc3a1fb87f857d54be898f7959b3af78277a4d",
+      "submissionSha256": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5",
+      "fullInputSha256": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+      "pageCount": 2
+    },
+    "contextReadCoverage": {
+      "status": "absent",
+      "totalLines": 0,
+      "deliveredLines": 0,
+      "eof": false
+    },
+    "reason": null,
+    "ok": true,
+    "code": "verified-review-invocation",
+    "pageWitnesses": [
+      {
+        "id": 1,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_1486d1bc6001xXIRaTf87i6gjJ",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "read",
+        "call-id": "owned-native-batch-1",
+        "part-id": "prt_1486d1bc6001xXIRaTf87i6gjJ",
+        "position": 5,
+        "tool": "review_read_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 1,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_1486d1c58001xXcV9Ym1A5mqbV",
+        "position": 8,
+        "tool": "review_assess_delivered_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "assessment",
+        "call-id": "owned-native-batch-2",
+        "part-id": "prt_1486d1c58001xXcV9Ym1A5mqbV",
+        "position": 8,
+        "tool": "review_assess_delivered_diff_batch",
+        "members": [
+          1,
+          2
+        ]
+      }
+    ],
+    "pageCount": 2,
+    "violations": [],
+    "reasonKind": null,
+    "sessionID": "ses_eb792e907ffeON1L2EDS4zlVKr"
+  },
+  "problem": null,
+  "sourceFiles": {
+    ".ημ/config/opencode/agents/github-reviewer.md": "d31ff0838cb7c49819b4eaf201de2bd5c189955eb4933bd92a0d81560018b46a",
+    ".ημ/plugins/review_pipeline.cljs": "143526bc6d9d58144a2716a325e8157f3f8ff63e666144028ccf92a46c9ce07f",
+    ".ημ/review/evidence-review.md": "42309f93f6a2a44b6d105f05291c147d1669ac882aff8e4add97333d7c38e986",
+    "deps.edn": "8eabd65ea41db900deb987c445c31f03615a2a36928bb6818c778783e28a2be5",
+    "shadow-cljs.edn": "409203bc5f8214710cea01f979141806805169eef374ade54fda406289d476fa",
+    "src/clj/eta_mu/opencode/build.clj": "96008881199a5df5d9aa27200c79e0ca64536c8e84a634692abc111a19fa7c50",
+    "src/cljs/eta_mu/boundaries/opencode.cljs": "06a980346494b4fc7aac585d62a44082b72089d01cf59b16a70b6284c999e738",
+    "src/cljs/eta_mu/domain/review.cljc": "116bbcc067481bdb90f999c40200397206fe2c84622300ec03c2e046fbbd19e5",
+    "src/cljs/eta_mu/domain/review_invocation.cljc": "99be3227e388124af996cb9b9f985bbc9fa6c2d3ae625d0ec2c74733dcc23647",
+    "src/cljs/eta_mu/extern/review_batch.cljs": "f95a73c780e810502d3c6780851d9ac584f38506716a2fbabee73b8006bfd66f",
+    "src/cljs/eta_mu/extern/review_invocation.cljs": "54223723810a8bad86540e03ac37f349482f22377669f2ec9a02c12cb5c77efa",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs": "8480b6e9a78e7c97e9ce20fc6e65a5a957c913383177583b48a90cbde9a552ad",
+    "src/cljs/eta_mu/law/review_batch.cljc": "9bc4ad654c6a96348be4a18e244f32998ce7a9b9376b649de554c8c33c62bba5",
+    "src/cljs/eta_mu/law/review_invocation.cljc": "30c3366a1d743d2668bc1aa1741bfaf722189e3e6cc28355c8298889b74ec513",
+    "src/cljs/eta_mu/shape/review_batch.cljc": "97c58ab1ad2ac057c57a33c56830d395543c626389910b01d6ed78fc5c74f82f"
+  },
+  "actualCalls": [
+    {
+      "tool": "review_begin",
+      "callID": "owned-native-batch-0",
+      "partID": "prt_1486d1a7f001V4Kq92k1A2i2OL",
+      "position": 2,
+      "status": "completed",
+      "outputBytes": 2631,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_read_diff_batch",
+      "callID": "owned-native-batch-1",
+      "partID": "prt_1486d1bc6001xXIRaTf87i6gjJ",
+      "position": 5,
+      "status": "completed",
+      "outputBytes": 11936,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_assess_delivered_diff_batch",
+      "callID": "owned-native-batch-2",
+      "partID": "prt_1486d1c58001xXcV9Ym1A5mqbV",
+      "position": 8,
+      "status": "completed",
+      "outputBytes": 246,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-3",
+      "partID": "prt_1486d1cd10014NSDcFwWvUPMRt",
+      "position": 11,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-4",
+      "partID": "prt_1486d1d58001dd8frawvsrlNG4",
+      "position": 14,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-5",
+      "partID": "prt_1486d1de6001if72lKtOiNWt3d",
+      "position": 17,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-6",
+      "partID": "prt_1486d1e5a0017L4vC02Dv2kwAg",
+      "position": 20,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_record_evidence",
+      "callID": "owned-native-batch-7",
+      "partID": "prt_1486d1edf001L704FCUOZW09GI",
+      "position": 23,
+      "status": "completed",
+      "outputBytes": 138,
+      "outputLines": 1,
+      "truncated": false
+    },
+    {
+      "tool": "review_submit",
+      "callID": "owned-native-batch-8",
+      "partID": "prt_1486d1f4e001vL9bdXtb4T0Uo6",
+      "position": 26,
+      "status": "completed",
+      "outputBytes": 286,
+      "outputLines": 1,
+      "truncated": false
+    }
+  ],
+  "observedAt": "2026-10-17T05:55:06.259634+00:00",
+  "capture": {
+    "canonicalBeforeAfterEqualityActuallyAsserted": true,
+    "rawNativeToolInputsUnedited": true,
+    "scriptedLocalhostNoModelOrPublisher": true
+  },
+  "evidenceSHA256": {
+    "native.jsonl": "8d645749198c552633634b31d5bc3a1fb87f857d54be898f7959b3af78277a4d",
+    "submission.json": "96a2708575190518774e3279881547430c9eb634bb398f5edfa90758303ca3e5",
+    "input.diff": "2784767530068f15bcb5a361ac1787319a5f94dfa91fb9fcceb042ba04a70aa9",
+    "input-manifest.json": "43f8a85317d3f487b76be716e751bf3364d1bd7eea2b5a34ec9a083f48d51d4a",
+    "prior-source-snapshot.json": "d2d485c184b4badd4f299b85a916d9c927d6e9428a6a68b64a42f7a50a326a1f"
+  },
+  "diagnosticConfigOverrides": {
+    "rootEDN": "{:eta-mu/opencode-version 1 :id :eta-mu/delivered-native-fixture :imports [\"../shared/profiles.edn\" \"../shared/plugins/review-pipeline.edn\" \"permissions/delivered-native.edn\"] :profile :dev :build [\"shadow-cljs\" \"release\" \"opencode-plugin\"]}\n",
+    "permissionEDN": "{:permissions [{:id :review/delivered-native :applies #{:review_begin :review_read_diff_chunk :review_assess_diff_chunk :review_read_diff_batch :review_assess_diff_batch :review_assess_delivered_diff_batch :review_record_evidence :review_propose_finding :review_classify_finding :review_status :review_submit} :policy :allow}]}\n",
+    "scriptedPrompt": "Use only fixed scripted test tools. No model judgment is requested."
+  }
+}

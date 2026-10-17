@@ -63,6 +63,13 @@
   [params ctx]
   (infra/assess-diff-batch! params ctx))
 
+(deftool assess-delivered-diff-batch
+  {:id :review/assess_delivered_diff_batch
+   :description "Explicit delivered-page protocol: assess one to four already delivered original pages with an ordered distinct id and a separate nonblank model-authored note for EACH page. Provide only assessments containing id/note; do not copy profile, source hash, offsets or page hashes. Producer and native verifier bind the original source and geometry independently from actual delivery. Notes must fit 2048 UTF8 bytes each; complete args must fit 16384 UTF8 bytes. Any malformed, oversized or undelivered member refuses the entire vector without partial credit. Finish the final partial batch and coverage.missing before the FIRST deterministic stage. Rereads or failed calls end the invocation. This explicit operation does not relax the retained strict metadata API or establish semantic understanding."
+   :args (batch-shape/tool-args ::batch/assess-delivered) :tags #{:review}}
+  [params ctx]
+  (infra/assess-delivered-diff-batch! params ctx))
+
 (deftool propose-finding
   {:id          :review/propose_finding
    :description "Register a candidate finding. The path and line are validated against the staged diff at call time: only added lines on the PR head side are reviewable. A candidate is not a defect until classified."
@@ -114,6 +121,7 @@
   assess-diff-chunk
   read-diff-batch
   assess-diff-batch
+  assess-delivered-diff-batch
   record-evidence
   propose-finding
   classify-finding

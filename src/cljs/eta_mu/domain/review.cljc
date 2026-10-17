@@ -226,6 +226,11 @@
               {:ok? true :session next :chunks members :coverage (input-coverage next)
                :restart-required? false}))))
 
+(defn- batch-assessment-result [session members]
+  (let [next (reduce #(assoc-in %1 [:assessed-chunks (:id %2)] (:note %2)) session members)]
+    {:ok? true :session next :chunk-ids (mapv :id members)
+     :coverage (input-coverage next)}))
+
 (defn assess-diff-batch
   "Atomic per-page assessment. Wire sizes are independently measured at extern."
   [session request bytes note-bytes]
@@ -242,9 +247,24 @@
       (not (and (batch/assessment-shape? request bytes note-bytes)
                 (= source-sha (:source_sha256 request)) (every? valid-member? members)))
       (refuse-batch session "Malformed, oversized, mismatched or undelivered batch assessment.")
-      :else (let [next (reduce #(assoc-in %1 [:assessed-chunks (:id %2)] (:note %2)) session members)]
-              {:ok? true :session next :chunk-ids (mapv :id members)
-               :coverage (input-coverage next)}))))
+      :else (batch-assessment-result session members))))
+
+(defn assess-delivered-diff-batch
+  "Explicit id/note protocol over this session's actual immutable deliveries.
+   Does not repair or reinterpret any strict copied-metadata request."
+  [session request bytes note-bytes]
+  (let [members (:assessments request)
+        delivered? (fn [{:keys [id]}]
+                     (let [page (get (:diff-chunks session) (dec id))]
+                       (and (= id (:id page))
+                            (contains? (:delivered-chunks session) id))))]
+    (cond
+      (or (restart-required? session) (not= :deterministic (:stage session)))
+      (refuse-batch session "Delivered batch assessment must precede stage one in a healthy invocation.")
+      (not (and (batch/delivered-assessment-shape? request bytes note-bytes)
+                (every? delivered? members)))
+      (refuse-batch session "Malformed, oversized or undelivered id/note batch assessment.")
+      :else (batch-assessment-result session members))))
 
 (defn- full-input-error [session]
   (cond

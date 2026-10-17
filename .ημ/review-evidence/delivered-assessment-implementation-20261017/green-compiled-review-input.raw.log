@@ -1,0 +1,14 @@
+
+> test:review-input
+> node scripts/verify-full-review-input.mjs && node scripts/verify-review-invocation.mjs
+
+{}
+Picked up JAVA_TOOL_OPTIONS: -Xmx1536m -XX:ActiveProcessorCount=2 -Duser.home="/tmp/muse-full-review-qCUSnn/compiler-home"
+Picked up JAVA_TOOL_OPTIONS: -Xmx1536m -XX:ActiveProcessorCount=2 -Duser.home="/tmp/muse-full-review-qCUSnn/compiler-home"
+[:opencode-plugin] Compiling ...
+[:opencode-plugin] Build completed. (89 files, 39 compiled, 0 warnings, 10.97s)
+shadow-cljs - config: /tmp/muse-full-review-qCUSnn/checkout/shadow-cljs.edn
+shadow-cljs - starting via "clojure"
+Picked up JAVA_TOOL_OPTIONS: -Xmx1536m -XX:ActiveProcessorCount=2 -Duser.home="/tmp/muse-full-review-qCUSnn/compiler-home"
+{"result":"pass","tools":11,"pages":204,"missing_tail_refused":true,"premature_publish_refused":true,"recovered_tail_finding_retained":true,"recovered_full_input_accepted":true,"stale_chronology_refused":true,"same_session_reset_refused":true,"host_id_reset_refused":true,"healthy_readmission_refused":true,"stale_submission_removed":true,"fresh_invocation_accepted":true,"cleanup_fault_artifact_observed":true,"context":{"context_protocol":"open-hax.review-context/v1","observed_pages":1482,"bounded_begin_bytes":8795,"context_bytes":63822,"context_sha256":"094bbbf6f427d2159f863f7e5887952bd148c23182e07dcfe611ce0e47fa37e4","custody_negatives":14,"first_unavailable_negatives":2,"admitted_begin_refusals":4,"native_review":false},"native_review":false}
+{"result":"pass","runtime":"v22.23.3","modulePath":"/home/err/spaces/cephalon-muse-delivery-custody/muse/.opencode/dist/review-invocation.cjs","moduleSha256":"f60c5491207a27765c94d7897d460fc1f7ef66495a64cb6abd3979962cf23a58","results":[{"representation":"string","assertions":31,"pass":true},{"representation":"Buffer","assertions":31,"pass":true},{"representation":"Uint8Array","assertions":31,"pass":true}],"pass":3,"fail":0,"native_review":false}

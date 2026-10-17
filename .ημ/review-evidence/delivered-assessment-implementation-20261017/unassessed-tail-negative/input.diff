@@ -1,0 +1,768 @@
+diff --git a/.clj-kondo/config.edn b/.clj-kondo/config.edn
+new file mode 100644
+index 0000000..5f39e3b
+--- /dev/null
++++ b/.clj-kondo/config.edn
+@@ -0,0 +1,9 @@
++;; ClojureScript 1.12.145 treats await inside ^:async forms as a native compiler
++;; special form. The installed clj-kondo does not yet resolve that spelling.
++;; Keep this recognition limited to the two adapter namespaces; compilation
++;; still enforces lawful placement. No test or compiler warning is suppressed.
++{:config-in-ns
++ {openplanner.graph.recall.mongo
++  {:linters {:unresolved-symbol {:exclude [await]}}}
++  openplanner.graph.recall.mongo-test
++  {:linters {:unresolved-symbol {:exclude [await]}}}}}
+diff --git a/.coderabbit.yaml b/.coderabbit.yaml
+new file mode 100644
+index 0000000..3ebfd1b
+--- /dev/null
++++ b/.coderabbit.yaml
+@@ -0,0 +1,6 @@
++# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
++reviews:
++  path_filters:
++    - "**"
++    # Override the default lockfile exclusion: dependency changes are inputs.
++    - "**/pnpm-lock.yaml"
+diff --git a/.env.example b/.env.example
+index 0988879..9044a8f 100644
+--- a/.env.example
++++ b/.env.example
+@@ -11,7 +11,10 @@ OPENPLANNER_API_KEY=change-me
+ OPENPLANNER_STORAGE_BACKEND=duckdb
+ 
+ # MongoDB configuration (when STORAGE_BACKEND=mongodb)
+-MONGODB_URI=mongodb://localhost:27017
++# Host-side SDK access; Compose application containers use the separate service URI.
++MONGODB_URI=mongodb://localhost:27017/?directConnection=true
++# Override this separately when Compose should use an external MongoDB cluster.
++COMPOSE_MONGODB_URI=mongodb://mongodb:27017/?replicaSet=openplanner
+ MONGODB_DB=openplanner
+ MONGODB_EVENTS_COLLECTION=events
+ MONGODB_COMPACTED_COLLECTION=compacted_memories
+@@ -36,4 +39,4 @@ OLLAMA_EMBED_MODEL=qwen3-embedding:0.6b
+ # Scope overrides (supports either JSON or key=value pairs separated by ';' or ',')
+ # OLLAMA_EMBED_MODEL_BY_SOURCE={"chatgpt-export":"qwen3-embedding:4b"}
+ # OLLAMA_EMBED_MODEL_BY_KIND=message=qwen3-embedding:0.6b
+-# OLLAMA_EMBED_MODEL_BY_PROJECT=chatgpt=qwen3-embedding:4b
+\ No newline at end of file
++# OLLAMA_EMBED_MODEL_BY_PROJECT=chatgpt=qwen3-embedding:4b
+diff --git a/.github/workflows/eta-mu-review.yml b/.github/workflows/eta-mu-review.yml
+new file mode 100644
+index 0000000..28f5467
+--- /dev/null
++++ b/.github/workflows/eta-mu-review.yml
+@@ -0,0 +1,30 @@
++# SPDX-License-Identifier: GPL-3.0-or-later
++name: eta-mu evidence review
++
++on:
++  pull_request:
++    types: [opened, synchronize, reopened, ready_for_review]
++
++permissions:
++  contents: read
++  pull-requests: read
++
++jobs:
++  review:
++    name: Evidence-first review (eta-mu)
++    uses: riatzukiza/eta-mu/.github/workflows/opencode-code-review.yml@e4fb01ff056f9ac823b2b9659e6bc25ac7fea1f2
++    with:
++      pr_head_sha: ${{ github.event.pull_request.head.sha }}
++      model: opencode/mimo-v2.6-flash-free
++      review_timeout_minutes: 120
++      muse_revision: a9a62f0d509056406f3dd7d8c86a13551be168cd
++      agents_revision: face3009a8dfb6f355acad467fd288100e49c0ba
++      opencode_version: 1.18.31
++      node_version: "22.20.0"
++      setup_eta_mu_toolchain: false
++      evidence_gates_script: |
++        run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
++        run_gate diff_hygiene git diff --check "${PR_BASE_SHA}...HEAD"
++    secrets:
++      ETA_MU_APP_ID: ${{ secrets.ETA_MU_APP_ID }}
++      ETA_MU_APP_PRIVATE_KEY: ${{ secrets.ETA_MU_APP_PRIVATE_KEY }}
+diff --git a/.github/workflows/scoped-graph-recall.yml b/.github/workflows/scoped-graph-recall.yml
+new file mode 100644
+index 0000000..9ed7eb2
+--- /dev/null
++++ b/.github/workflows/scoped-graph-recall.yml
+@@ -0,0 +1,99 @@
++# SPDX-License-Identifier: GPL-3.0-or-later
++name: Scoped graph recall verification
++
++on:
++  pull_request:
++    types: [opened, synchronize, reopened, ready_for_review]
++  workflow_dispatch:
++
++permissions:
++  contents: read
++
++jobs:
++  verify:
++    runs-on: ubuntu-24.04
++    timeout-minutes: 30
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
++        with:
++          ref: ${{ github.event.pull_request.head.sha || github.sha }}
++          fetch-depth: 0
++          persist-credentials: false
++      - name: Verify selected checkout
++        env:
++          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
++        run: |
++          actual_head="$(git rev-parse HEAD)"
++          if [ "$actual_head" != "$EXPECTED_HEAD" ]; then
++            echo "::error::Checkout does not match the selected head" >&2
++            exit 1
++          fi
++          echo "Verified exact checkout: $actual_head"
++      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
++        with:
++          distribution: temurin
++          java-version: "21"
++      - uses: DeLaGuardo/setup-clojure@6d46099eae24853c33c0482f2bb54edf4f1a4c74 # 13
++        with:
++          cli: "1.12.2.1565"
++          clj-kondo: "2025.07.28"
++      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
++        with:
++          version: "10.11.0"
++      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
++        with:
++          node-version: "22.20.0"
++      - name: Install the four bounded dependency packages
++        run: pnpm --dir packages --filter @open-hax/openplanner-sdk... --filter @open-hax/openplanner-graph-claim-core... install --frozen-lockfile
++      - name: Build and test the imported cache
++        working-directory: packages/stores/cache
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-cache-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-cache-release.log"
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-cache-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-cache-test-compile.log"
++          node target/test.cjs 2>&1 | tee "$RUNNER_TEMP/bounded-cache-test.log"
++          grep -Eq '^0 failures, 0 errors\.$' "$RUNNER_TEMP/bounded-cache-test.log"
++      - name: Build and test the imported hydration library
++        working-directory: packages/stores/document-hydration
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-hydration-release.log"
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-hydration-test-compile.log"
++          node target/test.cjs 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-test.log"
++          grep -Eq '^0 failures, 0 errors\.$' "$RUNNER_TEMP/bounded-hydration-test.log"
++      - name: Build the imported SDK and import its released exports
++        run: |
++          set -euo pipefail
++          pnpm --dir packages --filter @open-hax/openplanner-sdk build
++          pnpm --dir packages --filter @open-hax/openplanner-sdk test
++          pnpm --dir packages --filter @open-hax/openplanner-sdk exec node --input-type=module -e 'import("./dist/index.js").then(m => { if (typeof m.createOpenPlannerSdk !== "function") throw new Error("missing SDK entry point"); })'
++      - name: Actual documented Mongo transaction fixture
++        # Starts only a uniquely owned disposable Mongo fixture; no application runtime.
++        run: |
++          docker pull mongo:7
++          node packages/openplanner-sdk/scripts/verify-compose-mongo.mjs
++      - name: Portable recall laws
++        working-directory: packages/graph/graph-claim-core
++        run: clojure -M:recall-test
++      - name: Changed recall namespace lint
++        working-directory: packages/graph/graph-claim-core
++        run: clj-kondo --lint src/openplanner/graph/recall test/openplanner/graph/recall
++      - name: Actual Node suites and forced assertion failure
++        working-directory: packages/graph/graph-claim-core
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/scoped-recall-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/scoped-recall-test-compile.log"
++          node scripts/verify-recall-test-exit.mjs
++      - name: Released ESM and runnable scoped recall demonstration
++        working-directory: packages/graph/graph-claim-core
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/scoped-recall-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/scoped-recall-release.log"
++          node scripts/verify-scoped-recall.mjs
++          node scripts/verify-sdk-query-format.mjs
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..e530707
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,58 @@
++# Build artifacts
++dist/
++dist.root-owned.*/
++*.tsbuildinfo
++*.tsbuildinfo.*
++
++# Coverage reports (regenerable)
++coverage/
++
++# Duplication scan reports (regenerable)
++reports/jscpd/
++
++# Public renderer (CLJS build output)
++public/renderer/
++
++# Dependencies
++node_modules/
++
++# Local credentials; the public .env.example template remains tracked.
++.env
++
++# Data lake / database artifacts (regenerable)
++openplanner-lake/
++
++# Editor / LSP caches
++.clj-kondo/*
++!.clj-kondo/config.edn
++.cpcache/
++.shadow-cljs/
++.lsp/
++
++# CLJS build output
++.target/
++target/
++.shadow-cljs/
++
++# Vite cache
++.vite/
++.vite-vitest/
++
++# LevelDB / local DB artifacts (regenerable)
++.reconstitute/
++
++# Package lock files in nested repos (root lock is canonical)
++package-lock.json
++
++# Backup / scratch files
++*.bak
++*.backup
++.projectile
++
++# OS
++.DS_Store
++
++# Generated, hash-verified artifacts from the reusable review workflow.
++# Tracked source is still checked; these directories contain no source inputs.
++/.review-context/
++/.opencode/review-evidence/
+diff --git "a/.\316\267\316\274/review-evidence/cephalon-character/bounded-additional-repair-evidence-20261010.json" "b/.\316\267\316\274/review-evidence/cephalon-character/bounded-additional-repair-evidence-20261010.json"
+diff --git a/.clj-kondo/config.edn b/.clj-kondo/config.edn
+new file mode 100644
+index 0000000..5f39e3b
+--- /dev/null
++++ b/.clj-kondo/config.edn
+@@ -0,0 +1,9 @@
++;; ClojureScript 1.12.145 treats await inside ^:async forms as a native compiler
++;; special form. The installed clj-kondo does not yet resolve that spelling.
++;; Keep this recognition limited to the two adapter namespaces; compilation
++;; still enforces lawful placement. No test or compiler warning is suppressed.
++{:config-in-ns
++ {openplanner.graph.recall.mongo
++  {:linters {:unresolved-symbol {:exclude [await]}}}
++  openplanner.graph.recall.mongo-test
++  {:linters {:unresolved-symbol {:exclude [await]}}}}}
+diff --git a/.coderabbit.yaml b/.coderabbit.yaml
+new file mode 100644
+index 0000000..3ebfd1b
+--- /dev/null
++++ b/.coderabbit.yaml
+@@ -0,0 +1,6 @@
++# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
++reviews:
++  path_filters:
++    - "**"
++    # Override the default lockfile exclusion: dependency changes are inputs.
++    - "**/pnpm-lock.yaml"
+diff --git a/.env.example b/.env.example
+index 0988879..9044a8f 100644
+--- a/.env.example
++++ b/.env.example
+@@ -11,7 +11,10 @@ OPENPLANNER_API_KEY=change-me
+ OPENPLANNER_STORAGE_BACKEND=duckdb
+ 
+ # MongoDB configuration (when STORAGE_BACKEND=mongodb)
+-MONGODB_URI=mongodb://localhost:27017
++# Host-side SDK access; Compose application containers use the separate service URI.
++MONGODB_URI=mongodb://localhost:27017/?directConnection=true
++# Override this separately when Compose should use an external MongoDB cluster.
++COMPOSE_MONGODB_URI=mongodb://mongodb:27017/?replicaSet=openplanner
+ MONGODB_DB=openplanner
+ MONGODB_EVENTS_COLLECTION=events
+ MONGODB_COMPACTED_COLLECTION=compacted_memories
+@@ -36,4 +39,4 @@ OLLAMA_EMBED_MODEL=qwen3-embedding:0.6b
+ # Scope overrides (supports either JSON or key=value pairs separated by ';' or ',')
+ # OLLAMA_EMBED_MODEL_BY_SOURCE={"chatgpt-export":"qwen3-embedding:4b"}
+ # OLLAMA_EMBED_MODEL_BY_KIND=message=qwen3-embedding:0.6b
+-# OLLAMA_EMBED_MODEL_BY_PROJECT=chatgpt=qwen3-embedding:4b
+\ No newline at end of file
++# OLLAMA_EMBED_MODEL_BY_PROJECT=chatgpt=qwen3-embedding:4b
+diff --git a/.github/workflows/eta-mu-review.yml b/.github/workflows/eta-mu-review.yml
+new file mode 100644
+index 0000000..28f5467
+--- /dev/null
++++ b/.github/workflows/eta-mu-review.yml
+@@ -0,0 +1,30 @@
++# SPDX-License-Identifier: GPL-3.0-or-later
++name: eta-mu evidence review
++
++on:
++  pull_request:
++    types: [opened, synchronize, reopened, ready_for_review]
++
++permissions:
++  contents: read
++  pull-requests: read
++
++jobs:
++  review:
++    name: Evidence-first review (eta-mu)
++    uses: riatzukiza/eta-mu/.github/workflows/opencode-code-review.yml@e4fb01ff056f9ac823b2b9659e6bc25ac7fea1f2
++    with:
++      pr_head_sha: ${{ github.event.pull_request.head.sha }}
++      model: opencode/mimo-v2.6-flash-free
++      review_timeout_minutes: 120
++      muse_revision: a9a62f0d509056406f3dd7d8c86a13551be168cd
++      agents_revision: face3009a8dfb6f355acad467fd288100e49c0ba
++      opencode_version: 1.18.31
++      node_version: "22.20.0"
++      setup_eta_mu_toolchain: false
++      evidence_gates_script: |
++        run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
++        run_gate diff_hygiene git diff --check "${PR_BASE_SHA}...HEAD"
++    secrets:
++      ETA_MU_APP_ID: ${{ secrets.ETA_MU_APP_ID }}
++      ETA_MU_APP_PRIVATE_KEY: ${{ secrets.ETA_MU_APP_PRIVATE_KEY }}
+diff --git a/.github/workflows/scoped-graph-recall.yml b/.github/workflows/scoped-graph-recall.yml
+new file mode 100644
+index 0000000..9ed7eb2
+--- /dev/null
++++ b/.github/workflows/scoped-graph-recall.yml
+@@ -0,0 +1,99 @@
++# SPDX-License-Identifier: GPL-3.0-or-later
++name: Scoped graph recall verification
++
++on:
++  pull_request:
++    types: [opened, synchronize, reopened, ready_for_review]
++  workflow_dispatch:
++
++permissions:
++  contents: read
++
++jobs:
++  verify:
++    runs-on: ubuntu-24.04
++    timeout-minutes: 30
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
++        with:
++          ref: ${{ github.event.pull_request.head.sha || github.sha }}
++          fetch-depth: 0
++          persist-credentials: false
++      - name: Verify selected checkout
++        env:
++          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
++        run: |
++          actual_head="$(git rev-parse HEAD)"
++          if [ "$actual_head" != "$EXPECTED_HEAD" ]; then
++            echo "::error::Checkout does not match the selected head" >&2
++            exit 1
++          fi
++          echo "Verified exact checkout: $actual_head"
++      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
++        with:
++          distribution: temurin
++          java-version: "21"
++      - uses: DeLaGuardo/setup-clojure@6d46099eae24853c33c0482f2bb54edf4f1a4c74 # 13
++        with:
++          cli: "1.12.2.1565"
++          clj-kondo: "2025.07.28"
++      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
++        with:
++          version: "10.11.0"
++      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
++        with:
++          node-version: "22.20.0"
++      - name: Install the four bounded dependency packages
++        run: pnpm --dir packages --filter @open-hax/openplanner-sdk... --filter @open-hax/openplanner-graph-claim-core... install --frozen-lockfile
++      - name: Build and test the imported cache
++        working-directory: packages/stores/cache
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-cache-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-cache-release.log"
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-cache-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-cache-test-compile.log"
++          node target/test.cjs 2>&1 | tee "$RUNNER_TEMP/bounded-cache-test.log"
++          grep -Eq '^0 failures, 0 errors\.$' "$RUNNER_TEMP/bounded-cache-test.log"
++      - name: Build and test the imported hydration library
++        working-directory: packages/stores/document-hydration
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-hydration-release.log"
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-hydration-test-compile.log"
++          node target/test.cjs 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-test.log"
++          grep -Eq '^0 failures, 0 errors\.$' "$RUNNER_TEMP/bounded-hydration-test.log"
++      - name: Build the imported SDK and import its released exports
++        run: |
++          set -euo pipefail
++          pnpm --dir packages --filter @open-hax/openplanner-sdk build
++          pnpm --dir packages --filter @open-hax/openplanner-sdk test
++          pnpm --dir packages --filter @open-hax/openplanner-sdk exec node --input-type=module -e 'import("./dist/index.js").then(m => { if (typeof m.createOpenPlannerSdk !== "function") throw new Error("missing SDK entry point"); })'
++      - name: Actual documented Mongo transaction fixture
++        # Starts only a uniquely owned disposable Mongo fixture; no application runtime.
++        run: |
++          docker pull mongo:7
++          node packages/openplanner-sdk/scripts/verify-compose-mongo.mjs
++      - name: Portable recall laws
++        working-directory: packages/graph/graph-claim-core
++        run: clojure -M:recall-test
++      - name: Changed recall namespace lint
++        working-directory: packages/graph/graph-claim-core
++        run: clj-kondo --lint src/openplanner/graph/recall test/openplanner/graph/recall
++      - name: Actual Node suites and forced assertion failure
++        working-directory: packages/graph/graph-claim-core
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/scoped-recall-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/scoped-recall-test-compile.log"
++          node scripts/verify-recall-test-exit.mjs
++      - name: Released ESM and runnable scoped recall demonstration
++        working-directory: packages/graph/graph-claim-core
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/scoped-recall-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/scoped-recall-release.log"
++          node scripts/verify-scoped-recall.mjs
++          node scripts/verify-sdk-query-format.mjs
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..e530707
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,58 @@
++# Build artifacts
++dist/
++dist.root-owned.*/
++*.tsbuildinfo
++*.tsbuildinfo.*
++
++# Coverage reports (regenerable)
++coverage/
++
++# Duplication scan reports (regenerable)
++reports/jscpd/
++
++# Public renderer (CLJS build output)
++public/renderer/
++
++# Dependencies
++node_modules/
++
++# Local credentials; the public .env.example template remains tracked.
++.env
++
++# Data lake / database artifacts (regenerable)
++openplanner-lake/
++
++# Editor / LSP caches
++.clj-kondo/*
++!.clj-kondo/config.edn
++.cpcache/
++.shadow-cljs/
++.lsp/
++
++# CLJS build output
++.target/
++target/
++.shadow-cljs/
++
++# Vite cache
++.vite/
++.vite-vitest/
++
++# LevelDB / local DB artifacts (regenerable)
++.reconstitute/
++
++# Package lock files in nested repos (root lock is canonical)
++package-lock.json
++
++# Backup / scratch files
++*.bak
++*.backup
++.projectile
++
++# OS
++.DS_Store
++
++# Generated, hash-verified artifacts from the reusable review workflow.
++# Tracked source is still checked; these directories contain no source inputs.
++/.review-context/
++/.opencode/review-evidence/
+diff --git "a/.\316\267\316\274/review-evidence/cephalon-character/bounded-additional-repair-evidence-20261010.json" "b/.\316\267\316\274/review-evidence/cephalon-character/bounded-additional-repair-evidence-20261010.json"
+diff --git a/.clj-kondo/config.edn b/.clj-kondo/config.edn
+new file mode 100644
+index 0000000..5f39e3b
+--- /dev/null
++++ b/.clj-kondo/config.edn
+@@ -0,0 +1,9 @@
++;; ClojureScript 1.12.145 treats await inside ^:async forms as a native compiler
++;; special form. The installed clj-kondo does not yet resolve that spelling.
++;; Keep this recognition limited to the two adapter namespaces; compilation
++;; still enforces lawful placement. No test or compiler warning is suppressed.
++{:config-in-ns
++ {openplanner.graph.recall.mongo
++  {:linters {:unresolved-symbol {:exclude [await]}}}
++  openplanner.graph.recall.mongo-test
++  {:linters {:unresolved-symbol {:exclude [await]}}}}}
+diff --git a/.coderabbit.yaml b/.coderabbit.yaml
+new file mode 100644
+index 0000000..3ebfd1b
+--- /dev/null
++++ b/.coderabbit.yaml
+@@ -0,0 +1,6 @@
++# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
++reviews:
++  path_filters:
++    - "**"
++    # Override the default lockfile exclusion: dependency changes are inputs.
++    - "**/pnpm-lock.yaml"
+diff --git a/.env.example b/.env.example
+index 0988879..9044a8f 100644
+--- a/.env.example
++++ b/.env.example
+@@ -11,7 +11,10 @@ OPENPLANNER_API_KEY=change-me
+ OPENPLANNER_STORAGE_BACKEND=duckdb
+ 
+ # MongoDB configuration (when STORAGE_BACKEND=mongodb)
+-MONGODB_URI=mongodb://localhost:27017
++# Host-side SDK access; Compose application containers use the separate service URI.
++MONGODB_URI=mongodb://localhost:27017/?directConnection=true
++# Override this separately when Compose should use an external MongoDB cluster.
++COMPOSE_MONGODB_URI=mongodb://mongodb:27017/?replicaSet=openplanner
+ MONGODB_DB=openplanner
+ MONGODB_EVENTS_COLLECTION=events
+ MONGODB_COMPACTED_COLLECTION=compacted_memories
+@@ -36,4 +39,4 @@ OLLAMA_EMBED_MODEL=qwen3-embedding:0.6b
+ # Scope overrides (supports either JSON or key=value pairs separated by ';' or ',')
+ # OLLAMA_EMBED_MODEL_BY_SOURCE={"chatgpt-export":"qwen3-embedding:4b"}
+ # OLLAMA_EMBED_MODEL_BY_KIND=message=qwen3-embedding:0.6b
+-# OLLAMA_EMBED_MODEL_BY_PROJECT=chatgpt=qwen3-embedding:4b
+\ No newline at end of file
++# OLLAMA_EMBED_MODEL_BY_PROJECT=chatgpt=qwen3-embedding:4b
+diff --git a/.github/workflows/eta-mu-review.yml b/.github/workflows/eta-mu-review.yml
+new file mode 100644
+index 0000000..28f5467
+--- /dev/null
++++ b/.github/workflows/eta-mu-review.yml
+@@ -0,0 +1,30 @@
++# SPDX-License-Identifier: GPL-3.0-or-later
++name: eta-mu evidence review
++
++on:
++  pull_request:
++    types: [opened, synchronize, reopened, ready_for_review]
++
++permissions:
++  contents: read
++  pull-requests: read
++
++jobs:
++  review:
++    name: Evidence-first review (eta-mu)
++    uses: riatzukiza/eta-mu/.github/workflows/opencode-code-review.yml@e4fb01ff056f9ac823b2b9659e6bc25ac7fea1f2
++    with:
++      pr_head_sha: ${{ github.event.pull_request.head.sha }}
++      model: opencode/mimo-v2.6-flash-free
++      review_timeout_minutes: 120
++      muse_revision: a9a62f0d509056406f3dd7d8c86a13551be168cd
++      agents_revision: face3009a8dfb6f355acad467fd288100e49c0ba
++      opencode_version: 1.18.31
++      node_version: "22.20.0"
++      setup_eta_mu_toolchain: false
++      evidence_gates_script: |
++        run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
++        run_gate diff_hygiene git diff --check "${PR_BASE_SHA}...HEAD"
++    secrets:
++      ETA_MU_APP_ID: ${{ secrets.ETA_MU_APP_ID }}
++      ETA_MU_APP_PRIVATE_KEY: ${{ secrets.ETA_MU_APP_PRIVATE_KEY }}
+diff --git a/.github/workflows/scoped-graph-recall.yml b/.github/workflows/scoped-graph-recall.yml
+new file mode 100644
+index 0000000..9ed7eb2
+--- /dev/null
++++ b/.github/workflows/scoped-graph-recall.yml
+@@ -0,0 +1,99 @@
++# SPDX-License-Identifier: GPL-3.0-or-later
++name: Scoped graph recall verification
++
++on:
++  pull_request:
++    types: [opened, synchronize, reopened, ready_for_review]
++  workflow_dispatch:
++
++permissions:
++  contents: read
++
++jobs:
++  verify:
++    runs-on: ubuntu-24.04
++    timeout-minutes: 30
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
++        with:
++          ref: ${{ github.event.pull_request.head.sha || github.sha }}
++          fetch-depth: 0
++          persist-credentials: false
++      - name: Verify selected checkout
++        env:
++          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
++        run: |
++          actual_head="$(git rev-parse HEAD)"
++          if [ "$actual_head" != "$EXPECTED_HEAD" ]; then
++            echo "::error::Checkout does not match the selected head" >&2
++            exit 1
++          fi
++          echo "Verified exact checkout: $actual_head"
++      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
++        with:
++          distribution: temurin
++          java-version: "21"
++      - uses: DeLaGuardo/setup-clojure@6d46099eae24853c33c0482f2bb54edf4f1a4c74 # 13
++        with:
++          cli: "1.12.2.1565"
++          clj-kondo: "2025.07.28"
++      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
++        with:
++          version: "10.11.0"
++      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
++        with:
++          node-version: "22.20.0"
++      - name: Install the four bounded dependency packages
++        run: pnpm --dir packages --filter @open-hax/openplanner-sdk... --filter @open-hax/openplanner-graph-claim-core... install --frozen-lockfile
++      - name: Build and test the imported cache
++        working-directory: packages/stores/cache
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-cache-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-cache-release.log"
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-cache-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-cache-test-compile.log"
++          node target/test.cjs 2>&1 | tee "$RUNNER_TEMP/bounded-cache-test.log"
++          grep -Eq '^0 failures, 0 errors\.$' "$RUNNER_TEMP/bounded-cache-test.log"
++      - name: Build and test the imported hydration library
++        working-directory: packages/stores/document-hydration
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-hydration-release.log"
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/bounded-hydration-test-compile.log"
++          node target/test.cjs 2>&1 | tee "$RUNNER_TEMP/bounded-hydration-test.log"
++          grep -Eq '^0 failures, 0 errors\.$' "$RUNNER_TEMP/bounded-hydration-test.log"
++      - name: Build the imported SDK and import its released exports
++        run: |
++          set -euo pipefail
++          pnpm --dir packages --filter @open-hax/openplanner-sdk build
++          pnpm --dir packages --filter @open-hax/openplanner-sdk test
++          pnpm --dir packages --filter @open-hax/openplanner-sdk exec node --input-type=module -e 'import("./dist/index.js").then(m => { if (typeof m.createOpenPlannerSdk !== "function") throw new Error("missing SDK entry point"); })'
++      - name: Actual documented Mongo transaction fixture
++        # Starts only a uniquely owned disposable Mongo fixture; no application runtime.
++        run: |
++          docker pull mongo:7
++          node packages/openplanner-sdk/scripts/verify-compose-mongo.mjs
++      - name: Portable recall laws
++        working-directory: packages/graph/graph-claim-core
++        run: clojure -M:recall-test
++      - name: Changed recall namespace lint
++        working-directory: packages/graph/graph-claim-core
++        run: clj-kondo --lint src/openplanner/graph/recall test/openplanner/graph/recall
++      - name: Actual Node suites and forced assertion failure
++        working-directory: packages/graph/graph-claim-core
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs compile test --force-spawn 2>&1 | tee "$RUNNER_TEMP/scoped-recall-test-compile.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/scoped-recall-test-compile.log"
++          node scripts/verify-recall-test-exit.mjs
++      - name: Released ESM and runnable scoped recall demonstration
++        working-directory: packages/graph/graph-claim-core
++        run: |
++          set -euo pipefail
++          pnpm exec shadow-cljs release lib --force-spawn 2>&1 | tee "$RUNNER_TEMP/scoped-recall-release.log"
++          grep -Eq 'Build completed\..* 0 warnings[,)]' "$RUNNER_TEMP/scoped-recall-release.log"
++          node scripts/verify-scoped-recall.mjs
++          node scripts/verify-sdk-query-format.mjs
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..e530707
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,58 @@
++# Build artifacts
++dist/
++dist.root-owned.*/
++*.tsbuildinfo
++*.tsbuildinfo.*
++
++# Coverage reports (regenerable)
++coverage/
++
++# Duplication scan reports (regenerable)
++reports/jscpd/
++
++# Public renderer (CLJS build output)
++public/renderer/
++
++# Dependencies
++node_modules/
++
++# Local credentials; the public .env.example template remains tracked.
++.env
++
++# Data lake / database artifacts (regenerable)
++openplanner-lake/
++
++# Editor / LSP caches
++.clj-kondo/*
++!.clj-kondo/config.edn
++.cpcache/
++.shadow-cljs/
++.lsp/
++
++# CLJS build output
++.target/
++target/
++.shadow-cljs/
++
++# Vite cache
++.vite/
++.vite-vitest/
++
++# LevelDB / local DB artifacts (regenerable)
++.reconstitute/
++
++# Package lock files in nested repos (root lock is canonical)
++package-lock.json
++
++# Backup / scratch files
++*.bak
++*.backup
++.projectile
++
++# OS
++.DS_Store
++
++# Generated, hash-verified artifacts from the reusable review workflow.
++# Tracked source is still checked; these directories contain no source inputs.
++/.review-context/
++/.opencode/review-evidence/
+diff --git "a/.\316\267\316\274/review-evidence/cephalon-character/bounded-additional-repair-evidence-20261010.json" "b/.\316\267\316\274/review-evidence/cephalon-character/bounded-additional-repair-evidence-20261010.json"

@@ -11,6 +11,11 @@
 (def ^:dynamic *fixture-root* root)
 (defn read-bytes [file] (.readFileSync fs (str *fixture-root* file)))
 (defn read-json [file] (extern/strict-json (.toString (read-bytes file) "utf8")))
+(def delivered-root ".ημ/review-evidence/delivered-assessment-implementation-20261017/")
+(defn historical-source [file]
+  (let [snapshot (extern/strict-json
+                   (.readFileSync fs (str delivered-root "prior-source-snapshot.json") "utf8"))]
+    (get-in snapshot [:files (keyword file) :text])))
 (defn data
   ([] (data "proof.json" "native.jsonl"))
   ([proof-file native-file]
@@ -46,6 +51,102 @@
     (is (= before (mapv #(wire/sha256 (read-bytes %)) ["native.jsonl" "submission.json" "input.diff"])))
     (is (true? (get-in proof [:capture :canonicalBeforeAfterEqualityActuallyAsserted])))))
 
+(deftest current-delivered-protocol-has-actual-native-and-source-custody
+  (binding [*fixture-root* delivered-root]
+    (let [{:keys [proof context]} (data)
+          result (js->clj (extern/verify-review-invocation (read-bytes "native.jsonl")
+                                                          (read-bytes "submission.json") context)
+                         :keywordize-keys true)
+          witnesses (:pageWitnesses result)]
+      (is (:ok result))
+      (is (= 2 (:pageCount result)))
+      (is (= 9 (:reviewCallCount result)))
+      (is (= 4 (count witnesses)))
+      (is (= [1 2] (:members (last witnesses))))
+      (is (= "review_assess_delivered_diff_batch" (:tool (last witnesses))))
+      (is (= ["owned-native-batch-1" "owned-native-batch-2"]
+             (vec (distinct (map :call-id witnesses)))))
+      (is (true? (get-in proof [:capture :canonicalBeforeAfterEqualityActuallyAsserted])))
+      (doseq [[file digest] (:evidenceSHA256 proof)]
+        (is (= digest (wire/sha256 (read-bytes (name file))))))
+      (doseq [[file digest] (:sourceFiles proof)]
+        (let [file (subs (str file) 1)]
+          (is (= digest (wire/sha256 (.readFileSync fs file))) file))))))
+
+(deftest delivered-native-wire-arguments-and-source-do-not-grant-their-own-custody
+  (binding [*fixture-root* delivered-root]
+    (let [{:keys [proof context events submission]} (data)
+          r (dec (:position (first (filter #(= "review_read_diff_batch" (:tool %)) (:actualCalls proof)))))
+          a (dec (:position (first (filter #(= "review_assess_delivered_diff_batch" (:tool %)) (:actualCalls proof)))))
+          cases {"old strict tool cannot reinterpret id/note" (assoc-in events [a :part :tool] "review_assess_diff_batch")
+                 "unknown root" (assoc-in events [a :part :state :input :profile] "foreign")
+                 "unknown member" (assoc-in events [a :part :state :input :assessments 0 :sha256] "copied")
+                 "unprepared page" (assoc-in events [a :part :state :input :assessments 0 :id] 99)
+                 "duplicate member" (assoc-in events [a :part :state :input :assessments 1 :id] 1)
+                 "null note" (assoc-in events [a :part :state :input :assessments 0 :note] nil)
+                 "numeric note" (assoc-in events [a :part :state :input :assessments 0 :note] 42)
+                 "omitted final page" (update-in events [a :part :state :input :assessments] pop)
+                 "changed source bytes" (change-output events r #(update-in % [:chunks 0 :text] (fn [s] (str "X" (subs s 1)))))
+                 "forged source hash" (change-output events r #(assoc-in % [:custody :source_sha256] (apply str (repeat 64 "0"))))
+                 "wrong returned membership" (change-output events a #(assoc % :chunk-ids [1]))
+                 "clipped native read" (assoc-in events [r :part :state :metadata :truncated] true)}]
+      (doseq [[label edited] cases]
+        (testing (str label " — explicitly edited negative data, no native credit")
+          (let [result (verdict edited submission context)]
+            (is (false? (:ok result)))
+            (is (nil? (:acceptedInvocation result))))))
+      (doseq [note [(str (apply str (repeat 512 "😀")) "x") (apply str (repeat 2048 "\u0000"))]]
+        (let [edited (update-in events [a :part :state :input :assessments]
+                                #(mapv (fn [m] (assoc m :note note)) %))
+              matching (update submission :input-assessments #(mapv (fn [m] (assoc m :note note)) %))
+              result (verdict edited matching context)]
+          (is (= "structured-input-unestablished" (:code result)))
+          (is (nil? (:acceptedInvocation result))))))))
+
+(deftest actual-mixed-reads-and-final-single-page-batch-retain-eight-relations
+  (binding [*fixture-root* (str delivered-root "mixed/")]
+    (let [{:keys [proof context]} (data)
+          result (js->clj (extern/verify-review-invocation (read-bytes "native.jsonl")
+                                                          (read-bytes "submission.json") context)
+                         :keywordize-keys true)
+          witnesses (:pageWitnesses result)]
+      (is (:ok result))
+      (is (= 4 (:pageCount result)))
+      (is (= 12 (:reviewCallCount result)))
+      (is (= 8 (count witnesses)))
+      (is (= [1] (:members (first witnesses))))
+      (is (= [2 3] (:members (second witnesses))))
+      (is (= [4] (:members (last witnesses))))
+      (is (= [1 2 3 4] (mapv :id (filter #(= "assessment" (:kind %)) witnesses))))
+      (is (= (get-in proof [:stdout :sha256]) (wire/sha256 (read-bytes "native.jsonl"))))
+      (doseq [[file digest] (:evidenceSHA256 proof)]
+        (is (= digest (wire/sha256 (read-bytes (name file)))))))))
+
+(deftest actual-native-unassessed-tail-refusal-remains-a-failed-fixture-attempt
+  (binding [*fixture-root* (str delivered-root "unassessed-tail-negative/")]
+    (let [proof (read-json "proof.json")
+          file (:submissionFile proof)
+          context (extern/prepare-review-invocation-context
+                    (read-bytes "input.diff") (read-bytes "input-manifest.json")
+                    (clj->js (get-in proof [:source :tools])) file nil
+                    (str (subs file 0 (- (count file) (count "submission.json"))) "pr-context.md"))
+          _ (aset context "batchHost" (clj->js (:expectedHost proof)))
+          result (js->clj (extern/verify-review-invocation (read-bytes "native.jsonl") nil context)
+                         :keywordize-keys true)
+          events (mapv extern/strict-json (str/split-lines (.toString (read-bytes "native.jsonl") "utf8")))
+          calls (filterv #(= "tool_use" (:type %)) events)
+          last-result (extern/strict-json (get-in (last calls) [:part :state :output]))]
+      (is (= 6 (.-pageCount context)))
+      (is (= 7 (count calls)))
+      (is (false? (:ok? last-result)))
+      (is (str/includes? (:error last-result) "Unassessed full-input chunks remain: 5, 6"))
+      (is (not-any? #(= "review_submit" (get-in % [:part :tool])) calls))
+      (is (false? (:ok result)))
+      (is (nil? (:acceptedInvocation result)))
+      (is (= (:independentRefusal proof) result))
+      (doseq [[file digest] (:evidenceSHA256 proof)]
+        (is (= digest (wire/sha256 (read-bytes (name file)))))))))
+
 (deftest retained-prior-exact-source-reverification-stays-historical-data
   (binding [*fixture-root* (str root "review-fixes/")]
     (let [{:keys [proof context]} (data)
@@ -68,7 +169,7 @@
       (is (= 2 (:pageCount result)))
       (is (= 9 (:reviewCallCount result))))))
 
-(deftest current-beginawait-producer-native-wire-and-complete-source-binding
+(deftest retained-beginawait-producer-native-wire-and-frozen-source-binding
   (binding [*fixture-root* (str root "review-fixes/")]
     (let [{:keys [proof context]} (data "beginawait-proof.json" "beginawait-native.jsonl")
           prior (read-json "proof.json")
@@ -90,7 +191,7 @@
           (is (= digest (wire/sha256 (read-bytes file))) file)))
       (doseq [[file digest] (:sourceFiles proof)]
         (let [file (if (keyword? file) (subs (str file) 1) file)]
-          (is (= digest (wire/sha256 (.readFileSync fs file))) file))))))
+          (is (= digest (wire/sha256 (historical-source file))) file))))))
 
 (deftest retained-postawait-native-transcript-remains-authentic-compatible-data
   (binding [*fixture-root* (str root "review-fixes/")]
@@ -108,7 +209,7 @@
       (is (= 3 (count (:cases proof))))
       (doseq [[file digest] (:sourceFiles proof)]
         (let [file (if (keyword? file) (subs (str file) 1) file)]
-          (is (= digest (wire/sha256 (.readFileSync fs file))) file)))
+          (is (= digest (wire/sha256 (historical-source file))) file)))
       (doseq [{:keys [mode nativeFile stdout submissionFile expectedHost actualCalls]} (:cases proof)]
         (let [raw (read-bytes nativeFile)
               events (mapv extern/strict-json (str/split-lines (.toString raw "utf8")))

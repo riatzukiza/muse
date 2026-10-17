@@ -12,7 +12,8 @@
                     "review_propose_finding" "review_classify_finding"
                     "review_status" "review_submit"})
 
-(def batch-tools #{"review_read_diff_batch" "review_assess_diff_batch"})
+(def batch-assessment-tools #{"review_assess_diff_batch" "review_assess_delivered_diff_batch"})
+(def batch-tools (conj batch-assessment-tools "review_read_diff_batch"))
 (def all-review-tools (into review-tools batch-tools))
 
 (def host-tools
@@ -83,7 +84,8 @@
       :else nil))))
 
 (defn- read-call? [c] (contains? #{"review_read_diff_chunk" "review_read_diff_batch"} (tool c)))
-(defn- assessment-call? [c] (contains? #{"review_assess_diff_chunk" "review_assess_diff_batch"} (tool c)))
+(defn- assessment-call? [c]
+  (or (= "review_assess_diff_chunk" (tool c)) (contains? batch-assessment-tools (tool c))))
 
 (defn- attempted-ids [c]
   (let [args (input c)]
@@ -92,14 +94,15 @@
       "review_assess_diff_chunk" [(:id args)]
       "review_read_diff_batch" (if (batch/read-valid? args)
                                  (vec (range (:first-id args) (+ (:first-id args) (:count args)))) [])
-      "review_assess_diff_batch" (if (vector? (:assessments args)) (mapv :id (:assessments args)) [])
+      ("review_assess_diff_batch" "review_assess_delivered_diff_batch")
+      (if (vector? (:assessments args)) (mapv :id (:assessments args)) [])
       [])))
 
 (defn- delivered-ids [c]
   (if (= "review_read_diff_batch" (tool c)) (get-in (output c) [:batch :ids]) (attempted-ids c)))
 
 (defn- assessment-notes [c]
-  (if (= "review_assess_diff_batch" (tool c)) (:assessments (input c))
+  (if (contains? batch-assessment-tools (tool c)) (:assessments (input c))
       [{:id (:id (input c)) :note (:note (input c))}]))
 
 (defn- coverage-valid? [coverage pages]
@@ -112,19 +115,25 @@
 (defn- batch-call-error [c {:keys [pages input-source batch-host]}]
   (let [args (input c) result (output c) page-by-id (into {} (map (juxt :id identity) pages))
         read? (= "review_read_diff_batch" (tool c))
+        delivered? (= "review_assess_delivered_diff_batch" (tool c))
         ids (if read? (get-in result [:batch :ids]) (attempted-ids c))
         source (select-keys input-source [:base_sha :head_sha :diff_base_sha :full_diff])]
     (cond
       (not (batch/qualified-host? batch-host)) :batch-host-unestablished
-      (if read? (not (batch/read-valid? args)) (not (batch/assess-valid? args))) :batch-input-shape
-      (and (not read?) (or (not= batch/profile (:profile args))
-                                  (not= (get-in source [:full_diff :sha256]) (:source_sha256 args))
-                                  (not= (count ids) (count (set ids)))
-                                  (not= ids (vec (sort ids)))
-                                  (some #(not (and (nonblank? (:note %))
-                                                   (= (select-keys % [:id :start :end :sha256])
-                                                      (select-keys (page-by-id (:id %)) [:id :start :end :sha256]))))
-                                        (:assessments args)))) :batch-assessment-binding
+      (not ((cond read? batch/read-valid?
+                  delivered? batch/delivered-assess-valid?
+                  :else batch/assess-valid?) args)) :batch-input-shape
+      (and (not read?)
+           (or (not= (count ids) (count (set ids)))
+               (not= ids (vec (sort ids)))
+               (some #(not (contains? page-by-id %)) ids)
+               (some #(not (nonblank? (:note %))) (:assessments args))
+               (and (not delivered?)
+                    (or (not= batch/profile (:profile args))
+                        (not= (get-in source [:full_diff :sha256]) (:source_sha256 args))
+                        (some #(not= (select-keys % [:id :start :end :sha256])
+                                     (select-keys (page-by-id (:id %)) [:id :start :end :sha256]))
+                              (:assessments args)))))) :batch-assessment-binding
       (not (success? c)) nil
       (not (false? (:restart-required? result))) :batch-success-shape
       (not (coverage-valid? (:coverage result) pages)) :batch-coverage-binding

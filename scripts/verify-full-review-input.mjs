@@ -67,7 +67,7 @@ if (process.argv[2] === '--fresh-invocation') {
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'muse-full-review-'));
 const tools = ['review_begin', 'review_read_diff_chunk', 'review_assess_diff_chunk',
-  'review_read_diff_batch', 'review_assess_diff_batch',
+  'review_read_diff_batch', 'review_assess_diff_batch', 'review_assess_delivered_diff_batch',
   'review_record_evidence', 'review_propose_finding', 'review_classify_finding', 'review_status', 'review_submit'];
 try {
   const checkout = path.join(fixture, 'checkout');
