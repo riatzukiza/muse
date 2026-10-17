@@ -420,3 +420,12 @@
   spore: none
   receipt-refs: b7d428637faf4e7d49ea60b5e9f2bead758900680ceced9767a0545e35b0e9fa
   note: Semantic assertion failure and process-custody qualification are separate. Preserve a failed generic cleanup boundary, then reuse the existing owned-namespace reap protocol with exact source/module/fixture evidence. No spore.
+- ts: 2026-10-17T18:11:57.518146206Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Keep throw controls at the actual public boundary before catch helpers
+  p-efficiency: 0.78
+  p-friction: 0.36
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: ec3720c404da74b498c6a323fa088c7e6f445f750d2f096d3174ebb2873ef0f7
+  note: An existing preparation helper intentionally converts errors to nil and cannot serve a thrown assertion. Preserve actual public-boundary negative expectations and historical failure counts when repairing the test callsite. No spore.
