@@ -1,0 +1,123 @@
+{
+  "started": "2026-10-17T05:56:11.475507+00:00",
+  "stagedPaths": [
+    ".\u03b7\u03bc/plugins/review_pipeline.cljs",
+    "src/cljs/eta_mu/domain/review.cljc",
+    "src/cljs/eta_mu/extern/review_batch.cljs",
+    "src/cljs/eta_mu/extern/review_invocation.cljs",
+    "src/cljs/eta_mu/infra/review_pipeline.cljs",
+    "src/cljs/eta_mu/law/review_invocation.cljc",
+    "src/cljs/eta_mu/shape/review_batch.cljc",
+    "test/cljs/eta_mu/law/review_delivered_batch_test.cljs",
+    "test/cljs/eta_mu/extern/review_batch_wire_test.cljs",
+    "test/cljs/eta_mu/extern/review_batch_native_test.cljs",
+    "scripts/verify-full-review-input.mjs",
+    ".\u03b7\u03bc/review-evidence/delivered-assessment-implementation-20261017/native.jsonl",
+    ".\u03b7\u03bc/review-evidence/delivered-assessment-implementation-20261017/submission.json",
+    ".\u03b7\u03bc/review-evidence/delivered-assessment-implementation-20261017/input.diff",
+    ".\u03b7\u03bc/review-evidence/delivered-assessment-implementation-20261017/input-manifest.json",
+    ".\u03b7\u03bc/review-evidence/delivered-assessment-implementation-20261017/proof.json",
+    ".\u03b7\u03bc/review-evidence/delivered-assessment-implementation-20261017/prior-source-snapshot.json"
+  ],
+  "frozenSHA256": "c89f700130fb0d977138c13597cf2b650bc7aea1f3620d1b1d0cad3bb75b4248",
+  "gates": [
+    {
+      "label": "lint",
+      "command": [
+        "clj-kondo",
+        "--lint",
+        "src/cljs",
+        "src/clj",
+        "test/cljs",
+        ".\u03b7\u03bc",
+        "--fail-level",
+        "warning"
+      ],
+      "exit": 0,
+      "sha256": "7514adc39dbc49c3e353885e5849496505767a012761610b78627fc55318ed2f",
+      "bytes": 44
+    },
+    {
+      "label": "test-compile",
+      "command": [
+        "/home/err/spaces/cephalon-muse-delivery-custody/muse/node_modules/.bin/shadow-cljs",
+        "--force-spawn",
+        "compile",
+        "test"
+      ],
+      "exit": 0,
+      "sha256": "12680e0256c9936dcf48c175ffcbd4be498585bdfedbc67dff6050723be2908f",
+      "bytes": 284
+    },
+    {
+      "label": "test",
+      "command": [
+        "node",
+        "target/test/test.cjs"
+      ],
+      "exit": 0,
+      "sha256": "4eedf889a901af917469b0c445cfbfde48f07ff7e80a0b7726148f3415dcc1e8",
+      "bytes": 1743
+    },
+    {
+      "label": "prebuild",
+      "command": [
+        "npm",
+        "run",
+        "prebuild"
+      ],
+      "exit": 0,
+      "sha256": "e0e985d70272018dbc2720c9fca01e571c66af3fac46177a5735a51711ac395b",
+      "bytes": 274
+    },
+    {
+      "label": "build",
+      "command": [
+        "/home/err/spaces/cephalon-muse-delivery-custody/muse/node_modules/.bin/shadow-cljs",
+        "--force-spawn",
+        "release",
+        "daemon",
+        "opencode-plugin",
+        "mcp-server",
+        "claude-server",
+        "review-invocation"
+      ],
+      "exit": 0,
+      "sha256": "2bf6f658dbcdc4a438d50255b14b6568fa63a5c6793509e7330bd195e7292aae",
+      "bytes": 729
+    },
+    {
+      "label": "claude-hook",
+      "command": [
+        "node",
+        ".claude/dist/claude-server.js",
+        "--emit-hook-config"
+      ],
+      "exit": 0,
+      "sha256": "84d08647ec613d36f1efbca4e131ca86006990e6c860e78ea6469b4f5cda2fa9",
+      "bytes": 66
+    },
+    {
+      "label": "cold-hosts",
+      "command": [
+        "npm",
+        "run",
+        "test:build-cold"
+      ],
+      "exit": 0,
+      "sha256": "9958ac935826ccbd3210dad7fafc60f3065c0faa520f4e5fe0741e00ad7e74a2",
+      "bytes": 2915
+    },
+    {
+      "label": "compiled-review-input",
+      "command": [
+        "npm",
+        "run",
+        "test:review-input"
+      ],
+      "exit": 0,
+      "sha256": "178a0b49465f7fb71f5a34dc06efb24f213a3f1cc20d63bac8efbbe6775f94fd",
+      "bytes": 1913
+    }
+  ]
+}

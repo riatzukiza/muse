@@ -13,6 +13,7 @@
 (def registry
   {::digest [:re "^[0-9a-f]{64}$"]
    ::id [:int {:min 1 :max 9007199254740991}]
+   ::note [:string {:min 1}]
    ::host [:map {:closed true}
            [:binary-sha256 [:ref ::digest]]
            [:config-sha256 [:ref ::digest]]
@@ -22,16 +23,22 @@
            [:count [:int {:min 1 :max 4}]]] 
    ::assessment [:map {:closed true} [:id [:ref ::id]]
                  [:start [:int {:min 0}]] [:end [:int {:min 1}]]
-                 [:sha256 [:ref ::digest]] [:note [:string {:min 1}]]]
+                 [:sha256 [:ref ::digest]] [:note [:ref ::note]]]
    ::assess [:map {:closed true} [:profile [:= profile]]
              [:source_sha256 [:ref ::digest]]
-             [:assessments [:vector {:min 1 :max 4} [:ref ::assessment]]]]})
+             [:assessments [:vector {:min 1 :max 4} [:ref ::assessment]]]]
+   ::delivered-assessment [:map {:closed true} [:id [:ref ::id]]
+                           [:note [:ref ::note]]]
+   ::assess-delivered [:map {:closed true}
+                       [:assessments [:vector {:min 1 :max 4}
+                                      [:ref ::delivered-assessment]]]]})
 
 (defn- validator [key]
   (m/validator [:ref key] {:registry (merge (m/default-schemas) registry)}))
 (def host-valid? (validator ::host))
 (def read-valid? (validator ::read))
 (def assess-valid? (validator ::assess))
+(def delivered-assess-valid? (validator ::assess-delivered))
 
 (defn qualified-host? [host]
   (and (host-valid? host) (= host-binary-sha256 (:binary-sha256 host))
@@ -54,12 +61,23 @@
 (defn host-matches? [expected observed]
   (and (qualified-host? expected) (qualified-host? observed) (= expected observed)))
 
-(defn assessment-shape?
-  "Measurements are supplied by the wire boundary, never trusted model args."
+(defn- assessment-measurements-fit?
   [request bytes note-bytes]
-  (and (assess-valid? request) (nat-int? bytes) (<= bytes (:request-bytes limits))
+  (and (nat-int? bytes) (<= bytes (:request-bytes limits))
        (= (count (:assessments request)) (count note-bytes))
        (every? #(and (nat-int? %) (<= % (:note-bytes limits))) note-bytes)
        (every? #(not (str/blank? (:note %))) (:assessments request))
        (let [ids (mapv :id (:assessments request))]
          (and (= ids (vec (sort ids))) (= (count ids) (count (set ids)))))))
+
+(defn assessment-shape?
+  "Measurements are supplied by the wire boundary, never trusted model args."
+  [request bytes note-bytes]
+  (and (assess-valid? request)
+       (assessment-measurements-fit? request bytes note-bytes)))
+
+(defn delivered-assessment-shape?
+  "Separate closed id/note grammar; no missing strict metadata is repaired."
+  [request bytes note-bytes]
+  (and (delivered-assess-valid? request)
+       (assessment-measurements-fit? request bytes note-bytes)))

@@ -110,9 +110,11 @@
          (batch/profile-fits? {:bytes (bytes session) :json-bytes (bytes (encode session))
                                :nonblank? (not (str/blank? session))}
                               (bytes (encode fields)))
-         (or (not= name "review_assess_diff_batch")
-             (batch/assessment-shape? args (bytes (encode args))
-                                     (mapv #(bytes (:note %)) (:assessments args)))))))
+         (or (not (contains? law/batch-assessment-tools name))
+             (let [{:keys [bytes note-bytes]} (batch-wire/assessment-measurement args)
+                   shape? (if (= name "review_assess_delivered_diff_batch")
+                            batch/delivered-assessment-shape? batch/assessment-shape?)]
+               (shape? args bytes note-bytes))))))
 
 (defn prepare-review-batch-host
   "Supervisor API: actual selected executable path, raw resolved config JSON,

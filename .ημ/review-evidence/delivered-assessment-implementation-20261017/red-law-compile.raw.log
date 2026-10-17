@@ -1,0 +1,6 @@
+shadow-cljs - config: /home/err/spaces/cephalon-muse-delivery-custody/muse/shadow-cljs.edn
+shadow-cljs - starting via "clojure"
+Picked up JAVA_TOOL_OPTIONS: -Xmx1536m -XX:ActiveProcessorCount=2
+Picked up JAVA_TOOL_OPTIONS: -Xmx1536m -XX:ActiveProcessorCount=2
+[:test] Compiling ...
+[:test] Build completed. (74 files, 73 compiled, 0 warnings, 5.89s)

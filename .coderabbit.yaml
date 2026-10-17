@@ -1,0 +1,6 @@
+# Raw process logs are part of the committed review evidence.
+# This exact default override retains every other default filter and input.
+# https://docs.coderabbit.ai/configuration/path-instructions#default-ignored-paths
+reviews:
+  path_filters:
+    - "**/*.log"

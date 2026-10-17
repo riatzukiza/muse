@@ -1,0 +1,10 @@
+▶ build-gate: pnpm build
+ WARN  Issue while reading "/home/err/.npmrc". Failed to replace env in config: ${NPM_TOKEN}
+shadow-cljs - config: /home/err/spaces/cephalon-muse-delivery-custody/muse/shadow-cljs.edn
+shadow-cljs - starting via "clojure"
+▶ build-gate: pnpm lint
+ WARN  Issue while reading "/home/err/.npmrc". Failed to replace env in config: ${NPM_TOKEN}
+▶ build-gate: pnpm test
+ WARN  Issue while reading "/home/err/.npmrc". Failed to replace env in config: ${NPM_TOKEN}
+shadow-cljs - config: /home/err/spaces/cephalon-muse-delivery-custody/muse/shadow-cljs.edn
+shadow-cljs - starting via "clojure"

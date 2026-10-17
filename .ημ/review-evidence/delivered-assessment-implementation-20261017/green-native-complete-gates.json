@@ -1,0 +1,21 @@
+{
+  "started": "2026-10-17T06:05:57.342208+00:00",
+  "additionalScope": "final actual mixed/final-single-page native captures and actual unassessed-tail refusal",
+  "gates": [
+    {
+      "label": "compile",
+      "exit": 0,
+      "sha256": "6c73ae8f34392388a095fb209a8e954fe779db32319928bae5f4c33f7231f426"
+    },
+    {
+      "label": "test",
+      "exit": 0,
+      "sha256": "31e91024c300f3daf6d86ae31095038201b8f1fb5febfa66597fc65f4a55f66a"
+    },
+    {
+      "label": "lint",
+      "exit": 0,
+      "sha256": "90bf14216270841562322d94f3dd26ccf792f2486ebbdf4ba5179cfeb6a57056"
+    }
+  ]
+}

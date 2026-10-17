@@ -59,14 +59,16 @@
            (let [name (get-in c [:part :tool])
                  kind (case name
                         ("review_read_diff_chunk" "review_read_diff_batch") :read
-                        ("review_assess_diff_chunk" "review_assess_diff_batch") :assessment
+                        ("review_assess_diff_chunk" "review_assess_diff_batch"
+                         "review_assess_delivered_diff_batch") :assessment
                         nil)
                  args (get-in c [:part :state :input])
                  result (get-in c [:part :state :output])]
              (when (and (= "tool_use" (:type c)) kind (true? (:ok? result)))
                (let [members (case name
                                "review_read_diff_batch" (get-in result [:batch :ids])
-                               "review_assess_diff_batch" (mapv :id (:assessments args))
+                               ("review_assess_diff_batch" "review_assess_delivered_diff_batch")
+                               (mapv :id (:assessments args))
                                [(:id args)])]
                  (mapv (fn [id] {:id id :kind kind
                                  :call-id (get-in c [:part :call-id]) :part-id (get-in c [:part :id])

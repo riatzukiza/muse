@@ -1,0 +1,59 @@
+{
+  "schema": "open-hax.github-review/v1",
+  "context-protocol": "open-hax.review-context/v1",
+  "comments": [],
+  "input-coverage": {
+    "chunks": 4,
+    "delivered": 4,
+    "assessed": 4,
+    "missing": []
+  },
+  "input-source": {
+    "schema": "open-hax.review-input/v1",
+    "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "head_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "diff_base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "full_diff": {
+      "path": "basehead.diff",
+      "bytes": 20732,
+      "sha256": "029b3a0b9e39efeae6fe3472785e87cc82e6b2e72634a91c17bb3d701d6f5998"
+    },
+    "provenance": {
+      "repository": "synthetic/owned-real-prefix-test",
+      "pull_request": "1",
+      "run_id": "1",
+      "run_attempt": "1",
+      "workflow_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "workflow_ref": "synthetic/owned-real-prefix-test/local"
+    }
+  },
+  "context-source": null,
+  "summary": "Scripted four-page mixed/final-batch diagnostic only. No real review or publication.",
+  "event": "APPROVE",
+  "input-assessments": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 4882,
+      "note": "Scripted mixed-read diagnostic for original page 1; no semantic judgment."
+    },
+    {
+      "id": 2,
+      "start": 4882,
+      "end": 10366,
+      "note": "Scripted mixed-read diagnostic for original page 2; no semantic judgment."
+    },
+    {
+      "id": 3,
+      "start": 10366,
+      "end": 15248,
+      "note": "Scripted mixed-read diagnostic for original page 3; no semantic judgment."
+    },
+    {
+      "id": 4,
+      "start": 15248,
+      "end": 20732,
+      "note": "Scripted mixed-read diagnostic for original page 4; no semantic judgment."
+    }
+  ]
+}
