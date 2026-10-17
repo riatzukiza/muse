@@ -745,3 +745,13 @@
   spore: none
   receipt-refs: cephalon-muse-delivered-assessment-plan-20261017
   note: Actual consumer failures expose redundant model metadata copying. New primary Incoming card proposes3points and explicit predecessor/current-profile compatibility plus coupled real-native verification. No implementation, nativeReady/Done/boardvalidation/adopted aggregate or guaranteed throughput. Existing strict copied-metadata requests remain strict. Source qualification then owningETA exposure/prompt/pins and actual full150-input OpenPlanner review still required. Preserve both native refusals and all receipt/reflection/raw prefixes; no third unchanged92 invocation. HumanPAUSEDheartbeat/live0of3; no paid/model/credential/runtime/continuation/timeout/deployment/spore change.
+
+- ts: 2026-10-17T04:16:29.364Z
+  session: /home/err/spaces/cephalon-muse-delivery-custody/muse
+  task: cephalon-character-memory/finite-milestone
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: muse13-manifest-journals-correction-20261017
+  note: Initial proposed kindcorrection was rejected by authoritativevalidation before anyappend; use existingdecision kind. NativeCodeRabbit5556086543/root4301309566 verifies omitted twojournalpaths; everyoriginalreceipt byte remains unchanged. This documentary correction identifies all7changedpaths and does not coerce/reinterpret an invalid envelope or claim new runtime tests. Full prior prefixes preserved; no source API/profile/boardstate/runtime/model/paid/credential change.
