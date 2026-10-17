@@ -1160,5 +1160,5 @@
     (doseq [changed [(assoc-in source [:target :thread_id] "PRRT_fake")
                      (assoc-in source [:target :review_id] 0)
                      (assoc-in source [:target :kind] "unknown")]]
-      (is (thrown? js/Error (prepare-native-context "diff" (json changed) tools (:submission-file context)))))
-    (is (thrown? js/Error (prepare-native-context "changed" (json source) tools (:submission-file context))))))
+      (is (thrown? js/Error (extern/prepare-review-invocation-context "diff" (json changed) tools (:submission-file context)))))
+    (is (thrown? js/Error (extern/prepare-review-invocation-context "changed" (json source) tools (:submission-file context))))))
