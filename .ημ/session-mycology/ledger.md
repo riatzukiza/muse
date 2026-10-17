@@ -438,3 +438,12 @@
   spore: none
   receipt-refs: 05915f78c5d70bb83d8cd7b0988a01a5ba33207a4085362af575d6e018e3b8c3
   note: Current native approval raced cancellation safely: preserve it, send no cancellation after terminal, then correct the actual selected old caller rather than claiming later controller main changes the pin. Receipt supplements add complete context without validating historical malformed records. Use existing public receipt authority with explicit repo/pi for every future Muse record. No spore; new-source hosted evidence pending.
+- ts: 2026-10-17T19:39:11.581290985Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-opencode-argument-boundary-plan-over9f-v1
+  task: Plan declared OpenCode argument validation separately from typed-target law
+  p-efficiency: 0.84
+  p-friction: 0.31
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: 71de6572087b0726a8e2ae412c3ad8b7bc5d79b62f2ff46d29f5f0aaae06ca17
+  note: A successful schema declaration alone did not guarantee runtime argument checking. Bind the real compiled/custom-host execution route, preserve strict STOP and original failure, and plan a focused adapter owner before changing source. No spore, product, test, readiness, retry or deployment credit.
