@@ -384,3 +384,57 @@
   spore: none
   receipt-refs: /home/err/.local/share/openhax-codex/20261010/review-state/Muse29-a4d-three-behavioral-and-fixed-DAG-GREEN-v1/root-canonical-receipt-event.edn
   note: Lawvalidatesactualcoveragewithoutshapeimport/expectedmapproducer. Realbegincomponents/viewbound; supportcategorylexicalrefsrestricted; canonicaloriginalhunkspanscarriedacrosspagesandfullreadbinding. Helperalignmentsuseactualownerresults/spanmeta; allfrozenREDassertionspreserved. 216coldartifactfiles20610701bytesretained. Mongoavailability/nativeproducer/authremainunqualified; publicadoption/strictv2nativequalificationunfinished. No newmodelprobe/account/provider/production effects.
+- ts: 2026-10-17T17:09:36.236846354Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Plan typed native review-body input using existing Muse owner before implementation
+  p-efficiency: 0.72
+  p-friction: 0.48
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: 993c18d3cf636f778cf14c799775a57235d3063d02a513f03d57c91a1c3dd29d
+  note: An accepted consumer law can reveal a real upstream transport sum-type gap. Reuse the actual existing owner, preserve thread semantics and distinguish source peer, planning review, readiness and native assessment. No spore.
+- ts: 2026-10-17T17:24:50.588762541Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Tighten planning to same compiled public fixture and explain bounded estimate
+  p-efficiency: 0.74
+  p-friction: 0.35
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: b91cc1a9a2c11565e97404ca0bdbd7778fa641df8d1469e385b8e72da290af75
+  note: A permissive OR in predecessor evidence can miss the intended public boundary. Bind the identical fixture/script and exports across revisions before readiness. No spore.
+- ts: 2026-10-17T17:51:08.836507496Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Qualify actual planning input and readiness before typed body test-only RED
+  p-efficiency: 0.86
+  p-friction: 0.30
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: 293fd6609bd15756c0b166249b2a781a184d32312d7da1fc48994d771d2a8edd
+  note: A planning gate, native board readiness, test-only source and observed semantic RED are separate evidence layers. Preserve compiled fixture identity across revisions and keep upstream/consumer adoption separate. No spore.
+- ts: 2026-10-17T18:03:16.868508030Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Repair a pure typed target using same compiled fixture and normal owned closure
+  p-efficiency: 0.80
+  p-friction: 0.42
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: b7d428637faf4e7d49ea60b5e9f2bead758900680ceced9767a0545e35b0e9fa
+  note: Semantic assertion failure and process-custody qualification are separate. Preserve a failed generic cleanup boundary, then reuse the existing owned-namespace reap protocol with exact source/module/fixture evidence. No spore.
+- ts: 2026-10-17T18:11:57.518146206Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Keep throw controls at the actual public boundary before catch helpers
+  p-efficiency: 0.78
+  p-friction: 0.36
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: ec3720c404da74b498c6a323fa088c7e6f445f750d2f096d3174ebb2873ef0f7
+  note: An existing preparation helper intentionally converts errors to nil and cannot serve a thrown assertion. Preserve actual public-boundary negative expectations and historical failure counts when repairing the test callsite. No spore.
+- ts: 2026-10-17T19:18:14.627516238Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Consume accepted dynamic reviewer and retain historical receipt context without rewriting facts
+  p-efficiency: 0.88
+  p-friction: 0.28
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: 05915f78c5d70bb83d8cd7b0988a01a5ba33207a4085362af575d6e018e3b8c3
+  note: Current native approval raced cancellation safely: preserve it, send no cancellation after terminal, then correct the actual selected old caller rather than claiming later controller main changes the pin. Receipt supplements add complete context without validating historical malformed records. Use existing public receipt authority with explicit repo/pi for every future Muse record. No spore; new-source hosted evidence pending.

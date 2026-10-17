@@ -14,10 +14,13 @@ jobs:
   review:
     if: ${{ github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository }}
     name: Evidence-first review (eta-mu)
-    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@09a4454480baa67f6fdc40f6f73f5e48ef0457d1
+    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@7112c36440d180ca183d6a3f89661cee161fdae5
     with:
       pr_head_sha: ${{ github.event.pull_request.head.sha }}
       setup_eta_mu_toolchain: false
+      opencode_version: 1.18.31
+      agents_revision: 580a361ee0110319cc4f3320d9982961073b66a2
+      muse_revision: 9d3ae4957d99880ffbfad640d283e4c4692d99fa
       evidence_gates_script: |
         run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
     # Least privilege: forward only the secrets the review job consumes.
