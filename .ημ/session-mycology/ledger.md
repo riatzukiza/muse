@@ -411,3 +411,12 @@
   spore: none
   receipt-refs: 293fd6609bd15756c0b166249b2a781a184d32312d7da1fc48994d771d2a8edd
   note: A planning gate, native board readiness, test-only source and observed semantic RED are separate evidence layers. Preserve compiled fixture identity across revisions and keep upstream/consumer adoption separate. No spore.
+- ts: 2026-10-17T18:03:16.868508030Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Repair a pure typed target using same compiled fixture and normal owned closure
+  p-efficiency: 0.80
+  p-friction: 0.42
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: b7d428637faf4e7d49ea60b5e9f2bead758900680ceced9767a0545e35b0e9fa
+  note: Semantic assertion failure and process-custody qualification are separate. Preserve a failed generic cleanup boundary, then reuse the existing owned-namespace reap protocol with exact source/module/fixture evidence. No spore.
