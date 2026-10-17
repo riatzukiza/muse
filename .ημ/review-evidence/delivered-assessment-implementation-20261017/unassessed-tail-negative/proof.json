@@ -70,7 +70,7 @@
       "review_status",
       "review_submit"
     ],
-    "input": "retained public synthetic two-page fixture"
+    "input": "retained public synthetic six-page fixture made from three repeated prefixes"
   },
   "stdout": {
     "bytes": 50047,

@@ -131,3 +131,28 @@ that fixture whitespace explicitly. These files remain ordinary visible textual
 diffs. Source and other evidence whitespace checks retain their normal rules.
 Every raw input digest still matches its captured native proof. No historical
 receipt or fixture bytes were edited to hide the staging failure.
+
+
+## Review correction: retained six-page failure and full log inclusion
+
+Native CodeRabbit review5556734435/root4301814986 correctly identified a stale
+caption in the retained failed diagnostic. The source.input description now
+names the six actual pages made from three repeated public prefixes. Only that
+descriptive value changed. proof.original.json preserves the exact original
+proof bytes (SHA25612107c7356915f358e66c4290c25e979e35f457ff4682d8a76de1a60059691db).
+All captured native events, fixture/manifest bytes and their digests, call/part
+IDs, refusal, missing pages5/6 and zero accepted invocation/submission remain
+unchanged. The original mistaken label and its correction remain inspectable;
+this is no new execution, causal RED, production defect or provider approval.
+
+The same native review explicitly selected36 of49 inputs and excluded13 raw
+process logs via its default !**/*.log filter. Its current-head coverage marker
+does not turn those omissions into full-input review. The root .coderabbit.yaml
+uses only the documented exact default override **/*.log; official CodeRabbit
+path-filter documentation says this form disables that default without narrowing
+review to an allowlist. Other defaults, source inputs, current review/merge gates
+and included-usage limits remain. This corrects the already required complete
+source review configuration within the same delivery, without a new behavior,
+estimate or optional provider invitation. Fresh complete reviews of the new
+head remain required; no f1 approval or partial36-input CodeRabbit result is
+transferred. No production/test code or source-bound native capture changed.
