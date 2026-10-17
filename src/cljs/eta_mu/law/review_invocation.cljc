@@ -341,6 +341,25 @@
          (= (count members) (count (set (map first members))))
          (= (count members) (count (set (map second members)))))))
 
+(defn- native-thread-target? [target]
+  (and (map? target)
+       (not (contains? target :cohort_targets))
+       (every? #(nonblank? (get target %)) [:repository_id :pr_id :thread_id])
+       (every? #(positive? (get target %)) [:repository_database_id :pr_number :root_comment_id])))
+
+(defn- rejection-target? [target]
+  (and (map? target)
+       (if (contains? target :kind)
+         (and (= "review-body-item" (:kind target))
+              (not-any? #(contains? target %) [:thread_id :root_comment_id :cohort_targets])
+              (every? #(nonblank? (get target %)) [:repository_id :pr_id :review_node_id :review_updated_at])
+              (every? #(positive? (get target %)) [:repository_database_id :pr_number :review_id])
+              (string? (:item_id target)) (boolean (re-matches #"[a-z0-9]+" (:item_id target)))
+              (oid? (:review_commit target)) (sha? 64 (:review_body_sha256 target)))
+         (and (native-thread-target? target)
+              (not-any? #(contains? target %) [:review_id :item_id :review_node_id :review_commit
+                                             :review_body_sha256 :review_updated_at])))))
+
 (defn input-source-valid?
   "Validate the fixed transport manifest without projecting its descriptor.
    Coordinates establish shape only, not native authenticity or admission.
@@ -369,12 +388,10 @@
            (oid? (:head_sha source)) (positive? (:proposal_id source))
            (every? #(sha? 64 (get source %))
                    [:context_sha256 :proposal_body_sha256 :source_inventory_sha256])
-           (if (= "open-hax.positive-cohort-assessment-input/v1" (:schema source))
-             (cohort-target? target)
-             (and (map? target)
-                  (not (contains? target :cohort_targets))
-                  (every? #(nonblank? (get target %)) [:repository_id :pr_id :thread_id])
-                  (every? #(positive? (get target %)) [:repository_database_id :pr_number :root_comment_id])))
+           (case (:schema source)
+             "open-hax.positive-cohort-assessment-input/v1" (cohort-target? target)
+             "open-hax.rejection-assessment-input/v1" (rejection-target? target)
+             (native-thread-target? target))
            (provenance? (:provenance source))
            (map? full)
            (positive? (:bytes full)) (sha? 64 (:sha256 full)))))))
