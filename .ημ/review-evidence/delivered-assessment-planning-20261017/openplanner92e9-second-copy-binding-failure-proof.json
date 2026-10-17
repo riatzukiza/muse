@@ -1,0 +1,30 @@
+{
+  "observedAt": "2026-10-17T03:47:10.241695+00:00",
+  "head": "92e9de3a8e411bf81d9821c9926d9844e463f320",
+  "run": 38995640792,
+  "job": 117292502212,
+  "attempt": 2,
+  "nativeFailure": "2026-10-17T03:27:18Z",
+  "jobDurationSeconds": 1449,
+  "acceptedAssessments": 172,
+  "delivered": 176,
+  "requiredPages": 1493,
+  "actualMismatches": [
+    {
+      "page": 173,
+      "field": "start",
+      "actualDelivered": 1375039,
+      "submitted": 13750039
+    }
+  ],
+  "requestBytes": 1624,
+  "maxNoteBytes": 283,
+  "sourceGuardRefusalCorrect": true,
+  "actualInvocationsOn92": 2,
+  "acceptedInvocation": null,
+  "noSubmissionOrApprovalOrRound": true,
+  "noFurtherUnchangedHeadRerun": true,
+  "rawLogBytes": 2693722,
+  "rawLogSHA256": "fe3870846692e6460353696db930ffe79be2b450e86c58d2af55ea6da68cece5",
+  "next": "Inspect qualified owner delivery/assessment custody API and actual native limits under the already included bounded full-input review transport work. Preserve all original input, per-page independent judgments and native source/call/batch bindings; no timeout increase, continuation, scope omission, paid route, or guard waiver."
+}

@@ -735,3 +735,13 @@
   spore: none
   receipt-refs: muse-pr12-begin-await-custody-current-native-countercontrols-green-20261015
   note: Begin reobserves through existing guard after host await before completing admission, preserving original binding/restart. Native closed-map allegation conflicts with pinned registry predicate safeParse(u).success passing original u and three actual domain refusals; original finding remains open until actual opener independently reassesses. No shape/Zod workaround, author self-settlement or synthetic Bot verdict. Old proofs/receipts/reflections stay immutable. Initial lint/public smoke used defaultNode24 with existing npm user-config notice; preserved and repeated in isolated Node22 for qualified gates. No continuation/timeout/model/paid/credential/runtime/deployment/heartbeat/spore change; goalACTIVE heartbeat humanPAUSED live0of3. New current head must independently qualify all checks/reviews.
+
+- ts: 2026-10-17T04:06:56.782Z
+  session: /home/err/spaces/cephalon-muse-delivery-custody/muse
+  task: cephalon-character-memory/bounded-review-batching
+  p-efficiency: 0.8
+  p-friction: 0.2
+  p-skill-candidate: 0.1
+  spore: none
+  receipt-refs: cephalon-muse-delivered-assessment-plan-20261017
+  note: Actual consumer failures expose redundant model metadata copying. New primary Incoming card proposes3points and explicit predecessor/current-profile compatibility plus coupled real-native verification. No implementation, nativeReady/Done/boardvalidation/adopted aggregate or guaranteed throughput. Existing strict copied-metadata requests remain strict. Source qualification then owningETA exposure/prompt/pins and actual full150-input OpenPlanner review still required. Preserve both native refusals and all receipt/reflection/raw prefixes; no third unchanged92 invocation. HumanPAUSEDheartbeat/live0of3; no paid/model/credential/runtime/continuation/timeout/deployment/spore change.
