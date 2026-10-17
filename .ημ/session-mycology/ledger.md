@@ -393,3 +393,12 @@
   spore: none
   receipt-refs: 993c18d3cf636f778cf14c799775a57235d3063d02a513f03d57c91a1c3dd29d
   note: An accepted consumer law can reveal a real upstream transport sum-type gap. Reuse the actual existing owner, preserve thread semantics and distinguish source peer, planning review, readiness and native assessment. No spore.
+- ts: 2026-10-17T17:24:50.588762541Z
+  session: /home/err/.local/share/openhax-codex/20261010/muse-native-body-target-over9d3-PREP-v1
+  task: Tighten planning to same compiled public fixture and explain bounded estimate
+  p-efficiency: 0.74
+  p-friction: 0.35
+  p-skill-candidate: 0
+  spore: none
+  receipt-refs: b91cc1a9a2c11565e97404ca0bdbd7778fa641df8d1469e385b8e72da290af75
+  note: A permissive OR in predecessor evidence can miss the intended public boundary. Bind the identical fixture/script and exports across revisions before readiness. No spore.
