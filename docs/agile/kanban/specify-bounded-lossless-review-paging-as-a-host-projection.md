@@ -1,14 +1,14 @@
 ---
-uuid: "specify-bounded-lossless-review-paging-as-a-host-projection"
-title: "Specify bounded lossless review paging as a host projection"
-status: "incoming"
-type: "task"
-priority: "P1"
-points: "5"
-labels: "review, transport, shared-login, 5sp"
-dependency: []
 category: "kanban"
-write-id: "1793018631767-0.dy3lnpucpue0pj1apsc"
+labels: "review, historical, superseded"
+dependency: []
+type: "task"
+write-id: "1793026739707-0.vvplwdj7q4o90usxlbm"
+points: "5"
+title: "Historical paging draft superseded by UUIDv4 plan d1d94066"
+priority: "P1"
+status: "incoming"
+uuid: "specify-bounded-lossless-review-paging-as-a-host-projection"
 created_at: "2026-10-26T12:43:51.767Z"
 ---
 
@@ -55,3 +55,8 @@ A separate protected ETA consumer must bind the reviewed emitter/source/profile 
 ## Risks
 
 A larger response can increase inference latency or exceed a model's practical context. An input cap can silently become truncation unless completeness remains independently checked. Repartitioning can invalidate coverage evidence, hashes and cache keys. Profile selection exposed to a model creates a confused authority boundary. Compatibility-file ownership may require a different upstream home. All of these remain blockers until independently reviewed and verified; no old trace supplies a new verdict.
+
+---
+Superseded by native-created UUIDv4 planning card d1d94066-abb7-4439-af0e-cfdd8df4f337, with separately estimated dependent implementation7ee34a27-324a-4201-b026-f8d9ae6691ee and qualification6118415f-632c-49e2-8970-cd614c0b8628. Preserve this original creation event/card as historical provenance; no identity field or event bytes rewritten. Active completion boundaries and graph belong to the new cards; all are incoming pending review.
+
+---
