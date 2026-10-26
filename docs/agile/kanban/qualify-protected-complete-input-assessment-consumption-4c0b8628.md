@@ -22,7 +22,7 @@ Separately review protected ETA consumption of the accepted emitter/profile and 
 
 ## Scope
 
-Bind immutable source, artifact, complete input and profile before execution. Preserve existing permission restrictions and every required source/context/protocol byte. Measure a fresh accepted full-input invocation inside the existing 60–180-minute bound plus publisher headroom. Independently qualify one-shot authorized App publication/readback and revocation.
+Bind immutable source, artifact, complete input and profile before session creation. A changed input or profile requires a fresh session and fresh evidence. Preserve existing permission restrictions and every required source/context/protocol byte. Measure a fresh accepted full-input invocation inside the existing 60–180-minute bound plus publisher headroom. Independently qualify one-shot authorized App publication/readback and revocation.
 
 ## Non-goals
 

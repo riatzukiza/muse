@@ -1,14 +1,14 @@
 ---
-uuid: "7ee34a27-324a-4201-b026-f8d9ae6691ee"
-title: "Implement the accepted bounded lossless review projection"
-status: "incoming"
-type: "task"
-priority: "P1"
-points: "5"
+category: "kanban"
 labels: "review, transport, shared-login, 5sp"
 dependency: ["d1d94066-abb7-4439-af0e-cfdd8df4f337"]
-category: "kanban"
-write-id: "1793026677931-0.h07dvrgropu4eox8dz1"
+type: "task"
+write-id: "1793032235074-0.uetnlizsvqgxhk1qgam"
+points: "5"
+title: "Implement the accepted bounded lossless review projection"
+priority: "P1"
+status: "incoming"
+uuid: "7ee34a27-324a-4201-b026-f8d9ae6691ee"
 created_at: "2026-10-26T14:57:57.931Z"
 ---
 
@@ -22,7 +22,7 @@ Implement a bounded lossless host-page projection in the accepted owning reposit
 
 ## Scope
 
-Preserve the 8,192-unit/128-line default exactly. Candidate 16,384/32,768-unit limits require a trusted immutable operator profile selected before the invocation. Invalid explicit values refuse; no untrusted/model override or silent fallback. Changed input/profile requires fresh evidence.
+Preserve the 8,192-unit/128-line default exactly. Candidate 16,384/32,768-unit limits require a trusted immutable operator profile selected before session creation. Invalid explicit values refuse; no untrusted/model override or silent fallback. A changed input or profile requires a fresh session and fresh evidence.
 
 ## Non-goals
 
@@ -43,3 +43,8 @@ Use the accepted owner's CLJS/CLJC tests, native build/lint/typecheck and artifa
 ## Risks
 
 If the owner is outside Muse, carry the implementation card/contract to that owner through Rheos-supported planning and reference it here. Stop rather than creating a compatibility semantic fork.
+
+---
+CR4379542652 verified: scope now explicitly binds the trusted immutable profile before session creation, with a fresh session and fresh evidence whenever input or profile changes. Matching qualification card corrected. Source wording prepared while normal-review40357617300 ran; applied only after that stable-head44fae22 invocation completed with nativeAppAPPROVED5655406068. This updates planning obligations, not an executable paging/profile implementation or new-head approval.
+
+---
