@@ -3,11 +3,11 @@ category: "kanban"
 labels: "review, historical, superseded"
 dependency: []
 type: "task"
-write-id: "1793026739707-0.vvplwdj7q4o90usxlbm"
+write-id: "1793029751805-0.rzsino1xor5s95o8n5"
 points: "5"
 title: "Historical paging draft superseded by UUIDv4 plan d1d94066"
 priority: "P1"
-status: "incoming"
+status: "archived"
 uuid: "specify-bounded-lossless-review-paging-as-a-host-projection"
 created_at: "2026-10-26T12:43:51.767Z"
 ---
@@ -58,5 +58,7 @@ A larger response can increase inference latency or exceed a model's practical c
 
 ---
 Superseded by native-created UUIDv4 planning card d1d94066-abb7-4439-af0e-cfdd8df4f337, with separately estimated dependent implementation7ee34a27-324a-4201-b026-f8d9ae6691ee and qualification6118415f-632c-49e2-8970-cd614c0b8628. Preserve this original creation event/card as historical provenance; no identity field or event bytes rewritten. Active completion boundaries and graph belong to the new cards; all are incoming pending review.
+
+Native Promethean FSM inspection established incoming-to-archived as a lawful edge. The native CLI moved this superseded draft to archived and read-task confirmed it. Its slug creation identity, source path and old event bytes remain historical. Replacement planningd1d94066, dependent implementation7ee34a27 and qualification6118415f remain incoming; no implementation approval or board rule override.
 
 ---
