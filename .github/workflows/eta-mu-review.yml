@@ -14,8 +14,10 @@ jobs:
   review:
     if: ${{ github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository }}
     name: Evidence-first review (eta-mu)
-    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@2b918cdab2ebd30e745bb8fa86d077d7a3af0030
+    # Protected ETA368 merge: checked free MiMo discovery and retained diagnostics.
+    uses: open-hax/eta-mu/.github/workflows/opencode-code-review.yml@ad93a9cb786da61be9021d1f00b80b811463dfc7
     with:
+      pr_head_sha: ${{ github.event.pull_request.head.sha }}
       setup_eta_mu_toolchain: false
       evidence_gates_script: |
         run_gate diff_stat git diff --stat "${PR_BASE_SHA}...HEAD"
