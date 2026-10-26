@@ -103,5 +103,15 @@
       "validate" (validate repo-root file (clamp lines 200 1 2000))
       ("append" "bootstrap") (append repo-root file params action))))
 
+(deftool receipt-status
+  {:id :receipt/status
+   :name "receipt_status"
+   :description "Read receipt ledger status without appending or bootstrapping."
+   :args [:map]
+   :tags #{:receipt :audit}}
+  [_ ctx]
+  (let [root (resolve-repo-root {} ctx)]
+    (status root (receipt-file root))))
+
 (defplugin plugin {:id :eta-mu/receipt-river}
-  receipt-river)
+  receipt-river receipt-status)

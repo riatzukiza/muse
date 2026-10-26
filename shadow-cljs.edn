@@ -66,6 +66,25 @@
       :source-map false,
       :infer-externs false,
       :warnings {:infer-warning false}}},
+    :codex-mcp
+    {:target :esm,
+     :runtime :node,
+     :output-dir ".codex/dist"
+     :muse/config-root ".ημ/config/codex/root.edn",
+     :modules {:receipt-river {:init-fn eta-mu.gen.mcp-server/init}},
+     :build-hooks [(eta-mu.mcp.build/generate-entrypoint)
+                   (eta-mu.mcp.build/emit-host-config)],
+     :js-options
+     {:js-provider :import,
+      :keep-as-import #{"zod"
+                         "@modelcontextprotocol/sdk/server/mcp.js"
+                         "@modelcontextprotocol/sdk/server/stdio.js"}},
+     :compiler-options
+     {:output-feature-set :es-next,
+      :optimizations :simple,
+      :source-map false,
+      :infer-externs false,
+      :warnings {:infer-warning false}}},
     :claude-server
     {:target :esm,
      :runtime :node,

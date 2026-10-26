@@ -74,7 +74,8 @@
   "Build hook (:configure stage)."
   {:shadow.build/stage :configure}
   [build-state & _]
-  (let [cfg  (config/read-config root-path)
+  (let [selected-root (get-in build-state [:shadow.build/config :muse/config-root] root-path)
+        cfg  (config/read-config selected-root)
         syms (config/resources cfg)]
     (when (empty? syms)
       (throw (ex-info "No :resource symbols found in config exposures"
@@ -109,7 +110,7 @@
   {:shadow.build/stage :flush}
   [build-state & _]
   (let [{:keys [output-dir modules]} (:shadow.build/config build-state)
-        cfg (config/read-config root-path)]
+        cfg (config/read-config (get-in build-state [:shadow.build/config :muse/config-root] root-path))]
     (emit! (str output-dir "/package.json") "{\n  \"type\": \"module\"\n}\n")
     (when-let [mcp-config-path (get-in cfg [:root :publish :mcp-config])]
       (let [server-name (get-in cfg [:root :info :name] "eta-mu-mcp")
