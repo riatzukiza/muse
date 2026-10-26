@@ -1,14 +1,14 @@
 ---
-uuid: "c31d4187-d2e6-4e78-946f-c3163706c13e"
-title: "Refresh the standard review caller to the protected ETA baseline"
-status: "incoming"
-type: "task"
-priority: "P1"
-points: "3"
+category: "kanban"
 labels: "review, ci, shared-login, 3sp"
 dependency: []
-category: "kanban"
-write-id: "1793031155554-0.h194e6o4193lvcvl64"
+type: "task"
+write-id: "1793031414661-0.rx923uaak2g88220vok"
+points: "3"
+title: "Refresh the standard review caller to the protected ETA baseline"
+priority: "P1"
+status: "incoming"
+uuid: "c31d4187-d2e6-4e78-946f-c3163706c13e"
 created_at: "2026-10-26T16:12:35.554Z"
 ---
 
@@ -24,7 +24,7 @@ Prepare and independently review adoption of that existing protected standard-re
 
 ## Scope
 
-Change only the immutable reusable-workflow reference. Preserve caller permissions, explicit inputs, custom diff-stat gate and the same three secrets. Keep anonymous zero-cost MiMo discovery with owner defaults; no paid fallback, permission widening or secret changes. Retain all original failed run bytes.
+Change the immutable reusable-workflow reference and supply its required PR head SHA from the native pull-request event. Preserve caller permissions, existing explicit inputs, custom diff-stat gate and the same three secrets. Keep anonymous zero-cost MiMo discovery with owner defaults; no paid fallback, permission widening or secret changes. Retain all original failed run bytes.
 
 ## Non-goals
 
@@ -33,7 +33,7 @@ No old-run rerun, claimed causal fix from model names alone, new parser/publishe
 ## Acceptance criteria
 
 - [ ] The source reference is the independently merged protected ETA baseline and its declared workflow inputs/secrets fit the unchanged caller.
-- [ ] actionlint and diff checks pass; caller semantic comparison differs only in the immutable uses reference.
+- [ ] actionlint and diff checks pass; caller semantic comparison differs only in the immutable uses reference and explicit native event-head binding. Every declared required input is present.
 - [ ] New source gets independent exact-head review and native checks; no old approval is transferred.
 - [ ] A fresh hosted run preserves discovery/client/provider/model/tool/input/provenance and actual outcome. Failed or incomplete execution supplies no judgment; only accepted full coverage and native App readback can count.
 
@@ -43,4 +43,9 @@ Use native GitHub merge readback for ETA368 and immutable upstream workflow cont
 
 ## Risks
 
-Catalog eligibility is not inference availability. The new caller may expose a different concrete failure; preserve it and repair only established causes. This candidate is not adopted or an accepted assessment until reviews and required qualification succeed.
+Catalog eligibility is not inference availability. The initial candidate run40356983929 was refused at startup because the required head input was absent; no model ran. Its corrected contract check covers every required input. Any new concrete failure must be preserved and repaired only from established evidence. This candidate is not adopted or an accepted assessment until reviews and required qualification succeed.
+
+---
+Candidate5f33464 actual hosted run40356983929 refused beforejobs: required pr_head_sha missing. Original staticcheck verified supplied names but missed required-input coverage. Corrected preparation supplies github.event.pull_request.head.sha, preserving all existing inputs/permissions/secrets; scope/body updated before breakdown. New one-off RED required-input check proves missinghead and GREEN verifies ALL required fields plus exact two-field semanticdiff. Oldstartupfailure retained; no modelcalled/no claimed inferencefix, qualification/reviews stillpending.
+
+---
