@@ -1,5 +1,5 @@
 (ns eta-mu.domain.codex-registration-test
-  (:require [cljs.test :refer [deftest is run-tests]]
+  (:require [cljs.test :refer [deftest is]]
             [eta-mu.domain.codex-registration :as registration]))
 
 (deftest preserves-unrelated-and-refuses-replacement
@@ -11,6 +11,4 @@
     (is (= existing (registration/rollback (assoc existing "muse" target) "muse" target)))
     (is (thrown? js/Error (registration/rollback (assoc existing "muse" {:command "changed"}) "muse" target)))
     (is (thrown? js/Error (registration/register existing "bad.name" target)))
-    (is (thrown? js/Error (registration/register existing "muse" {:command "node" :args ["relative.js"]}))))))
-
-(run-tests)
+    (is (thrown? js/Error (registration/register existing "muse" {:command "node" :args ["relative.js"]})))))
