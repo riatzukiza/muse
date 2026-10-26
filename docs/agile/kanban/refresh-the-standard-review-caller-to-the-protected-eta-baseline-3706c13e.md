@@ -3,11 +3,11 @@ category: "kanban"
 labels: "review, ci, shared-login, 3sp"
 dependency: []
 type: "task"
-write-id: "1793031414661-0.rx923uaak2g88220vok"
+write-id: "1793033008785-0.3vmmqzvxsxg1k006sjk"
 points: "3"
 title: "Refresh the standard review caller to the protected ETA baseline"
 priority: "P1"
-status: "incoming"
+status: "in_progress"
 uuid: "c31d4187-d2e6-4e78-946f-c3163706c13e"
 created_at: "2026-10-26T16:12:35.554Z"
 ---
@@ -47,5 +47,7 @@ Catalog eligibility is not inference availability. The initial candidate run4035
 
 ---
 Candidate5f33464 actual hosted run40356983929 refused beforejobs: required pr_head_sha missing. Original staticcheck verified supplied names but missed required-input coverage. Corrected preparation supplies github.event.pull_request.head.sha, preserving all existing inputs/permissions/secrets; scope/body updated before breakdown. New one-off RED required-input check proves missinghead and GREEN verifies ALL required fields plus exact two-field semanticdiff. Oldstartupfailure retained; no modelcalled/no claimed inferencefix, qualification/reviews stillpending.
+
+Review4379920519 correctly identifies lifecycle drift: executable caller repair was prepared while this card stayed incoming. Reconcile prospectively through native gates, preserving earlier events rather than inventing prior ready/adoption. Exact44fae22 independent native review5655406068 and successful hosted40357617300 verify identical caller bytes and9/9 input coverage; currentc4 source still requires its own quorum. Original missing-input startup failure retained. This is the CI prerequisite only; paging cards remain incoming.
 
 ---
