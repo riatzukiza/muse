@@ -1,0 +1,1 @@
+{:standalone {:allow #{:receipt/status} :audit :strict}}

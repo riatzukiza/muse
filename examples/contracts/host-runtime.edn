@@ -1,0 +1,31 @@
+{:namespace :open-hax
+ :resources
+ [{:provider/id :proxx
+   :provider/label "Proxx"
+   :provider/base-url "http://127.0.0.1:8789/v1"
+   :provider/api-shape :openai-chat
+   :provider/auth {:auth/mode :bearer
+                   :auth/env "PROXX_API_KEY"}}
+
+  {:model-family/id "gpt"
+   :model-family/provider :proxx
+   :model-family/prefixes ["gpt-"]
+   :model-family/reasoning true
+   :model-family/context-window 272000
+   :model-family/max-tokens 128000
+   :model-family/input [:text :image]}
+
+  {:model/id "gpt-5.5"
+   :model/family :open-hax/gpt
+   :model/provider :open-hax/proxx
+   :model/label "GPT-5.5"
+   :model/default true}
+
+  {:mcp-server/id "rheos-kanban"
+   :mcp-server/transport :http
+   :mcp-server/url "http://127.0.0.1:8792/mcp"
+   :enabled true}
+
+  {:agent/id :coding
+   :agent {:model "open-hax/gpt-5.5"}
+   :prompts {:system "Help with the active workspace."}}]}

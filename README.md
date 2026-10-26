@@ -1,5 +1,8 @@
 # muse
 
+> **Roadmap:** [`ROADMAP.md`](ROADMAP.md) — this repo's slice. The hub, with the
+> seam, ownership table and sequencing rule, is [eta-mu/ROADMAP.md](https://github.com/open-hax/eta-mu/blob/main/ROADMAP.md).
+
 Muse is a ClojureScript compatibility and compilation workspace. It authors
 host-agnostic eta-mu/Katamorph resources as data, links implementations and
 exposures, and emits host-native artifacts for OpenCode, Claude, MCP, and later
@@ -24,6 +27,9 @@ or run `scripts/bootstrap.sh`.
 
 | Piece | Where | What it does |
 |---|---|---|
+| Contract assembly | `src/cljs/eta_mu/shape/katamorph.cljs` | Validates and assembles Katamorph namespace resources without I/O |
+| Agent catalog | `src/cljs/eta_mu/shape/agent_catalog.cljs` | Resolves portable provider, family, model, default, and agent references |
+| Target shapes | `src/cljs/eta_mu/shape/target/*.cljs` | Pure projections from the resolved catalog into host vocabulary |
 | Compiler DSL | `src/cljs/eta_mu/dsl.cljc` + `dsl/{compile,normalize,profile,schema}.cljc` | Authors and links host-agnostic declarations; capability/implementation/exposure separation is the active migration target |
 | Target adapters | `src/clj/eta_mu/{opencode,claude,mcp}/` + `src/cljs/eta_mu/boundaries/**` | Render linked declarations into host-native tools, hooks, config, MCP servers, and codecs |
 | Daemon | `src/cljs/eta_mu/daemon/core.cljs` → `dist-daemon/daemon.js` | Watches `.ημ/` trees and converges generated compatibility artifacts |
@@ -33,7 +39,23 @@ or run `scripts/bootstrap.sh`.
 | Handoff | `.ημ/Π_LAST.md`, `receipts.edn` | Fork-tax snapshots and an append-only execution-ledger fixture |
 
 House rules for the layer architecture are in [AGENTS.md](AGENTS.md); engineering
-style in [STYLE.md](STYLE.md).
+style in [STYLE.md](STYLE.md). The recovered ownership boundary and Eta-Mu
+drift inventory are in
+[docs/design/contract-ownership-and-host-translation.md](docs/design/contract-ownership-and-host-translation.md).
+
+## Contracts → host settings
+
+An OpenCode config may import a Katamorph namespace resource file alongside
+ordinary Muse settings fragments. Muse validates and assembles the contracts,
+resolves them into a target-neutral agent catalog, projects the supported
+provider/model/agent/MCP semantics, then applies raw settings as explicit
+host-only overrides. See
+[`examples/contracts/host-runtime.edn`](examples/contracts/host-runtime.edn)
+and [`examples/config/opencode/root.edn`](examples/config/opencode/root.edn).
+
+Katamorph owns whether shared declarations are lawful. Muse owns their
+translation. Turn Processor owns agent turns. Sol is one service deployment of
+that loop; Knoxx is intentionally not part of this stabilization slice.
 
 ## The build pipeline (EDN → registry → boundary)
 

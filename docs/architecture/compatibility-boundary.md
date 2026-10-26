@@ -1,8 +1,8 @@
 # Muse Compatibility Boundary
 
-Status: accepted operator boundary; implementation migration open  
-Recorded: 2026-07-26  
-Tracks: [issue #1](https://github.com/octave-commons/muse/issues/1)  
+Status: accepted operator boundary; implementation migration open\
+Recorded: 2026-07-26\
+Tracks: [issue #1](https://github.com/octave-commons/muse/issues/1)
 Cross-repository authority: `open-hax/eta-mu/docs/architecture/contract-dialect-and-data-authority.md`
 
 ## Decision

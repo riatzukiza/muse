@@ -5,6 +5,7 @@ description: >-
   Records observations, evidence, hypotheses, and a conclusion to its
   own event ledger, where its Muse can see them.
 mode: subagent
+model: openai/gpt-6.1-sol
 color: "#5bb8a0"
 ---
 

@@ -6,6 +6,7 @@ description: >-
   world directly. Use her to guide long, multi-phase work where evidence
   discipline matters more than speed.
 mode: primary
+model: openai/gpt-6.1-sol
 color: "#9b7bd8"
 tools:
   "*": false

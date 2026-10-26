@@ -60,6 +60,56 @@
        :else false))))
 
 ;; ---------------------------------------------------------------------------
+;; Promotion distribution shapes
+;; ---------------------------------------------------------------------------
+
+(defn promotion-event
+  "Plain-data record of a promotion: the single unit every memory channel
+   (events.edn, actor ledger, mongo, OpenPlanner graph) distributes so future
+   instances inherit the lesson. Key names are unique under `name`, so
+   clj->js produces an unambiguous mongo document."
+  [spore {:keys [skillPath contractPath]}]
+  {:event/type        :skill/promoted
+   :skill/slug        (:slug spore)
+   :skill/name        (:name spore)
+   :skill/description (:description spore)
+   :skill/recurrence  (:recurrence spore)
+   :skill/reuse-scope (:reuseScope spore)
+   :skill/p           {:efficiency (:efficiencyP spore)
+                       :friction   (:frictionP spore)
+                       :candidate  (:skillCandidateP spore)}
+   :skill/paths       {:skill skillPath :contract contractPath}
+   :lesson            (:lesson spore)
+   :better-path       (:betterPath spore)
+   :source-cwd        (:cwd spore)})
+
+(defn lesson-graph-body
+  "OpenPlanner /v1/graph/edges/upsert request body for a promotion event.
+   Two edges: the promotion itself, and where the pattern was learned."
+  [event project]
+  (let [skill-node (str "eta-mu:skill:" (:skill/slug event))
+        data       {:name        (:skill/name event)
+                    :description (:skill/description event)
+                    :lesson      (:lesson event)
+                    :betterPath  (:better-path event)
+                    :recurrence  (:skill/recurrence event)
+                    :reuseScope  (:skill/reuse-scope event)
+                    :skillPath   (get-in event [:skill/paths :skill])}]
+    {:source  "eta-mu-mycology"
+     :project project
+     :edges   (cond-> [{:source "eta-mu:session-mycology"
+                        :target skill-node
+                        :kind   "promoted_skill"
+                        :layer  "agent-context"
+                        :data   data}]
+                (:source-cwd event)
+                (conj {:source skill-node
+                       :target (str "eta-mu:project:" (slugify (:source-cwd event)))
+                       :kind   "learned_in"
+                       :layer  "agent-context"
+                       :data   {:cwd (:source-cwd event)}}))}))
+
+;; ---------------------------------------------------------------------------
 ;; Rendering
 ;; ---------------------------------------------------------------------------
 
